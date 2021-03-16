@@ -2,15 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_BUSCAR_IMOVEL } from '../helpers/graphql';
-import { Imovel } from '../helpers/types';
+import { GQL_BUSCAR_IMOVEL } from '../../helpers/graphql';
+import { Imovel } from '../../helpers/types';
 
 @Component({
-  selector: 'app-imovel',
-  templateUrl: './imovel.component.html',
-  styleUrls: ['./imovel.component.scss'],
+  selector: 'app-exibir-imovel',
+  templateUrl: './exibir-imovel.component.html',
+  styleUrls: ['./exibir-imovel.component.scss'],
 })
-export class ImovelComponent implements OnInit, OnDestroy {
+export class ExibirImovelComponent implements OnInit, OnDestroy {
   imovel!: Imovel;
   imovelQuery!: QueryRef<any>;
   loading = true;

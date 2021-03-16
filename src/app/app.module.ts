@@ -9,9 +9,9 @@ import { AdminComponent } from './admin/admin.component';
 import { GraphQLModule } from './services/graphql.module';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { LoginComponent } from './auth/login/login.component';
-import { ListarImoveisComponent } from './listar-imoveis/listar-imoveis.component';
-import { ImovelComponent } from './imovel/imovel.component';
-import { EditarImovelComponent } from './editar-imovel/editar-imovel.component';
+import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
+import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
+import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { EditarImovelComponent } from './editar-imovel/editar-imovel.component';
     CabecalhoComponent,
     LoginComponent,
     ListarImoveisComponent,
-    ImovelComponent,
+    ExibirImovelComponent,
     EditarImovelComponent,
   ],
   imports: [

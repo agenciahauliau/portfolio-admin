@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_IMOVEIS } from '../helpers/graphql';
-import { Imovel } from '../helpers/types';
+import { GQL_IMOVEIS } from '../../helpers/graphql';
+import { Imovel } from '../../helpers/types';
 
 @Component({
   selector: 'app-listar-imoveis',
