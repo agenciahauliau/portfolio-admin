@@ -7,6 +7,9 @@
       }}<br />Valor: R$ {{ imovel.valorImovel }}<br />Criado:
       {{ imovel.createdAt }}<br />Atualizado: {{ imovel.updatedAt }}
     </p>
+    <button (click)="goToImovel(imovel._id)">
+      {{ "mais detalhes" | uppercase }}
+    </button>
     <hr />
   </div>
 </div>

@@ -16,33 +16,33 @@ export const GQL_ME = gql`
 
 export const GQL_CRIAR_IMOVEL = gql`
   mutation criarImovel(
-    $categoriaImovel: String!
+    $categoriaImovel: String
     $jardins: Boolean
-    $descricaoImovel: String!
-    $tipoNegociacao: String!
-    $statusImovel: String!
-    $aceitaPermuta: Boolean!
-    $mobiliado: Boolean!
-    $valorImovel: Number!
-    $valorIPTU: Number!
-    $valorCondominio: Number!
-    $areaTotal: Number!
-    $areaConstruida: Number!
-    $andarImovel: Number
-    $qtdeQuarto: Number!
-    $qtdeBanheiro: Number!
-    $qtdeSuites: Number!
-    $qtdeVagas: Number!
-    $nomeConstrutora: String!
-    $bairro: String!
-    $logradouro: String!
+    $descricaoImovel: String
+    $tipoNegociacao: String
+    $statusImovel: String
+    $aceitaPermuta: Boolean
+    $mobiliado: Boolean
+    $valorImovel: Float
+    $valorIPTU: Float
+    $valorCondominio: Float
+    $areaTotal: Float
+    $areaConstruida: Float
+    $andarImovel: Float
+    $qtdeQuarto: Float
+    $qtdeBanheiro: Float
+    $qtdeSuites: Float
+    $qtdeVagas: Float
+    $nomeConstrutora: String
+    $bairro: String
+    $logradouro: String
     $numeroLogradouro: String
     $complemento: String
-    $cep: Number!
-    $cidade: String!
-    $uf: String!
-    $comodidadesImovel: [String]
-    $comodidadesCondominio: [String]
+    $cep: Float
+    $cidade: String
+    $uf: String
+    $comodidadesImovel: [String!]
+    $comodidadesCondominio: [String!]
   ) {
     createImovel(
       dados: {
@@ -148,7 +148,7 @@ export const GQL_IMOVEIS = gql`
 
 export const GQL_BUSCAR_IMOVEL = gql`
   query imovel(
-    $_id: String
+    $_id: ID
     $categoriaImovel: String
     $jardins: Boolean
     $descricaoImovel: String
@@ -156,26 +156,26 @@ export const GQL_BUSCAR_IMOVEL = gql`
     $statusImovel: String
     $aceitaPermuta: Boolean
     $mobiliado: Boolean
-    $valorImovel: Number
-    $valorIPTU: Number
-    $valorCondominio: Number
-    $areaTotal: Number
-    $areaConstruida: Number
-    $andarImovel: Number
-    $qtdeQuarto: Number
-    $qtdeBanheiro: Number
-    $qtdeSuites: Number
-    $qtdeVagas: Number
+    $valorImovel: Float
+    $valorIPTU: Float
+    $valorCondominio: Float
+    $areaTotal: Float
+    $areaConstruida: Float
+    $andarImovel: Float
+    $qtdeQuarto: Float
+    $qtdeBanheiro: Float
+    $qtdeSuites: Float
+    $qtdeVagas: Float
     $nomeConstrutora: String
     $bairro: String
     $logradouro: String
     $numeroLogradouro: String
     $complemento: String
-    $cep: Number
+    $cep: Float
     $cidade: String
     $uf: String
-    $comodidadesImovel: [String]
-    $comodidadesCondominio: [String]
+    $comodidadesImovel: [String!]
+    $comodidadesCondominio: [String!]
   ) {
     imovel(
       dados: {
@@ -244,14 +244,14 @@ export const GQL_BUSCAR_IMOVEL = gql`
 `;
 
 export const GQL_REMOVE_IMOVEL = gql`
-  mutation removeImovel($_id: String!) {
+  mutation removeImovel($_id: ID!) {
     removeImovel(id: $_id)
   }
 `;
 
 export const GQL_UPDATE_IMOVEL = gql`
   mutation updateImovel(
-    $_id: String!
+    $_id: ID
     $categoriaImovel: String
     $jardins: Boolean
     $descricaoImovel: String
@@ -259,26 +259,26 @@ export const GQL_UPDATE_IMOVEL = gql`
     $statusImovel: String
     $aceitaPermuta: Boolean
     $mobiliado: Boolean
-    $valorImovel: Number
-    $valorIPTU: Number
-    $valorCondominio: Number
-    $areaTotal: Number
-    $areaConstruida: Number
-    $andarImovel: Number
-    $qtdeQuarto: Number
-    $qtdeBanheiro: Number
-    $qtdeSuites: Number
-    $qtdeVagas: Number
+    $valorImovel: Float
+    $valorIPTU: Float
+    $valorCondominio: Float
+    $areaTotal: Float
+    $areaConstruida: Float
+    $andarImovel: Float
+    $qtdeQuarto: Float
+    $qtdeBanheiro: Float
+    $qtdeSuites: Float
+    $qtdeVagas: Float
     $nomeConstrutora: String
     $bairro: String
     $logradouro: String
     $numeroLogradouro: String
     $complemento: String
-    $cep: Number
+    $cep: Float
     $cidade: String
     $uf: String
-    $comodidadesImovel: [String]
-    $comodidadesCondominio: [String]
+    $comodidadesImovel: [String!]
+    $comodidadesCondominio: [String!]
   ) {
     updateImovel(
       id: $_id

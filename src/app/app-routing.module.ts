@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { ImoveisComponent } from './imoveis/imoveis.component';
+import { ListarImoveisComponent } from './listar-imoveis/listar-imoveis.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthGuard } from './auth/helper/auth.guard';
+import { AuthGuard } from './helpers/auth.guard';
+import { ImovelComponent } from './imovel/imovel.component';
 
 const routes: Routes = [
-  { path: '', component: ImoveisComponent },
+  { path: '', component: ListarImoveisComponent },
   { path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'imovel/:id', component: ImovelComponent },
 ];
 
 @NgModule({

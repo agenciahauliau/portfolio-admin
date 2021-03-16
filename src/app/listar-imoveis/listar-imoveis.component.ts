@@ -1,22 +1,24 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { Router } from '@angular/router';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_IMOVEIS } from '../services/graphql';
+import { GQL_IMOVEIS } from '../helpers/graphql';
+import { Imovel } from '../helpers/types';
 
 @Component({
-  selector: 'app-imoveis',
-  templateUrl: './imoveis.component.html',
-  styleUrls: ['./imoveis.component.scss'],
+  selector: 'app-listar-imoveis',
+  templateUrl: './listar-imoveis.component.html',
+  styleUrls: ['./listar-imoveis.component.scss'],
 })
-export class ImoveisComponent implements OnInit, OnDestroy {
-  imoveis!: any[];
+export class ListarImoveisComponent implements OnInit, OnDestroy {
+  imoveis!: Imovel[];
   imoveisQuery!: QueryRef<any>;
   loading = true;
   error: any;
 
   private querySubs = new Subscription();
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private router: Router) {}
 
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
@@ -30,6 +32,10 @@ export class ImoveisComponent implements OnInit, OnDestroy {
         this.imoveis = data.imoveis;
       }
     );
+  }
+
+  goToImovel(imovelId: any) {
+    this.router.navigate(['/imovel', imovelId]);
   }
 
   refresh() {

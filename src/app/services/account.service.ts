@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { TokenService } from '../auth/helper/token.service';
-import { GQL_LOGIN, GQL_ME } from './graphql';
+import { TokenService } from '../helpers/token.service';
+import { GQL_LOGIN, GQL_ME } from '../helpers/graphql';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,7 @@ export class AccountService {
           email: email,
           senha: senha,
         },
+        errorPolicy: 'all',
       })
       .subscribe(
         ({ data }: any) => {
