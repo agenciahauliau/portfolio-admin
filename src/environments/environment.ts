@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API:
+    'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com/v1/graphql',
+  TOKEN_KEY: 'auth-token',
+  USER_KEY: 'auth-user',
 };
 
 /*

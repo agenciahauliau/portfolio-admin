@@ -1,0 +1,12 @@
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="error">Erro :(</div>
+<div *ngIf="imoveis">
+  <div *ngFor="let imovel of imoveis">
+    <p>
+      ID: {{ imovel._id }} <br />Categoria:{{ imovel.categoriaImovel
+      }}<br />Valor: R$ {{ imovel.valorImovel }}<br />Criado:
+      {{ imovel.createdAt }}<br />Atualizado: {{ imovel.updatedAt }}
+    </p>
+    <hr />
+  </div>
+</div>
