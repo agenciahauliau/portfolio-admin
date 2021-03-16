@@ -11,6 +11,7 @@ import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ListarImoveisComponent } from './listar-imoveis/listar-imoveis.component';
 import { ImovelComponent } from './imovel/imovel.component';
+import { EditarImovelComponent } from './editar-imovel/editar-imovel.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ImovelComponent } from './imovel/imovel.component';
     LoginComponent,
     ListarImoveisComponent,
     ImovelComponent,
+    EditarImovelComponent,
   ],
   imports: [
     BrowserModule,

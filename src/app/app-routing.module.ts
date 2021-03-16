@@ -7,10 +7,11 @@ import { AuthGuard } from './helpers/auth.guard';
 import { ImovelComponent } from './imovel/imovel.component';
 
 const routes: Routes = [
-  { path: '', component: ListarImoveisComponent },
-  { path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/imoveis', pathMatch: 'full' },
+  { path: 'imoveis', component: ListarImoveisComponent },
   { path: 'imovel/:id', component: ImovelComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
 ];
 
 @NgModule({

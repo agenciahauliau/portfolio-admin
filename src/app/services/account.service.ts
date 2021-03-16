@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from '../helpers/token.service';
-import { GQL_LOGIN, GQL_ME } from '../helpers/graphql';
+import { GQL_BUSCAR_IMOVEL, GQL_LOGIN, GQL_ME } from '../helpers/graphql';
+import { Imovel } from '../helpers/types';
 
 @Injectable({
   providedIn: 'root',

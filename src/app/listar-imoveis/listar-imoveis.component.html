@@ -5,7 +5,8 @@
     <p>
       ID: {{ imovel._id }} <br />Categoria:{{ imovel.categoriaImovel
       }}<br />Valor: R$ {{ imovel.valorImovel }}<br />Criado:
-      {{ imovel.createdAt }}<br />Atualizado: {{ imovel.updatedAt }}
+      {{ imovel.createdAt | date: "dd/MMM/yyyy - HH:mm" }}<br />Atualizado:
+      {{ imovel.updatedAt | date: "dd/MMM/yyyy - HH:mm" }}
     </p>
     <button (click)="goToImovel(imovel._id)">
       {{ "mais detalhes" | uppercase }}
