@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
-import { HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../helper/token.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
