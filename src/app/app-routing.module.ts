@@ -5,13 +5,20 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
+import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/imoveis', pathMatch: 'full' },
   { path: 'imoveis', component: ListarImoveisComponent },
   { path: 'imovel/:id', component: ExibirImovelComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    component: AdminComponent,
+  },
+  { path: 'criar-imovel', component: CriarImovelComponent },
 ];
 
 @NgModule({

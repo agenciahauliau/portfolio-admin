@@ -16,33 +16,33 @@ export const GQL_ME = gql`
 
 export const GQL_CRIAR_IMOVEL = gql`
   mutation criarImovel(
-    $categoriaImovel: String
-    $jardins: Boolean
-    $descricaoImovel: String
-    $tipoNegociacao: String
-    $statusImovel: String
-    $aceitaPermuta: Boolean
-    $mobiliado: Boolean
-    $valorImovel: Float
-    $valorIPTU: Float
-    $valorCondominio: Float
-    $areaTotal: Float
-    $areaConstruida: Float
-    $andarImovel: Float
-    $qtdeQuarto: Float
-    $qtdeBanheiro: Float
-    $qtdeSuites: Float
-    $qtdeVagas: Float
-    $nomeConstrutora: String
-    $bairro: String
-    $logradouro: String
-    $numeroLogradouro: String
-    $complemento: String
-    $cep: Float
-    $cidade: String
-    $uf: String
-    $comodidadesImovel: [String!]
-    $comodidadesCondominio: [String!]
+    $categoriaImovel: String!
+    $jardins: Boolean!
+    $descricaoImovel: String!
+    $tipoNegociacao: String!
+    $statusImovel: String!
+    $aceitaPermuta: Boolean!
+    $mobiliado: Boolean!
+    $valorImovel: Float!
+    $valorIPTU: Float!
+    $valorCondominio: Float!
+    $areaTotal: Float!
+    $areaConstruida: Float!
+    $andarImovel: Int!
+    $qtdeQuarto: Int!
+    $qtdeBanheiro: Int!
+    $qtdeSuites: Int!
+    $qtdeVagas: Int!
+    $nomeConstrutora: String!
+    $bairro: String!
+    $logradouro: String!
+    $numeroLogradouro: String!
+    $complemento: String!
+    $cep: Int!
+    $cidade: String!
+    $uf: String!
+    $comodidadesImovel: [String!]!
+    $comodidadesCondominio: [String!]!
   ) {
     createImovel(
       dados: {

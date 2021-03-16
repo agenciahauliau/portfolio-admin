@@ -1,0 +1,281 @@
+<div>
+  <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
+    <div>
+      <label for="categoriaImovel">Categoria do Imóvel: </label>
+      <input
+        type="text"
+        name="categoriaImovel"
+        [(ngModel)]="form.categoriaImovel"
+        #categoriaImovel="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="jardins">É um empreendimento Jardins? </label>
+      <input
+        type="checkbox"
+        name="jardins"
+        [(ngModel)]="form.jardins"
+        #jardin="ngModel"
+      />
+    </div>
+    <div>
+      <label for="descricaoImovel">Descrição do Imóvel: </label>
+      <textarea
+        name="descricaoImovel"
+        cols="30"
+        rows="10"
+        [(ngModel)]="form.descricaoImovel"
+        #descricaoImovel="ngModel"
+        placeholder=""
+      ></textarea>
+    </div>
+    <div>
+      <label for="tipoNegociacao">Tipo de Negociação: </label>
+      <input
+        type="text"
+        name="tipoNegociacao"
+        [(ngModel)]="form.tipoNegociacao"
+        #tipoNegociacao="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="statusImovel">Status do imóvel</label>
+      <input
+        type="text"
+        name="statusImovel"
+        [(ngModel)]="form.statusImovel"
+        #statusImovel="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="aceitaPermuta">Aceita permuta? </label>
+      <input
+        type="checkbox"
+        name="aceitaPermuta"
+        [(ngModel)]="form.aceitaPermuta"
+        #aceitaPermuta="ngModel"
+      />
+    </div>
+    <div>
+      <label for="mobiliado">Mobiliado? </label>
+      <input
+        type="checkbox"
+        name="mobiliado"
+        [(ngModel)]="form.mobiliado"
+        #mobiliado="ngModel"
+      />
+    </div>
+    <div>
+      <label for="valorImovel">Valor do imóvel: </label>
+      <input
+        type="number"
+        name="valorImovel"
+        [(ngModel)]="form.valorImovel"
+        #valorImovel="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="valorIPTU">Valor do IPTU: </label>
+      <input
+        type="number"
+        name="valorIPTU"
+        [(ngModel)]="form.valorIPTU"
+        #valorIPTU="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="valorCondominio">Valor do condomínio: </label>
+      <input
+        type="number"
+        name="valorCondominio"
+        [(ngModel)]="form.valorCondominio"
+        #valorCondominio="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="areaTotal">Área total do imovel: </label>
+      <input
+        type="number"
+        name="areaTotal"
+        [(ngModel)]="form.areaTotal"
+        #areaTotal="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="areaConstruida">Área construída: </label>
+      <input
+        type="number"
+        name="areaConstruida"
+        [(ngModel)]="form.areaConstruida"
+        #areaConstruida="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="andarImovel"
+        >Andar do imóvel (se for imóvel vertical):
+      </label>
+      <input
+        type="number"
+        name="andarImovel"
+        [(ngModel)]="form.andarImovel"
+        #andarImovel="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="qtdeQuarto">Quantidade de quartos: </label>
+      <input
+        type="number"
+        name="qtdeQuarto"
+        [(ngModel)]="form.qtdeQuarto"
+        #qtdeQuarto="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="qtdeBanheiro">Quantidade de banheiros: </label>
+      <input
+        type="number"
+        name="qtdeBanheiro"
+        [(ngModel)]="form.qtdeBanheiro"
+        #qtdeBanheiro="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="qtdeSuites">Quantidade de suítes: </label>
+      <input
+        type="number"
+        name="qtdeSuites"
+        [(ngModel)]="form.qtdeSuites"
+        #qtdeSuites="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="qtdeVagas">Quantidade de vagas: </label>
+      <input
+        type="number"
+        name="qtdeVagas"
+        [(ngModel)]="form.qtdeVagas"
+        #qtdeVagas="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="nomeConstrutora">Construtora: </label>
+      <input
+        type="text"
+        name="nomeConstrutora"
+        [(ngModel)]="form.nomeConstrutora"
+        #nomeConstrutora="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="cep">CEP: </label>
+      <input
+        type="number"
+        name="cep"
+        [(ngModel)]="form.cep"
+        #cep="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="logradouro">Endereço: </label>
+      <input
+        type="text"
+        name="logradouro"
+        [(ngModel)]="form.logradouro"
+        #logradouro="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="numeroLogradouro">Número: </label>
+      <input
+        type="text"
+        name="numeroLogradouro"
+        [(ngModel)]="form.numeroLogradouro"
+        #numeroLogradouro="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="complemento">Complemento: </label>
+      <input
+        type="text"
+        name="complemento"
+        [(ngModel)]="form.complemento"
+        #complemento="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="bairro">Bairro/Setor: </label>
+      <input
+        type="text"
+        name="bairro"
+        [(ngModel)]="form.bairro"
+        #bairro="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="cidade">Cidade: </label>
+      <input
+        type="text"
+        name="cidade"
+        [(ngModel)]="form.cidade"
+        #cidade="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="uf">Estado: </label>
+      <input
+        type="text"
+        name="uf"
+        [(ngModel)]="form.uf"
+        #uf="ngModel"
+        placeholder=""
+      />
+    </div>
+    <div>
+      <label for="comodidadesImovel">Comodidades do imóvel: </label>
+      <textarea
+        cols="30"
+        rows="10"
+        type="text"
+        name="comodidadesImovel"
+        [(ngModel)]="form.comodidadesImovel"
+        #comodidadesImovel="ngModel"
+        placeholder=""
+      ></textarea>
+    </div>
+    <div>
+      <label for="comodidadesCondominio">Comodidades do condomínio: </label>
+      <textarea
+        cols="30"
+        rows="10"
+        type="text"
+        name="comodidadesCondominio"
+        [(ngModel)]="form.comodidadesCondominio"
+        #comodidadesCondominio="ngModel"
+        placeholder=""
+      ></textarea>
+    </div>
+    <div>
+      <button type="submit">Enviar Dados</button>
+    </div>
+  </form>
+</div>

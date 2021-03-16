@@ -12,6 +12,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
+import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.com
     ListarImoveisComponent,
     ExibirImovelComponent,
     EditarImovelComponent,
+    CriarImovelComponent,
   ],
   imports: [
     BrowserModule,

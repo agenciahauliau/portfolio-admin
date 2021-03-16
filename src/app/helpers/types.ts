@@ -1,4 +1,4 @@
-export class User {
+export interface User {
   _id?: string;
   username?: string;
   email?: string;
@@ -8,7 +8,7 @@ export class User {
   updatedAt?: number;
 }
 
-export class Imovel {
+export interface Imovel {
   _id?: string;
   categoriaImovel?: string;
   jardins?: boolean;
@@ -28,15 +28,15 @@ export class Imovel {
   qtdeSuites?: number;
   qtdeVagas?: number;
   nomeConstrutora?: string;
-  bairro?: string;
+  cep?: number;
   logradouro?: string;
   numeroLogradouro?: string;
   complemento?: string;
-  cep?: number;
+  bairro?: string;
   cidade?: string;
   uf?: string;
-  comodidadesImovel?: [string];
-  comodidadesCondominio?: [string];
+  comodidadesImovel?: string[];
+  comodidadesCondominio?: string[];
   createdAt?: number;
   updatedAt?: number;
 }

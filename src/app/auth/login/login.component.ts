@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { TokenService } from '../../helpers/token.service';
+import { User } from 'src/app/helpers/types';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form: any = {
-    email: null,
-    senha: null,
-  };
+  form: User = {};
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -27,9 +25,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const { email, senha } = this.form;
     this.accService
-      .login(email, senha)
+      .login(this.form)
       .then((res) => {
         this.isLoginFailed = false;
         this.isLoggedIn = true;

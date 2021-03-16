@@ -4,7 +4,7 @@
   <div *ngFor="let imovel of imoveis">
     <p>
       ID: {{ imovel._id }} <br />Categoria:{{ imovel.categoriaImovel
-      }}<br />Valor: R$ {{ imovel.valorImovel }}<br />Criado:
+      }}<br />Valor: R$ {{ imovel.valorImovel | currency: "BRL" }}<br />Criado:
       {{ imovel.createdAt | date: "dd/MMM/yyyy - HH:mm" }}<br />Atualizado:
       {{ imovel.updatedAt | date: "dd/MMM/yyyy - HH:mm" }}
     </p>
