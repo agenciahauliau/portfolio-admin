@@ -32,6 +32,6 @@ export class CriarImovelComponent implements OnInit {
 
   //TODO: Verificar o pq que o array[0] não está sendo inserido no banco
   separa(data: any) {
-    return data.split(/\n+|\r+|,+|\s/g).filter(Boolean);
+    return data.split(/\n+|\r+|,\s+/g).filter(Boolean);
   }
 }

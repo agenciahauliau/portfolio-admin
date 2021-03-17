@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { TokenService } from '../../helpers/token.service';
 import { User } from 'src/app/helpers/types';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,13 +16,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private accService: AccountService,
-    private tokenStorage: TokenService
+    private tokenStorage: TokenService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-    }
+    this.redirect();
   }
 
   onSubmit() {
@@ -30,11 +30,19 @@ export class LoginComponent implements OnInit {
       .then((res) => {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.redirect();
       })
       .catch((err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         console.log(err);
       });
+  }
+
+  redirect() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.router.navigate(['admin']);
+    }
   }
 }
