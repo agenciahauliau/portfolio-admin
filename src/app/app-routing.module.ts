@@ -8,7 +8,7 @@ import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/imoveis', pathMatch: 'full' },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',
