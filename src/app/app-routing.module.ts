@@ -18,7 +18,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: AdminComponent,
   },
-  { path: 'criar-imovel', component: CriarImovelComponent },
+  {
+    path: 'admin/criar-imovel',
+    canActivate: [AuthGuard],
+    component: CriarImovelComponent,
+  },
 ];
 
 @NgModule({

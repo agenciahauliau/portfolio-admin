@@ -1,4 +1,11 @@
 <h4>Login</h4>
+<a
+  *ngIf="isLoggedIn"
+  [routerLink]="['/admin']"
+  routerLinkActive="router-link-active"
+  style="text-decoration: underline"
+  >Admin</a
+>
 <form
   *ngIf="!isLoggedIn"
   name="form"

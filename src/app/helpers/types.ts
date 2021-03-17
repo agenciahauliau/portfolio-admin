@@ -35,8 +35,8 @@ export interface Imovel {
   bairro?: string;
   cidade?: string;
   uf?: string;
-  comodidadesImovel?: string[];
-  comodidadesCondominio?: string[];
+  comodidadesImovel?: [string];
+  comodidadesCondominio?: [string];
   createdAt?: number;
   updatedAt?: number;
 }

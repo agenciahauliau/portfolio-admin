@@ -29,11 +29,11 @@
   <p>Cidade: {{ imovel.cidade }}, UF: {{ imovel.uf }}</p>
   <p>Comodidades do imóvel:</p>
   <ul>
-    <li *ngFor="let i of imovel.comodidadesImovel | slice: 1">{{ i }}</li>
+    <li *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</li>
   </ul>
   <p>Comodidades do condomínio:</p>
   <ul>
-    <li *ngFor="let i of imovel.comodidadesCondominio | slice: 1">{{ i }}</li>
+    <li *ngFor="let i of imovel.comodidadesCondominio | slice: 0">{{ i }}</li>
   </ul>
   <p>
     Postado em:

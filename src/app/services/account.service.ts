@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 import { TokenService } from '../helpers/token.service';
 import { GQL_CRIAR_IMOVEL, GQL_LOGIN, GQL_ME } from '../helpers/graphql';
 import { Imovel, User } from '../helpers/types';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -45,10 +44,16 @@ export class AccountService {
       })
       .subscribe(
         ({ data }: any) => {
-          console.log('Imóvel criado', data.imovel);
+          if (data.errors) {
+            console.log('Erro ao criar', data.errors);
+            return data.errors;
+          } else {
+            console.log('Imóvel criado', data.imovel);
+            return data.imovel;
+          }
         },
         (error) => {
-          console.log('Erro ao criar imóvel', error);
+          console.log('erro', error);
         }
       );
   }
