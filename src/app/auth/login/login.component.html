@@ -1,52 +1,60 @@
-<h4>Login</h4>
-<a
-  *ngIf="isLoggedIn"
-  [routerLink]="['/admin']"
-  routerLinkActive="router-link-active"
-  style="text-decoration: underline"
-  >Admin</a
->
-<form
-  *ngIf="!isLoggedIn"
-  name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
-  novalidate
->
-  <div form-group>
-    <label for="email">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      name="email"
-      [(ngModel)]="form.email"
-      required
-      email
-      #email="ngModel"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Senha</label>
-    <input
-      type="password"
-      class="form-control"
-      name="senha"
-      [(ngModel)]="form.senha"
-      required
-      minlength="6"
-      #senha="ngModel"
-    />
-  </div>
-  <div class="form-group">
-    <button type="submit">Entrar</button>
-  </div>
-  <div class="form-group">
-    <div
-      class="alert alert-danger"
-      role="alert"
-      *ngIf="f.submitted && isLoginFailed"
+<div class="painelLogin">
+  <div class="credenciaisLogin">
+    <img src="../../../assets/logo.webp" alt="Portifólio Imóveis" title="Portifólio Imóveis" />
+    <h1>Login</h1>
+    <p>Entre com suas credenciais para fazer login</p>
+    <a
+      *ngIf="isLoggedIn"
+      [routerLink]="['/admin']"
+      routerLinkActive="router-link-active"
+      style="text-decoration: underline"
+      >Admin</a
     >
-      Login failed: {{ errorMessage }}
-    </div>
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div form-group>
+        <label for="email"></label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+          placeholder="E-mail"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password"></label>
+        <input
+          type="password"
+          class="form-control"
+          name="senha"
+          [(ngModel)]="form.senha"
+          required
+          minlength="6"
+          #senha="ngModel"
+          placeholder="Senha"
+        />
+      </div>
+      <div class="form-group">
+        <button type="submit">Entrar</button>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+</div>
