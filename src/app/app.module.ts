@@ -13,6 +13,7 @@ import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.compon
     GraphQLModule,
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
