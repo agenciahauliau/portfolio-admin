@@ -33,7 +33,19 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   });
 
   const link = ApolloLink.from([basic, auth, httpLink.create({ uri })]);
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          imoveis: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
+    },
+  });
 
   return {
     link,

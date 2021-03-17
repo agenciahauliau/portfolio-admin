@@ -244,7 +244,7 @@ export const GQL_BUSCAR_IMOVEL = gql`
 `;
 
 export const GQL_REMOVE_IMOVEL = gql`
-  mutation removeImovel($_id: ID!) {
+  mutation removeImovel($_id: String!) {
     removeImovel(id: $_id)
   }
 `;

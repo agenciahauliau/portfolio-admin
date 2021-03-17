@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_IMOVEIS } from '../../helpers/graphql';
+import { AccountService } from 'src/app/services/account.service';
+import { GQL_IMOVEIS, GQL_REMOVE_IMOVEL } from '../../helpers/graphql';
 import { Imovel } from '../../helpers/types';
 
 @Component({
@@ -18,7 +19,11 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
 
   private querySubs = new Subscription();
 
-  constructor(private apollo: Apollo, private router: Router) {}
+  constructor(
+    private apollo: Apollo,
+    private router: Router,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
@@ -40,6 +45,11 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
 
   refresh() {
     this.imoveisQuery.refetch();
+  }
+
+  async remover(id: any) {
+    await this.accountService.deletar(id);
+    this.refresh();
   }
 
   ngOnDestroy() {

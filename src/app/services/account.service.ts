@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from '../helpers/token.service';
-import { GQL_CRIAR_IMOVEL, GQL_LOGIN, GQL_ME } from '../helpers/graphql';
+import {
+  GQL_CRIAR_IMOVEL,
+  GQL_LOGIN,
+  GQL_ME,
+  GQL_REMOVE_IMOVEL,
+} from '../helpers/graphql';
 import { Imovel, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
@@ -77,6 +82,30 @@ export class AccountService {
         (err) => {
           console.log(err);
           err;
+        }
+      );
+  }
+
+  async deletar(id: string) {
+    console.log(id);
+    return this.apollo
+      .mutate({
+        mutation: GQL_REMOVE_IMOVEL,
+        variables: { _id: id },
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        ({ data }: any) => {
+          if (data.errors) {
+            console.log('Erro ao deletar', data.errors);
+            return data.errors;
+          } else {
+            console.log('Imóvel removido', data.imovel);
+            return data.imovel;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
         }
       );
   }
