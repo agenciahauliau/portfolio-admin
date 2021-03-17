@@ -7,15 +7,14 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AccountService } from 'src/app/services/account.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private route: Router, private accountService: AccountService) {}
+  constructor(private router: Router) {}
   canActivate(
-    route: ActivatedRouteSnapshot,
+    next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
@@ -26,7 +25,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true;
     }
-    this.route.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }
