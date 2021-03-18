@@ -75,6 +75,18 @@
           background: inherit;
           backdrop-filter: blur(10px);
           box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.01), 0 0 50px rgba(0,0,0,0.1);
+
+          .formulario {
+
+            form > div {
+              margin-bottom: 20px;
+            }
+
+            input, textarea {
+              padding: 8px 15px;
+              background: #fff2;
+            }
+          }
       }
   }
 }
