@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { GQL_IMOVEIS } from '../../helpers/graphql';
 import { Imovel } from '../../helpers/types';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faEye } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-listar-imoveis',
@@ -14,7 +13,7 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
   styleUrls: ['./listar-imoveis.component.scss'],
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
-  faPlus = faPlus;
+  faEye = faEye;
   faTrashAlt = faTrashAlt;
 
   imoveis!: Imovel[];
