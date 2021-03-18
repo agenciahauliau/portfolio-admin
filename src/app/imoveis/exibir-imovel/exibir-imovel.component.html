@@ -3,15 +3,15 @@
 <div *ngIf="imovel">
   <p>ID do imóvel: {{ imovel._id }}</p>
   <p>Categoria: {{ imovel.categoriaImovel }}</p>
-  <p>É Jardins™: {{ imovel.jardins ? "Sim" : "Não" }}</p>
+  <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
   <p>Descrição: {{ imovel.descricaoImovel }}</p>
   <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
   <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
-  <p>Aceita permuta?: {{ imovel.aceitaPermuta ? "Sim" : "Não" }}</p>
-  <p>Já está mobiliado?: {{ imovel.mobiliado ? "Sim" : "Não" }}</p>
-  <p>Valor do imóvel: {{ imovel.valorImovel | currency: "BRL" }}</p>
-  <p>Valor do IPTU: {{ imovel.valorIPTU | currency: "BRL" }}</p>
-  <p>Valor do condomínio: {{ imovel.valorCondominio | currency: "BRL" }}</p>
+  <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
+  <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
+  <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
+  <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
+  <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
   <p>Área total: {{ imovel.areaTotal }}m²</p>
   <p>Área construída: {{ imovel.areaConstruida }}m²</p>
   <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
@@ -37,9 +37,9 @@
   </ul>
   <p>
     Postado em:
-    {{ imovel.createdAt | date: "dd/MMM/yyyy - HH:mm" }}
+    {{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}
   </p>
   <p>
-    Última atualização em: {{ imovel.updatedAt | date: "dd/MMM/yyyy - HH:mm" }}
+    Última atualização em: {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}
   </p>
 </div>

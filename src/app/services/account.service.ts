@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { TokenService } from '../helpers/token.service';
+import { TokenService } from './token.service';
 import {
   GQL_CRIAR_IMOVEL,
   GQL_LOGIN,
   GQL_ME,
   GQL_REMOVE_IMOVEL,
-} from '../helpers/graphql';
+} from '../graphql/graphql';
 import { Imovel, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class AccountService {
   constructor(
     private apollo: Apollo,
     private tokenStorage: TokenService,
-    private router: Router
+    private router: Router,
   ) {}
 
   async login(dados: User) {
@@ -36,7 +36,7 @@ export class AccountService {
         },
         (error) => {
           console.log('there was an error sending the query', error);
-        }
+        },
       );
   }
 
@@ -59,7 +59,7 @@ export class AccountService {
         },
         (error) => {
           console.log('erro', error);
-        }
+        },
       );
   }
 
@@ -82,7 +82,7 @@ export class AccountService {
         (err) => {
           console.log(err);
           err;
-        }
+        },
       );
   }
 
@@ -106,7 +106,7 @@ export class AccountService {
         },
         (error) => {
           console.log('erro', error);
-        }
+        },
       );
   }
 

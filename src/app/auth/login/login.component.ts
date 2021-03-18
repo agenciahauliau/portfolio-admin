@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
-import { TokenService } from '../../helpers/token.service';
+import { TokenService } from '../../services/token.service';
 import { User } from 'src/app/helpers/types';
 import { Router } from '@angular/router';
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private accService: AccountService,
     private tokenStorage: TokenService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {

@@ -18,12 +18,12 @@ export class CriarImovelComponent implements OnInit {
   onSubmit() {
     if (this.form.comodidadesImovel) {
       this.form.comodidadesImovel = this.separa(
-        this.form.comodidadesImovel + ''
+        this.form.comodidadesImovel + '',
       );
     }
     if (this.form.comodidadesCondominio) {
       this.form.comodidadesCondominio = this.separa(
-        this.form.comodidadesCondominio + ''
+        this.form.comodidadesCondominio + '',
       );
     }
     console.log('form', this.form);

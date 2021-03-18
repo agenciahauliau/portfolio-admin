@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
-import { GQL_IMOVEIS } from '../../helpers/graphql';
+import { GQL_IMOVEIS } from '../../graphql/graphql';
 import { Imovel } from '../../helpers/types';
 
 @Component({
@@ -22,7 +22,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   constructor(
     private apollo: Apollo,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
   ) {}
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
       ({ data, loading }) => {
         this.loading = loading;
         this.imoveis = data.imoveis;
-      }
+      },
     );
   }
 

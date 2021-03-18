@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_BUSCAR_IMOVEL } from '../../helpers/graphql';
+import { GQL_BUSCAR_IMOVEL } from '../../graphql/graphql';
 import { Imovel } from '../../helpers/types';
 
 @Component({
@@ -20,7 +20,7 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
       ({ data, loading }) => {
         this.loading = loading;
         this.imovel = data.imovel;
-      }
+      },
     );
   }
 
