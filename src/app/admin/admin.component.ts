@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faRocket } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHome} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin',
@@ -7,7 +8,8 @@ import { faRocket } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  faRocket = faRocket;
+  faPlusSquare = faPlusSquare;
+  faHome = faHome;
 
   constructor() {}
 

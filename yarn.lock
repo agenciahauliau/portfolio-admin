@@ -192,9 +192,6 @@
     "tslib" "^2.0.0"
     "yargs" "^16.1.1"
 
-"@angular/compiler@>=2.3.1 <12.0.0 || ^11.0.0-next || ^11.1.0-next || ^11.2.0-next":
-  "version" "9.0.0"
-
 "@angular/compiler@~11.2.6", "@angular/compiler@11.2.6":
   "integrity" "sha512-3ijsCxnCLU1V1hy4UMf9qtMz5LR+wCdVFDqktEQccN9YEkN0cNtOc8Nu9EV9/mc2tqd1Q4xSBpb2o2mvpy7AhQ=="
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-11.2.6.tgz"
@@ -202,7 +199,10 @@
   dependencies:
     "tslib" "^2.0.0"
 
-"@angular/core@^11.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@>=2.3.1 <12.0.0 || ^11.0.0-next || ^11.1.0-next || ^11.2.0-next", "@angular/core@~11.2.6", "@angular/core@11.2.6":
+"@angular/compiler@9.0.0":
+  "version" "9.0.0"
+
+"@angular/core@^11.0.0", "@angular/core@^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0", "@angular/core@~11.2.6", "@angular/core@11.2.6", "@angular/core@9.0.0":
   "integrity" "sha512-lS5JOQ/Y9gbk5WiMnCp5Zyz2pRIoZ+IWLOXHU5rkQeXy0zE3eMJhw0FfpEK+X5CeSNl2EPVSPLT0MtDtbNPodg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-11.2.6.tgz"
   "version" "11.2.6"
@@ -2499,6 +2499,7 @@
     "anymatch" "^2.0.0"
     "async-each" "^1.0.1"
     "braces" "^2.3.2"
+    "fsevents" "^1.2.7"
     "glob-parent" "^3.1.0"
     "inherits" "^2.0.3"
     "is-binary-path" "^1.0.0"
@@ -2517,6 +2518,7 @@
   dependencies:
     "anymatch" "~3.1.1"
     "braces" "~3.0.2"
+    "fsevents" "~2.3.1"
     "glob-parent" "~5.1.0"
     "is-binary-path" "~2.1.0"
     "is-glob" "~4.0.1"
@@ -5361,6 +5363,8 @@
   "integrity" "sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss="
   "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz"
   "version" "4.0.0"
+  dependencies:
+    "graceful-fs" "^4.1.6"
   optionalDependencies:
     "graceful-fs" "^4.1.6"
 
@@ -5519,7 +5523,14 @@
   "version" "4.1.1"
   dependencies:
     "copy-anything" "^2.0.1"
+    "errno" "^0.1.1"
+    "graceful-fs" "^4.1.2"
+    "image-size" "~0.5.0"
+    "make-dir" "^2.1.0"
+    "mime" "^1.4.1"
+    "needle" "^2.5.2"
     "parse-node-version" "^1.0.1"
+    "source-map" "~0.6.0"
     "tslib" "^1.10.0"
   optionalDependencies:
     "errno" "^0.1.1"
@@ -5920,6 +5931,7 @@
   "resolved" "https://registry.npmjs.org/minipass-fetch/-/minipass-fetch-1.3.3.tgz"
   "version" "1.3.3"
   dependencies:
+    "encoding" "^0.1.12"
     "minipass" "^3.1.0"
     "minipass-sized" "^1.0.3"
     "minizlib" "^2.0.0"
@@ -7732,6 +7744,8 @@
   "integrity" "sha512-B0LcJhjiwKkTl79aGVF/u5KdzsH8IylVfV56Ut6c9ouWLJcUK17T83aZBetNYSnZtXf2OHD4+2PbmRW+Fp5ulg=="
   "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.38.4.tgz"
   "version" "2.38.4"
+  dependencies:
+    "fsevents" "~2.3.1"
   optionalDependencies:
     "fsevents" "~2.3.1"
 
@@ -9199,8 +9213,10 @@
   "resolved" "https://registry.npmjs.org/watchpack/-/watchpack-1.7.5.tgz"
   "version" "1.7.5"
   dependencies:
+    "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
+    "watchpack-chokidar2" "^2.0.1"
   optionalDependencies:
     "chokidar" "^3.4.1"
     "watchpack-chokidar2" "^2.0.1"

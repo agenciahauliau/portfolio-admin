@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { Imovel } from '../../helpers/types';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHome} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-criar-imovel',
@@ -9,6 +11,9 @@ import { Imovel } from '../../helpers/types';
   styleUrls: ['./criar-imovel.component.scss'],
 })
 export class CriarImovelComponent implements OnInit {
+  faPlusSquare = faPlusSquare;
+  faHome = faHome;
+
   form: Imovel = {};
 
   constructor(private accService: AccountService) {}
