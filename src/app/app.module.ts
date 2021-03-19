@@ -3,36 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminComponent } from './admin/admin.component';
 import { GraphQLModule } from './graphql/graphql.module';
 import { LoginComponent } from './auth/login/login.component';
-import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
-import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
-import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
-import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminComponent,
-    LoginComponent,
-    ListarImoveisComponent,
-    ExibirImovelComponent,
-    EditarImovelComponent,
-    CriarImovelComponent,
-    RegisterComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     GraphQLModule,
-    HttpClientModule,
-    FormsModule,
-    FontAwesomeModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

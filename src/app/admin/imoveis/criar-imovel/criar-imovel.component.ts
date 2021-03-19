@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
-import { Imovel } from '../../helpers/types';
+import { Imovel } from '../../../helpers/types';
 
 @Component({
   selector: 'app-criar-imovel',

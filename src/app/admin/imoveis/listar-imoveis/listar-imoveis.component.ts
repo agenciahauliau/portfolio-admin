@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
-import { GQL_IMOVEIS } from '../../graphql/graphql';
-import { Imovel } from '../../helpers/types';
+import { GQL_IMOVEIS } from '../../../graphql/graphql';
+import { Imovel } from '../../../helpers/types';
 
 @Component({
   selector: 'app-listar-imoveis',
@@ -40,7 +40,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   }
 
   goToImovel(imovelId: any) {
-    this.router.navigate(['admin/imovel', imovelId]);
+    this.router.navigate(['imovel', imovelId]);
   }
 
   refresh() {

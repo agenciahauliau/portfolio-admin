@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../helpers/auth.guard';
 import { AdminComponent } from '../admin/admin.component';
-import { ExibirImovelComponent } from '../imoveis/exibir-imovel/exibir-imovel.component';
-import { ListarImoveisComponent } from '../imoveis/listar-imoveis/listar-imoveis.component';
-import { CriarImovelComponent } from '../imoveis/criar-imovel/criar-imovel.component';
+import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
+import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
+import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
+        canActivateChild: [AuthGuard],
         children: [
           {
             path: 'imoveis',

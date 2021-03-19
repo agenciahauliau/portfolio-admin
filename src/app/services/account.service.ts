@@ -14,6 +14,7 @@ import { Imovel, User } from '../helpers/types';
 })
 export class AccountService {
   perfil: unknown;
+  redirectUrl: string = '';
 
   constructor(
     private apollo: Apollo,
