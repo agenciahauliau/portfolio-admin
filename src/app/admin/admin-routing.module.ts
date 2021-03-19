@@ -25,8 +25,13 @@ const routes: Routes = [
             component: ExibirImovelComponent,
           },
           {
-            path: 'imovel/criar',
+            path: 'criar-imovel',
             component: CriarImovelComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'imoveis',
+            pathMatch: 'full',
           },
         ],
       },
