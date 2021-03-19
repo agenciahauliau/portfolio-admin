@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from '../../../services/account.service';
 import { Imovel } from '../../../helpers/types';
 
 @Component({
@@ -9,7 +8,36 @@ import { Imovel } from '../../../helpers/types';
   styleUrls: ['./criar-imovel.component.scss'],
 })
 export class CriarImovelComponent implements OnInit {
-  form: Imovel = {};
+  form: Imovel = {
+    _id: '',
+    categoriaImovel: '',
+    jardins: false,
+    descricaoImovel: '',
+    tipoNegociacao: '',
+    statusImovel: '',
+    aceitaPermuta: false,
+    mobiliado: false,
+    valorImovel: 0,
+    valorIPTU: 0,
+    valorCondominio: 0,
+    areaTotal: 0,
+    areaConstruida: 0,
+    andarImovel: 0,
+    qtdeQuarto: 0,
+    qtdeBanheiro: 0,
+    qtdeSuites: 0,
+    qtdeVagas: 0,
+    nomeConstrutora: '',
+    cep: 0,
+    logradouro: '',
+    numeroLogradouro: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+    comodidadesImovel: [''],
+    comodidadesCondominio: [''],
+  };
 
   constructor(private accService: AccountService) {}
 
