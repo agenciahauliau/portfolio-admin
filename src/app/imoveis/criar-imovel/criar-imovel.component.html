@@ -271,7 +271,7 @@
                 >Categoria do Imóvel: <strong style="color: red">*</strong></label
               >
               <input
-                type="text"
+                list="categoriaImovel"
                 name="categoriaImovel"
                 [(ngModel)]="form.categoriaImovel"
                 #categoriaImovel="ngModel"
@@ -279,6 +279,17 @@
                 value=""
                 required
               />
+              <datalist id="categoriaImovel">
+                <option value="Sala Comercial">Sala Comercial</option>
+                <option value="Área Comercial">Área Comercial</option>
+                <option value="Cobertura">Cobertura</option>
+                <option value="Apartamento Padrão">Apartamento Padrão</option>
+                <option value="Chácaras">Chácaras</option>
+                <option value="Casa Residencial">Casa Residencial</option>
+                <option value="Lote urbano">Lote urbano</option>
+                <option value="Casa em Condomínio">Casa em Condomínio</option>
+                <option value="Lote em Condomínio">Lote em Condomínio</option>
+              </datalist>
             </div>
 
             <div class="form-campo">
@@ -297,7 +308,7 @@
                 >Tipo de Negociação: <strong style="color: red">*</strong></label
               >
               <input
-                type="text"
+                list="tipoNegociacao"
                 name="tipoNegociacao"
                 [(ngModel)]="form.tipoNegociacao"
                 #tipoNegociacao="ngModel"
@@ -305,6 +316,12 @@
                 value=""
                 required
               />
+              <datalist id="tipoNegociacao">
+                <option value="Alugar">Alugar</option>
+                <option value="Venda">Vender</option>
+                <option value="Lançamento">Lançamento</option>
+              </datalist>
+
             </div>
 
             <div class="form-campo">
@@ -312,6 +329,7 @@
                 >Status do imóvel <strong style="color: red">*</strong></label
               >
               <input
+                list="statusImovel"
                 type="text"
                 name="statusImovel"
                 [(ngModel)]="form.statusImovel"
@@ -321,6 +339,12 @@
                 required
               />
             </div>
+
+            <datalist id="statusImovel">
+              <option value="Pronto para Morar">Pronto para Morar</option>
+              <option value="Entrega em Breve">Entrega em Breve</option>
+              <option value="Lançamento">Lançamento</option>
+            </datalist>
 
             <div class="form-campo">
               <label for="aceitaPermuta">Aceita permuta? </label>
