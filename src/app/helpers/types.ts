@@ -10,7 +10,7 @@ export interface User {
 
 export interface Imovel {
   _id?: string;
-  nomeImove?: string;
+  nomeImovel?: string;
   categoriaImovel?: string;
   jardins?: boolean;
   descricaoImovel?: string;
@@ -42,4 +42,12 @@ export interface Imovel {
   comodidadesCondominio?: [string];
   createdAt?: number;
   updatedAt?: number;
+}
+
+export interface Galeria {
+  _id?: string;
+  nomeGaleria?: string;
+  url?: [string];
+  arquivoDestaque?: string;
+  idImovel?: [string];
 }
