@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faTrashAlt, faEye } from '@fortawesome/free-regular-svg-icons';
+import {
+  faTrashAlt,
+  faEye,
+  faPlusSquare,
+} from '@fortawesome/free-regular-svg-icons';
+import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -16,6 +21,9 @@ import { GQL_EXIBE_GALERIASS } from 'src/app/helpers/graphql';
 export class ListarGaleriasComponent implements OnInit {
   faEye = faEye;
   faTrashAlt = faTrashAlt;
+  faPlusSquare = faPlusSquare;
+  faHome = faHome;
+  faSyncAlt = faSyncAlt;
 
   galerias!: Galeria[];
   galeriasQuery!: QueryRef<any>;

@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { Imovel } from '../../helpers/types';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar-imovel',
@@ -48,11 +49,11 @@ export class CriarImovelComponent implements OnInit {
     comodidadesCondominio: [''],
   };
 
-  constructor(private accService: AccountService) {}
+  constructor(private accService: AccountService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.comodidadesImovel) {
       this.form.comodidadesImovel = this.separa(
         this.form.comodidadesImovel + '',
@@ -64,10 +65,16 @@ export class CriarImovelComponent implements OnInit {
       );
     }
     console.log('form', this.form);
-    const result = this.accService.criarImovel(this.form);
-    console.log(result);
+    await this.accService.criarImovel(this.form);
+    setTimeout(() => {
+      window.alert('Imovel Criado');
+      this.voltar();
+    }, 2000);
   }
 
+  voltar() {
+    this.router.navigate(['/admin']);
+  }
   //TODO: Verificar o pq que o array[0] não está sendo inserido no banco
   separa(data: any) {
     return data.split(/\n+|\r+|,\s+/g).filter(Boolean);

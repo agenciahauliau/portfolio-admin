@@ -93,7 +93,7 @@ export class AccountService {
     return this.apollo
       .mutate({
         mutation: GQL_DELETA_GALERIA,
-        variables: { _id: id },
+        variables: { id: id },
         errorPolicy: 'all',
       })
       .subscribe(

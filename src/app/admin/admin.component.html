@@ -1,16 +1,23 @@
 <div class="admin">
-
   <div class="barAdmin">
     <div class="logoAdmin">
-      <img src="../../assets/logo-r.webp" alt="Portifólio Imóveis" title="Portifólio Imóveis" />
+      <img
+        src="../../assets/logo-r.webp"
+        alt="Portifólio Imóveis"
+        title="Portifólio Imóveis"
+      />
     </div>
     <div class="menuAdmin">
       <div class="itensMenuAdmin">
+        <a [routerLink]="['/admin']" routerLinkActive="router-link-active">
+          <fa-icon [icon]="faHome" size="2x"></fa-icon>
+        </a>
         <a
-        [routerLink]="['/admin']"
-        routerLinkActive="router-link-active"
+          class="temporario"
+          [routerLink]="['/admin/galerias']"
+          routerLinkActive="router-link-active"
         >
-          <fa-icon [icon]="faHome" size="2x" ></fa-icon>
+          <fa-icon [icon]="faImage" size="2x"></fa-icon>
         </a>
       </div>
     </div>
@@ -20,11 +27,11 @@
     <div class="cabecalhoConteudoAdmin">
       <div class="itensCabecalhoConteudoAdmin">
         <a
-        [routerLink]="['/admin/criar-imovel']"
-        routerLinkActive="router-link-active"
+          [routerLink]="['/admin/criar-imovel']"
+          routerLinkActive="router-link-active"
         >
           Criar Imovel
-          <fa-icon [icon]="faPlusSquare" ></fa-icon>
+          <fa-icon [icon]="faPlusSquare"></fa-icon>
         </a>
       </div>
     </div>
@@ -32,5 +39,4 @@
       <app-listar-imoveis></app-listar-imoveis>
     </div>
   </div>
-
 </div>
