@@ -12,11 +12,7 @@
         <a [routerLink]="['/admin']" routerLinkActive="router-link-active">
           <fa-icon [icon]="faHome" size="2x"></fa-icon>
         </a>
-        <a
-          class="temporario"
-          [routerLink]="['/admin/galerias']"
-          routerLinkActive="router-link-active"
-        >
+        <a [routerLink]="['/admin/upload']" routerLinkActive="router-link-active">
           <fa-icon [icon]="faImage" size="2x"></fa-icon>
         </a>
       </div>
@@ -32,6 +28,14 @@
         >
           Criar Imovel
           <fa-icon [icon]="faPlusSquare"></fa-icon>
+        </a>
+        <a
+          class="temporario"
+          [routerLink]="['/admin/galerias']"
+          routerLinkActive="router-link-active"
+        >
+        Galerias 
+          <fa-icon [icon]="faImage"></fa-icon>
         </a>
       </div>
     </div>

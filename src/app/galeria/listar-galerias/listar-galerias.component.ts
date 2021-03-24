@@ -4,7 +4,7 @@ import {
   faEye,
   faPlusSquare,
 } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -24,6 +24,7 @@ export class ListarGaleriasComponent implements OnInit {
   faPlusSquare = faPlusSquare;
   faHome = faHome;
   faSyncAlt = faSyncAlt;
+  faImage = faImage;
 
   galerias!: Galeria[];
   galeriasQuery!: QueryRef<any>;

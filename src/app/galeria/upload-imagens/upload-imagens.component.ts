@@ -12,7 +12,7 @@ import {
   faEye,
   faPlusSquare,
 } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { GQL_EXIBE_MIDIAS } from 'src/app/helpers/graphql';
@@ -36,6 +36,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;
   faHome = faHome;
   faSyncAlt = faSyncAlt;
+  faImage = faImage;
 
   private querySubs = new Subscription();
 
