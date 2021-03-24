@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:8080/v1/graphql',
+  API:
+    'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com/v1/graphql',
   TOKEN_KEY: 'auth-token',
   USER_KEY: 'auth-user',
 };

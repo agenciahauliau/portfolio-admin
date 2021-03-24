@@ -44,6 +44,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private apollo: Apollo,
     private tokenService: TokenService,
+    private router: Router,
   ) {}
   ngOnInit(): void {
     this.querySubs = this.apollo
@@ -132,6 +133,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
       }
       await this.uploadFiles();
     }; */
+
   async upload($event: any) {
     let operations = {
       query: `
@@ -156,7 +158,14 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
         reportProgress: true,
         observe: 'events',
         headers: {
+          'Access-Control-Allow-Origin': '*',
           Authorization: `Bearer ${this.tokenService.getToken()}`,
+          'Accept-Encoding': 'gzip, deflate, br',
+          Origin:
+            'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com',
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Connection: 'keep-alive',
         },
       })
       .subscribe(
@@ -167,6 +176,10 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
             return data?.errors;
           } else {
             console.log('Imagem sucesso', data);
+            setTimeout(() => {
+              window.alert('Galeria Criada');
+              this.voltar();
+            }, 6000);
             return data;
           }
         },
@@ -174,5 +187,9 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
           console.log('erro', error);
         },
       );
+  }
+
+  voltar() {
+    this.router.navigate(['/admin/upload']);
   }
 }
