@@ -4,11 +4,13 @@ import { Apollo } from 'apollo-angular';
 import { TokenService } from '../helpers/token.service';
 import {
   GQL_CRIAR_IMOVEL,
+  GQL_CRIA_GALERIA,
+  GQL_DELETA_GALERIA,
   GQL_LOGIN,
   GQL_ME,
   GQL_REMOVE_IMOVEL,
 } from '../helpers/graphql';
-import { Imovel, User } from '../helpers/types';
+import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +20,7 @@ export class AccountService {
   constructor(
     private apollo: Apollo,
     private tokenStorage: TokenService,
-    private router: Router
+    private router: Router,
   ) {}
 
   async login(dados: User) {
@@ -36,7 +38,7 @@ export class AccountService {
         },
         (error) => {
           console.log('there was an error sending the query', error);
-        }
+        },
       );
   }
 
@@ -59,7 +61,54 @@ export class AccountService {
         },
         (error) => {
           console.log('erro', error);
-        }
+        },
+      );
+  }
+
+  async criarGaleria(dados: Galeria) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_CRIA_GALERIA,
+        variables: dados,
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        ({ data }: any) => {
+          if (data.errors) {
+            console.log('Erro ao criar galeria', data.errors);
+            return data.errors;
+          } else {
+            console.log('Galeria criada', data.imovel);
+            return data.imovel;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
+        },
+      );
+  }
+
+  async removeGaleria(id: string) {
+    console.log(id);
+    return this.apollo
+      .mutate({
+        mutation: GQL_DELETA_GALERIA,
+        variables: { _id: id },
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        ({ data }: any) => {
+          if (data.errors) {
+            console.log('Erro ao deletar', data.errors);
+            return data.errors;
+          } else {
+            console.log('Galeria removido', data.galeria);
+            return data.galeria;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
+        },
       );
   }
 
@@ -82,7 +131,7 @@ export class AccountService {
         (err) => {
           console.log(err);
           err;
-        }
+        },
       );
   }
 
@@ -106,7 +155,7 @@ export class AccountService {
         },
         (error) => {
           console.log('erro', error);
-        }
+        },
       );
   }
 
