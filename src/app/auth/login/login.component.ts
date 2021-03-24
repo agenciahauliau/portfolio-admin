@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../services/account.service';
+import { GraphQlService } from '../../services/graphql.service';
 import { TokenService } from '../../services/token.service';
 import { User } from 'src/app/helpers/types';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private accService: AccountService,
+    private gqlService: GraphQlService,
     private tokenStorage: TokenService,
     private router: Router,
   ) {}
@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
     this.redirect();
   }
 
-  onSubmit() {
-    this.accService
+  async onSubmit() {
+    await this.gqlService
       .login(this.form)
       .then((res) => {
+        console.log('Resultado no LoginComponent', res);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.redirect();
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
       .catch((err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-        console.log(err);
+        console.log('Erro login no LoginComponent', err);
       });
   }
 

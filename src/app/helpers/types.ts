@@ -10,6 +10,7 @@ export interface User {
 
 export interface Imovel {
   _id?: string;
+  nomeImovel?: string;
   categoriaImovel?: string;
   jardins?: boolean;
   descricaoImovel?: string;
@@ -18,6 +19,8 @@ export interface Imovel {
   aceitaPermuta?: boolean;
   mobiliado?: boolean;
   valorImovel?: number;
+  valorEntrada?: number;
+  valorParcela?: number;
   valorIPTU?: number;
   valorCondominio?: number;
   areaTotal?: number;

@@ -8,25 +8,25 @@ export class TokenService {
   constructor() {}
 
   signOut(): void {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
   }
 
   public saveToken(token: string): void {
-    window.sessionStorage.removeItem(environment.TOKEN_KEY);
-    window.sessionStorage.setItem(environment.TOKEN_KEY, token);
+    window.localStorage.removeItem(environment.TOKEN_KEY);
+    window.localStorage.setItem(environment.TOKEN_KEY, token);
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(environment.TOKEN_KEY);
+    return window.localStorage.getItem(environment.TOKEN_KEY);
   }
 
   public saveUser(user: any): void {
-    window.sessionStorage.removeItem(environment.USER_KEY);
-    window.sessionStorage.setItem(environment.USER_KEY, JSON.stringify(user));
+    window.localStorage.removeItem(environment.USER_KEY);
+    window.localStorage.setItem(environment.USER_KEY, JSON.stringify(user));
   }
 
   public getUser(): any {
-    const user = window.sessionStorage.getItem(environment.USER_KEY);
+    const user = window.localStorage.getItem(environment.USER_KEY);
     if (user) {
       return JSON.parse(user);
     }

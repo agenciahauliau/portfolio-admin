@@ -9,6 +9,7 @@ import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.com
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 import { AdminComponent } from './admin.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { FormsModule } from '@angular/forms';
     EditarImovelComponent,
     CriarImovelComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, AdminRoutingModule, FormsModule, FontAwesomeModule, HttpClientModule],
 })
 export class AdminModule {}

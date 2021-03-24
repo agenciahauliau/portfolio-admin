@@ -17,11 +17,7 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
   error: any;
 
   private querySubs = new Subscription();
-  constructor(
-    private apollo: Apollo,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const imovelId = this.route.snapshot.paramMap.get('id');
@@ -33,12 +29,10 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
       errorPolicy: 'all',
     });
 
-    this.querySubs = this.imovelQuery.valueChanges.subscribe(
-      ({ data, loading }) => {
-        this.loading = loading;
-        this.imovel = data.imovel;
-      },
-    );
+    this.querySubs = this.imovelQuery.valueChanges.subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.imovel = data.imovel;
+    });
   }
 
   refresh() {

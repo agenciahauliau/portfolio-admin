@@ -9,44 +9,41 @@ import {
   Router,
   Route,
 } from '@angular/router';
-import { AccountService } from '../services/account.service';
+import { GraphQlService } from '../services/graphql.service';
+import { TokenService } from '../services/token.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private router: Router, private accService: AccountService) {}
+  constructor(
+    private router: Router,
+    private gqlService: GraphQlService,
+    private tokenService: TokenService,
+  ) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
-
     return this.checkLogin(url);
   }
 
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.canActivate(route, state);
   }
 
   canLoad(route: Route): boolean {
     const url = `/${route.path}`;
-
     return this.checkLogin(url);
   }
 
   checkLogin(url: string): boolean {
-    const token = sessionStorage.getItem('auth-token');
+    const token = this.tokenService.getToken();
     if (token) {
       return true;
     }
 
     // Store the attempted URL for redirecting
-    this.accService.redirectUrl = url;
+    this.gqlService.redirectUrl = url;
 
     // Create a dummy session id
     const sessionId = Math.random();

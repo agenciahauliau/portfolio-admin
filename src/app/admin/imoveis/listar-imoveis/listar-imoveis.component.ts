@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { AccountService } from 'src/app/services/account.service';
+import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 
@@ -19,11 +19,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
 
   private querySubs = new Subscription();
 
-  constructor(
-    private apollo: Apollo,
-    private router: Router,
-    private accountService: AccountService,
-  ) {}
+  constructor(private apollo: Apollo, private router: Router, private gqlService: GraphQlService) {}
 
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
@@ -31,12 +27,10 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
       pollInterval: 500,
     });
 
-    this.querySubs = this.imoveisQuery.valueChanges.subscribe(
-      ({ data, loading }) => {
-        this.loading = loading;
-        this.imoveis = data.imoveis;
-      },
-    );
+    this.querySubs = this.imoveisQuery.valueChanges.subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.imoveis = data.imoveis;
+    });
   }
 
   goToImovel(imovelId: any) {
@@ -48,7 +42,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   }
 
   async remover(id: any) {
-    await this.accountService.deletar(id);
+    await this.gqlService.deletar(id);
     this.refresh();
   }
 
