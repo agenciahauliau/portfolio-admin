@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CriarGaleriaComponent } from './galeria/criar-galeria/criar-galeria.component';
 import { ExibirGaleriaComponent } from './galeria/exibir-galeria/exibir-galeria.component';
 import { EditarGaleriaComponent } from './galeria/editar-galeria/editar-galeria.component';
+import { UploadImagensComponent } from './galeria/upload-imagens/upload-imagens.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EditarGaleriaComponent } from './galeria/editar-galeria/editar-galeria.
     CriarGaleriaComponent,
     ExibirGaleriaComponent,
     EditarGaleriaComponent,
+    UploadImagensComponent,
   ],
   imports: [
     BrowserModule,
