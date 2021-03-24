@@ -14,6 +14,9 @@ import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.com
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CriarGaleriaComponent } from './galeria/criar-galeria/criar-galeria.component';
+import { ExibirGaleriaComponent } from './galeria/exibir-galeria/exibir-galeria.component';
+import { EditarGaleriaComponent } from './galeria/editar-galeria/editar-galeria.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ExibirImovelComponent,
     EditarImovelComponent,
     CriarImovelComponent,
+    CriarGaleriaComponent,
+    ExibirGaleriaComponent,
+    EditarGaleriaComponent,
   ],
   imports: [
     BrowserModule,

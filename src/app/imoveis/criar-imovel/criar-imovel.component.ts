@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AccountService } from 'src/app/services/account.service';
 import { Imovel } from '../../helpers/types';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome} from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-criar-imovel',
@@ -23,16 +23,17 @@ export class CriarImovelComponent implements OnInit {
   onSubmit() {
     if (this.form.comodidadesImovel) {
       this.form.comodidadesImovel = this.separa(
-        this.form.comodidadesImovel + ''
+        this.form.comodidadesImovel + '',
       );
     }
     if (this.form.comodidadesCondominio) {
       this.form.comodidadesCondominio = this.separa(
-        this.form.comodidadesCondominio + ''
+        this.form.comodidadesCondominio + '',
       );
     }
     console.log('form', this.form);
-    this.accService.criarImovel(this.form);
+    const result = this.accService.criarImovel(this.form);
+    console.log(result);
   }
 
   //TODO: Verificar o pq que o array[0] não está sendo inserido no banco
