@@ -1,0 +1,31 @@
+<table class="tabelaImoveis">
+  <thead class="tabelaImoveisHeader">
+    <th>ID Imóvel</th>
+    <th>Categoria</th>
+    <th>Valor</th>
+    <th>Criado</th>
+    <th>Atualização</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody class="tabelaImoveisCorpo" *ngIf="galerias">
+    <tr class="tabelalinhaImovel" *ngFor="let galeria of galerias">
+      <td>{{ galeria.arquivoDestaque }}</td>
+      <td>{{ galeria._id }}</td>
+      <td>{{ galeria.nomeGaleria }}</td>
+      <td>
+        <button (click)="goToGaleria(galeria._id)">
+          <fa-icon [icon]="faEye" size="2x"></fa-icon>
+        </button>
+      </td>
+      <td>
+        <button (click)="remover(galeria._id)">
+          <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="error">Erro :(</div>

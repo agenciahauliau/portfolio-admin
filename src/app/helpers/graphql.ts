@@ -365,7 +365,7 @@ export const GQL_IMOVEIS_COM_FILTRO = gql`
 export const GQL_BUSCAR_IMOVEL = gql`
   query imovel(
     $_id: ID
-    $nomeImovel: String!
+    $nomeImovel: String
     $categoriaImovel: String
     $jardins: Boolean
     $descricaoImovel: String

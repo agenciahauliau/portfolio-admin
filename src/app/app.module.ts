@@ -18,6 +18,7 @@ import { CriarGaleriaComponent } from './galeria/criar-galeria/criar-galeria.com
 import { ExibirGaleriaComponent } from './galeria/exibir-galeria/exibir-galeria.component';
 import { EditarGaleriaComponent } from './galeria/editar-galeria/editar-galeria.component';
 import { UploadImagensComponent } from './galeria/upload-imagens/upload-imagens.component';
+import { ListarGaleriasComponent } from './galeria/listar-galerias/listar-galerias.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UploadImagensComponent } from './galeria/upload-imagens/upload-imagens.
     ExibirGaleriaComponent,
     EditarGaleriaComponent,
     UploadImagensComponent,
+    ListarGaleriasComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
+import { ExibirGaleriaComponent } from './galeria/exibir-galeria/exibir-galeria.component';
+import { ListarGaleriasComponent } from './galeria/listar-galerias/listar-galerias.component';
+import { CriarGaleriaComponent } from './galeria/criar-galeria/criar-galeria.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,6 +32,21 @@ const routes: Routes = [
     path: 'admin/criar-imovel',
     canActivate: [AuthGuard],
     component: CriarImovelComponent,
+  },
+  {
+    path: 'admin/galerias',
+    component: ListarGaleriasComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/galeria/:id',
+    component: ExibirGaleriaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/criar-galeria',
+    canActivate: [AuthGuard],
+    component: CriarGaleriaComponent,
   },
 ];
 
