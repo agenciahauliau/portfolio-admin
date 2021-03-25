@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from './token.service';
-import { GQL_CRIAR_IMOVEL, GQL_LOGIN, GQL_ME, GQL_REMOVE_IMOVEL } from '../graphql/graphql';
-import { Imovel, User } from '../helpers/types';
+import {
+  GQL_CRIAR_IMOVEL,
+  GQL_CRIA_GALERIA,
+  GQL_DELETA_GALERIA,
+  GQL_LOGIN,
+  GQL_ME,
+  GQL_REMOVE_IMOVEL,
+  GQL_UPLOAD_IMG,
+} from '../graphql/graphql';
+import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -57,6 +65,81 @@ export class GraphQlService {
         },
         (err) => {
           console.error('Err: ', err);
+        },
+      );
+  }
+
+  async upload(arquivo: any) {
+    console.log('arquivo', arquivo);
+    return this.apollo
+      .mutate({
+        mutation: GQL_UPLOAD_IMG,
+        variables: { file: arquivo },
+        context: {
+          useMultipart: true,
+        },
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data?.errors) {
+            console.log('Erro de upload', data?.errors);
+            return data?.errors;
+          } else {
+            console.log('Imagem sucesso', data);
+            return data;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
+        },
+      );
+  }
+
+  async criarGaleria(dados: Galeria) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_CRIA_GALERIA,
+        variables: dados,
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        ({ data }: any) => {
+          if (data.errors) {
+            console.log('Erro ao criar galeria', data.errors);
+            return data.errors;
+          } else {
+            console.log('Galeria criada', data.imovel);
+            return data.imovel;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
+        },
+      );
+  }
+
+  async removeGaleria(id: string) {
+    console.log(id);
+    return this.apollo
+      .mutate({
+        mutation: GQL_DELETA_GALERIA,
+        variables: { id: id },
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        ({ data }: any) => {
+          if (data.errors) {
+            console.log('Erro ao deletar', data.errors);
+            return data.errors;
+          } else {
+            console.log('Galeria removido', data.galeria);
+            return data.galeria;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
         },
       );
   }

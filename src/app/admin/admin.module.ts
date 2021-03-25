@@ -10,6 +10,11 @@ import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.compon
 import { AdminComponent } from './admin.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CriarGaleriaComponent } from './galerias/criar-galeria/criar-galeria.component';
+import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria.component';
+import { EditarGaleriaComponent } from './galerias/editar-galeria/editar-galeria.component';
+import { ListarGaleriasComponent } from './galerias/listar-galerias/listar-galerias.component';
+import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
     ExibirImovelComponent,
     EditarImovelComponent,
     CriarImovelComponent,
+    CriarGaleriaComponent,
+    ExibirGaleriaComponent,
+    EditarGaleriaComponent,
+    ListarGaleriasComponent,
+    UploadImagensComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, FormsModule, FontAwesomeModule, HttpClientModule],
 })

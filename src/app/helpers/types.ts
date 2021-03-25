@@ -43,3 +43,11 @@ export interface Imovel {
   createdAt?: number;
   updatedAt?: number;
 }
+
+export interface Galeria {
+  _id?: string;
+  nomeGaleria?: string;
+  url?: [string];
+  arquivoDestaque?: string;
+  idImovel?: [string];
+}

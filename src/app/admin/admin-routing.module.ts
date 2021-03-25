@@ -5,6 +5,10 @@ import { AdminComponent } from '../admin/admin.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
+import { ListarGaleriasComponent } from './galerias/listar-galerias/listar-galerias.component';
+import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria.component';
+import { CriarGaleriaComponent } from './galerias/criar-galeria/criar-galeria.component';
+import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
 
 const routes: Routes = [
   {
@@ -27,6 +31,22 @@ const routes: Routes = [
           {
             path: 'criar-imovel',
             component: CriarImovelComponent,
+          },
+          {
+            path: 'galerias',
+            component: ListarGaleriasComponent,
+          },
+          {
+            path: 'galeria/:id',
+            component: ExibirGaleriaComponent,
+          },
+          {
+            path: 'criar-galeria',
+            component: CriarGaleriaComponent,
+          },
+          {
+            path: 'upload',
+            component: UploadImagensComponent,
           },
           {
             path: '',

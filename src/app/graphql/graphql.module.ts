@@ -53,6 +53,11 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
               return incoming;
             },
           },
+          galerias: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
         },
       },
     },

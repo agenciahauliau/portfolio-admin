@@ -6,7 +6,7 @@ export const GQL_LOGIN = gql`
   }
 `;
 
-export const GQL_UPLOAD = gql`
+export const GQL_UPLOAD_IMG = gql`
   mutation upload($file: Upload!) {
     uploadFileRemoto(file: $file)
   }
@@ -84,6 +84,12 @@ export const GQL_ATUALIZA_GALERIA = gql`
       arquivoDestaque
       idImovel
     }
+  }
+`;
+
+export const GQL_EXIBE_MIDIAS = gql`
+  query arquivos {
+    listarUploads
   }
 `;
 
@@ -365,7 +371,7 @@ export const GQL_IMOVEIS_COM_FILTRO = gql`
 export const GQL_BUSCAR_IMOVEL = gql`
   query imovel(
     $_id: ID
-    $nomeImovel: String!
+    $nomeImovel: String
     $categoriaImovel: String
     $jardins: Boolean
     $descricaoImovel: String
