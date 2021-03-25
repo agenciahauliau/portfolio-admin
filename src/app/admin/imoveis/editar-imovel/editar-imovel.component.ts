@@ -6,6 +6,8 @@ import { NgModel } from '@angular/forms';
 import { GQL_BUSCAR_IMOVEL } from 'src/app/graphql/graphql';
 import { Imovel } from 'src/app/helpers/types';
 import { GraphQlService } from 'src/app/services/graphql.service';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-editar-imovel',
@@ -13,6 +15,9 @@ import { GraphQlService } from 'src/app/services/graphql.service';
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit {
+  faPlusSquare = faPlusSquare;
+  faHome = faHome;
+
   form: Imovel = {
     _id: '',
     categoriaImovel: '',

@@ -1,0 +1,38 @@
+.formulario {
+    form {
+      display: flex;
+  
+      div > div {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+  
+        label {
+          margin-bottom: 5px;
+        }
+      }
+  
+      .esquerdo {
+        width: 62%;
+        padding-right: 50px;
+      }
+  
+      .direito {
+        width: 32%;
+        height: fit-content;
+  
+        button {
+          width: fit-content;
+          padding: 18px 22px;
+          background: rgba(219, 4, 35, 1);
+        }
+      }
+    }
+  
+    input,
+    textarea {
+      padding: 8px 15px;
+      background: #fff2;
+    }
+  }
+  
