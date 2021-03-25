@@ -9,7 +9,6 @@ import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.compon
 import { ExibirGaleriaComponent } from './galeria/exibir-galeria/exibir-galeria.component';
 import { ListarGaleriasComponent } from './galeria/listar-galerias/listar-galerias.component';
 import { CriarGaleriaComponent } from './galeria/criar-galeria/criar-galeria.component';
-import { UploadImagensComponent } from './galeria/upload-imagens/upload-imagens.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,13 +20,13 @@ const routes: Routes = [
   },
   {
     path: 'admin/imoveis',
-    canActivate: [AuthGuard],
     component: ListarImoveisComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/imovel/:id',
-    canActivate: [AuthGuard],
     component: ExibirImovelComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/criar-imovel',
@@ -36,23 +35,18 @@ const routes: Routes = [
   },
   {
     path: 'admin/galerias',
-    canActivate: [AuthGuard],
     component: ListarGaleriasComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/galeria/:id',
-    canActivate: [AuthGuard],
     component: ExibirGaleriaComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin/criar-galeria',
     canActivate: [AuthGuard],
     component: CriarGaleriaComponent,
-  },
-  {
-    path: 'admin/upload',
-    canActivate: [AuthGuard],
-    component: UploadImagensComponent,
   },
 ];
 

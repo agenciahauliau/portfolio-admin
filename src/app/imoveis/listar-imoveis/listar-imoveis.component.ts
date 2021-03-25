@@ -26,20 +26,20 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   constructor(
     private apollo: Apollo,
     private router: Router,
-    private accountService: AccountService,
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
       query: GQL_IMOVEIS,
-      pollInterval: 5000,
+      pollInterval: 500,
     });
 
     this.querySubs = this.imoveisQuery.valueChanges.subscribe(
       ({ data, loading }) => {
         this.loading = loading;
         this.imoveis = data.imoveis;
-      },
+      }
     );
   }
 

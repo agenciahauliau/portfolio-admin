@@ -6,7 +6,7 @@ export const GQL_LOGIN = gql`
   }
 `;
 
-export const GQL_UPLOAD_IMG = gql`
+export const GQL_UPLOAD = gql`
   mutation upload($file: Upload!) {
     uploadFileRemoto(file: $file)
   }
@@ -84,12 +84,6 @@ export const GQL_ATUALIZA_GALERIA = gql`
       arquivoDestaque
       idImovel
     }
-  }
-`;
-
-export const GQL_EXIBE_MIDIAS = gql`
-  query arquivos {
-    listarUploads
   }
 `;
 
