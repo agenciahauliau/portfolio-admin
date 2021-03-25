@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
-import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regular-svg-icons';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-listar-imoveis',
@@ -14,10 +14,10 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./listar-imoveis.component.scss', '../../admin.component.scss'],
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
-  faImage = faImage;
-  faEdit = faEdit;
   faEye = faEye;
+  faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  faImage = faImage;
   faPlusSquare = faPlusSquare;
 
   imoveis!: Imovel[];
@@ -54,7 +54,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   }
 
   async remover(id: any) {
-    await this.gqlService.deletar(id);
+    await this.gqlService.deletarImovel(id);
     this.refresh();
   }
 

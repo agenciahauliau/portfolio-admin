@@ -43,7 +43,7 @@ export class CriarGaleriaComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['/admin/galerias']);
+    this.router.navigate(['admin/galerias']);
   }
 
   separa(data: any) {

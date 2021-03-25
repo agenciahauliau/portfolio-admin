@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { GraphQlService } from 'src/app/services/graphql.service';
   templateUrl: './editar-imovel.component.html',
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
-export class EditarImovelComponent implements OnInit {
+export class EditarImovelComponent implements OnInit, OnDestroy {
   form: Imovel = {
     _id: '',
     categoriaImovel: '',
@@ -80,7 +80,7 @@ export class EditarImovelComponent implements OnInit {
       this.form.comodidadesCondominio = this.separa(this.form.comodidadesCondominio + '');
     }
     console.log('form', this.form);
-    this.gqlService.updateImovel(imovelId, this.form);
+    this.gqlService.atualizaImovel(imovelId, this.form);
   }
 
   refresh() {

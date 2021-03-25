@@ -23,6 +23,7 @@
         <th>Nome da Galeria</th>
         <th></th>
         <th></th>
+        <th></th>
       </thead>
       <tbody class="tabelaImoveisCorpo" *ngIf="galerias">
         <tr class="tabelalinhaImovel" *ngFor="let galeria of galerias">
@@ -32,6 +33,11 @@
           <td>
             <button (click)="goToGaleria(galeria._id)">
               <fa-icon [icon]="faEye" size="2x"></fa-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="editarGaleria(galeria._id)">
+              <fa-icon [icon]="faEdit" size="2x"></fa-icon>
             </button>
           </td>
           <td>

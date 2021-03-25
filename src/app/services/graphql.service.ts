@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from './token.service';
 import {
+  GQL_ATUALIZA_GALERIA,
   GQL_CRIAR_IMOVEL,
   GQL_CRIA_GALERIA,
   GQL_DELETA_GALERIA,
@@ -70,7 +71,7 @@ export class GraphQlService {
       );
   }
 
-  async updateImovel(id: any, dados: Imovel) {
+  async atualizaImovel(id: any, dados: Imovel) {
     return this.apollo
       .mutate({
         mutation: GQL_UPDATE_IMOVEL,
@@ -94,7 +95,29 @@ export class GraphQlService {
       );
   }
 
-  async upload(arquivo: any) {
+  async deletarImovel(id: string) {
+    console.log(id);
+    return this.apollo
+      .mutate({
+        mutation: GQL_REMOVE_IMOVEL,
+        variables: { _id: id },
+      })
+      .subscribe(
+        ({ errors, data }: any) => {
+          if (errors) {
+            return console.error('Erro ao deletar: ', errors[0].message);
+          }
+          if (data) {
+            return console.log('Deletado', data.removeImovel);
+          }
+        },
+        (err) => {
+          console.error('Err: ', err);
+        },
+      );
+  }
+
+  async uploadArquivo(arquivo: any) {
     console.log('arquivo', arquivo);
     return this.apollo
       .mutate({
@@ -145,6 +168,30 @@ export class GraphQlService {
       );
   }
 
+  async atualizaGaleria(id: any, dados: Galeria) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_ATUALIZA_GALERIA,
+        variables: {
+          id: id,
+          dados: dados,
+        },
+      })
+      .subscribe(
+        ({ errors, data }: any) => {
+          if (errors) {
+            return console.error('Erro ao atualizar galeria:', errors[0].message);
+          }
+          if (data) {
+            return console.log('Galeria atualizada', data);
+          }
+        },
+        (err) => {
+          console.error('Err: ', err);
+        },
+      );
+  }
+
   async removeGaleria(id: string) {
     console.log(id);
     return this.apollo
@@ -181,28 +228,6 @@ export class GraphQlService {
           }
           if (data) {
             return console.log('Data me: ', data);
-          }
-        },
-        (err) => {
-          console.error('Err: ', err);
-        },
-      );
-  }
-
-  async deletar(id: string) {
-    console.log(id);
-    return this.apollo
-      .mutate({
-        mutation: GQL_REMOVE_IMOVEL,
-        variables: { _id: id },
-      })
-      .subscribe(
-        ({ errors, data }: any) => {
-          if (errors) {
-            return console.error('Erro ao deletar: ', errors[0].message);
-          }
-          if (data) {
-            return console.log('Deletado', data.removeImovel);
           }
         },
         (err) => {
