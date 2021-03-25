@@ -89,7 +89,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
     const formData = new FormData();
     formData.append('file', file.data);
     file.inProgress = true;
-    const result = await this.accountService.upload(file);
+    const result = await this.accountService.uploadArquivo(file);
   }
 
   private async uploadFiles() {

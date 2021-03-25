@@ -30,7 +30,7 @@ export class ExibirGaleriaComponent implements OnInit, OnDestroy {
     this.galeriaQuery = this.apollo.watchQuery<Galeria>({
       query: GQL_PESQ_GALERIA,
       variables: {
-        _id: galeriaId,
+        id: galeriaId,
       },
       errorPolicy: 'all',
     });

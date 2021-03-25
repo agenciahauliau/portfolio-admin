@@ -1,16 +1,12 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
-        Criar Imovel
+      <a [routerLink]="['/admin/criar-galeria']" routerLinkActive="router-link-active">
+        Nova Galeria
         <fa-icon [icon]="faPlusSquare"></fa-icon>
       </a>
-      <a
-        class="temporario"
-        [routerLink]="['/admin/galerias']"
-        routerLinkActive="router-link-active"
-      >
-        Galerias
+      <a class="temporario" [routerLink]="['/admin/upload']" routerLinkActive="router-link-active">
+        Enviar arquivo
         <fa-icon [icon]="faImage"></fa-icon>
       </a>
     </div>
@@ -23,6 +19,7 @@
         <th>Nome da Galeria</th>
         <th></th>
         <th></th>
+        <th></th>
       </thead>
       <tbody class="tabelaImoveisCorpo" *ngIf="galerias">
         <tr class="tabelalinhaImovel" *ngFor="let galeria of galerias">
@@ -32,6 +29,11 @@
           <td>
             <button (click)="goToGaleria(galeria._id)">
               <fa-icon [icon]="faEye" size="2x"></fa-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="editarGaleria(galeria._id)">
+              <fa-icon [icon]="faEdit" size="2x"></fa-icon>
             </button>
           </td>
           <td>
