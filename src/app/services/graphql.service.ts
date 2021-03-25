@@ -9,6 +9,7 @@ import {
   GQL_LOGIN,
   GQL_ME,
   GQL_REMOVE_IMOVEL,
+  GQL_UPDATE_IMOVEL,
   GQL_UPLOAD_IMG,
 } from '../graphql/graphql';
 import { Galeria, Imovel, User } from '../helpers/types';
@@ -61,6 +62,30 @@ export class GraphQlService {
           }
           if (data) {
             return console.log('Imovel criado', data);
+          }
+        },
+        (err) => {
+          console.error('Err: ', err);
+        },
+      );
+  }
+
+  async updateImovel(id: any, dados: Imovel) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_UPDATE_IMOVEL,
+        variables: {
+          id: id,
+          dados: dados,
+        },
+      })
+      .subscribe(
+        ({ errors, data }: any) => {
+          if (errors) {
+            return console.error('Erro ao atualizar imóvel:', errors[0].message);
+          }
+          if (data) {
+            return console.log('Imovel atualizado', data);
           }
         },
         (err) => {

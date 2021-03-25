@@ -1,17 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  faTrashAlt,
-  faEye,
-  faPlusSquare,
-} from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -61,6 +51,10 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.querySubs.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+    (document.querySelector('.app-alerts') as HTMLElement).style.top = '150px';
   }
 
   @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
@@ -162,8 +156,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
           'Access-Control-Allow-Origin': '*',
           Authorization: `Bearer ${this.tokenService.getToken()}`,
           'Accept-Encoding': 'gzip, deflate, br',
-          Origin:
-            'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com',
+          Origin: 'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com',
           'Content-Type': 'application/json',
           Accept: 'application/json',
           Connection: 'keep-alive',

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  faTrashAlt,
-  faEye,
-  faPlusSquare,
-} from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
@@ -44,12 +40,10 @@ export class ListarGaleriasComponent implements OnInit {
       pollInterval: 500,
     });
 
-    this.querySubs = this.galeriasQuery.valueChanges.subscribe(
-      ({ data, loading }) => {
-        this.loading = loading;
-        this.galerias = data.galerias;
-      },
-    );
+    this.querySubs = this.galeriasQuery.valueChanges.subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.galerias = data.galerias;
+    });
   }
 
   goToGaleria(galeriaId: any) {

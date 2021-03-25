@@ -1,11 +1,7 @@
 <div class="admin">
   <div class="barAdmin">
     <div class="logoAdmin">
-      <img
-        src="../../assets/logo-r.webp"
-        alt="Portifólio Imóveis"
-        title="Portifólio Imóveis"
-      />
+      <img src="../../assets/logo-r.webp" alt="Portifólio Imóveis" title="Portifólio Imóveis" />
     </div>
     <div class="menuAdmin">
       <div class="itensMenuAdmin">
@@ -19,10 +15,7 @@
   <div class="conteudoAdmin">
     <div class="cabecalhoConteudoAdmin">
       <div class="itensCabecalhoConteudoAdmin">
-        <a
-          [routerLink]="['/admin/criar-galeria']"
-          routerLinkActive="router-link-active"
-        >
+        <a [routerLink]="['/admin/criar-galeria']" routerLinkActive="router-link-active">
           Criar galeria
           <fa-icon [icon]="faPlusSquare"></fa-icon>
         </a>
@@ -38,13 +31,7 @@
             <h1>{{ galeria.nomeGaleria }}</h1>
           </div>
           <div class="imagemDestaque">
-            <img
-              src="{{ galeria.arquivoDestaque }}"
-              width="300"
-              height="auto"
-              alt=""
-              title=""
-            />
+            <img src="{{ galeria.arquivoDestaque }}" width="300" height="auto" alt="" title="" />
           </div>
           <div class="infogaleria">
             <div class="tituloInfo">

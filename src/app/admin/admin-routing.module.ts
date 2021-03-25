@@ -9,6 +9,8 @@ import { ListarGaleriasComponent } from './galerias/listar-galerias/listar-galer
 import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria.component';
 import { CriarGaleriaComponent } from './galerias/criar-galeria/criar-galeria.component';
 import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
+import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
+import { EditarGaleriaComponent } from './galerias/editar-galeria/editar-galeria.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,10 @@ const routes: Routes = [
             component: CriarImovelComponent,
           },
           {
+            path: 'editar-imovel/:id',
+            component: EditarImovelComponent,
+          },
+          {
             path: 'galerias',
             component: ListarGaleriasComponent,
           },
@@ -43,6 +49,10 @@ const routes: Routes = [
           {
             path: 'criar-galeria',
             component: CriarGaleriaComponent,
+          },
+          {
+            path: 'editar-galeria/:id',
+            component: EditarGaleriaComponent,
           },
           {
             path: 'upload',

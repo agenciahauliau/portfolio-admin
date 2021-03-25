@@ -23,11 +23,7 @@ export class ExibirGaleriaComponent implements OnInit, OnDestroy {
   error: any;
 
   private querySubs = new Subscription();
-  constructor(
-    private apollo: Apollo,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const galeriaId = this.route.snapshot.paramMap.get('id');
@@ -39,12 +35,10 @@ export class ExibirGaleriaComponent implements OnInit, OnDestroy {
       errorPolicy: 'all',
     });
 
-    this.querySubs = this.galeriaQuery.valueChanges.subscribe(
-      ({ data, loading }) => {
-        this.loading = loading;
-        this.galeria = data.galeria;
-      },
-    );
+    this.querySubs = this.galeriaQuery.valueChanges.subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.galeria = data.galeria;
+    });
   }
 
   refresh() {

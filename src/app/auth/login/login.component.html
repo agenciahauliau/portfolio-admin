@@ -37,9 +37,9 @@
           class="form-control"
           name="senha"
           [(ngModel)]="form.senha"
+          #senha="ngModel"
           required
           minlength="6"
-          #senha="ngModel"
           placeholder="Senha"
         />
       </div>

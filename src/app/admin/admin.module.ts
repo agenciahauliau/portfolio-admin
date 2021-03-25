@@ -8,7 +8,7 @@ import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.com
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 import { AdminComponent } from './admin.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CriarGaleriaComponent } from './galerias/criar-galeria/criar-galeria.component';
 import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria.component';
@@ -29,6 +29,13 @@ import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens
     ListarGaleriasComponent,
     UploadImagensComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, FormsModule, FontAwesomeModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    HttpClientModule,
+  ],
 })
 export class AdminModule {}

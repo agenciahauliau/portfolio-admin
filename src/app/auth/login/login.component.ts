@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { GraphQlService } from '../../services/graphql.service';
 import { TokenService } from '../../services/token.service';
 import { User } from 'src/app/helpers/types';
