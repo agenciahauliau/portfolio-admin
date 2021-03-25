@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
@@ -21,16 +20,11 @@ import { TokenService } from 'src/app/helpers/token.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../services/account.service';
 HttpClient;
-=======
-import { Component, OnInit } from '@angular/core';
-
->>>>>>> parent of 3af3d2b (Upload de imagens)
 @Component({
   selector: 'app-upload-imagens',
   templateUrl: './upload-imagens.component.html',
-  styleUrls: ['./upload-imagens.component.scss']
+  styleUrls: ['./upload-imagens.component.scss'],
 })
-<<<<<<< HEAD
 export class UploadImagensComponent implements OnInit, OnDestroy {
   midias!: [string];
   midiasQuery!: QueryRef<any>;
@@ -43,13 +37,9 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   faHome = faHome;
   faSyncAlt = faSyncAlt;
   faImage = faImage;
-=======
-export class UploadImagensComponent implements OnInit {
->>>>>>> parent of 3af3d2b (Upload de imagens)
 
-  constructor() { }
+  private querySubs = new Subscription();
 
-<<<<<<< HEAD
   constructor(
     private accountService: AccountService,
     private http: HttpClient,
@@ -57,12 +47,18 @@ export class UploadImagensComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
   ) {}
-=======
->>>>>>> parent of 3af3d2b (Upload de imagens)
   ngOnInit(): void {
+    this.querySubs = this.apollo
+      .watchQuery<any>({
+        query: GQL_EXIBE_MIDIAS,
+        fetchPolicy: 'no-cache',
+      })
+      .valueChanges.subscribe(({ data, loading }) => {
+        this.loading = loading;
+        this.midias = data.listarUploads;
+      });
   }
 
-<<<<<<< HEAD
   ngOnDestroy() {
     this.querySubs.unsubscribe();
   }
@@ -197,6 +193,4 @@ export class UploadImagensComponent implements OnInit {
   voltar() {
     this.router.navigate(['/admin/upload']);
   }
-=======
->>>>>>> parent of 3af3d2b (Upload de imagens)
 }

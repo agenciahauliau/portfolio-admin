@@ -9,6 +9,7 @@ import {
   GQL_LOGIN,
   GQL_ME,
   GQL_REMOVE_IMOVEL,
+  GQL_UPLOAD_IMG,
 } from '../helpers/graphql';
 import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
@@ -57,6 +58,34 @@ export class AccountService {
           } else {
             console.log('Imóvel criado', data.imovel);
             return data.imovel;
+          }
+        },
+        (error) => {
+          console.log('erro', error);
+        },
+      );
+  }
+
+  async upload(arquivo: any) {
+    console.log('arquivo', arquivo);
+    return this.apollo
+      .mutate({
+        mutation: GQL_UPLOAD_IMG,
+        variables: { file: arquivo },
+        context: {
+          useMultipart: true,
+        },
+        errorPolicy: 'all',
+      })
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data?.errors) {
+            console.log('Erro de upload', data?.errors);
+            return data?.errors;
+          } else {
+            console.log('Imagem sucesso', data);
+            return data;
           }
         },
         (error) => {
