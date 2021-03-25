@@ -46,7 +46,7 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
   }
 
   voltar() {
-    this.router.navigate(['/imoveis']);
+    this.router.navigate(['admin/imoveis']);
   }
 
   ngOnDestroy(): void {

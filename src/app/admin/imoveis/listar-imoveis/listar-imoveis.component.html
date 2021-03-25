@@ -18,6 +18,7 @@
           <th>Atualização</th>
           <th></th>
           <th></th>
+          <th></th>
         </thead>
         <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
           <tr class="tabelalinhaImovel" *ngFor="let imovel of imoveis">
@@ -29,6 +30,11 @@
             <td>
               <button (click)="goToImovel(imovel._id)">
                 <fa-icon [icon]="faEye" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="editarImovel(imovel._id)">
+                <fa-icon [icon]="faEdit" size="2x"></fa-icon>
               </button>
             </td>
             <td>

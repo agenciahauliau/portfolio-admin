@@ -13,7 +13,36 @@ import { GraphQlService } from 'src/app/services/graphql.service';
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit {
-  form!: Imovel;
+  form: Imovel = {
+    _id: '',
+    categoriaImovel: '',
+    jardins: false,
+    descricaoImovel: '',
+    tipoNegociacao: '',
+    statusImovel: '',
+    aceitaPermuta: false,
+    mobiliado: false,
+    valorImovel: 0,
+    valorIPTU: 0,
+    valorCondominio: 0,
+    areaTotal: 0,
+    areaConstruida: 0,
+    andarImovel: 0,
+    qtdeQuarto: 0,
+    qtdeBanheiro: 0,
+    qtdeSuites: 0,
+    qtdeVagas: 0,
+    nomeConstrutora: '',
+    cep: 0,
+    logradouro: '',
+    numeroLogradouro: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: '',
+    comodidadesImovel: [''],
+    comodidadesCondominio: [''],
+  };
   imovelQuery!: QueryRef<any>;
   loading = true;
   error: any;

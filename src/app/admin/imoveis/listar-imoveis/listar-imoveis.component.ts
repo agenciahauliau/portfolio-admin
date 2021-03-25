@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
-import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -15,6 +15,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
   faImage = faImage;
+  faEdit = faEdit;
   faEye = faEye;
   faTrashAlt = faTrashAlt;
   faPlusSquare = faPlusSquare;
@@ -41,7 +42,11 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   }
 
   goToImovel(imovelId: any) {
-    this.router.navigate(['imovel', imovelId]);
+    this.router.navigate(['admin/imovel', imovelId]);
+  }
+
+  editarImovel(imovelId: any) {
+    this.router.navigate(['admin/editar-imovel', imovelId]);
   }
 
   refresh() {

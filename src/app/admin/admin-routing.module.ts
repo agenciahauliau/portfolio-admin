@@ -27,35 +27,35 @@ const routes: Routes = [
             component: ListarImoveisComponent,
           },
           {
-            path: 'imovel/:id',
+            path: 'admin/imovel/:id',
             component: ExibirImovelComponent,
           },
           {
-            path: 'criar-imovel',
+            path: 'admin/criar-imovel',
             component: CriarImovelComponent,
           },
           {
-            path: 'editar-imovel/:id',
+            path: 'admin/editar-imovel/:id',
             component: EditarImovelComponent,
           },
           {
-            path: 'galerias',
+            path: 'admin/galerias',
             component: ListarGaleriasComponent,
           },
           {
-            path: 'galeria/:id',
+            path: 'admin/galeria/:id',
             component: ExibirGaleriaComponent,
           },
           {
-            path: 'criar-galeria',
+            path: 'admin/criar-galeria',
             component: CriarGaleriaComponent,
           },
           {
-            path: 'editar-galeria/:id',
+            path: 'admin/editar-galeria/:id',
             component: EditarGaleriaComponent,
           },
           {
-            path: 'upload',
+            path: 'admin/upload',
             component: UploadImagensComponent,
           },
           {
