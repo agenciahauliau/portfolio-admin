@@ -4,13 +4,19 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-exibir-imovel',
   templateUrl: './exibir-imovel.component.html',
-  styleUrls: ['./exibir-imovel.component.scss'],
+  styleUrls: ['./exibir-imovel.component.scss', '../../admin.component.scss'],
 })
 export class ExibirImovelComponent implements OnInit, OnDestroy {
+  faPlusSquare = faPlusSquare;
+  faHome = faHome;
+  faSyncAlt = faSyncAlt;
+
   imovel!: Imovel;
   imovelQuery!: QueryRef<any>;
   loading = true;

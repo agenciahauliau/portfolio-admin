@@ -1,8 +1,8 @@
-<div class="conteudoAdmin">
+<div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-galeria']" routerLinkActive="router-link-active">
-        Criar Galeria
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        Criar Imovel
         <fa-icon [icon]="faPlusSquare"></fa-icon>
       </a>
       <a
@@ -15,33 +15,34 @@
       </a>
     </div>
   </div>
-  <table class="tabelaImoveis">
-    <thead class="tabelaImoveisHeader">
-      <th>ID Galeria</th>
-      <th>Imagem principal</th>
-      <th>Nome da Galeria</th>
-      <th></th>
-      <th></th>
-    </thead>
-    <tbody class="tabelaImoveisCorpo" *ngIf="galerias">
-      <tr class="tabelalinhaImovel" *ngFor="let galeria of galerias">
-        <td>{{ galeria._id }}</td>
-        <td>{{ galeria.arquivoDestaque }}</td>
-        <td>{{ galeria.nomeGaleria }}</td>
-        <td>
-          <button (click)="goToGaleria(galeria._id)">
-            <fa-icon [icon]="faEye" size="2x"></fa-icon>
-          </button>
-        </td>
-        <td>
-          <button (click)="remover(galeria._id)">
-            <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+  <div class="infoConteudoAdmin">
+    <table class="tabelaImoveis">
+      <thead class="tabelaImoveisHeader">
+        <th>ID Galeria</th>
+        <th>Imagem principal</th>
+        <th>Nome da Galeria</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody class="tabelaImoveisCorpo" *ngIf="galerias">
+        <tr class="tabelalinhaImovel" *ngFor="let galeria of galerias">
+          <td>{{ galeria._id }}</td>
+          <td>{{ galeria.arquivoDestaque }}</td>
+          <td>{{ galeria.nomeGaleria }}</td>
+          <td>
+            <button (click)="goToGaleria(galeria._id)">
+              <fa-icon [icon]="faEye" size="2x"></fa-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="remover(galeria._id)">
+              <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div *ngIf="loading">Carregando...</div>
   <div *ngIf="error">Erro :(</div>
 </div>

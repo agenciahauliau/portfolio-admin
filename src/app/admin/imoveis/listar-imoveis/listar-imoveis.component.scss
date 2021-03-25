@@ -1,0 +1,25 @@
+.tabelaImoveis {
+  width: 100%;
+
+  .tabelaImoveisHeader {
+    th {
+      text-align: start;
+      padding: 10px 5px 25px;
+    }
+  }
+
+  .tabelaImoveisCorpo {
+    .tabelalinhaImovel {
+      td {
+        padding: 15px 5px;
+        border-bottom: 1px solid #fff1;
+
+        button {
+          color: #fff;
+          padding: 0 15px;
+          background: none;
+        }
+      }
+    }
+  }
+}

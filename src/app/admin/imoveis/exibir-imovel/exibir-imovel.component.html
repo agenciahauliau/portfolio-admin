@@ -1,43 +1,101 @@
-<div *ngIf="loading">Carregando...</div>
-<div *ngIf="error">Erro :(</div>
-<div *ngIf="imovel">
-  <p>ID do imóvel: {{ imovel._id }}</p>
-  <p>Categoria: {{ imovel.categoriaImovel }}</p>
-  <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
-  <p>Descrição: {{ imovel.descricaoImovel }}</p>
-  <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
-  <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
-  <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
-  <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
-  <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
-  <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
-  <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
-  <p>Área total: {{ imovel.areaTotal }}m²</p>
-  <p>Área construída: {{ imovel.areaConstruida }}m²</p>
-  <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
-  <p>Quantidade de quartos: {{ imovel.qtdeQuarto }}</p>
-  <p>Quantidade de banheiros: {{ imovel.qtdeBanheiro }}</p>
-  <p>Quantidade de suítes: {{ imovel.qtdeSuites }}</p>
-  <p>Quantidade de vagas: {{ imovel.qtdeVagas }}</p>
-  <p>Construtora: {{ imovel.nomeConstrutora }}</p>
-  <p>
-    Endereço: {{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} —
-    {{ imovel.complemento }}
-  </p>
-  <p>Bairro: {{ imovel.bairro }}</p>
-  <p>CEP: {{ imovel.cep }}</p>
-  <p>Cidade: {{ imovel.cidade }}, UF: {{ imovel.uf }}</p>
-  <p>Comodidades do imóvel:</p>
-  <ul>
-    <li *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</li>
-  </ul>
-  <p>Comodidades do condomínio:</p>
-  <ul>
-    <li *ngFor="let i of imovel.comodidadesCondominio | slice: 0">{{ i }}</li>
-  </ul>
-  <p>
-    Postado em:
-    {{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}
-  </p>
-  <p>Última atualização em: {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</p>
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        Criar Imovel
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="error">Erro :(</div>
+    <div class="imovel" *ngIf="imovel">
+      <div class="infoPostImovel">
+        <p>ID: {{ imovel._id }}</p>
+        <div class="infoPostImovelDatas">
+          <p>{{ imovel.createdAt | date: 'dd - MMM - yyyy - HH:mm' }}</p>
+          <p>
+            <fa-icon [icon]="faSyncAlt"></fa-icon
+            >{{ imovel.updatedAt | date: 'dd - MMM - yyyy - HH:mm' }}
+          </p>
+        </div>
+      </div>
+      <div class="tituloImovel">
+        <h1>{{ imovel.categoriaImovel }}</h1>
+        <p>{{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} — {{ imovel.complemento }}</p>
+        <p>{{ imovel.bairro }} — {{ imovel.cep }} — {{ imovel.cidade }} — {{ imovel.uf }}</p>
+      </div>
+      <div class="imagemDestaque">
+        <img
+          src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+          alt=""
+          title=""
+        />
+      </div>
+      <div class="infoImovel">
+        <div class="tituloInfo">
+          <h2>Informações de venda do Imóvel</h2>
+        </div>
+
+        <p class="descricao">{{ imovel.descricaoImovel }}</p>
+        <p>Categoria: {{ imovel.categoriaImovel }}</p>
+        <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
+        <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
+        <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
+        <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
+        <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
+      </div>
+      <div class="valorImovel">
+        <div class="tituloInfo">
+          <h2>Valores do Imóvel</h2>
+        </div>
+        <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
+        <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
+        <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
+      </div>
+      <div class="tamanhoImovel">
+        <div class="tituloInfo">
+          <h2>Área e quantidade de cômodos do imóvel</h2>
+        </div>
+        <p>Área total: {{ imovel.areaTotal }}m²</p>
+        <p>Área construída: {{ imovel.areaConstruida }}m²</p>
+        <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
+        <p>Quantidade de quartos: {{ imovel.qtdeQuarto }}</p>
+        <p>Quantidade de banheiros: {{ imovel.qtdeBanheiro }}</p>
+        <p>Quantidade de suítes: {{ imovel.qtdeSuites }}</p>
+        <p>Quantidade de vagas: {{ imovel.qtdeVagas }}</p>
+      </div>
+      <div class="enderecoImovel">
+        <div class="tituloInfo">
+          <h2>Endereço do Imóvel</h2>
+        </div>
+        <p>
+          Endereço: {{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} —
+          {{ imovel.complemento }}
+        </p>
+        <p>Bairro: {{ imovel.bairro }}</p>
+        <p>CEP: {{ imovel.cep }}</p>
+        <p>Cidade: {{ imovel.cidade }}, UF: {{ imovel.uf }}</p>
+      </div>
+      <div class="outrasInfoImovel">
+        <div class="tituloInfo">
+          <h2>Outras informações do Imóvel</h2>
+        </div>
+        <div class="coluna">
+          <p>Construtora: {{ imovel.nomeConstrutora }}</p>
+        </div>
+        <div class="coluna">
+          <h4>Comodidades do imóvel:</h4>
+          <div *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</div>
+        </div>
+        <div class="coluna">
+          <h4>Comodidades do condomínio:</h4>
+          <div *ngFor="let i of imovel.comodidadesCondominio | slice: 0">
+            {{ i }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -3,7 +3,7 @@
   height: 100%;
   min-height: 100vh;
   display: flex;
-  background: url(../../assets/linhas.webp) no-repeat fixed bottom / 100% auto, #272727;
+  background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
 
   * {
     color: #fff;
@@ -31,60 +31,91 @@
       justify-content: center;
       align-items: center;
       margin-top: 50px;
-
-      .itensMenuAdmin {
-        a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 38px;
-        }
-      }
     }
   }
 
   .conteudoAdmin {
     width: 100%;
     padding: 0 20px 20px;
+  }
+}
 
-    .cabecalhoConteudoAdmin {
-      padding: 20px;
-      position: sticky;
-      top: 0px;
-      z-index: 1;
-      background: url(../../assets/linhas.webp) no-repeat fixed bottom / 100% auto, #272727;
+.RouterOutlet {
+  * {
+    color: #fff;
+  }
 
-      .itensCabecalhoConteudoAdmin:first-child {
-        margin-left: 50px;
-      }
+  .cabecalhoConteudoAdmin {
+    padding: 20px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
 
-      .itensCabecalhoConteudoAdmin {
-        height: 60px;
+    .itensCabecalhoConteudoAdmin:first-child {
+      margin-left: 50px;
+    }
+
+    .itensCabecalhoConteudoAdmin {
+      height: 60px;
+      display: flex;
+      align-items: center;
+
+      a {
         display: flex;
         align-items: center;
+        margin-right: 38px;
 
-        a {
-          display: flex;
-          align-items: center;
-          margin-right: 38px;
-
-          fa-icon {
-            margin-left: 10px;
-          }
+        fa-icon {
+          margin-left: 10px;
         }
       }
     }
+  }
 
-    .infoConteudoAdmin {
-      margin: 50px;
-      padding: 50px;
-      background: inherit;
-      backdrop-filter: blur(10px);
-      box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
+  .infoConteudoAdmin {
+    margin: 50px;
+    padding: 50px;
+    background: inherit;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
+
+    .formulario {
+      form {
+        display: flex;
+
+        div > div {
+          margin-bottom: 20px;
+          display: flex;
+          flex-direction: column;
+
+          label {
+            margin-bottom: 5px;
+          }
+        }
+
+        .esquerdo {
+          width: 62%;
+          padding-right: 50px;
+        }
+
+        .direito {
+          width: 32%;
+          height: fit-content;
+
+          button {
+            width: fit-content;
+            padding: 18px 22px;
+            background: rgba(219, 4, 35, 1);
+          }
+        }
+      }
+
+      input,
+      textarea {
+        padding: 8px 15px;
+        background: #fff2;
+      }
     }
   }
-}
-:host::ng-deep app-upload-imagens {
-  color: red;
 }
