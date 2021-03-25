@@ -1,0 +1,43 @@
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="error">Erro :(</div>
+<div *ngIf="imovel">
+  <p>ID do imóvel: {{ imovel._id }}</p>
+  <p>Categoria: {{ imovel.categoriaImovel }}</p>
+  <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
+  <p>Descrição: {{ imovel.descricaoImovel }}</p>
+  <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
+  <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
+  <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
+  <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
+  <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
+  <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
+  <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
+  <p>Área total: {{ imovel.areaTotal }}m²</p>
+  <p>Área construída: {{ imovel.areaConstruida }}m²</p>
+  <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
+  <p>Quantidade de quartos: {{ imovel.qtdeQuarto }}</p>
+  <p>Quantidade de banheiros: {{ imovel.qtdeBanheiro }}</p>
+  <p>Quantidade de suítes: {{ imovel.qtdeSuites }}</p>
+  <p>Quantidade de vagas: {{ imovel.qtdeVagas }}</p>
+  <p>Construtora: {{ imovel.nomeConstrutora }}</p>
+  <p>
+    Endereço: {{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} —
+    {{ imovel.complemento }}
+  </p>
+  <p>Bairro: {{ imovel.bairro }}</p>
+  <p>CEP: {{ imovel.cep }}</p>
+  <p>Cidade: {{ imovel.cidade }}, UF: {{ imovel.uf }}</p>
+  <p>Comodidades do imóvel:</p>
+  <ul>
+    <li *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</li>
+  </ul>
+  <p>Comodidades do condomínio:</p>
+  <ul>
+    <li *ngFor="let i of imovel.comodidadesCondominio | slice: 0">{{ i }}</li>
+  </ul>
+  <p>
+    Postado em:
+    {{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}
+  </p>
+  <p>Última atualização em: {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</p>
+</div>

@@ -1,0 +1,22 @@
+<a [routerLink]="['../criar-imovel']" style="text-decoration: underline"
+  ><fa-icon [icon]="faRocket" size="2x"></fa-icon>Criar Imovel</a
+>
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="error">Erro :(</div>
+<div *ngIf="imoveis">
+  <div *ngFor="let imovel of imoveis">
+    <p>
+      ID: {{ imovel._id }} <br />Categoria:{{ imovel.categoriaImovel }}<br />Valor: R$
+      {{ imovel.valorImovel | currency: 'BRL' }}<br />Criado:
+      {{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}<br />Atualizado:
+      {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}
+    </p>
+    <button (click)="goToImovel(imovel._id)">
+      {{ 'mais detalhes' | uppercase }}
+    </button>
+    <button (click)="remover(imovel._id)">
+      {{ 'deletar' | uppercase }}
+    </button>
+    <hr />
+  </div>
+</div>

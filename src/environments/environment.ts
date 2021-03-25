@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:8080/v1/graphql/',
+  API: 'http://localhost:8080/v1/graphql',
   TOKEN_KEY: 'auth-token',
   USER_KEY: 'auth-user',
 };
