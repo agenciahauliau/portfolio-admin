@@ -1,0 +1,7 @@
+{
+  "/graphql/": {
+    "target": "https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com/v1/graphql",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
