@@ -10,7 +10,7 @@ import { GQL_PESQ_GALERIA } from 'src/app/graphql/graphql';
 @Component({
   selector: 'app-exibir-galeria',
   templateUrl: './exibir-galeria.component.html',
-  styleUrls: ['./exibir-galeria.component.scss'],
+  styleUrls: ['./exibir-galeria.component.scss', '../../admin.component.scss'],
 })
 export class ExibirGaleriaComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;

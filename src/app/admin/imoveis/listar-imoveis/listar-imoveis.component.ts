@@ -5,15 +5,20 @@ import { Subscription } from 'rxjs';
 import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
-import { faRocket } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-listar-imoveis',
   templateUrl: './listar-imoveis.component.html',
-  styleUrls: ['./listar-imoveis.component.scss'],
+  styleUrls: ['./listar-imoveis.component.scss', '../../admin.component.scss'],
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
-  faRocket = faRocket;
+  faImage = faImage;
+  faEye = faEye;
+  faTrashAlt = faTrashAlt;
+  faPlusSquare = faPlusSquare;
+
   imoveis!: Imovel[];
   imoveisQuery!: QueryRef<any>;
   loading = true;

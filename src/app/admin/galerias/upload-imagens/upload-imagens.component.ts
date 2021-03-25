@@ -23,7 +23,7 @@ HttpClient;
 @Component({
   selector: 'app-upload-imagens',
   templateUrl: './upload-imagens.component.html',
-  styleUrls: ['./upload-imagens.component.scss'],
+  styleUrls: ['./upload-imagens.component.scss', '../../admin.component.scss'],
 })
 export class UploadImagensComponent implements OnInit, OnDestroy {
   midias!: [string];

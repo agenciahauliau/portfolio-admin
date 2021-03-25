@@ -1,22 +1,50 @@
-<a [routerLink]="['../criar-imovel']" style="text-decoration: underline"
-  ><fa-icon [icon]="faRocket" size="2x"></fa-icon>Criar Imovel</a
->
-<div *ngIf="loading">Carregando...</div>
-<div *ngIf="error">Erro :(</div>
-<div *ngIf="imoveis">
-  <div *ngFor="let imovel of imoveis">
-    <p>
-      ID: {{ imovel._id }} <br />Categoria:{{ imovel.categoriaImovel }}<br />Valor: R$
-      {{ imovel.valorImovel | currency: 'BRL' }}<br />Criado:
-      {{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}<br />Atualizado:
-      {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}
-    </p>
-    <button (click)="goToImovel(imovel._id)">
-      {{ 'mais detalhes' | uppercase }}
-    </button>
-    <button (click)="remover(imovel._id)">
-      {{ 'deletar' | uppercase }}
-    </button>
-    <hr />
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a
+        [routerLink]="['/admin/criar-imovel']"
+        routerLinkActive="router-link-active"
+      >
+        Criar Imovel
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div class="tabelalinhaImovel">
+      <table class="tabelaImoveis">
+        <thead class="tabelaImoveisHeader">
+          <th>ID Imóvel</th>
+          <th>Categoria</th>
+          <th>Valor</th>
+          <th>Criado</th>
+          <th>Atualização</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
+          <tr class="tabelalinhaImovel" *ngFor="let imovel of imoveis">
+            <td>{{ imovel._id }}</td>
+            <td>{{ imovel.categoriaImovel }}</td>
+            <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
+            <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>
+              <button (click)="goToImovel(imovel._id)">
+                <fa-icon [icon]="faEye" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="remover(imovel._id)">
+                <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div *ngIf="loading">Carregando...</div>
+      <div *ngIf="error">Erro :(</div>
+    </div>
   </div>
 </div>

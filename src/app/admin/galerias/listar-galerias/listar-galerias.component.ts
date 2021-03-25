@@ -15,7 +15,7 @@ import { Galeria } from 'src/app/helpers/types';
 @Component({
   selector: 'app-listar-galerias',
   templateUrl: './listar-galerias.component.html',
-  styleUrls: ['./listar-galerias.component.scss'],
+  styleUrls: ['./listar-galerias.component.scss', '../../admin.component.scss'],
 })
 export class ListarGaleriasComponent implements OnInit {
   faEye = faEye;
