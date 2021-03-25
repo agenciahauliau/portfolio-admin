@@ -14,14 +14,9 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './editar-imovel.component.html',
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
-<<<<<<< HEAD
 export class EditarImovelComponent implements OnInit {
   faPlusSquare = faPlusSquare;
-  faHome = faHome;
 
-=======
-export class EditarImovelComponent implements OnInit, OnDestroy {
->>>>>>> e4c844f29fb6a2b4289e40936ece05cc7e8fb8b6
   form: Imovel = {
     _id: '',
     categoriaImovel: '',
