@@ -1,10 +1,7 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a
-        [routerLink]="['/admin/criar-imovel']"
-        routerLinkActive="router-link-active"
-      >
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
         Criar Imovel
         <fa-icon [icon]="faPlusSquare"></fa-icon>
       </a>
@@ -42,7 +39,7 @@
           </tr>
         </tbody>
       </table>
-      
+
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>
     </div>

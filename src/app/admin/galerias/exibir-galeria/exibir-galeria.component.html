@@ -1,57 +1,48 @@
-  <div class="RouterOutlet">
-    <div class="cabecalhoConteudoAdmin">
-      <div class="itensCabecalhoConteudoAdmin">
-        <a
-          [routerLink]="['/admin/criar-galeria']"
-          routerLinkActive="router-link-active"
-        >
-          Criar galeria
-          <fa-icon [icon]="faPlusSquare"></fa-icon>
-        </a>
-      </div>
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-galeria']" routerLinkActive="router-link-active">
+        Criar galeria
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
     </div>
-    <div class="infoConteudoAdmin">
-      <div *ngIf="loading">Carregando...</div>
-      <div *ngIf="error">Erro :(</div>
-      <div class="galeria" *ngIf="galeria">
-        <div class="infoPostgaleria">
-          <p>ID: {{ galeria._id }}</p>
-          <div class="titulogaleria">
-            <h1>{{ galeria.nomeGaleria }}</h1>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="error">Erro :(</div>
+    <div class="galeria" *ngIf="galeria">
+      <div class="infoPostgaleria">
+        <p>ID: {{ galeria._id }}</p>
+        <div class="titulogaleria">
+          <h1>{{ galeria.nomeGaleria }}</h1>
+        </div>
+        <div class="imagemDestaque">
+          <img src="{{ galeria.arquivoDestaque }}" width="300" height="auto" alt="" title="" />
+        </div>
+        <div class="infogaleria">
+          <div class="tituloInfo">
+            <h2>Informações da galeria</h2>
           </div>
-          <div class="imagemDestaque">
-            <img
-              src="{{ galeria.arquivoDestaque }}"
-              width="300"
-              height="auto"
-              alt=""
-              title=""
-            />
+          <div *ngFor="let i of galeria.url | slice: 0">
+            <p>{{ i }}</p>
           </div>
-          <div class="infogaleria">
-            <div class="tituloInfo">
-              <h2>Informações da galeria</h2>
-            </div>
+        </div>
+        <div class="outrasInfogaleria">
+          <div class="tituloInfo">
+            <h2>Outras informações do Imóvel</h2>
+          </div>
+          <div class="coluna">
+            <h4>Imóveis usando essa galeria:</h4>
+            <div *ngFor="let i of galeria.idImovel | slice: 0">{{ i }}</div>
+          </div>
+          <div class="coluna">
+            <h4>Imagens:</h4>
             <div *ngFor="let i of galeria.url | slice: 0">
-              <p>{{ i }}</p>
-            </div>
-          </div>
-          <div class="outrasInfogaleria">
-            <div class="tituloInfo">
-              <h2>Outras informações do Imóvel</h2>
-            </div>
-            <div class="coluna">
-              <h4>Imóveis usando essa galeria:</h4>
-              <div *ngFor="let i of galeria.idImovel | slice: 0">{{ i }}</div>
-            </div>
-            <div class="coluna">
-              <h4>Imagens:</h4>
-              <div *ngFor="let i of galeria.url | slice: 0">
-                {{ i }}
-              </div>
+              {{ i }}
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

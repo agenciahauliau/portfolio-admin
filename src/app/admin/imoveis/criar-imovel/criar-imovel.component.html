@@ -1,429 +1,396 @@
 <div class="RouterOutlet">
-<div class="cabecalhoConteudoAdmin">
-  <div class="itensCabecalhoConteudoAdmin">
-    <a
-      [routerLink]="['/admin/criar-imovel']"
-      routerLinkActive="router-link-active"
-    >
-      Criar Imovel
-      <fa-icon [icon]="faPlusSquare"></fa-icon>
-    </a>
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        Criar Imovel
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+    </div>
   </div>
-</div>
-<div class="infoConteudoAdmin">
-  <div class="formulario">
-    <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
-      <div class="coluna esquerdo">
-        <div class="form-campo">
-          <label for="descricaoImovel"
-            >Descrição do Imóvel:
-            <strong style="color: red">*</strong></label
-          >
-          <textarea
-            name="descricaoImovel"
-            cols="40"
-            rows="10"
-            [(ngModel)]="form.descricaoImovel"
-            #descricaoImovel="ngModel"
-            placeholder="Linda e ampla casa para morar com sua família"
-            required
-          ></textarea>
-        </div>
+  <div class="infoConteudoAdmin">
+    <div class="formulario">
+      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="coluna esquerdo">
+          <div class="form-campo">
+            <label for="descricaoImovel"
+              >Descrição do Imóvel: <strong style="color: red">*</strong></label
+            >
+            <textarea
+              name="descricaoImovel"
+              cols="40"
+              rows="10"
+              [(ngModel)]="form.descricaoImovel"
+              #descricaoImovel="ngModel"
+              placeholder="Linda e ampla casa para morar com sua família"
+              required
+            ></textarea>
+          </div>
 
-        <div class="form-campo">
-          <label for="areaTotal"
-            >Área total do imovel:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="areaTotal"
-            [(ngModel)]="form.areaTotal"
-            #areaTotal="ngModel"
-            placeholder="332,56 m²"
-            value="0"
-            required
-          />
+          <div class="form-campo">
+            <label for="areaTotal"
+              >Área total do imovel: <strong style="color: red">*</strong></label
+            >
+            <input
+              type="number"
+              name="areaTotal"
+              [(ngModel)]="form.areaTotal"
+              #areaTotal="ngModel"
+              placeholder="332,56 m²"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="areaConstruida"
+              >Área construída: <strong style="color: red">*</strong></label
+            >
+            <input
+              type="number"
+              name="areaConstruida"
+              [(ngModel)]="form.areaConstruida"
+              #areaConstruida="ngModel"
+              placeholder="230,56 m²"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
+            <input
+              type="number"
+              name="andarImovel"
+              [(ngModel)]="form.andarImovel"
+              #andarImovel="ngModel"
+              placeholder="0"
+              value="0"
+            />
+          </div>
+          <div class="form-campo">
+            <label for="qtdeQuarto"
+              >Quantidade de quartos: <strong style="color: red">*</strong></label
+            >
+            <input
+              type="number"
+              name="qtdeQuarto"
+              [(ngModel)]="form.qtdeQuarto"
+              #qtdeQuarto="ngModel"
+              placeholder="3"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="qtdeBanheiro"
+              >Quantidade de banheiros: <strong style="color: red">*</strong></label
+            >
+            <input
+              type="number"
+              name="qtdeBanheiro"
+              [(ngModel)]="form.qtdeBanheiro"
+              #qtdeBanheiro="ngModel"
+              placeholder="2"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="qtdeSuites">Quantidade de suítes: </label>
+            <input
+              type="number"
+              name="qtdeSuites"
+              [(ngModel)]="form.qtdeSuites"
+              #qtdeSuites="ngModel"
+              placeholder="1"
+              value="0"
+            />
+          </div>
+          <div class="form-campo">
+            <label for="qtdeVagas">Quantidade de vagas: </label>
+            <input
+              type="number"
+              name="qtdeVagas"
+              [(ngModel)]="form.qtdeVagas"
+              #qtdeVagas="ngModel"
+              placeholder="1"
+              value="0"
+            />
+          </div>
+          <div class="form-campo">
+            <label for="nomeConstrutora">Construtora: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="nomeConstrutora"
+              [(ngModel)]="form.nomeConstrutora"
+              #nomeConstrutora="ngModel"
+              placeholder="FGR Construtora"
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="cep">CEP: <strong style="color: red">*</strong></label>
+            <input
+              type="number"
+              name="cep"
+              [(ngModel)]="form.cep"
+              #cep="ngModel"
+              placeholder="74000-000"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="logradouro">Endereço: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="logradouro"
+              [(ngModel)]="form.logradouro"
+              #logradouro="ngModel"
+              placeholder="Avenida dos Tupinambás"
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="numeroLogradouro">Número: </label>
+            <input
+              type="text"
+              name="numeroLogradouro"
+              [(ngModel)]="form.numeroLogradouro"
+              #numeroLogradouro="ngModel"
+              placeholder="456"
+              value="0"
+            />
+          </div>
+          <div class="form-campo">
+            <label for="complemento">Complemento: </label>
+            <input
+              type="text"
+              name="complemento"
+              [(ngModel)]="form.complemento"
+              #complemento="ngModel"
+              placeholder="Quadra 17, Lote 13"
+              value=""
+            />
+          </div>
+          <div class="form-campo">
+            <label for="bairro">Bairro/Setor: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="bairro"
+              [(ngModel)]="form.bairro"
+              #bairro="ngModel"
+              placeholder="Bairro Tesouro Perdido"
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="cidade">Cidade: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="cidade"
+              [(ngModel)]="form.cidade"
+              #cidade="ngModel"
+              placeholder="Goiânia"
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="uf">Estado: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="uf"
+              [(ngModel)]="form.uf"
+              #uf="ngModel"
+              placeholder="GO"
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="comodidadesImovel">Comodidades do imóvel: </label>
+            <textarea
+              cols="20"
+              rows="10"
+              type="text"
+              name="comodidadesImovel"
+              [(ngModel)]="form.comodidadesImovel"
+              #comodidadesImovel="ngModel"
+              placeholder="Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
+            ></textarea>
+          </div>
+          <div class="form-campo">
+            <label for="comodidadesCondominio">Comodidades do condomínio: </label>
+            <textarea
+              cols="20"
+              rows="10"
+              type="text"
+              name="comodidadesCondominio"
+              [(ngModel)]="form.comodidadesCondominio"
+              #comodidadesCondominio="ngModel"
+              placeholder="Segurança 24 horas, Posto de emergência privado"
+            ></textarea>
+          </div>
         </div>
-        <div class="form-campo">
-          <label for="areaConstruida"
-            >Área construída: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="areaConstruida"
-            [(ngModel)]="form.areaConstruida"
-            #areaConstruida="ngModel"
-            placeholder="230,56 m²"
-            value="0"
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="andarImovel"
-            >Andar do imóvel (se for imóvel vertical):
-          </label>
-          <input
-            type="number"
-            name="andarImovel"
-            [(ngModel)]="form.andarImovel"
-            #andarImovel="ngModel"
-            placeholder="0"
-            value="0"
-          />
-        </div>
-        <div class="form-campo">
-          <label for="qtdeQuarto"
-            >Quantidade de quartos:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="qtdeQuarto"
-            [(ngModel)]="form.qtdeQuarto"
-            #qtdeQuarto="ngModel"
-            placeholder="3"
-            value="0"
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="qtdeBanheiro"
-            >Quantidade de banheiros:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="qtdeBanheiro"
-            [(ngModel)]="form.qtdeBanheiro"
-            #qtdeBanheiro="ngModel"
-            placeholder="2"
-            value="0"
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="qtdeSuites">Quantidade de suítes: </label>
-          <input
-            type="number"
-            name="qtdeSuites"
-            [(ngModel)]="form.qtdeSuites"
-            #qtdeSuites="ngModel"
-            placeholder="1"
-            value="0"
-          />
-        </div>
-        <div class="form-campo">
-          <label for="qtdeVagas">Quantidade de vagas: </label>
-          <input
-            type="number"
-            name="qtdeVagas"
-            [(ngModel)]="form.qtdeVagas"
-            #qtdeVagas="ngModel"
-            placeholder="1"
-            value="0"
-          />
-        </div>
-        <div class="form-campo">
-          <label for="nomeConstrutora"
-            >Construtora: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="nomeConstrutora"
-            [(ngModel)]="form.nomeConstrutora"
-            #nomeConstrutora="ngModel"
-            placeholder="FGR Construtora"
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="cep"
-            >CEP: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="cep"
-            [(ngModel)]="form.cep"
-            #cep="ngModel"
-            placeholder="74000-000"
-            value="0"
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="logradouro"
-            >Endereço: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="logradouro"
-            [(ngModel)]="form.logradouro"
-            #logradouro="ngModel"
-            placeholder="Avenida dos Tupinambás"
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="numeroLogradouro">Número: </label>
-          <input
-            type="text"
-            name="numeroLogradouro"
-            [(ngModel)]="form.numeroLogradouro"
-            #numeroLogradouro="ngModel"
-            placeholder="456"
-            value="0"
-          />
-        </div>
-        <div class="form-campo">
-          <label for="complemento">Complemento: </label>
-          <input
-            type="text"
-            name="complemento"
-            [(ngModel)]="form.complemento"
-            #complemento="ngModel"
-            placeholder="Quadra 17, Lote 13"
-            value=""
-          />
-        </div>
-        <div class="form-campo">
-          <label for="bairro"
-            >Bairro/Setor: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="bairro"
-            [(ngModel)]="form.bairro"
-            #bairro="ngModel"
-            placeholder="Bairro Tesouro Perdido"
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="cidade"
-            >Cidade: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="cidade"
-            [(ngModel)]="form.cidade"
-            #cidade="ngModel"
-            placeholder="Goiânia"
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="uf"
-            >Estado: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="uf"
-            [(ngModel)]="form.uf"
-            #uf="ngModel"
-            placeholder="GO"
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="comodidadesImovel">Comodidades do imóvel: </label>
-          <textarea
-            cols="20"
-            rows="10"
-            type="text"
-            name="comodidadesImovel"
-            [(ngModel)]="form.comodidadesImovel"
-            #comodidadesImovel="ngModel"
-            placeholder="Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
-          ></textarea>
-        </div>
-        <div class="form-campo">
-          <label for="comodidadesCondominio"
-            >Comodidades do condomínio:
-          </label>
-          <textarea
-            cols="20"
-            rows="10"
-            type="text"
-            name="comodidadesCondominio"
-            [(ngModel)]="form.comodidadesCondominio"
-            #comodidadesCondominio="ngModel"
-            placeholder="Segurança 24 horas, Posto de emergência privado"
-          ></textarea>
-        </div>
-      </div>
-      <div class="coluna direito">
-        <div class="form-campo">
-          <label for="nomeImovel"
-            >Nome do Imóvel: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="text"
-            name="nomeImovel"
-            [(ngModel)]="form.nomeImovel"
-            #nomeImovel="ngModel"
-            placeholder=""
-            value=""
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="categoriaImovel"
-            >Categoria do Imóvel:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            list="categoriaImovel"
-            name="categoriaImovel"
-            [(ngModel)]="form.categoriaImovel"
-            #categoriaImovel="ngModel"
-            placeholder="Casa de condomínio"
-            value=""
-            required
-          />
-          <datalist id="categoriaImovel">
-            <option value="Sala Comercial">Sala Comercial</option>
-            <option value="Área Comercial">Área Comercial</option>
-            <option value="Cobertura">Cobertura</option>
-            <option value="Apartamento Padrão">Apartamento Padrão</option>
-            <option value="Chácaras">Chácaras</option>
-            <option value="Casa Residencial">Casa Residencial</option>
-            <option value="Lote urbano">Lote urbano</option>
-            <option value="Casa em Condomínio">Casa em Condomínio</option>
-            <option value="Lote em Condomínio">Lote em Condomínio</option>
-          </datalist>
-        </div>
+        <div class="coluna direito">
+          <div class="form-campo">
+            <label for="nomeImovel">Nome do Imóvel: <strong style="color: red">*</strong></label>
+            <input
+              type="text"
+              name="nomeImovel"
+              [(ngModel)]="form.nomeImovel"
+              #nomeImovel="ngModel"
+              placeholder=""
+              value=""
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="categoriaImovel"
+              >Categoria do Imóvel: <strong style="color: red">*</strong></label
+            >
+            <input
+              list="categoriaImovel"
+              name="categoriaImovel"
+              [(ngModel)]="form.categoriaImovel"
+              #categoriaImovel="ngModel"
+              placeholder="Casa de condomínio"
+              value=""
+              required
+            />
+            <datalist id="categoriaImovel">
+              <option value="Sala Comercial">Sala Comercial</option>
+              <option value="Área Comercial">Área Comercial</option>
+              <option value="Cobertura">Cobertura</option>
+              <option value="Apartamento Padrão">Apartamento Padrão</option>
+              <option value="Chácaras">Chácaras</option>
+              <option value="Casa Residencial">Casa Residencial</option>
+              <option value="Lote urbano">Lote urbano</option>
+              <option value="Casa em Condomínio">Casa em Condomínio</option>
+              <option value="Lote em Condomínio">Lote em Condomínio</option>
+            </datalist>
+          </div>
 
-        <div class="form-campo">
-          <label for="jardins">É um empreendimento Jardins? </label>
-          <input
-            type="checkbox"
-            name="jardins"
-            [(ngModel)]="form.jardins"
-            #jardin="ngModel"
-            value="false"
-          />
-        </div>
+          <div class="form-campo">
+            <label for="jardins">É um empreendimento Jardins? </label>
+            <input
+              type="checkbox"
+              name="jardins"
+              [(ngModel)]="form.jardins"
+              #jardin="ngModel"
+              value="false"
+            />
+          </div>
 
-        <div class="form-campo">
-          <label for="tipoNegociacao"
-            >Tipo de Negociação:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            list="tipoNegociacao"
-            name="tipoNegociacao"
-            [(ngModel)]="form.tipoNegociacao"
-            #tipoNegociacao="ngModel"
-            placeholder="Venda"
-            value=""
-            required
-          />
-          <datalist id="tipoNegociacao">
-            <option value="Alugar">Alugar</option>
-            <option value="Venda">Vender</option>
+          <div class="form-campo">
+            <label for="tipoNegociacao"
+              >Tipo de Negociação: <strong style="color: red">*</strong></label
+            >
+            <input
+              list="tipoNegociacao"
+              name="tipoNegociacao"
+              [(ngModel)]="form.tipoNegociacao"
+              #tipoNegociacao="ngModel"
+              placeholder="Venda"
+              value=""
+              required
+            />
+            <datalist id="tipoNegociacao">
+              <option value="Alugar">Alugar</option>
+              <option value="Venda">Vender</option>
+              <option value="Lançamento">Lançamento</option>
+            </datalist>
+          </div>
+
+          <div class="form-campo">
+            <label for="statusImovel">Status do imóvel <strong style="color: red">*</strong></label>
+            <input
+              list="statusImovel"
+              type="text"
+              name="statusImovel"
+              [(ngModel)]="form.statusImovel"
+              #statusImovel="ngModel"
+              placeholder="Pronto para morar"
+              value=""
+              required
+            />
+          </div>
+
+          <datalist id="statusImovel">
+            <option value="Pronto para Morar">Pronto para Morar</option>
+            <option value="Entrega em Breve">Entrega em Breve</option>
             <option value="Lançamento">Lançamento</option>
           </datalist>
-        </div>
 
-        <div class="form-campo">
-          <label for="statusImovel"
-            >Status do imóvel <strong style="color: red">*</strong></label
-          >
-          <input
-            list="statusImovel"
-            type="text"
-            name="statusImovel"
-            [(ngModel)]="form.statusImovel"
-            #statusImovel="ngModel"
-            placeholder="Pronto para morar"
-            value=""
-            required
-          />
-        </div>
+          <div class="form-campo">
+            <label for="aceitaPermuta">Aceita permuta? </label>
+            <input
+              type="checkbox"
+              name="aceitaPermuta"
+              [(ngModel)]="form.aceitaPermuta"
+              #aceitaPermuta="ngModel"
+              value="false"
+            />
+          </div>
 
-        <datalist id="statusImovel">
-          <option value="Pronto para Morar">Pronto para Morar</option>
-          <option value="Entrega em Breve">Entrega em Breve</option>
-          <option value="Lançamento">Lançamento</option>
-        </datalist>
+          <div class="form-campo">
+            <label for="mobiliado">Mobiliado? </label>
+            <input
+              type="checkbox"
+              name="mobiliado"
+              [(ngModel)]="form.mobiliado"
+              #mobiliado="ngModel"
+              value="false"
+            />
+          </div>
 
-        <div class="form-campo">
-          <label for="aceitaPermuta">Aceita permuta? </label>
-          <input
-            type="checkbox"
-            name="aceitaPermuta"
-            [(ngModel)]="form.aceitaPermuta"
-            #aceitaPermuta="ngModel"
-            value="false"
-          />
-        </div>
+          <div class="form-campo">
+            <label for="valorImovel">Valor do imóvel: <strong style="color: red">*</strong></label>
+            <input
+              type="number"
+              name="valorImovel"
+              [(ngModel)]="form.valorImovel"
+              #valorImovel="ngModel"
+              placeholder="R$ 1.500.000,00"
+              value="0"
+              required
+            />
+          </div>
 
-        <div class="form-campo">
-          <label for="mobiliado">Mobiliado? </label>
-          <input
-            type="checkbox"
-            name="mobiliado"
-            [(ngModel)]="form.mobiliado"
-            #mobiliado="ngModel"
-            value="false"
-          />
-        </div>
+          <div class="form-campo">
+            <label for="valorIPTU">Valor do IPTU: <strong style="color: red">*</strong></label>
+            <input
+              type="number"
+              name="valorIPTU"
+              [(ngModel)]="form.valorIPTU"
+              #valorIPTU="ngModel"
+              placeholder="R$ 400,45"
+              value="0"
+              required
+            />
+          </div>
+          <div class="form-campo">
+            <label for="valorCondominio"
+              >Valor do condomínio: <strong style="color: red">*</strong></label
+            >
+            <input
+              type="number"
+              name="valorCondominio"
+              [(ngModel)]="form.valorCondominio"
+              #valorCondominio="ngModel"
+              placeholder="R$ 1.500,13"
+              value="0"
+              required
+            />
+          </div>
 
-        <div class="form-campo">
-          <label for="valorImovel"
-            >Valor do imóvel: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="valorImovel"
-            [(ngModel)]="form.valorImovel"
-            #valorImovel="ngModel"
-            placeholder="R$ 1.500.000,00"
-            value="0"
-            required
-          />
+          <div>
+            <button type="submit">Enviar Dados</button>
+          </div>
         </div>
-
-        <div class="form-campo">
-          <label for="valorIPTU"
-            >Valor do IPTU: <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="valorIPTU"
-            [(ngModel)]="form.valorIPTU"
-            #valorIPTU="ngModel"
-            placeholder="R$ 400,45"
-            value="0"
-            required
-          />
-        </div>
-        <div class="form-campo">
-          <label for="valorCondominio"
-            >Valor do condomínio:
-            <strong style="color: red">*</strong></label
-          >
-          <input
-            type="number"
-            name="valorCondominio"
-            [(ngModel)]="form.valorCondominio"
-            #valorCondominio="ngModel"
-            placeholder="R$ 1.500,13"
-            value="0"
-            required
-          />
-        </div>
-
-        <div>
-          <button type="submit">Enviar Dados</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-  </div>
+</div>

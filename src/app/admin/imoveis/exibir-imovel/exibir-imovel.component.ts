@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faSyncAlt} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-exibir-imovel',

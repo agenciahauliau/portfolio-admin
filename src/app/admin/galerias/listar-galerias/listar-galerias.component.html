@@ -1,26 +1,21 @@
-
-
-  <div class="RouterOutlet">
-    <div class="cabecalhoConteudoAdmin">
-      <div class="itensCabecalhoConteudoAdmin">
-        <a
-          [routerLink]="['/admin/criar-imovel']"
-          routerLinkActive="router-link-active"
-        >
-          Criar Imovel
-          <fa-icon [icon]="faPlusSquare"></fa-icon>
-        </a>
-        <a
-          class="temporario"
-          [routerLink]="['/admin/galerias']"
-          routerLinkActive="router-link-active"
-        >
-        Galerias 
-          <fa-icon [icon]="faImage"></fa-icon>
-        </a>
-      </div>
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        Criar Imovel
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+      <a
+        class="temporario"
+        [routerLink]="['/admin/galerias']"
+        routerLinkActive="router-link-active"
+      >
+        Galerias
+        <fa-icon [icon]="faImage"></fa-icon>
+      </a>
     </div>
-    <div class="infoConteudoAdmin">
+  </div>
+  <div class="infoConteudoAdmin">
     <table class="tabelaImoveis">
       <thead class="tabelaImoveisHeader">
         <th>ID Galeria</th>
@@ -49,7 +44,6 @@
     </table>
   </div>
 
-    <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="error">Erro :(</div>
-  </div>
-
+  <div *ngIf="loading">Carregando...</div>
+  <div *ngIf="error">Erro :(</div>
+</div>

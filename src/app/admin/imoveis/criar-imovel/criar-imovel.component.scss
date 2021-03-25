@@ -1,5 +1,4 @@
 .formulario {
-
   form {
     display: flex;
 
@@ -25,13 +24,13 @@
       button {
         width: fit-content;
         padding: 18px 22px;
-        background: rgba(219,4,35,1) ;
+        background: rgba(219, 4, 35, 1);
       }
     }
-
   }
 
-  input, textarea {
+  input,
+  textarea {
     padding: 8px 15px;
     background: #fff2;
   }
