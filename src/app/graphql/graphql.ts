@@ -6,13 +6,7 @@ export const GQL_LOGIN = gql`
   }
 `;
 
-export const GQL_UPLOAD_IMG = gql`
-  mutation upload($file: Upload!) {
-    uploadFileRemoto(file: $file)
-  }
-`;
-
-export const GQL_PESQ_GALERIA = gql`
+export const GQL_BUSCAR_GALERIA = gql`
   query procurarUmaGaleria(
     $id: ID
     $idImovel: [String!]
@@ -87,19 +81,7 @@ export const GQL_ATUALIZA_GALERIA = gql`
   }
 `;
 
-export const GQL_EXIBE_MIDIAS = gql`
-  query arquivos {
-    listarUploads
-  }
-`;
-
-export const GQL_LISTA_ARQUIVOS = gql`
-  query listarUploads {
-    listarUploads
-  }
-`;
-
-export const GQL_EXIBE_GALERIAS = gql`
+export const GQL_LISTAR_GALERIAS = gql`
   query listaGalerias {
     galerias {
       _id
@@ -112,6 +94,24 @@ export const GQL_EXIBE_GALERIAS = gql`
 export const GQL_DELETA_GALERIA = gql`
   mutation deletarGaleria($id: String!) {
     removeGaleria(id: $id)
+  }
+`;
+
+export const GQL_ENVIA_ARQUIVO = gql`
+  mutation upload($file: Upload!) {
+    uploadFileRemoto(file: $file)
+  }
+`;
+
+export const GQL_LISTAR_ARQUIVOS = gql`
+  query arquivos {
+    listarUploads
+  }
+`;
+
+export const GQL_DELETA_ARQUIVO = gql`
+  mutation deletarArquivo($nome: String!) {
+    deletaArquivo(filename: $nome)
   }
 `;
 
@@ -227,7 +227,7 @@ export const GQL_CRIAR_IMOVEL = gql`
   }
 `;
 
-export const GQL_IMOVEIS = gql`
+export const GQL_LISTAR_IMOVEIS = gql`
   query imoveis {
     imoveis {
       _id
@@ -266,7 +266,7 @@ export const GQL_IMOVEIS = gql`
   }
 `;
 
-export const GQL_IMOVEIS_COM_FILTRO = gql`
+export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
   query imoveis_com_filtro(
     $_id: ID
     $nomeImovel: String
@@ -480,13 +480,13 @@ export const GQL_BUSCAR_IMOVEL = gql`
   }
 `;
 
-export const GQL_REMOVE_IMOVEL = gql`
+export const GQL_DELETA_IMOVEL = gql`
   mutation removeImovel($_id: String!) {
     removeImovel(id: $_id)
   }
 `;
 
-export const GQL_UPDATE_IMOVEL = gql`
+export const GQL_ATUALIZA_IMOVEL = gql`
   mutation updateImovel(
     $_id: String!
     $nomeImovel: String

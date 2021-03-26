@@ -1,14 +1,14 @@
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { Subscription, Observable } from 'rxjs';
-import { GQL_LISTA_ARQUIVOS } from 'src/app/graphql/graphql';
-import { GraphQlService } from 'src/app/services/graphql.service';
-import { TokenService } from 'src/app/services/token.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { Subscription } from 'rxjs';
+import { GQL_LISTAR_ARQUIVOS } from '../../../graphql/graphql';
+import { GraphQlService } from '../../../services/graphql.service';
+import { TokenService } from '../../../services/token.service';
+import { UploadService } from '../../../services/upload.service';
 HttpClient;
 @Component({
   selector: 'app-upload-imagens',
@@ -44,8 +44,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.querySubs = this.apollo
       .watchQuery<any>({
-        query: GQL_LISTA_ARQUIVOS,
-        fetchPolicy: 'no-cache',
+        query: GQL_LISTAR_ARQUIVOS,
         pollInterval: 2000,
       })
       .valueChanges.subscribe(({ data, loading }) => {

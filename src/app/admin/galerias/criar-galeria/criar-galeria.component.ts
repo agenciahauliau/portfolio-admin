@@ -4,7 +4,7 @@ import { Galeria } from '../../../helpers/types';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { GraphQlService } from 'src/app/services/graphql.service';
+import { GraphQlService } from '../../../services/graphql.service';
 
 @Component({
   selector: 'app-criar-galeria',

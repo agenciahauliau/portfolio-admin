@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphQlService } from '../../../services/graphql.service';
-import { Imovel } from '../../../helpers/types';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { GraphQlService } from '../../../services/graphql.service';
+import { Imovel } from '../../../helpers/types';
 
 @Component({
   selector: 'app-criar-imovel',

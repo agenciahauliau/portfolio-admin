@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
-import { GQL_BUSCAR_IMOVEL } from 'src/app/graphql/graphql';
-import { Imovel } from 'src/app/helpers/types';
-import { GraphQlService } from 'src/app/services/graphql.service';
+import { Subscription } from 'rxjs';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
+import { Imovel } from '../../../helpers/types';
+import { GraphQlService } from '../../../services/graphql.service';
 
 @Component({
   selector: 'app-editar-imovel',

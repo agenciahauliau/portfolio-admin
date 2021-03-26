@@ -6,7 +6,7 @@ import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regul
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
 import { GraphQlService } from '../../../services/graphql.service';
-import { GQL_EXIBE_GALERIAS } from '../../../graphql/graphql';
+import { GQL_LISTAR_GALERIAS } from '../../../graphql/graphql';
 import { Galeria } from '../../../helpers/types';
 
 @Component({
@@ -35,9 +35,9 @@ export class ListarGaleriasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.galeriasQuery = this.apollo.watchQuery<any>({
-      query: GQL_EXIBE_GALERIAS,
-      pollInterval: 500,
+    this.galeriasQuery = this.apollo.watchQuery<Galeria[]>({
+      query: GQL_LISTAR_GALERIAS,
+      pollInterval: 2000,
     });
 
     this.querySubs = this.galeriasQuery.valueChanges.subscribe(({ data, loading }) => {

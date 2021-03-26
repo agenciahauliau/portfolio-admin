@@ -4,8 +4,8 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { Galeria } from 'src/app/helpers/types';
-import { GQL_PESQ_GALERIA } from 'src/app/graphql/graphql';
+import { Galeria } from '../../../helpers/types';
+import { GQL_BUSCAR_GALERIA } from '../../../graphql/graphql';
 
 @Component({
   selector: 'app-exibir-galeria',
@@ -28,7 +28,7 @@ export class ExibirGaleriaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const galeriaId = this.route.snapshot.paramMap.get('id');
     this.galeriaQuery = this.apollo.watchQuery<Galeria>({
-      query: GQL_PESQ_GALERIA,
+      query: GQL_BUSCAR_GALERIA,
       variables: {
         id: galeriaId,
       },

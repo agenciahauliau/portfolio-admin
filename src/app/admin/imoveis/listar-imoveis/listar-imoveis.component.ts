@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { GraphQlService } from '../../../services/graphql.service';
-import { GQL_IMOVEIS } from '../../../graphql/graphql';
+import { GQL_LISTAR_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 
 @Component({
@@ -31,8 +31,8 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
-      query: GQL_IMOVEIS,
-      pollInterval: 5000,
+      query: GQL_LISTAR_IMOVEIS,
+      pollInterval: 2000,
     });
 
     this.querySubs = this.imoveisQuery.valueChanges.subscribe(({ data, loading }) => {

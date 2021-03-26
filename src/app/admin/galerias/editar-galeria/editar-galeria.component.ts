@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_PESQ_GALERIA } from '../../../graphql/graphql';
+import { GQL_BUSCAR_GALERIA } from '../../../graphql/graphql';
 import { Galeria } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 
@@ -37,7 +37,7 @@ export class EditarGaleriaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const galeriaId = this.route.snapshot.paramMap.get('id');
     this.galeriaQuery = this.apollo.watchQuery<Galeria>({
-      query: GQL_PESQ_GALERIA,
+      query: GQL_BUSCAR_GALERIA,
       variables: {
         id: galeriaId,
       },

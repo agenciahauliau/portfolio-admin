@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from './token.service';
 import {
-  GQL_ATUALIZA_GALERIA,
   GQL_CRIAR_IMOVEL,
+  GQL_ATUALIZA_IMOVEL,
+  GQL_DELETA_IMOVEL,
   GQL_CRIA_GALERIA,
   GQL_DELETA_GALERIA,
+  GQL_ATUALIZA_GALERIA,
   GQL_LOGIN,
   GQL_ME,
-  GQL_REMOVE_IMOVEL,
-  GQL_UPDATE_IMOVEL,
 } from '../graphql/graphql';
 import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
@@ -73,7 +73,7 @@ export class GraphQlService {
   async atualizaImovel(id: any, dados: Imovel) {
     return this.apollo
       .mutate({
-        mutation: GQL_UPDATE_IMOVEL,
+        mutation: GQL_ATUALIZA_IMOVEL,
         variables: {
           _id: id,
           dados: dados,
@@ -99,7 +99,7 @@ export class GraphQlService {
     console.log(id);
     return this.apollo
       .mutate({
-        mutation: GQL_REMOVE_IMOVEL,
+        mutation: GQL_DELETA_IMOVEL,
         variables: { _id: id },
       })
       .subscribe(
