@@ -5,6 +5,7 @@ import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-i
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { GQL_LISTAR_ARQUIVOS } from '../../../graphql/graphql';
 import { GraphQlService } from '../../../services/graphql.service';
 import { TokenService } from '../../../services/token.service';
@@ -16,7 +17,7 @@ HttpClient;
   styleUrls: ['./upload-imagens.component.scss', '../../admin.component.scss'],
 })
 export class UploadImagensComponent implements OnInit, OnDestroy {
-  url = 'https://admin.portfolio.imb.br/v1/files/';
+  url = `${environment.API}files/`;
   midias!: [string];
   midiasQuery!: QueryRef<any>;
   loading = true;
