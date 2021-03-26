@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { Subscription } from 'rxjs';
-import { GQL_EXIBE_MIDIAS, GQL_LISTA_ARQUIVOS } from 'src/app/graphql/graphql';
+import { Subscription, Observable } from 'rxjs';
+import { GQL_LISTA_ARQUIVOS } from 'src/app/graphql/graphql';
 import { GraphQlService } from 'src/app/services/graphql.service';
 import { TokenService } from 'src/app/services/token.service';
-import { environment } from 'src/environments/environment';
+import { UploadService } from 'src/app/services/upload.service';
 HttpClient;
 @Component({
   selector: 'app-upload-imagens',
@@ -29,20 +29,24 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   faSyncAlt = faSyncAlt;
   faImage = faImage;
 
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
+
   private querySubs = new Subscription();
 
   constructor(
-    private accountService: GraphQlService,
-    private http: HttpClient,
     private apollo: Apollo,
-    private tokenService: TokenService,
     private router: Router,
+    private uploadService: UploadService,
   ) {}
+
   ngOnInit(): void {
     this.querySubs = this.apollo
       .watchQuery<any>({
         query: GQL_LISTA_ARQUIVOS,
         fetchPolicy: 'no-cache',
+        pollInterval: 2000,
       })
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
@@ -50,65 +54,49 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
       });
   }
 
+  selectFiles(event: any): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadFiles(): void {
+    this.message = [];
+    if (this.selectedFiles) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
+    }
+  }
+
+  upload(idx: number, file: File): void {
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+    if (file) {
+      this.uploadService.upload(file).subscribe(
+        (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfos[idx].value = Math.round((100 * event.loaded) / event.total);
+          } else if (event instanceof HttpResponse) {
+            const msg = 'Arquivo enviado com sucesso ' + file.name;
+            this.message.push(msg);
+          }
+        },
+        (error: any) => {
+          this.progressInfos[idx].value = 0;
+          const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
+          this.message.push(msg);
+        },
+      );
+    }
+  }
+
   ngOnDestroy() {
     this.querySubs.unsubscribe();
   }
 
-  ngAfterViewInit() {
+  /* ngAfterViewInit() {
     (document.querySelector('.app-alerts') as HTMLElement).style.top = '150px';
-  }
-
-  @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
-  files: any = [];
-
-  async uploadFile(file: any) {
-    console.log('fiile', file);
-    const formData = new FormData();
-    formData.append('file', file.data);
-    file.inProgress = true;
-    const result = await this.accountService.uploadArquivo(file);
-  }
-
-  private async uploadFiles() {
-    this.fileUpload.nativeElement.value = '';
-    this.files.forEach(async (file: any) => {
-      console.log('uploadsfiles', file);
-      await this.uploadFile(file);
-    });
-  }
-
-  async onClick(): Promise<any> {
-    const fileUpload = this.fileUpload.nativeElement;
-    fileUpload.onchange = async () => {
-      for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
-        this.files.push({ data: file, inProgress: false, progress: 0 });
-      }
-      console.log(this.files);
-      await this.uploadFiles();
-    };
-    fileUpload.click();
-  }
-
-  async upload($event: any) {
-    let file = $event.target.files[0];
-    let fd = new FormData();
-    fd.append('files', file, file.name);
-    return this.http
-      .post('http://localhost:8080/v1/files/upload', fd, {
-        reportProgress: true,
-        observe: 'events',
-      })
-      .subscribe(
-        (data: any) => {
-          console.log('Imagem sucesso', data.body);
-          return data;
-        },
-        (error) => {
-          console.log('erro', error.error.message);
-        },
-      );
-  }
+  }*/
 
   voltar() {
     this.router.navigate(['/admin/upload']);

@@ -11,7 +11,6 @@ import {
   GQL_ME,
   GQL_REMOVE_IMOVEL,
   GQL_UPDATE_IMOVEL,
-  GQL_UPLOAD_IMG,
 } from '../graphql/graphql';
 import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
@@ -114,34 +113,6 @@ export class GraphQlService {
         },
         (err) => {
           console.error('Err: ', err);
-        },
-      );
-  }
-
-  async uploadArquivo(arquivo: any) {
-    console.log('arquivo', arquivo);
-    return this.apollo
-      .mutate({
-        mutation: GQL_UPLOAD_IMG,
-        variables: { file: arquivo },
-        context: {
-          useMultipart: true,
-        },
-        errorPolicy: 'all',
-      })
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-          if (data?.errors) {
-            console.log('Erro de upload', data?.errors);
-            return data?.errors;
-          } else {
-            console.log('Imagem sucesso', data);
-            return data;
-          }
-        },
-        (error) => {
-          console.log('erro', error);
         },
       );
   }
