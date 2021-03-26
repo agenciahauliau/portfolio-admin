@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com/v1/graphql',
+  API: 'https://admin.portfolio.imb.br/v1/graphql',
   TOKEN_KEY: 'auth-token',
   USER_KEY: 'auth-user',
 };

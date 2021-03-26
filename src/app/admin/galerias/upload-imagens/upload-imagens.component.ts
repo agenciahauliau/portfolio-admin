@@ -5,7 +5,7 @@ import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-i
 import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_EXIBE_MIDIAS } from 'src/app/graphql/graphql';
+import { GQL_EXIBE_MIDIAS, GQL_LISTA_ARQUIVOS } from 'src/app/graphql/graphql';
 import { GraphQlService } from 'src/app/services/graphql.service';
 import { TokenService } from 'src/app/services/token.service';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,7 @@ HttpClient;
   styleUrls: ['./upload-imagens.component.scss', '../../admin.component.scss'],
 })
 export class UploadImagensComponent implements OnInit, OnDestroy {
+  url = 'https://admin.portfolio.imb.br/v1/files/';
   midias!: [string];
   midiasQuery!: QueryRef<any>;
   loading = true;
@@ -40,7 +41,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.querySubs = this.apollo
       .watchQuery<any>({
-        query: GQL_EXIBE_MIDIAS,
+        query: GQL_LISTA_ARQUIVOS,
         fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(({ data, loading }) => {
@@ -59,30 +60,6 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
 
   @ViewChild('fileUpload', { static: false }) fileUpload!: ElementRef;
   files: any = [];
-  //selectFile!: File;
-
-  /* upload(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-
-      this.imageService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {},
-        (err) => {},
-      );
-    });
-
-    reader.readAsDataURL(file);
-  } */
-
-  /* async onFileUpload(event: any) {
-    this.selectFile = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    return await this.accountService.upload(this.selecetdFile);
-  } */
 
   async uploadFile(file: any) {
     console.log('fiile', file);
@@ -112,73 +89,23 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
     };
     fileUpload.click();
   }
-  /* };
-    const fileUpload = this.fileUpload.nativeElement;
-    const formData = new FormData();
-    console.log(fileUpload.files);
-    formData.append('file', fileUpload.files);
-    console.log(formData);
-    await this.accountService
-      .upload(fileUpload.files)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err)); */
-  /* fileUpload.onchange = async () => {
-      for (let index = 0; index < fileUpload.files.length; index++) {
-        fileUpload.files[index];
-      }
-      await this.uploadFiles();
-    }; */
 
   async upload($event: any) {
-    let operations = {
-      query: `
-        mutation upload($file: Upload!) {
-          uploadFileRemoto(file: $file)
-        }
-      `,
-      variables: { file: null },
-    };
-
-    let _map = {
-      file: ['variables.file'],
-    };
     let file = $event.target.files[0];
     let fd = new FormData();
-    fd.append('operations', JSON.stringify(operations));
-    console.log('operations', JSON.stringify(operations));
-    fd.append('map', JSON.stringify(_map));
-    fd.append('file', file, file.name);
+    fd.append('files', file, file.name);
     return this.http
-      .post(environment.API, fd, {
+      .post('http://localhost:8080/v1/files/upload', fd, {
         reportProgress: true,
         observe: 'events',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          Authorization: `Bearer ${this.tokenService.getToken()}`,
-          'Accept-Encoding': 'gzip, deflate, br',
-          Origin: 'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com',
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Connection: 'keep-alive',
-        },
       })
       .subscribe(
         (data: any) => {
-          console.log(data);
-          if (data?.errors) {
-            console.log('Erro de upload', data?.errors);
-            return data?.errors;
-          } else {
-            console.log('Imagem sucesso', data);
-            setTimeout(() => {
-              window.alert('Galeria Criada');
-              this.voltar();
-            }, 6000);
-            return data;
-          }
+          console.log('Imagem sucesso', data.body);
+          return data;
         },
         (error) => {
-          console.log('erro', error);
+          console.log('erro', error.error.message);
         },
       );
   }

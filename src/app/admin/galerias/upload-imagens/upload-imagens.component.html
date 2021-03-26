@@ -15,8 +15,11 @@
   </div>
   <div class="infoConteudoAdmin">
     <div class="tabelalinhaImovel" *ngFor="let midia of midias">
-      <img src="{{ midia }}" width="200" height="auto" alt="" title="" />
-      <p><b>URL: </b> {{ midia }}</p>
+      <img src="{{ url }}{{ midia }}" width="200" height="auto" alt="" title="" />
+      <p>
+        <b>URL: </b>
+        {{ url }}{{ midia }}
+      </p>
     </div>
     <div *ngIf="loading">Carregando...</div>
     <div *ngIf="error">Erro :(</div>

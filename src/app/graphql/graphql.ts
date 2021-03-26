@@ -93,6 +93,12 @@ export const GQL_EXIBE_MIDIAS = gql`
   }
 `;
 
+export const GQL_LISTA_ARQUIVOS = gql`
+  query listarUploads {
+    listarUploads
+  }
+`;
+
 export const GQL_EXIBE_GALERIAS = gql`
   query listaGalerias {
     galerias {
