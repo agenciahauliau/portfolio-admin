@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_PESQ_GALERIA } from 'src/app/graphql/graphql';
-import { Galeria } from 'src/app/helpers/types';
-import { GraphQlService } from 'src/app/services/graphql.service';
+import { GQL_PESQ_GALERIA } from '../../../graphql/graphql';
+import { Galeria } from '../../../helpers/types';
+import { GraphQlService } from '../../../services/graphql.service';
 
 @Component({
   selector: 'app-editar-galeria',
@@ -13,16 +13,17 @@ import { GraphQlService } from 'src/app/services/graphql.service';
   styleUrls: ['./editar-galeria.component.scss', '../../admin.component.scss'],
 })
 export class EditarGaleriaComponent implements OnInit, OnDestroy {
-  form: Galeria = {
-    nomeGaleria: '',
-    arquivoDestaque: '',
-    idImovel: [''],
-    url: [''],
-  };
   faPlusSquare = faPlusSquare;
-  galeriaQuery!: QueryRef<any>;
   loading = true;
   error: any;
+  galeriaId = this.route.snapshot.paramMap.get('id');
+  galeriaQuery!: QueryRef<any>;
+  form: any = {
+    nomeGaleria: '',
+    arquivoDestaque: '',
+    url: [''],
+    idImovel: [''],
+  };
 
   private querySubs = new Subscription();
 
@@ -50,7 +51,6 @@ export class EditarGaleriaComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    const galeriaId = this.route.snapshot.paramMap.get('id');
     if (this.form.idImovel) {
       this.form.idImovel = this.separa(this.form.idImovel + '');
     }
@@ -58,10 +58,10 @@ export class EditarGaleriaComponent implements OnInit, OnDestroy {
       this.form.url = this.separa(this.form.url + '');
       this.form.arquivoDestaque = this.form.url?.[0];
     }
-    await this.gqlService.atualizaGaleria(galeriaId, this.form);
+    await this.gqlService.atualizaGaleria(this.galeriaId, this.form);
     setTimeout(() => {
       window.alert('Galeria Atualizada');
-      this.voltar();
+      this.refresh();
     }, 2000);
   }
 
@@ -70,7 +70,7 @@ export class EditarGaleriaComponent implements OnInit, OnDestroy {
   }
 
   voltar() {
-    this.router.navigate(['../']);
+    this.router.navigate(['galeria', this.galeriaId]);
   }
 
   ngOnDestroy(): void {

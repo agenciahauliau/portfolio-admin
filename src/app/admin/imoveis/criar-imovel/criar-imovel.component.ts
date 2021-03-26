@@ -15,6 +15,7 @@ export class CriarImovelComponent implements OnInit {
 
   form: Imovel = {
     _id: '',
+    nomeImovel: '',
     categoriaImovel: '',
     jardins: false,
     descricaoImovel: '',
@@ -23,6 +24,8 @@ export class CriarImovelComponent implements OnInit {
     aceitaPermuta: false,
     mobiliado: false,
     valorImovel: 0,
+    valorEntrada: 0,
+    valorParcela: 0,
     valorIPTU: 0,
     valorCondominio: 0,
     areaTotal: 0,
@@ -55,7 +58,6 @@ export class CriarImovelComponent implements OnInit {
     if (this.form.comodidadesCondominio) {
       this.form.comodidadesCondominio = this.separa(this.form.comodidadesCondominio + '');
     }
-    console.log('form', this.form);
     this.gqlService.criarImovel(this.form);
   }
 

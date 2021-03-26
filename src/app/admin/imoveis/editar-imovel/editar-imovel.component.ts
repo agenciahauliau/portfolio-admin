@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -7,18 +7,17 @@ import { GQL_BUSCAR_IMOVEL } from 'src/app/graphql/graphql';
 import { Imovel } from 'src/app/helpers/types';
 import { GraphQlService } from 'src/app/services/graphql.service';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-editar-imovel',
   templateUrl: './editar-imovel.component.html',
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
-export class EditarImovelComponent implements OnInit {
+export class EditarImovelComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;
-
-  form: Imovel = {
+  editaForm: Imovel = {
     _id: '',
+    nomeImovel: '',
     categoriaImovel: '',
     jardins: false,
     descricaoImovel: '',
@@ -27,6 +26,8 @@ export class EditarImovelComponent implements OnInit {
     aceitaPermuta: false,
     mobiliado: false,
     valorImovel: 0,
+    valorEntrada: 0,
+    valorParcela: 0,
     valorIPTU: 0,
     valorCondominio: 0,
     areaTotal: 0,
@@ -71,20 +72,22 @@ export class EditarImovelComponent implements OnInit {
 
     this.querySubs = this.imovelQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
-      this.form = data.imovel;
+      this.editaForm = data.imovel;
     });
   }
 
   onSubmit() {
     const imovelId = this.route.snapshot.paramMap.get('id');
-    if (this.form.comodidadesImovel) {
-      this.form.comodidadesImovel = this.separa(this.form.comodidadesImovel + '');
+    if (this.editaForm.comodidadesImovel) {
+      this.editaForm.comodidadesImovel = this.separa(this.editaForm.comodidadesImovel + '');
     }
-    if (this.form.comodidadesCondominio) {
-      this.form.comodidadesCondominio = this.separa(this.form.comodidadesCondominio + '');
+    if (this.editaForm.comodidadesCondominio) {
+      this.editaForm.comodidadesCondominio = this.separa(this.editaForm.comodidadesCondominio + '');
     }
-    console.log('form', this.form);
-    this.gqlService.atualizaImovel(imovelId, this.form);
+    console.log(JSON.stringify(imovelId));
+    console.log(imovelId);
+    console.log(this.editaForm);
+    this.gqlService.atualizaImovel(imovelId, this.editaForm);
   }
 
   refresh() {

@@ -76,9 +76,10 @@ export class GraphQlService {
       .mutate({
         mutation: GQL_UPDATE_IMOVEL,
         variables: {
-          id: id,
+          _id: id,
           dados: dados,
         },
+        errorPolicy: 'all',
       })
       .subscribe(
         ({ errors, data }: any) => {

@@ -263,7 +263,7 @@ export const GQL_IMOVEIS = gql`
 export const GQL_IMOVEIS_COM_FILTRO = gql`
   query imoveis_com_filtro(
     $_id: ID
-    $nomeImovel: String!
+    $nomeImovel: String
     $categoriaImovel: String
     $jardins: Boolean
     $descricaoImovel: String
@@ -291,8 +291,8 @@ export const GQL_IMOVEIS_COM_FILTRO = gql`
     $cep: Float
     $cidade: String
     $uf: String
-    $comodidadesImovel: [String!]
-    $comodidadesCondominio: [String!]
+    $comodidadesImovel: [String]
+    $comodidadesCondominio: [String]
     $quantidade: Float
   ) {
     imoveis(
@@ -482,7 +482,7 @@ export const GQL_REMOVE_IMOVEL = gql`
 
 export const GQL_UPDATE_IMOVEL = gql`
   mutation updateImovel(
-    $_id: ID
+    $_id: String!
     $nomeImovel: String
     $categoriaImovel: String
     $jardins: Boolean
