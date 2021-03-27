@@ -11,6 +11,7 @@ export interface User {
 export interface Imovel {
   _id?: string;
   nomeImovel?: string;
+  imagemPrincipal?: string;
   categoriaImovel?: string;
   jardins?: boolean;
   descricaoImovel?: string;
@@ -38,6 +39,7 @@ export interface Imovel {
   bairro?: string;
   cidade?: string;
   uf?: string;
+  imagensAdicionais?: [string];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
   createdAt?: number;

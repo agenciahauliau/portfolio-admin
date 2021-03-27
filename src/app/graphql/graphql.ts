@@ -126,6 +126,7 @@ export const GQL_ME = gql`
 export const GQL_CRIAR_IMOVEL = gql`
   mutation criarImovel(
     $nomeImovel: String!
+    $imagemPrincipal: String!
     $categoriaImovel: String!
     $jardins: Boolean!
     $descricaoImovel: String!
@@ -153,12 +154,14 @@ export const GQL_CRIAR_IMOVEL = gql`
     $cep: Int!
     $cidade: String!
     $uf: String!
+    $imagensAdicionais: [String!]!
     $comodidadesImovel: [String!]!
     $comodidadesCondominio: [String!]!
   ) {
     createImovel(
       dados: {
         nomeImovel: $nomeImovel
+        imagemPrincipal: $imagemPrincipal
         categoriaImovel: $categoriaImovel
         jardins: $jardins
         descricaoImovel: $descricaoImovel
@@ -186,12 +189,14 @@ export const GQL_CRIAR_IMOVEL = gql`
         cep: $cep
         cidade: $cidade
         uf: $uf
+        imagensAdicionais: $imagensAdicionais
         comodidadesImovel: $comodidadesImovel
         comodidadesCondominio: $comodidadesCondominio
       }
     ) {
       _id
       nomeImovel
+      imagemPrincipal
       categoriaImovel
       jardins
       descricaoImovel
@@ -219,6 +224,7 @@ export const GQL_CRIAR_IMOVEL = gql`
       cep
       cidade
       uf
+      imagensAdicionais
       comodidadesImovel
       comodidadesCondominio
       createdAt
@@ -231,6 +237,8 @@ export const GQL_LISTAR_IMOVEIS = gql`
   query imoveis {
     imoveis {
       _id
+      nomeImovel
+      imagemPrincipal
       categoriaImovel
       jardins
       descricaoImovel
@@ -258,6 +266,7 @@ export const GQL_LISTAR_IMOVEIS = gql`
       cep
       cidade
       uf
+      imagensAdicionais
       comodidadesImovel
       comodidadesCondominio
       createdAt
@@ -339,6 +348,7 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
     ) {
       _id
       nomeImovel
+      imagemPrincipal
       categoriaImovel
       jardins
       descricaoImovel
@@ -366,6 +376,7 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       cep
       cidade
       uf
+      imagensAdicionais
       comodidadesImovel
       comodidadesCondominio
       createdAt
@@ -445,6 +456,7 @@ export const GQL_BUSCAR_IMOVEL = gql`
     ) {
       _id
       nomeImovel
+      imagemPrincipal
       categoriaImovel
       jardins
       descricaoImovel
@@ -472,6 +484,7 @@ export const GQL_BUSCAR_IMOVEL = gql`
       cep
       cidade
       uf
+      imagensAdicionais
       comodidadesImovel
       comodidadesCondominio
       createdAt
@@ -488,52 +501,54 @@ export const GQL_DELETA_IMOVEL = gql`
 
 export const GQL_ATUALIZA_IMOVEL = gql`
   mutation updateImovel(
-    $_id: String!
-    $nomeImovel: String
-    $categoriaImovel: String
-    $jardins: Boolean
-    $descricaoImovel: String
-    $tipoNegociacao: String
-    $statusImovel: String
-    $aceitaPermuta: Boolean
-    $mobiliado: Boolean
-    $valorImovel: Float
-    $valorEntrada: Float
-    $valorParcela: Float
-    $valorIPTU: Float
-    $valorCondominio: Float
-    $areaTotal: Float
-    $areaConstruida: Float
-    $andarImovel: Float
-    $qtdeQuarto: Float
-    $qtdeBanheiro: Float
-    $qtdeSuites: Float
-    $qtdeVagas: Float
-    $nomeConstrutora: String
-    $bairro: String
-    $logradouro: String
-    $numeroLogradouro: String
-    $complemento: String
-    $cep: Float
-    $cidade: String
-    $uf: String
-    $comodidadesImovel: [String!]
-    $comodidadesCondominio: [String!]
+    $nomeImovel: String!
+    $imagemPrincipal: String!
+    $categoriaImovel: String!
+    $jardins: Boolean!
+    $descricaoImovel: String!
+    $tipoNegociacao: String!
+    $statusImovel: String!
+    $aceitaPermuta: Boolean!
+    $mobiliado: Boolean!
+    $valorImovel: Float!
+    $valorEntrada: Float!
+    $valorParcela: Float!
+    $valorIPTU: Float!
+    $valorCondominio: Float!
+    $areaTotal: Float!
+    $areaConstruida: Float!
+    $andarImovel: Int!
+    $qtdeQuarto: Int!
+    $qtdeBanheiro: Int!
+    $qtdeSuites: Int!
+    $qtdeVagas: Int!
+    $nomeConstrutora: String!
+    $bairro: String!
+    $logradouro: String!
+    $numeroLogradouro: String!
+    $complemento: String!
+    $cep: Int!
+    $cidade: String!
+    $uf: String!
+    $imagensAdicionais: [String!]!
+    $comodidadesImovel: [String!]!
+    $comodidadesCondominio: [String!]!
   ) {
     updateImovel(
       id: $_id
       dados: {
         nomeImovel: $nomeImovel
+        imagemPrincipal: $imagemPrincipal
         categoriaImovel: $categoriaImovel
         jardins: $jardins
         descricaoImovel: $descricaoImovel
         tipoNegociacao: $tipoNegociacao
         statusImovel: $statusImovel
-        valorEntrada: $valorEntrada
-        valorParcela: $valorParcela
         aceitaPermuta: $aceitaPermuta
         mobiliado: $mobiliado
         valorImovel: $valorImovel
+        valorEntrada: $valorEntrada
+        valorParcela: $valorParcela
         valorIPTU: $valorIPTU
         valorCondominio: $valorCondominio
         areaTotal: $areaTotal
@@ -551,12 +566,14 @@ export const GQL_ATUALIZA_IMOVEL = gql`
         cep: $cep
         cidade: $cidade
         uf: $uf
+        imagensAdicionais: $imagensAdicionais
         comodidadesImovel: $comodidadesImovel
         comodidadesCondominio: $comodidadesCondominio
       }
     ) {
       _id
       nomeImovel
+      imagemPrincipal
       categoriaImovel
       jardins
       descricaoImovel
@@ -584,6 +601,7 @@ export const GQL_ATUALIZA_IMOVEL = gql`
       cep
       cidade
       uf
+      imagensAdicionais
       comodidadesImovel
       comodidadesCondominio
       createdAt
