@@ -6,6 +6,7 @@ import { Imovel } from '../../../helpers/types';
 import { environment } from '../../../../environments/environment';
 import { UploadService } from 'src/app/services/upload.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar-imovel',
@@ -59,7 +60,11 @@ export class CriarImovelComponent implements OnInit {
     comodidadesCondominio: [''],
   };
 
-  constructor(private gqlService: GraphQlService, private uploadService: UploadService) {}
+  constructor(
+    private gqlService: GraphQlService,
+    private uploadService: UploadService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -72,11 +77,19 @@ export class CriarImovelComponent implements OnInit {
     }
     this.form.imagemPrincipal = this.mainImg;
     this.gqlService.criarImovel(this.form);
+    setTimeout(() => {
+      window.alert('Imóvel Criado');
+      this.voltar();
+    }, 2000);
   }
 
   //TODO: Verificar o pq que o array[0] não está sendo inserido no banco
   separa(data: any) {
     return data.split(/\n+|\r+|,\s+/g).filter(Boolean);
+  }
+
+  voltar() {
+    this.router.navigate(['admin/imoveis']);
   }
 
   selectFiles(event: any): void {
