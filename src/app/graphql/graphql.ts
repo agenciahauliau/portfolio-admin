@@ -6,6 +6,12 @@ export const GQL_LOGIN = gql`
   }
 `;
 
+export const GQL_CHECK = gql`
+  query check {
+    check
+  }
+`;
+
 export const GQL_BUSCAR_GALERIA = gql`
   query procurarUmaGaleria(
     $id: ID
