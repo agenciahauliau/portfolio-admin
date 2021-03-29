@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private gqlService: GraphQlService,
-    private tokenStorage: TokenService,
+    private tokenService: TokenService,
     private router: Router,
   ) {}
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   redirect() {
-    if (this.tokenStorage.getToken()) {
+    if (this.tokenService.getToken()) {
       this.isLoggedIn = true;
       this.router.navigate(['admin']);
     }
