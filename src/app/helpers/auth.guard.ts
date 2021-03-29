@@ -9,6 +9,8 @@ import {
   Router,
   Route,
 } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { GQL_CHECK } from '../graphql/graphql';
 import { GraphQlService } from '../services/graphql.service';
 import { TokenService } from '../services/token.service';
 
@@ -16,29 +18,36 @@ import { TokenService } from '../services/token.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+  resultado: boolean = true;
   constructor(
     private router: Router,
+    private apollo: Apollo,
     private gqlService: GraphQlService,
     private tokenService: TokenService,
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const url: string = state.url;
-    return this.checkLogin(url);
+    return await this.checkLogin(url);
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.canActivate(route, state);
+  async canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ): Promise<boolean> {
+    return await this.canActivate(route, state);
   }
 
-  canLoad(route: Route): boolean {
+  async canLoad(route: Route): Promise<boolean> {
     const url = `/${route.path}`;
-    return this.checkLogin(url);
+    return await this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
+  async checkLogin(url: string): Promise<boolean> {
+    await this.check();
     const token = this.tokenService.getToken();
-    if (token) {
+    console.log(this.resultado);
+    if (token && this.resultado) {
       return true;
     }
 
@@ -58,5 +67,25 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     // Navigate to the login page with extras
     this.router.navigate(['/login'], navigationExtras);
     return false;
+  }
+
+  private async check() {
+    this.apollo
+      .query({
+        query: GQL_CHECK,
+        fetchPolicy: 'network-only',
+      })
+      .subscribe(
+        ({ data }) => {
+          if (data) {
+            this.resultado = true;
+          }
+        },
+        (err: any) => {
+          console.log('check err: ', err);
+          this.tokenService.signOut();
+          this.resultado = false;
+        },
+      );
   }
 }

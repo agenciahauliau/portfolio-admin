@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { GQL_CHECK } from '../graphql/graphql';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
-  constructor() {}
+  constructor(private apollo: Apollo) {}
 
   signOut(): void {
+    this.apollo.client.resetStore();
+    window.localStorage.removeItem(environment.TOKEN_KEY);
     window.localStorage.clear();
   }
 
