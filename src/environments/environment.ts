@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API: process.env.API_URL || 'https://admin.portfolio.imb.br/v1/',
+  API: 'https://api.portfolio.imb.br/v1/',
+  //API: 'http://localhost:8080/v1/',
   TOKEN_KEY: 'auth-token',
   USER_KEY: 'auth-user',
 };
