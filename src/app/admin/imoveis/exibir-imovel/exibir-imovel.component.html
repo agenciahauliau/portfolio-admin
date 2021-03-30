@@ -92,6 +92,16 @@
           </div>
         </div>
       </div>
+      <div>
+        <div class="tituloInfo">
+          <h2>Imagens Adicionais</h2>
+        </div>
+        <ul>
+          <li *ngFor="let img of imovel.imagensAdicionais">
+            <img src="{{ img }}" width="280px" alt="" srcset="{{img}}" />
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

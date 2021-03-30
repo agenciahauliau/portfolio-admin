@@ -20,6 +20,11 @@ export class CriarImovelComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+
+  // Para Upload Imagens Adicionais
+  selectedFilesImgsAdicionais?: FileList;
+  progressInfosImgsAdicionais: any[] = [];
+  messageImgAdicionais: string[] = [];
   plusImgs = [''];
 
   faPlusSquare = faPlusSquare;
@@ -76,6 +81,7 @@ export class CriarImovelComponent implements OnInit {
       this.form.comodidadesCondominio = this.separa(this.form.comodidadesCondominio + '');
     }
     this.form.imagemPrincipal = this.mainImg;
+    this.form.imagensAdicionais = this.plusImgs;
     this.gqlService.criarImovel(this.form);
     setTimeout(() => {
       window.alert('Imóvel Criado');
@@ -118,15 +124,54 @@ export class CriarImovelComponent implements OnInit {
             const msg = 'Arquivo enviado com sucesso ' + file.name;
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
-            //this.plusImgs.push(this.url + event.body[0]);
-            //this.plusImgs = this.plusImgs.filter((x) => x.trim() != '');
-            //console.log(this.plusImgs);
           }
         },
         (error: any) => {
           this.progressInfos[idx].value = 0;
           const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
           this.message.push(msg);
+        },
+      );
+    }
+  }
+
+  /* Imagens adicionais */
+  selectFilesImagensAdicionais(event: any): void {
+    this.messageImgAdicionais = [];
+    this.progressInfosImgsAdicionais = [];
+    this.selectedFilesImgsAdicionais = event.target.files;
+  }
+
+  uploadFilesImagensAdicionais(): void {
+    this.message = [];
+    if (this.selectedFilesImgsAdicionais) {
+      for (let i = 0; i < this.selectedFilesImgsAdicionais.length; i++) {
+        this.uploadImagensAdicionais(i, this.selectedFilesImgsAdicionais[i]);
+      }
+    }
+  }
+
+  uploadImagensAdicionais(idx: number, file: File): void {
+    this.progressInfosImgsAdicionais[idx] = { value: 0, fileName: file.name };
+    if (file) {
+      this.uploadService.upload(file).subscribe(
+        (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfosImgsAdicionais[idx].value = Math.round(
+              (100 * event.loaded) / event.total,
+            );
+          } else if (event instanceof HttpResponse) {
+            const msg = 'Arquivo enviado com sucesso ' + file.name;
+            this.messageImgAdicionais.push(msg);
+            this.plusImgs.push(this.url + event.body[0]);
+            this.plusImgs = this.plusImgs.filter((x) => x.trim() != '');
+            console.log(this.plusImgs);
+          }
+        },
+        (error: any) => {
+          this.progressInfosImgsAdicionais[idx].value = 0;
+          const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
+          this.messageImgAdicionais.push(msg);
         },
       );
     }

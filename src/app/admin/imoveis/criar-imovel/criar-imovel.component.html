@@ -419,7 +419,52 @@
               required
             />
           </div>
-
+          <div class="form-campo">
+            <label for="inagensAdicionais"
+              >Adicionar mais Fotos: <strong style="color: red">*</strong></label
+            >
+            <div>
+              <input type="file" multiple (change)="selectFilesImagensAdicionais($event)" />
+            </div>
+            <div>
+              <button
+                type="button"
+                class=""
+                [disabled]="!selectedFilesImgsAdicionais"
+                (click)="uploadFilesImagensAdicionais()"
+              >
+                Upload
+              </button>
+            </div>
+            <div *ngFor="let progressInfo of progressInfosImgsAdicionais">
+              <span>{{ progressInfo.fileName }}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progressInfo.value }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progressInfo.value + '%' }"
+                >
+                  {{ progressInfo.value }}%
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>Imagens já adicionadas</div>
+              <ul>
+                <li *ngFor="let plusImg of plusImgs">
+                  <img src="{{ plusImg }}" alt="" width="300px" srcset="{{plusImg}}" />
+                </li>
+              </ul>
+              <!-- <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+              <ul *ngFor="let msg of message; let i = index">
+                <li>{{ msg }}</li>
+              </ul>
+            </div> -->
+            </div>
+          </div>
           <div>
             <button type="submit">Enviar Dados</button>
           </div>

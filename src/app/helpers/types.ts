@@ -39,7 +39,7 @@ export interface Imovel {
   bairro?: string;
   cidade?: string;
   uf?: string;
-  imagensAdicionais?: [string];
+  imagensAdicionais?: string[];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
   createdAt?: number;
