@@ -23,30 +23,13 @@ export class GraphQlService {
   constructor(private apollo: Apollo, private tokenStorage: TokenService, private router: Router) {}
 
   async login(dados: User) {
-    return this.apollo
+    const result = this.apollo
       .mutate({
         mutation: GQL_LOGIN,
         variables: dados,
       })
-      .subscribe(
-        ({ data, errors }: any) => {
-          let resultado;
-          if (data) {
-            console.log('Autenticado');
-            this.tokenStorage.saveToken(data.login);
-            resultado = true;
-          }
-          if (errors) {
-            console.error(errors[0].message);
-            resultado = false;
-          }
-          console.log('resultado', resultado);
-          return resultado;
-        },
-        (err) => {
-          console.error('Erro: ', err);
-        },
-      );
+      .toPromise();
+    return result;
   }
 
   async criarImovel(dados: Imovel) {

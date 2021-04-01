@@ -28,14 +28,22 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     await this.gqlService
       .login(this.form)
-      .then((res) => {
-        console.log('Resultado no LoginComponent', res);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.redirect();
+      .then((res: any) => {
+        if (res.data) {
+          this.tokenService.saveToken(res.data.login);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.redirect();
+        }
+        // Resolução de erros só por garantia. Tecnicamente o catch que vai fazer o trabalho.
+        if (res.errors) {
+          console.error(res.errors[0].message);
+          this.isLoginFailed = true;
+          this.errorMessage = res.errors[0].message;
+        }
       })
       .catch((err) => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = 'Erro de usuário/email ou senha';
         this.isLoginFailed = true;
         console.log('Erro login no LoginComponent', err);
       });
