@@ -32,7 +32,6 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.imoveisQuery = this.apollo.watchQuery<any>({
       query: GQL_LISTAR_IMOVEIS,
-      pollInterval: 2000,
     });
 
     this.querySubs = this.imoveisQuery.valueChanges.subscribe(({ data, loading }) => {
