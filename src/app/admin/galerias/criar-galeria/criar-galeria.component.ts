@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Galeria } from '../../../helpers/types';
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GraphQlService } from '../../../services/graphql.service';
+import { Galeria } from 'src/app/helpers/types';
+import { GraphQlService } from 'src/app/services/graphql.service';
 
 @Component({
   selector: 'app-criar-galeria',
@@ -12,34 +10,52 @@ import { GraphQlService } from '../../../services/graphql.service';
   styleUrls: ['./criar-galeria.component.scss'],
 })
 export class CriarGaleriaComponent implements OnInit {
-  faPlusSquare = faPlusSquare;
-  faHome = faHome;
+  galeriaForm!: Galeria & FormGroup;
 
-  form: Galeria = {
-    nomeGaleria: '',
-    arquivoDestaque: '',
-    idImovel: [''],
-    url: [''],
-  };
+  constructor(
+    private formBuilder: FormBuilder,
+    private gqlService: GraphQlService,
+    private router: Router,
+  ) {}
 
-  constructor(private accService: GraphQlService, private router: Router) {}
+  ngOnInit(): void {
+    this.galeriaForm = this.formBuilder.group({
+      nomeGaleria: ['', [Validators.required, Validators.minLength(4)]],
+      arquivoDestaque: ['', [Validators.required]],
+      idImovel: [[''], [Validators.required]],
+      url: [[''], [Validators.required]],
+    });
+  }
 
-  ngOnInit(): void {}
+  get getControl() {
+    return this.galeriaForm.controls;
+  }
 
   async onSubmit() {
-    if (this.form.idImovel) {
-      this.form.idImovel = this.separa(this.form.idImovel + '');
+    if (this.galeriaForm.value.idImovel) {
+      this.galeriaForm.value.idImovel = this.separa(this.galeriaForm.value.idImovel + '');
     }
-    if (this.form.url) {
-      this.form.url = this.separa(this.form.url + '');
-      this.form.arquivoDestaque = this.form.url?.[0];
+    if (this.galeriaForm.value.url) {
+      this.galeriaForm.value.url = this.separa(this.galeriaForm.value.url + '');
+      this.galeriaForm.value.arquivoDestaque = this.galeriaForm.value.url?.[0];
     }
-    console.log('form', this.form);
-    await this.accService.criarGaleria(this.form);
-    setTimeout(() => {
-      window.alert('Galeria Criada');
-      this.voltar();
-    }, 2000);
+    console.log(this.galeriaForm.value);
+    await this.gqlService
+      .criarGaleria(this.galeriaForm.value)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data?.createGaleria);
+          window.alert('Galeria criada');
+          this.voltar();
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
   }
 
   voltar() {

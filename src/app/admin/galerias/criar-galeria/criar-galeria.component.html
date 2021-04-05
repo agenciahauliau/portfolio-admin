@@ -1,47 +1,48 @@
-<div class="formulario">
-  <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
-    <div class="form-campo">
-      <label for="nomeGaleria"
-        >Nome da galeria de imagens: <strong style="color: red">*</strong></label
-      >
-      <input
-        type="text"
-        name="nomeGaleria"
-        [(ngModel)]="form.nomeGaleria"
-        #nomeGaleria="ngModel"
-        placeholder="Nome único"
-        value=""
-        required
-      />
+<form [formGroup]="galeriaForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-campo">
+    <label for="nomeGaleria"
+      >Nome da galeria de imagens: <strong style="color: red">*</strong></label
+    >
+    <input type="text" placeholder="Nome único" formControlName="nomeGaleria" />
+    <div
+      *ngIf="getControl.nomeGaleria.touched && getControl.nomeGaleria.invalid"
+      class="text-danger"
+    >
+      <div *ngIf="getControl.nomeGaleria.errors?.required">Nome da galeria é obrigatório</div>
+      <div *ngIf="getControl.nomeGaleria.errors?.minlength">Mínimo de 4 letras é obrigatório</div>
     </div>
-    <div class="form-campo">
-      <label for="url">Imagens: <strong style="color: red">*</strong></label>
-      <textarea
-        name="url"
-        cols="40"
-        rows="10"
-        [(ngModel)]="form.url"
-        #url="ngModel"
-        placeholder="URL das imagens aqui"
-        required
-      ></textarea>
-    </div>
-    <div class="form-campo">
-      <label for="idImovel"
-        >Imoveis atrelados a essa galeria: <strong style="color: red">*</strong></label
-      >
-      <textarea
-        name="idImovel"
-        cols="40"
-        rows="10"
-        [(ngModel)]="form.idImovel"
-        #idImovel="ngModel"
-        placeholder="Por hora, insira os ID's dos imóveis aqui."
-        required
-      ></textarea>
-      <div>
-        <button type="submit">Enviar Dados</button>
+  </div>
+  <div class="form-campo">
+    <label for="url">Imagens: <strong style="color: red">*</strong></label>
+    <textarea
+      name="url"
+      cols="40"
+      rows="10"
+      formControlName="url"
+      placeholder="URL das imagens aqui"
+    ></textarea>
+    <div *ngIf="getControl.url.touched && getControl.url.invalid" class="text-danger">
+      <div *ngIf="getControl.url.errors?.required">
+        Pelo menos uma imagem é obrigatória adicionar.
       </div>
     </div>
-  </form>
-</div>
+  </div>
+  <div class="form-campo">
+    <label for="idImovel"
+      >Imoveis atrelados a essa galeria: <strong style="color: red">*</strong></label
+    >
+    <textarea
+      name="idImovel"
+      cols="40"
+      rows="10"
+      formControlName="idImovel"
+      placeholder="Por hora, insira os ID's dos imóveis aqui."
+    ></textarea>
+    <div *ngIf="getControl.idImovel.touched && getControl.idImovel.invalid" class="text-danger">
+      <div *ngIf="getControl.idImovel.errors?.required">Name is required.</div>
+    </div>
+    <div>
+      <button [disabled]="!galeriaForm.valid" type="submit">Enviar Dados</button>
+    </div>
+  </div>
+</form>
