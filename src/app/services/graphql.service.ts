@@ -33,24 +33,13 @@ export class GraphQlService {
   }
 
   async criarImovel(dados: Imovel) {
-    return this.apollo
+    const result = this.apollo
       .mutate({
         mutation: GQL_CRIAR_IMOVEL,
         variables: dados,
       })
-      .subscribe(
-        ({ errors, data }: any) => {
-          if (errors) {
-            return console.error('Erro ao criar imóvel:', errors[0].message);
-          }
-          if (data) {
-            return console.log('Imovel criado', data);
-          }
-        },
-        (err) => {
-          console.error('Err: ', err);
-        },
-      );
+      .toPromise();
+    return result;
   }
 
   async atualizaImovel(id: any, dados: Imovel) {
@@ -101,26 +90,14 @@ export class GraphQlService {
   }
 
   async criarGaleria(dados: Galeria) {
-    return this.apollo
+    const result = this.apollo
       .mutate({
         mutation: GQL_CRIA_GALERIA,
         variables: dados,
         errorPolicy: 'all',
       })
-      .subscribe(
-        ({ data }: any) => {
-          if (data.errors) {
-            console.log('Erro ao criar galeria', data.errors);
-            return data.errors;
-          } else {
-            console.log('Galeria criada', data.imovel);
-            return data.imovel;
-          }
-        },
-        (error) => {
-          console.log('erro', error);
-        },
-      );
+      .toPromise();
+    return result;
   }
 
   async atualizaGaleria(id: any, dados: Galeria) {
