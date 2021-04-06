@@ -32,6 +32,7 @@
     "filepond": "^4.26.1",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "graphql": "^15.5.0",
+    "ngx-mask": "^11.1.5",
     "rxjs": "~6.6.7",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
