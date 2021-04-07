@@ -39,6 +39,9 @@ export interface Imovel {
   bairro?: string;
   cidade?: string;
   uf?: string;
+  statusLancamento?: string;
+  previsaoLancamento?: number;
+  imgPlantaCondominio?: [string];
   imagensAdicionais?: string[];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
