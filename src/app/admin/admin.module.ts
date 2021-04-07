@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -35,6 +36,7 @@ import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
 })
 export class AdminModule {}
