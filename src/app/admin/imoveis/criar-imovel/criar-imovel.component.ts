@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GraphQlService } from '../../../services/graphql.service';
 import { Imovel } from '../../../helpers/types';
 import { environment } from '../../../../environments/environment';
-import { UploadService } from 'src/app/services/upload.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { UploadService } from '../../../services/upload.service';
 
 @Component({
   selector: 'app-criar-imovel',
@@ -21,6 +22,12 @@ export class CriarImovelComponent implements OnInit {
   message: string[] = [];
   mainImg = '';
 
+  // Filtros e mascaras
+  prefixReal = 'R$';
+  sufixoM2 = ' m²';
+  maskCep = '00000-000';
+  maskM2 = '000.00';
+
   // Para Upload Imagens Adicionais
   selectedFilesImgsAdicionais?: FileList;
   progressInfosImgsAdicionais: any[] = [];
@@ -29,67 +36,110 @@ export class CriarImovelComponent implements OnInit {
 
   faPlusSquare = faPlusSquare;
   faHome = faHome;
-  form: Imovel = {
-    _id: '',
-    nomeImovel: '',
-    imagemPrincipal: '',
-    categoriaImovel: '',
-    jardins: false,
-    descricaoImovel: '',
-    tipoNegociacao: '',
-    statusImovel: '',
-    aceitaPermuta: false,
-    mobiliado: false,
-    valorImovel: 0,
-    valorEntrada: 0,
-    valorParcela: 0,
-    valorIPTU: 0,
-    valorCondominio: 0,
-    areaTotal: 0,
-    areaConstruida: 0,
-    andarImovel: 0,
-    qtdeQuarto: 0,
-    qtdeBanheiro: 0,
-    qtdeSuites: 0,
-    qtdeVagas: 0,
-    nomeConstrutora: '',
-    cep: 0,
-    logradouro: '',
-    numeroLogradouro: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    uf: '',
-    imagensAdicionais: [''],
-    comodidadesImovel: [''],
-    comodidadesCondominio: [''],
-  };
+
+  imovelForm!: Imovel & FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
     private router: Router,
   ) {}
 
-  ngOnInit(): void {}
-
-  onSubmit() {
-    if (this.form.comodidadesImovel) {
-      this.form.comodidadesImovel = this.separa(this.form.comodidadesImovel + '');
-    }
-    if (this.form.comodidadesCondominio) {
-      this.form.comodidadesCondominio = this.separa(this.form.comodidadesCondominio + '');
-    }
-    this.form.imagemPrincipal = this.mainImg;
-    this.form.imagensAdicionais = this.plusImgs;
-    this.gqlService.criarImovel(this.form);
-    setTimeout(() => {
-      window.alert('Imóvel Criado');
-      this.voltar();
-    }, 2000);
+  ngOnInit(): void {
+    this.imovelForm = this.formBuilder.group({
+      nomeImovel: ['', [Validators.required, Validators.minLength(4)]],
+      imagemPrincipal: [''],
+      categoriaImovel: ['', [Validators.required]],
+      jardins: [false],
+      descricaoImovel: ['', [Validators.required]],
+      tipoNegociacao: ['', [Validators.required]],
+      statusImovel: ['', [Validators.required]],
+      aceitaPermuta: [false],
+      mobiliado: [false],
+      valorImovel: ['', [Validators.required, Validators.min(0)]],
+      valorEntrada: ['', Validators.min(0)],
+      valorParcela: ['', Validators.min(0)],
+      valorIPTU: ['', [Validators.required, Validators.min(0)]],
+      valorCondominio: ['', Validators.min(0)],
+      areaTotal: ['', [Validators.required, Validators.min(0)]],
+      areaConstruida: ['', Validators.min(0)],
+      andarImovel: ['', Validators.min(0)],
+      qtdeQuarto: ['', Validators.min(0)],
+      qtdeBanheiro: ['', Validators.min(0)],
+      qtdeSuites: ['', Validators.min(0)],
+      qtdeVagas: ['', Validators.min(0)],
+      nomeConstrutora: ['', Validators.required],
+      cep: ['', [Validators.required, Validators.min(0o1001000), Validators.max(99999999)]],
+      logradouro: ['', Validators.required],
+      numeroLogradouro: [''],
+      complemento: [''],
+      bairro: ['', Validators.required],
+      cidade: ['', Validators.required],
+      uf: ['', Validators.required],
+      imagensAdicionais: [[]],
+      comodidadesImovel: [[]],
+      comodidadesCondominio: [[]],
+      statusLancamento: '',
+      previsaoLancamento: 0,
+      imgPlantaCondominio: [],
+    });
   }
 
-  //TODO: Verificar o pq que o array[0] não está sendo inserido no banco
+  get getControl() {
+    return this.imovelForm.controls;
+  }
+
+  async onSubmit() {
+    /* Tratamento de dados das comodidades de imóvel e de condomínio */
+    if (this.imovelForm.value.comodidadesImovel) {
+      this.imovelForm.value.comodidadesImovel = this.separa(
+        this.imovelForm.value.comodidadesImovel + '',
+      );
+    }
+    if (this.imovelForm.value.comodidadesCondominio) {
+      this.imovelForm.value.comodidadesCondominio = this.separa(
+        this.imovelForm.value.comodidadesCondominio + '',
+      );
+    }
+
+    /* Checagem de números */
+    if (!this.imovelForm.value.valorImovel) this.imovelForm.value.valorImovel = 0;
+    if (!this.imovelForm.value.valorEntrada) this.imovelForm.value.valorEntrada = 0;
+    if (!this.imovelForm.value.valorParcela) this.imovelForm.value.valorParcela = 0;
+    if (!this.imovelForm.value.valorIPTU) this.imovelForm.value.valorIPTU = 0;
+    if (!this.imovelForm.value.valorCondominio) this.imovelForm.value.valorCondominio = 0;
+    if (!this.imovelForm.value.areaTotal) this.imovelForm.value.areaTotal = 0;
+    if (!this.imovelForm.value.areaConstruida) this.imovelForm.value.areaConstruida = 0;
+    if (!this.imovelForm.value.andarImovel) this.imovelForm.value.andarImovel = 0;
+    if (!this.imovelForm.value.qtdeQuarto) this.imovelForm.value.qtdeQuarto = 0;
+    if (!this.imovelForm.value.qtdeBanheiro) this.imovelForm.value.qtdeBanheiro = 0;
+    if (!this.imovelForm.value.qtdeSuites) this.imovelForm.value.qtdeSuites = 0;
+    if (!this.imovelForm.value.qtdeVagas) this.imovelForm.value.qtdeVagas = 0;
+
+    /* Recebe as imagens */
+    this.imovelForm.value.imagemPrincipal = this.mainImg;
+    this.imovelForm.value.imagensAdicionais = this.plusImgs;
+    console.log(this.imovelForm);
+
+    /*     await this.gqlService
+      .criarImovel(this.imovelForm.value)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          window.alert('Imóvel criado');
+          this.voltar();
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      }); */
+  }
+
   separa(data: any) {
     return data.split(/\n+|\r+|,\s+/g).filter(Boolean);
   }

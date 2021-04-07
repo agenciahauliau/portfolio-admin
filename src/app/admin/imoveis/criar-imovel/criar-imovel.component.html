@@ -9,7 +9,7 @@
   </div>
   <div class="infoConteudoAdmin">
     <div class="formulario">
-      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm">
+      <form [formGroup]="imovelForm" (ngSubmit)="onSubmit()">
         <div class="coluna esquerdo">
           <div class="form-campo">
             <label for="descricaoImovel"
@@ -19,26 +19,37 @@
               name="descricaoImovel"
               cols="40"
               rows="10"
-              [(ngModel)]="form.descricaoImovel"
-              #descricaoImovel="ngModel"
+              formControlName="descricaoImovel"
               placeholder="Linda e ampla casa para morar com sua família"
-              required
             ></textarea>
+            <div
+              *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.descricaoImovel.errors?.required">Descrição é obrigatória</div>
+            </div>
           </div>
-
           <div class="form-campo">
             <label for="areaTotal"
               >Área total do imovel: <strong style="color: red">*</strong></label
             >
             <input
               type="number"
+              onmousewheel="return false;"
               name="areaTotal"
-              [(ngModel)]="form.areaTotal"
-              #areaTotal="ngModel"
               placeholder="332,56 m²"
-              value="0"
-              required
+              formControlName="areaTotal"
             />
+            <div
+              *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.areaTotal.errors?.required">Área total é obrigatória</div>
+              <div *ngIf="getControl.areaTotal.errors?.required">Campo obrigatório</div>
+              <div *ngIf="getControl.areaTotal.errors?.min">
+                A Área total do imóvel não pode ser menor que 0
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="areaConstruida"
@@ -46,24 +57,37 @@
             >
             <input
               type="number"
+              onmousewheel="return false;"
               name="areaConstruida"
-              [(ngModel)]="form.areaConstruida"
-              #areaConstruida="ngModel"
+              formControlName="areaConstruida"
               placeholder="230,56 m²"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.areaConstruida.touched && getControl.areaConstruida.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.areaConstruida.errors?.min">
+                A Área construída do imóvel não pode ser menor que 0
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
             <input
               type="number"
+              onmousewheel="return false;"
               name="andarImovel"
-              [(ngModel)]="form.andarImovel"
-              #andarImovel="ngModel"
+              formControlName="andarImovel"
               placeholder="0"
-              value="0"
             />
+            <div
+              *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.andarImovel.errors?.min">
+                O Andar do imóvel não pode ser menor do que 0. Se for casa, deixe 0.
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="qtdeQuarto"
@@ -71,13 +95,19 @@
             >
             <input
               type="number"
+              onmousewheel="return false;"
               name="qtdeQuarto"
-              [(ngModel)]="form.qtdeQuarto"
-              #qtdeQuarto="ngModel"
+              formControlName="qtdeQuarto"
               placeholder="3"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeQuarto.errors?.min">
+                A quantidade de quarto(s) não pode ser menor do que 0. Se for casa, deixe 0.
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="qtdeBanheiro"
@@ -85,92 +115,133 @@
             >
             <input
               type="number"
+              onmousewheel="return false;"
               name="qtdeBanheiro"
-              [(ngModel)]="form.qtdeBanheiro"
-              #qtdeBanheiro="ngModel"
+              formControlName="qtdeBanheiro"
               placeholder="2"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeBanheiro.errors?.min">
+                A quantidade de banheiro(s) não pode ser menor do que 0. Se for casa, deixe 0.
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="qtdeSuites">Quantidade de suítes: </label>
             <input
               type="number"
+              onmousewheel="return false;"
               name="qtdeSuites"
-              [(ngModel)]="form.qtdeSuites"
-              #qtdeSuites="ngModel"
+              formControlName="qtdeSuites"
               placeholder="1"
-              value="0"
             />
+            <div
+              *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeSuites.errors?.min">
+                A quantidade de suíte(s) não pode ser menor do que 0. Se for casa, deixe 0.
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="qtdeVagas">Quantidade de vagas: </label>
             <input
               type="number"
+              onmousewheel="return false;"
               name="qtdeVagas"
-              [(ngModel)]="form.qtdeVagas"
-              #qtdeVagas="ngModel"
+              formControlName="qtdeVagas"
               placeholder="1"
-              value="0"
             />
+            <div
+              *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeVagas.errors?.min">
+                A quantidade de vaga(s) não pode ser menor do que 0. Se for casa, deixe 0.
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="nomeConstrutora">Construtora: <strong style="color: red">*</strong></label>
             <input
               type="text"
               name="nomeConstrutora"
-              [(ngModel)]="form.nomeConstrutora"
-              #nomeConstrutora="ngModel"
+              formControlName="nomeConstrutora"
               placeholder="FGR Construtora"
-              value=""
-              required
             />
+            <div
+              *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.nomeConstrutora.errors?.required">
+                Nome da construtora é obrigatório
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="cep">CEP: <strong style="color: red">*</strong></label>
             <input
-              type="number"
+              type="text"
+              onmousewheel="return false;"
               name="cep"
-              [(ngModel)]="form.cep"
-              #cep="ngModel"
+              formControlName="cep"
               placeholder="74000-000"
-              value="0"
-              required
+              [mask]="this.maskCep"
             />
+            <div *ngIf="getControl.cep.touched && getControl.cep.invalid" class="text-danger">
+              <div *ngIf="getControl.cep.errors?.required">Obrigatório inserir CEP</div>
+              <div *ngIf="getControl.cep.errors?.min">
+                CEP inválido, está faltando número. Menor CEP válido: 01001-000
+              </div>
+              <div *ngIf="getControl.cep.errors?.max">
+                CEP inválido, composição maior que 8 dígitos
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="logradouro">Endereço: <strong style="color: red">*</strong></label>
             <input
               type="text"
               name="logradouro"
-              [(ngModel)]="form.logradouro"
-              #logradouro="ngModel"
+              formControlName="logradouro"
               placeholder="Avenida dos Tupinambás"
-              value=""
-              required
             />
+            <div
+              *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.logradouro.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="numeroLogradouro">Número: </label>
             <input
               type="text"
               name="numeroLogradouro"
-              [(ngModel)]="form.numeroLogradouro"
-              #numeroLogradouro="ngModel"
+              formControlName="numeroLogradouro"
               placeholder="456"
-              value="0"
             />
+            <div
+              *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.numeroLogradouro.errors?.min">
+                É obrigatório que tenha um número, e é obrigatório que não seja menor que 0. Se caso
+                não tiver número, deixe apenas o 0(zero);
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="complemento">Complemento: </label>
             <input
               type="text"
               name="complemento"
-              [(ngModel)]="form.complemento"
-              #complemento="ngModel"
+              formControlName="complemento"
               placeholder="Quadra 17, Lote 13"
-              value=""
             />
           </div>
           <div class="form-campo">
@@ -178,36 +249,26 @@
             <input
               type="text"
               name="bairro"
-              [(ngModel)]="form.bairro"
-              #bairro="ngModel"
+              formControlName="bairro"
               placeholder="Bairro Tesouro Perdido"
-              value=""
-              required
             />
+            <div *ngIf="getControl.bairro.touched && getControl.bairro.invalid" class="text-danger">
+              <div *ngIf="getControl.bairro.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="cidade">Cidade: <strong style="color: red">*</strong></label>
-            <input
-              type="text"
-              name="cidade"
-              [(ngModel)]="form.cidade"
-              #cidade="ngModel"
-              placeholder="Goiânia"
-              value=""
-              required
-            />
+            <input type="text" name="cidade" formControlName="cidade" placeholder="Goiânia" />
+            <div *ngIf="getControl.cidade.touched && getControl.cidade.invalid" class="text-danger">
+              <div *ngIf="getControl.cidade.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="uf">Estado: <strong style="color: red">*</strong></label>
-            <input
-              type="text"
-              name="uf"
-              [(ngModel)]="form.uf"
-              #uf="ngModel"
-              placeholder="GO"
-              value=""
-              required
-            />
+            <input type="text" name="uf" formControlName="uf" placeholder="GO" value="" required />
+            <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger">
+              <div *ngIf="getControl.uf.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="comodidadesImovel">Comodidades do imóvel: </label>
@@ -216,8 +277,7 @@
               rows="10"
               type="text"
               name="comodidadesImovel"
-              [(ngModel)]="form.comodidadesImovel"
-              #comodidadesImovel="ngModel"
+              formControlName="comodidadesImovel"
               placeholder="Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
             ></textarea>
           </div>
@@ -228,8 +288,7 @@
               rows="10"
               type="text"
               name="comodidadesCondominio"
-              [(ngModel)]="form.comodidadesCondominio"
-              #comodidadesCondominio="ngModel"
+              formControlName="comodidadesCondominio"
               placeholder="Segurança 24 horas, Posto de emergência privado"
             ></textarea>
           </div>
@@ -263,23 +322,16 @@
                 <img src="{{ mainImg }}" alt="" width="300px" srcset="{{mainImg}}" />
               </div>
             </div>
-            <!-- <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
-              <ul *ngFor="let msg of message; let i = index">
-                <li>{{ msg }}</li>
-              </ul>
-            </div> -->
           </div>
           <div class="form-campo">
             <label for="nomeImovel">Nome do Imóvel: <strong style="color: red">*</strong></label>
-            <input
-              type="text"
-              name="nomeImovel"
-              [(ngModel)]="form.nomeImovel"
-              #nomeImovel="ngModel"
-              placeholder=""
-              value=""
-              required
-            />
+            <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="" />
+            <div
+              *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.nomeImovel.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="categoriaImovel"
@@ -288,11 +340,8 @@
             <input
               list="categoriaImovel"
               name="categoriaImovel"
-              [(ngModel)]="form.categoriaImovel"
-              #categoriaImovel="ngModel"
+              formControlName="categoriaImovel"
               placeholder="Casa de condomínio"
-              value=""
-              required
             />
             <datalist id="categoriaImovel">
               <option value="Sala Comercial">Sala Comercial</option>
@@ -305,17 +354,16 @@
               <option value="Casa em Condomínio">Casa em Condomínio</option>
               <option value="Lote em Condomínio">Lote em Condomínio</option>
             </datalist>
+            <div
+              *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.categoriaImovel.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
-
           <div class="form-campo">
             <label for="jardins">É um empreendimento Jardins? </label>
-            <input
-              type="checkbox"
-              name="jardins"
-              [(ngModel)]="form.jardins"
-              #jardin="ngModel"
-              value="false"
-            />
+            <input type="checkbox" name="jardins" formControlName="jardins" />
           </div>
 
           <div class="form-campo">
@@ -325,17 +373,20 @@
             <input
               list="tipoNegociacao"
               name="tipoNegociacao"
-              [(ngModel)]="form.tipoNegociacao"
-              #tipoNegociacao="ngModel"
+              formControlName="tipoNegociacao"
               placeholder="Venda"
-              value=""
-              required
             />
             <datalist id="tipoNegociacao">
-              <option value="Alugar">Alugar</option>
-              <option value="Venda">Vender</option>
-              <option value="Lançamento">Lançamento</option>
+              <option value="Alugar">Para Alugar</option>
+              <option value="Venda">Para Vender</option>
+              <option value="Lançamento">Lançamento Imobiliário</option>
             </datalist>
+            <div
+              *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.tipoNegociacao.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
 
           <div class="form-campo">
@@ -344,66 +395,79 @@
               list="statusImovel"
               type="text"
               name="statusImovel"
-              [(ngModel)]="form.statusImovel"
-              #statusImovel="ngModel"
+              formControlName="statusImovel"
               placeholder="Pronto para morar"
-              value=""
-              required
             />
+            <datalist id="statusImovel">
+              <option value="Pronto para Morar">Pronto para Morar</option>
+              <option value="Entrega em Breve">Entrega em Breve</option>
+              <option value="Pronto para Construir">Pronto para Construir</option>
+              <option value="Lançamento">Lançamento</option>
+              <option value="Entregue">Entregue</option>
+            </datalist>
+            <div
+              *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.statusImovel.errors?.required">Campo obrigatório</div>
+            </div>
           </div>
-
-          <datalist id="statusImovel">
-            <option value="Pronto para Morar">Pronto para Morar</option>
-            <option value="Entrega em Breve">Entrega em Breve</option>
-            <option value="Lançamento">Lançamento</option>
-          </datalist>
 
           <div class="form-campo">
             <label for="aceitaPermuta">Aceita permuta? </label>
             <input
               type="checkbox"
               name="aceitaPermuta"
-              [(ngModel)]="form.aceitaPermuta"
-              #aceitaPermuta="ngModel"
+              formControlName="aceitaPermuta"
               value="false"
             />
           </div>
 
           <div class="form-campo">
             <label for="mobiliado">Mobiliado? </label>
-            <input
-              type="checkbox"
-              name="mobiliado"
-              [(ngModel)]="form.mobiliado"
-              #mobiliado="ngModel"
-              value="false"
-            />
+            <input type="checkbox" name="mobiliado" formControlName="mobiliado" value="false" />
           </div>
 
           <div class="form-campo">
             <label for="valorImovel">Valor do imóvel: <strong style="color: red">*</strong></label>
             <input
               type="number"
+              onmousewheel="return false;"
               name="valorImovel"
-              [(ngModel)]="form.valorImovel"
-              #valorImovel="ngModel"
+              formControlName="valorImovel"
               placeholder="R$ 1.500.000,00"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorImovel.errors?.required">
+                Valor do imóvel é obrigatório
+              </div>
+              <div *ngIf="getControl.valorImovel.errors?.min">
+                Valor do imóvel não pode ser menor do que R$ 0,00
+              </div>
+            </div>
           </div>
 
           <div class="form-campo">
             <label for="valorIPTU">Valor do IPTU: <strong style="color: red">*</strong></label>
             <input
               type="number"
+              onmousewheel="return false;"
               name="valorIPTU"
-              [(ngModel)]="form.valorIPTU"
-              #valorIPTU="ngModel"
+              formControlName="valorIPTU"
               placeholder="R$ 400,45"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorIPTU.errors?.required">Valor do IPTU é obrigatório</div>
+              <div *ngIf="getControl.valorIPTU.errors?.min">
+                Valor do IPTU não pode ser menor do que R$ 0,00
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="valorCondominio"
@@ -411,13 +475,19 @@
             >
             <input
               type="number"
+              onmousewheel="return false;"
               name="valorCondominio"
-              [(ngModel)]="form.valorCondominio"
-              #valorCondominio="ngModel"
+              formControlName="valorCondominio"
               placeholder="R$ 1.500,13"
-              value="0"
-              required
             />
+            <div
+              *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorCondominio.errors?.min">
+                Valor do condomínio não pode ser menor do que R$ 0,00
+              </div>
+            </div>
           </div>
           <div class="form-campo">
             <label for="inagensAdicionais"
@@ -429,7 +499,6 @@
             <div>
               <button
                 type="button"
-                class=""
                 [disabled]="!selectedFilesImgsAdicionais"
                 (click)="uploadFilesImagensAdicionais()"
               >
@@ -451,21 +520,17 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div *ngIf="plusImgs[0] != ''">
               <div>Imagens já adicionadas</div>
               <ul>
                 <li *ngFor="let plusImg of plusImgs">
                   <img src="{{ plusImg }}" alt="" width="300px" srcset="{{plusImg}}" />
                 </li>
               </ul>
-              <!-- <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
-              <ul *ngFor="let msg of message; let i = index">
-                <li>{{ msg }}</li>
-              </ul>
-            </div> -->
             </div>
           </div>
           <div>
+            <!-- <button [disabled]="!imovelForm.valid" type="submit">Enviar Dados</button> -->
             <button type="submit">Enviar Dados</button>
           </div>
         </div>
