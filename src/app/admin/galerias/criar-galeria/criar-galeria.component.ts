@@ -21,10 +21,11 @@ export class CriarGaleriaComponent implements OnInit {
   ngOnInit(): void {
     this.galeriaForm = this.formBuilder.group({
       nomeGaleria: ['', [Validators.required, Validators.minLength(4)]],
-      arquivoDestaque: ['', [Validators.required]],
-      idImovel: [[''], [Validators.required]],
-      url: [[''], [Validators.required]],
+      arquivoDestaque: [],
+      idImovel: [[], [Validators.required]],
+      url: [[], [Validators.required]],
     });
+    console.log(this.galeriaForm);
   }
 
   get getControl() {

@@ -1,4 +1,4 @@
-<form [formGroup]="galeriaForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="galeriaForm" (ngSubmit)="onSubmit()">
   <div class="form-campo">
     <label for="nomeGaleria"
       >Nome da galeria de imagens: <strong style="color: red">*</strong></label
@@ -42,7 +42,7 @@
       <div *ngIf="getControl.idImovel.errors?.required">Name is required.</div>
     </div>
     <div>
-      <button [disabled]="!galeriaForm.valid" type="submit">Enviar Dados</button>
+      <button type="submit" [disabled]="!galeriaForm.valid">Enviar Dados</button>
     </div>
   </div>
 </form>
