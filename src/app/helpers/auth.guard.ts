@@ -46,7 +46,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   async checkLogin(url: string): Promise<boolean> {
     await this.check();
     const token = this.tokenService.getToken();
-    console.log(this.resultado);
     if (token && this.resultado) {
       return true;
     }
