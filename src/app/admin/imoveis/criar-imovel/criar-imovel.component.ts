@@ -21,6 +21,7 @@ export class CriarImovelComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+  imgPreview: any;
 
   // Para Upload de Planta
   selectedPlantaFiles?: FileList;
@@ -169,6 +170,19 @@ export class CriarImovelComponent implements OnInit {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+
+    /* Previsualização da imagem */
+    let mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      alert('Campo somente para imagens.');
+      return;
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (e) => {
+      this.imgPreview = reader.result;
+    };
   }
 
   /* Imagem principal */

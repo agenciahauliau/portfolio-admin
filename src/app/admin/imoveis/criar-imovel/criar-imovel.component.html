@@ -300,6 +300,7 @@
             >
             <div>
               <input type="file" (change)="selectFiles($event)" />
+              <img [src]="imgPreview" width="300px" *ngIf="imgPreview" />
             </div>
             <div>
               <button type="button" class="" [disabled]="!selectedFiles" (click)="uploadFiles()">
