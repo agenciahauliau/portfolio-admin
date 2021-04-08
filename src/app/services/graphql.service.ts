@@ -11,6 +11,7 @@ import {
   GQL_ATUALIZA_GALERIA,
   GQL_LOGIN,
   GQL_ME,
+  GQL_LISTAR_IMOVEIS,
 } from '../graphql/graphql';
 import { Galeria, Imovel, User } from '../helpers/types';
 @Injectable({
@@ -36,6 +37,7 @@ export class GraphQlService {
     const result = this.apollo
       .mutate({
         mutation: GQL_CRIAR_IMOVEL,
+        refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
         variables: dados,
       })
       .toPromise();
@@ -46,6 +48,7 @@ export class GraphQlService {
     return this.apollo
       .mutate({
         mutation: GQL_ATUALIZA_IMOVEL,
+        refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
         variables: {
           _id: id,
           dados: dados,
@@ -72,6 +75,7 @@ export class GraphQlService {
     return this.apollo
       .mutate({
         mutation: GQL_DELETA_IMOVEL,
+        refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
         variables: { _id: id },
       })
       .subscribe(
