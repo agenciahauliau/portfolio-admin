@@ -28,7 +28,17 @@
             <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
             <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
-            <td>{{ imovel.statusLancamento }}</td>
+            <td>
+              <select
+                name="statusLancamento"
+                (change)="atualizaStatus(imovel._id, $event)"
+                [value]="imovel.statusLancamento"
+              >
+                <option value="pendente">Pendente</option>
+                <option value="reprovado">Não aprovado</option>
+                <option value="aprovado">Aprovado</option>
+              </select>
+            </td>
             <td>
               <button (click)="goToImovel(imovel._id)">
                 <fa-icon [icon]="faEye" size="2x"></fa-icon>
