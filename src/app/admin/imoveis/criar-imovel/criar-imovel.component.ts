@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -22,6 +22,12 @@ export class CriarImovelComponent implements OnInit {
   message: string[] = [];
   mainImg = '';
 
+  // Para Upload de Planta
+  selectedPlantaFiles?: FileList;
+  progressInfosPlantaFiles: any[] = [];
+  messagePlantaFiles: string[] = [];
+  plantaFiles = [''];
+
   // Filtros e mascaras
   prefixReal = 'R$';
   sufixoM2 = ' m²';
@@ -36,6 +42,7 @@ export class CriarImovelComponent implements OnInit {
 
   faPlusSquare = faPlusSquare;
   faHome = faHome;
+  faTrash = faTrash;
 
   imovelForm!: Imovel & FormGroup;
 
@@ -80,7 +87,7 @@ export class CriarImovelComponent implements OnInit {
       imagensAdicionais: [[]],
       comodidadesImovel: [[]],
       comodidadesCondominio: [[]],
-      statusLancamento: '',
+      statusLancamento: 'pendente',
       previsaoLancamento: 0,
       imgPlantaCondominio: [],
     });
@@ -120,9 +127,10 @@ export class CriarImovelComponent implements OnInit {
     /* Recebe as imagens */
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imagensAdicionais = this.plusImgs;
-    console.log(this.imovelForm);
+    this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
+    this.imovelForm.value.previsaoLancamento = Date.parse(this.imovelForm.value.previsaoLancamento);
 
-    /*     await this.gqlService
+    await this.gqlService
       .criarImovel(this.imovelForm.value)
       .then((res: any) => {
         if (res.data) {
@@ -137,11 +145,20 @@ export class CriarImovelComponent implements OnInit {
       })
       .catch((err) => {
         console.log('err', err);
-      }); */
+      });
   }
 
   separa(data: any) {
-    return data.split(/\n+|\r+|,\s+/g).filter(Boolean);
+    return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
+  }
+
+  limpaArrayImgs() {
+    this.mainImg = '';
+    this.plantaFiles = [''];
+    this.plusImgs = [''];
+    this.progressInfos = [];
+    this.progressInfosPlantaFiles = [];
+    this.progressInfosImgsAdicionais = [];
   }
 
   voltar() {
@@ -154,6 +171,7 @@ export class CriarImovelComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
+  /* Imagem principal */
   uploadFiles(): void {
     this.message = [];
     if (this.selectedFiles) {
@@ -164,7 +182,7 @@ export class CriarImovelComponent implements OnInit {
   }
 
   upload(idx: number, file: File): void {
-    this.progressInfos[idx] = { value: 0, fileName: file.name };
+    this.progressInfos[idx] = { value: 0, fileName: file.name, url: '' };
     if (file) {
       this.uploadService.upload(file).subscribe(
         (event: any) => {
@@ -172,6 +190,7 @@ export class CriarImovelComponent implements OnInit {
             this.progressInfos[idx].value = Math.round((100 * event.loaded) / event.total);
           } else if (event instanceof HttpResponse) {
             const msg = 'Arquivo enviado com sucesso ' + file.name;
+            this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
           }
@@ -183,6 +202,26 @@ export class CriarImovelComponent implements OnInit {
         },
       );
     }
+  }
+
+  deletaImgPrincipal(imgUrl: string): void {
+    this.uploadService
+      .deletaArquivo(imgUrl)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          this.message = [];
+          this.progressInfos = [];
+          this.mainImg = '';
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
   }
 
   /* Imagens adicionais */
@@ -202,7 +241,7 @@ export class CriarImovelComponent implements OnInit {
   }
 
   uploadImagensAdicionais(idx: number, file: File): void {
-    this.progressInfosImgsAdicionais[idx] = { value: 0, fileName: file.name };
+    this.progressInfosImgsAdicionais[idx] = { value: 0, fileName: file.name, url: '' };
     if (file) {
       this.uploadService.upload(file).subscribe(
         (event: any) => {
@@ -213,9 +252,9 @@ export class CriarImovelComponent implements OnInit {
           } else if (event instanceof HttpResponse) {
             const msg = 'Arquivo enviado com sucesso ' + file.name;
             this.messageImgAdicionais.push(msg);
+            this.progressInfosImgsAdicionais[idx].url = this.url + event.body[0];
             this.plusImgs.push(this.url + event.body[0]);
             this.plusImgs = this.plusImgs.filter((x) => x.trim() != '');
-            console.log(this.plusImgs);
           }
         },
         (error: any) => {
@@ -224,6 +263,99 @@ export class CriarImovelComponent implements OnInit {
           this.messageImgAdicionais.push(msg);
         },
       );
+    }
+  }
+
+  deletaImagensAdicionais(imgUrl: string): void {
+    this.uploadService
+      .deletaArquivo(imgUrl)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          this.removeLinkDoArray(this.plusImgs, imgUrl);
+          this.removeLinkDoArray(this.progressInfosImgsAdicionais, imgUrl);
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  }
+
+  /* Planta imagens */
+  selectFilesPlantaFiles(event: any): void {
+    this.messagePlantaFiles = [];
+    this.progressInfosPlantaFiles = [];
+    this.selectedPlantaFiles = event.target.files;
+  }
+
+  uploadFilesPlantaFiles(): void {
+    this.message = [];
+    if (this.selectedPlantaFiles) {
+      for (let i = 0; i < this.selectedPlantaFiles.length; i++) {
+        this.uploadImgPlantas(i, this.selectedPlantaFiles[i]);
+      }
+    }
+  }
+
+  uploadImgPlantas(idx: number, file: File): void {
+    this.progressInfosPlantaFiles[idx] = { value: 0, fileName: file.name, url: '' };
+    if (file) {
+      this.uploadService.upload(file).subscribe(
+        (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfosPlantaFiles[idx].value = Math.round(
+              (100 * event.loaded) / event.total,
+            );
+          } else if (event instanceof HttpResponse) {
+            const msg = 'Arquivo enviado com sucesso ' + file.name;
+            this.messagePlantaFiles.push(msg);
+            this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
+            this.plantaFiles.push(this.url + event.body[0]);
+            this.plantaFiles = this.plantaFiles.filter((x) => x.trim() != '');
+          }
+        },
+        (error: any) => {
+          this.progressInfosPlantaFiles[idx].value = 0;
+          const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
+          this.messagePlantaFiles.push(msg);
+        },
+      );
+    }
+  }
+
+  deletaImagensPlantas(imgUrl: string): void {
+    this.uploadService
+      .deletaArquivo(imgUrl)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          this.removeLinkDoArray(this.plantaFiles, imgUrl);
+          this.removeLinkDoArray(this.progressInfosPlantaFiles, imgUrl);
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  }
+
+  removeLinkDoArray(array: any, url: string) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] === url) {
+        array.splice(i, 1);
+        i--;
+      }
+      if (array[i]?.url === url) {
+        array.splice(i, 1);
+        i--;
+      }
     }
   }
 }
