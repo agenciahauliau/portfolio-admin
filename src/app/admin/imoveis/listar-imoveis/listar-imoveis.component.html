@@ -15,9 +15,10 @@
           <th>Categoria</th>
           <th>Valor</th>
           <th>Criado</th>
-          <th>Atualização</th>
+          <th>Ultima atualização</th>
+          <th>Status</th>
           <th></th>
-          <th></th>
+          <th>Ações</th>
           <th></th>
         </thead>
         <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
@@ -27,6 +28,7 @@
             <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
             <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>{{ imovel.statusLancamento }}</td>
             <td>
               <button (click)="goToImovel(imovel._id)">
                 <fa-icon [icon]="faEye" size="2x"></fa-icon>
