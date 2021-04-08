@@ -45,29 +45,18 @@ export class GraphQlService {
   }
 
   async atualizaImovel(id: any, dados: Imovel) {
-    return this.apollo
+    console.log(dados);
+    const result = this.apollo
       .mutate({
         mutation: GQL_ATUALIZA_IMOVEL,
         refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
         variables: {
           _id: id,
-          dados: dados,
+          ...dados,
         },
-        errorPolicy: 'all',
       })
-      .subscribe(
-        ({ errors, data }: any) => {
-          if (errors) {
-            return console.error('Erro ao atualizar imóvel:', errors[0].message);
-          }
-          if (data) {
-            return console.log('Imovel atualizado', data);
-          }
-        },
-        (err) => {
-          console.error('Err: ', err);
-        },
-      );
+      .toPromise();
+    return result;
   }
 
   async deletarImovel(id: string) {
