@@ -152,7 +152,7 @@ export const GQL_CRIAR_IMOVEL = gql`
     $qtdeBanheiro: Int!
     $qtdeSuites: Int!
     $qtdeVagas: Int!
-    $previsaoLancamento: Int
+    $previsaoLancamento: Float
     $nomeConstrutora: String!
     $bairro: String!
     $logradouro: String!
