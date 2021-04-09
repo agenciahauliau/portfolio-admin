@@ -129,7 +129,12 @@ export class CriarImovelComponent implements OnInit {
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imagensAdicionais = this.plusImgs;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
-    this.imovelForm.value.previsaoLancamento = Date.parse(this.imovelForm.value.previsaoLancamento);
+
+    this.imovelForm.value.previsaoLancamento != 0
+      ? (this.imovelForm.value.previsaoLancamento = Date.parse(
+          this.imovelForm.value.previsaoLancamento,
+        ))
+      : (this.imovelForm.value.previsaoLancamento = 0);
 
     await this.gqlService
       .criarImovel(this.imovelForm.value)
