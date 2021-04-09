@@ -45,7 +45,6 @@ export class GraphQlService {
   }
 
   async atualizaImovel(id: any, dados: Imovel) {
-    console.log(dados);
     const result = this.apollo
       .mutate({
         mutation: GQL_ATUALIZA_IMOVEL,
