@@ -42,7 +42,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-------------------------------------------------------
           ---- Categoria Imóveis ----------------------------------
           --------------------------------------------------------->
@@ -69,21 +69,23 @@
               </select>
             </div>
 
-
-          <!-------------------------------------------------------
+            <!-------------------------------------------------------
           ---- Botão Jardins --------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo checkbox Jardins" *ngIf="
-            getControl.categoriaImovel.value === 'Casa em Condomínio' || 
-            getControl.categoriaImovel.value === 'Lote em Condomínio'"
+            <div
+              class="form-campo checkbox Jardins"
+              *ngIf="
+                getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+                getControl.categoriaImovel.value === 'Lote em Condomínio'
+              "
             >
               <input type="checkbox" name="jardins" formControlName="jardins" />
               <label for="jardins">Jardins </label>
             </div>
           </div>
 
-           <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Tipo de negociação ----------------------------------
           --------------------------------------------------------->
 
@@ -107,10 +109,9 @@
 
           <div class="form-campo">
             <div
-            *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid"
-            class="text-danger"
-          >
-          </div>
+              *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="statusImovel">Status do imóvel <b>*</b></label>
             <select name="statusImovel" formControlName="statusImovel">
               <option value="">Selecione...</option>
@@ -120,30 +121,31 @@
               <option value="Lançamento">Lançamento</option>
               <option value="Entregue">Entregue</option>
             </select>
-           
           </div>
 
-          <!-------------------------------------------------------
+          <div class="permutaEmobiliado">
+            <!-------------------------------------------------------
           ---- Permuta --------------------------------------------
           --------------------------------------------------------->
 
-          <div class="form-campo checkbox">
-            <input
-              type="checkbox"
-              name="aceitaPermuta"
-              formControlName="aceitaPermuta"
-              value="false"
-            />
-            <label for="aceitaPermuta">Aceita permuta? </label>
-          </div>
+            <div class="form-campo checkbox">
+              <input
+                type="checkbox"
+                name="aceitaPermuta"
+                formControlName="aceitaPermuta"
+                value="false"
+              />
+              <label for="aceitaPermuta">Aceita permuta? </label>
+            </div>
 
-          <!-------------------------------------------------------
+            <!-------------------------------------------------------
           ---- Mobiliado --------------------------------------------
           --------------------------------------------------------->
 
-          <div class="form-campo checkbox">
-            <input type="checkbox" name="mobiliado" formControlName="mobiliado" value="false" />
-            <label for="mobiliado">Mobiliado? </label>
+            <div class="form-campo checkbox">
+              <input type="checkbox" name="mobiliado" formControlName="mobiliado" value="false" />
+              <label for="mobiliado">Mobiliado? </label>
+            </div>
           </div>
 
           <!-------------------------------------------------------
@@ -151,6 +153,14 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
+            <div
+              *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorImovel.errors?.min">
+                Valor do imóvel não pode ser menor do que R$ 0,00
+              </div>
+            </div>
             <label for="valorImovel">Valor do imóvel: <b>*</b></label>
             <input
               type="number"
@@ -159,24 +169,21 @@
               formControlName="valorImovel"
               placeholder="R$ 1.500.000,00"
             />
-            <div
-              *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.valorImovel.errors?.required">
-                Valor do imóvel é obrigatório
-              </div>
-              <div *ngIf="getControl.valorImovel.errors?.min">
-                Valor do imóvel não pode ser menor do que R$ 0,00
-              </div>
-            </div>
           </div>
 
-           <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Valor ITPU --------------------------------------------
           --------------------------------------------------------->
 
           <div class="form-campo">
+            <div
+              *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorIPTU.errors?.min">
+                Valor do IPTU não pode ser menor do que R$ 0,00
+              </div>
+            </div>
             <label for="valorIPTU">Valor do IPTU: <b>*</b></label>
             <input
               type="number"
@@ -185,22 +192,21 @@
               formControlName="valorIPTU"
               placeholder="R$ 400,45"
             />
-            <div
-              *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.valorIPTU.errors?.required">Valor do IPTU é obrigatório</div>
-              <div *ngIf="getControl.valorIPTU.errors?.min">
-                Valor do IPTU não pode ser menor do que R$ 0,00
-              </div>
-            </div>
           </div>
 
-           <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Área Total --------------------------------------------
           --------------------------------------------------------->
 
           <div class="form-campo">
+            <div
+              *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.areaTotal.errors?.min">
+                A Área total do imóvel não pode ser menor que 0
+              </div>
+            </div>
             <label for="areaTotal">Área total do imovel: <b>*</b></label>
             <input
               type="number"
@@ -209,24 +215,17 @@
               placeholder="332,56 m²"
               formControlName="areaTotal"
             />
-            <div
-              *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.areaTotal.errors?.required">Área total é obrigatória</div>
-              <div *ngIf="getControl.areaTotal.errors?.required">Campo obrigatório</div>
-              <div *ngIf="getControl.areaTotal.errors?.min">
-                A Área total do imóvel não pode ser menor que 0
-              </div>
-            </div>
           </div>
         </div>
         <div class="coluna esquerdo">
-
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Descrição --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
+            <div
+              *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="descricaoImovel">Descrição do Imóvel: <b>*</b></label>
             <textarea
               name="descricaoImovel"
@@ -235,15 +234,9 @@
               formControlName="descricaoImovel"
               placeholder="Linda e ampla casa para morar com sua família"
             ></textarea>
-            <div
-              *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.descricaoImovel.errors?.required">Descrição é obrigatória</div>
-            </div>
           </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Galeria --------------------------------------------
           --------------------------------------------------------->
 
@@ -281,11 +274,20 @@
               </div>
             </div>
           </div>
-           <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Nome Imóvel --------------------------------------------
           --------------------------------------------------------->
 
-          <div class="form-campo">
+          <div
+            class="form-campo"
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid"
               class="text-danger"
@@ -294,7 +296,7 @@
             <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="" />
           </div>
 
-  <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Plantas --------------------------------------------
           --------------------------------------------------------->
 
@@ -337,26 +339,33 @@
               </div>
             </div>
           </div>
-  <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Previsão do lançamento --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
+          >
             <label for="previsaoLancamento">Previsão do lançamento</label>
             <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento" />
           </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Valor do condomínio --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
-            <label for="valorCondominio">Valor do condomínio: <b>*</b></label>
-            <input
-              type="number"
-              onmousewheel="return false;"
-              name="valorCondominio"
-              formControlName="valorCondominio"
-              placeholder="R$ 1.500,13"
-            />
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid"
               class="text-danger"
@@ -365,11 +374,29 @@
                 Valor do condomínio não pode ser menor do que R$ 0,00
               </div>
             </div>
+            <label for="valorCondominio">Valor do condomínio: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorCondominio"
+              formControlName="valorCondominio"
+              placeholder="R$ 1.500,13"
+            />
           </div>
           <!-------------------------------------------------------
           ---- Área Construída --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio'
+            "
+          >
             <label for="areaConstruida">Área construída: <b>*</b></label>
             <input
               type="number"
@@ -391,7 +418,18 @@
           <!-------------------------------------------------------
           ---- Andar do imóvel --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo" *ngIf="getControl.categoriaImovel.value === 'Cobertura' || getControl.categoriaImovel.value === 'Apartamento Padrão'">
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão'
+            "
+          >
+            <div
+              *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
             <input
               type="number"
@@ -400,28 +438,21 @@
               formControlName="andarImovel"
               placeholder="0"
             />
-            <div
-              *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.andarImovel.errors?.min">
-                O Andar do imóvel não pode ser menor do que 0. Se for casa, deixe 0.
-              </div>
-            </div>
           </div>
 
           <!-------------------------------------------------------
           ---- Quartos --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
-            <label for="qtdeQuarto">Quantidade de quartos: <b>*</b></label>
-            <input
-              type="number"
-              onmousewheel="return false;"
-              name="qtdeQuarto"
-              formControlName="qtdeQuarto"
-              placeholder="3"
-            />
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid"
               class="text-danger"
@@ -430,20 +461,30 @@
                 A quantidade de quarto(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
             </div>
+            <label for="qtdeQuarto">Quantidade de quartos: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeQuarto"
+              formControlName="qtdeQuarto"
+              placeholder="3"
+            />
           </div>
 
           <!-------------------------------------------------------
           ---- Banheiros --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
-            <label for="qtdeBanheiro">Quantidade de banheiros: <b>*</b></label>
-            <input
-              type="number"
-              onmousewheel="return false;"
-              name="qtdeBanheiro"
-              formControlName="qtdeBanheiro"
-              placeholder="2"
-            />
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid"
               class="text-danger"
@@ -452,20 +493,29 @@
                 A quantidade de banheiro(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
             </div>
+            <label for="qtdeBanheiro">Quantidade de banheiros: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeBanheiro"
+              formControlName="qtdeBanheiro"
+              placeholder="2"
+            />
           </div>
 
           <!-------------------------------------------------------
           ---- Suítes --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
-            <label for="qtdeSuites">Quantidade de suítes: </label>
-            <input
-              type="number"
-              onmousewheel="return false;"
-              name="qtdeSuites"
-              formControlName="qtdeSuites"
-              placeholder="1"
-            />
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid"
               class="text-danger"
@@ -474,20 +524,30 @@
                 A quantidade de suíte(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
             </div>
+            <label for="qtdeSuites">Quantidade de suítes: </label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeSuites"
+              formControlName="qtdeSuites"
+              placeholder="1"
+            />
           </div>
 
           <!-------------------------------------------------------
           ---- Quantidade de vagas --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
-            <label for="qtdeVagas">Quantidade de vagas: </label>
-            <input
-              type="number"
-              onmousewheel="return false;"
-              name="qtdeVagas"
-              formControlName="qtdeVagas"
-              placeholder="1"
-            />
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio'
+            "
+          >
             <div
               *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid"
               class="text-danger"
@@ -496,12 +556,33 @@
                 A quantidade de vaga(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
             </div>
+            <label for="qtdeVagas">Quantidade de vagas: </label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeVagas"
+              formControlName="qtdeVagas"
+              placeholder="1"
+            />
           </div>
 
           <!-------------------------------------------------------
           ---- Construtora --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
+          >
+            <div
+              *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid"
+              class="text-danger"
+            ></div>
             <label for="nomeConstrutora">Construtora: <b>*</b></label>
             <input
               type="text"
@@ -509,28 +590,11 @@
               formControlName="nomeConstrutora"
               placeholder="FGR Construtora"
             />
-            <div
-              *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.nomeConstrutora.errors?.required">
-                Nome da construtora é obrigatório
-              </div>
-            </div>
           </div>
           <!-------------------------------------------------------
           ---- CEP --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
-            <label for="cep">CEP: <b>*</b></label>
-            <input
-              type="text"
-              onmousewheel="return false;"
-              name="cep"
-              formControlName="cep"
-              placeholder="74000-000"
-              [mask]="this.maskCep"
-            />
             <div *ngIf="getControl.cep.touched && getControl.cep.invalid" class="text-danger">
               <div *ngIf="getControl.cep.errors?.required">Obrigatório inserir CEP</div>
               <div *ngIf="getControl.cep.errors?.min">
@@ -540,11 +604,24 @@
                 CEP inválido, composição maior que 8 dígitos
               </div>
             </div>
+            <label for="cep">CEP: <b>*</b></label>
+            <input
+              type="text"
+              onmousewheel="return false;"
+              name="cep"
+              formControlName="cep"
+              placeholder="74000-000"
+              [mask]="this.maskCep"
+            />
           </div>
           <!-------------------------------------------------------
           ---- Logadrarou --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
+            <div
+              *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
+              class="text-danger"
+            ></div>
             <label for="logradouro">Logradouro: <b>*</b></label>
             <input
               type="text"
@@ -552,24 +629,11 @@
               formControlName="logradouro"
               placeholder="Avenida dos Tupinambás"
             />
-            <div
-              *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="getControl.logradouro.errors?.required">Campo obrigatório</div>
-            </div>
           </div>
           <!-------------------------------------------------------
           ---- Valor do condomínio --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
-            <label for="numeroLogradouro">Número: </label>
-            <input
-              type="text"
-              name="numeroLogradouro"
-              formControlName="numeroLogradouro"
-              placeholder="456"
-            />
             <div
               *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
               class="text-danger"
@@ -579,6 +643,13 @@
                 não tiver número, deixe apenas o 0(zero);
               </div>
             </div>
+            <label for="numeroLogradouro">Número: </label>
+            <input
+              type="text"
+              name="numeroLogradouro"
+              formControlName="numeroLogradouro"
+              placeholder="456"
+            />
           </div>
           <!-------------------------------------------------------
           ---- Complemento --------------------------------------------
@@ -596,6 +667,10 @@
           ---- Bairro/Setor --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
+            <div
+              *ngIf="getControl.bairro.touched && getControl.bairro.invalid"
+              class="text-danger"
+            ></div>
             <label for="bairro">Bairro/Setor: <b>*</b></label>
             <input
               type="text"
@@ -603,29 +678,25 @@
               formControlName="bairro"
               placeholder="Bairro Tesouro Perdido"
             />
-            <div *ngIf="getControl.bairro.touched && getControl.bairro.invalid" class="text-danger">
-              <div *ngIf="getControl.bairro.errors?.required">Campo obrigatório</div>
-            </div>
           </div>
           <!-------------------------------------------------------
           ---- Cidade --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
+            <div
+              *ngIf="getControl.cidade.touched && getControl.cidade.invalid"
+              class="text-danger"
+            ></div>
             <label for="cidade">Cidade: <b>*</b></label>
             <input type="text" name="cidade" formControlName="cidade" placeholder="Goiânia" />
-            <div *ngIf="getControl.cidade.touched && getControl.cidade.invalid" class="text-danger">
-              <div *ngIf="getControl.cidade.errors?.required">Campo obrigatório</div>
-            </div>
           </div>
           <!-------------------------------------------------------
           ---- Estado --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
+            <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger"></div>
             <label for="uf">Estado: <b>*</b></label>
             <input type="text" name="uf" formControlName="uf" placeholder="GO" value="" required />
-            <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger">
-              <div *ngIf="getControl.uf.errors?.required">Campo obrigatório</div>
-            </div>
           </div>
           <!-------------------------------------------------------
           ---- Comodidades Imóvel --------------------------------------------
@@ -644,7 +715,16 @@
           <!-------------------------------------------------------
           ---- Comodidades do condomínio --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo">
+          <div class="form-campo" 
+          *ngIf="
+          getControl.categoriaImovel.value === 'Sala Comercial' ||
+          getControl.categoriaImovel.value === 'Cobertura' ||
+          getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+          getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+          getControl.categoriaImovel.value === 'Lote em Condomínio'
+        "
+          >
+          >
             <label for="comodidadesCondominio">Comodidades do condomínio: </label>
             <textarea
               cols="20"
