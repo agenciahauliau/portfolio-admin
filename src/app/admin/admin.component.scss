@@ -21,8 +21,8 @@
         height: 50px;
       }
 
-      .menuMobile{
-        svg{
+      .menuMobile {
+        svg {
           width: 38px;
         }
       }
@@ -92,45 +92,86 @@
 
     .formulario {
       form {
-        display: flex;
+        label {
+          display: block;
+          margin-bottom: 6px;
+          font-size: 0.9em;
 
-        div > div {
-          margin-bottom: 20px;
-          display: flex;
-          flex-direction: column;
-
-          label {
-            margin-bottom: 5px;
+          b {
+            color: #db0423;
           }
         }
 
-        .esquerdo {
-          width: 62%;
-          padding-right: 50px;
+        .text-danger ~ label{
+          color: yellow;
         }
 
-        .direito {
-          width: 32%;
-          height: fit-content;
+        input,
+        textarea,
+        select {
+          width: 100%;
+          padding: 6px 12px;
+          background: #ffffff02;
+          border-bottom: 1px solid #fff5;
+        }
 
-          button {
-            width: fit-content;
-            padding: 18px 22px;
-            background: rgba(219, 4, 35, 1);
+        option {
+          background: #272727;
+          border-bottom: 1px solid #fff5;
+        }
+
+        button {
+          width: fit-content;
+          padding: 18px 22px;
+          background: rgba(219, 4, 35, 1);
+        }
+
+        div.checkbox {
+          width: fit-content;
+          height: fit-content;
+          position: relative;
+          padding: 6px 12px;
+
+          [type='checkbox'] {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+
+            & ~ label {
+              padding: 6px 12px;
+              margin-bottom: 0 !important;
+              background: #272727;
+            }
+
+            &:checked ~ label {
+              background: rgba(219, 4, 35, 1);
+            }
           }
         }
       }
 
-      input,
-      textarea {
-        padding: 8px 15px;
-        background: #fff2;
+      .form-campo {
+        margin-bottom: 24px;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type='number'] {
+        -moz-appearance: textfield;
       }
     }
   }
 }
 
-@media (min-width: 820px) {
+@media screen and (min-width: 820px) {
   .admin {
     display: flex;
     * {
@@ -151,31 +192,18 @@
           width: 50px;
           height: 50px;
         }
+
+        .menuMobile {
+          display: none;
+        }
       }
 
       .menuAdmin {
-        height: calc(100% - 90px);
-        display: flex;
-        padding: 20px;
-        position: absolute;
-        bottom: 0;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .menu {
-          > * {
-            display: block;
-            margin-bottom: 24px;
-          }
-          svg {
-            width: 38px;
-          }
-        }
+        left: 0;
       }
     }
 
     .conteudoAdmin {
-      width: 100%;
       padding: 0 20px 20px;
     }
   }
@@ -186,7 +214,6 @@
     }
 
     .cabecalhoConteudoAdmin {
-      padding: 20px;
       position: sticky;
       top: 0px;
       z-index: 1;
@@ -210,8 +237,8 @@
     }
 
     .infoConteudoAdmin {
-      margin: 50px;
-      padding: 50px;
+      margin: 12px;
+      padding: 12px;
       background: inherit;
       backdrop-filter: blur(10px);
       box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
@@ -219,16 +246,6 @@
       .formulario {
         form {
           display: flex;
-
-          div > div {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-
-            label {
-              margin-bottom: 5px;
-            }
-          }
 
           .esquerdo {
             width: 62%;
@@ -238,19 +255,7 @@
           .direito {
             width: 32%;
             height: fit-content;
-
-            button {
-              width: fit-content;
-              padding: 18px 22px;
-              background: rgba(219, 4, 35, 1);
-            }
           }
-        }
-
-        input,
-        textarea {
-          padding: 8px 15px;
-          background: #fff2;
         }
       }
     }

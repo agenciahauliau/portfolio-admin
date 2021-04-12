@@ -6,11 +6,18 @@
   border: none;
   box-sizing: border-box;
   font-family: Karla;
+  font-size: 14px;
 }
 
 a {
   color: #272727;
   text-decoration: none;
+}
+
+@media screen and (min-width: 820px) {
+  * {
+    font-size: 18px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

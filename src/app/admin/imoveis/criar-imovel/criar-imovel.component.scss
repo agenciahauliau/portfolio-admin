@@ -1,54 +1,23 @@
 .formulario {
   form {
-    display: flex;
-
-    div > div {
-      margin-bottom: 20px;
+    .definicaoImovel {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
 
-      label {
-        margin-bottom: 5px;
+      .categoriaImovel {
+        width: 70%;
+      }
+
+      .Jardins {
+        height: fit-content;
+        display: flex;
+        align-items: flex-end;
+        margin: 6px;
+        padding-right: 0;
       }
     }
 
-    .esquerdo {
-      width: 62%;
-      padding-right: 50px;
-    }
-
-    .direito {
-      width: 32%;
-      height: fit-content;
-
-      button {
-        width: fit-content;
-        padding: 18px 22px;
-        background: rgba(219, 4, 35, 1);
-      }
-    }
-  }
-
-  input,
-  textarea {
-    padding: 8px 15px;
-    background: #fff2;
-  }
-
-  select {
-    padding: 8px 15px;
-    background: #fff2;
-  }
-
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  input[type='number'] {
-    -moz-appearance: textfield;
+    
   }
 }
