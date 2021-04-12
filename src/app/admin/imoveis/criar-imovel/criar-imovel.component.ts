@@ -21,6 +21,7 @@ export class CriarImovelComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+  imgPreview: any;
 
   // Para Upload de Planta
   selectedPlantaFiles?: FileList;
@@ -128,7 +129,12 @@ export class CriarImovelComponent implements OnInit {
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imagensAdicionais = this.plusImgs;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
-    this.imovelForm.value.previsaoLancamento = Date.parse(this.imovelForm.value.previsaoLancamento);
+
+    this.imovelForm.value.previsaoLancamento != 0
+      ? (this.imovelForm.value.previsaoLancamento = Date.parse(
+          this.imovelForm.value.previsaoLancamento,
+        ))
+      : (this.imovelForm.value.previsaoLancamento = 0);
 
     await this.gqlService
       .criarImovel(this.imovelForm.value)
@@ -169,6 +175,19 @@ export class CriarImovelComponent implements OnInit {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+
+    /* Previsualização da imagem */
+    let mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      alert('Campo somente para imagens.');
+      return;
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (e) => {
+      this.imgPreview = reader.result;
+    };
   }
 
   /* Imagem principal */

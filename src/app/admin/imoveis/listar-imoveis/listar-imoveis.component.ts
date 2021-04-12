@@ -49,6 +49,29 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/editar-imovel', imovelId]);
   }
 
+  async atualizaStatus(id: unknown, event: any) {
+    const status = { statusLancamento: event.target.value };
+    console.log(event);
+    if (confirm(`Confirma alteração para "${event.target.value}" ?`)) {
+      await this.gqlService
+        .atualizaImovel(id, status)
+        .then((res: any) => {
+          if (res.data) {
+            console.log('Sucesso', res?.data?.updateImovel?.statusLancamento);
+          }
+          if (res.errors) {
+            console.log('Erro', res?.errors[0]?.message);
+            window.alert(`Erro: ${res.errors[0].message}`);
+          }
+        })
+        .catch((err) => {
+          console.log('err', err);
+        });
+    } else {
+      this.router.navigateByUrl('/', { skipLocationChange: true });
+    }
+  }
+
   refresh() {
     this.imoveisQuery.refetch();
   }

@@ -23,7 +23,10 @@
       </div>
       <div class="tituloImovel">
         <h1>{{ imovel.categoriaImovel }}</h1>
-        <p>{{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} — {{ imovel.complemento }}</p>
+        <p>
+          {{ imovel.logradouro }}, {{ imovel.numeroLogradouro
+          }}<span *ngIf="imovel.complemento">— {{ imovel.complemento }}</span>
+        </p>
         <p>{{ imovel.bairro }} — {{ imovel.cep }} — {{ imovel.cidade }} — {{ imovel.uf }}</p>
       </div>
       <div class="imagemDestaque">
