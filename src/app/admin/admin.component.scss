@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  display: flex;
   background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
 
   * {
@@ -10,33 +9,49 @@
   }
 
   .barAdmin {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    position: sticky;
-    top: 0;
-
     .logoAdmin {
-      padding-bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #fff5;
 
       img {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
+      }
+
+      .menuMobile{
+        svg{
+          width: 38px;
+        }
       }
     }
 
     .menuAdmin {
+      height: calc(100% - 90px);
       display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 50px;
+      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      left: -100px;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .menu {
+        > * {
+          display: block;
+          margin-bottom: 24px;
+        }
+        svg {
+          width: 38px;
+        }
+      }
     }
   }
 
   .conteudoAdmin {
     width: 100%;
-    padding: 0 20px 20px;
   }
 }
 
@@ -46,7 +61,6 @@
   }
 
   .cabecalhoConteudoAdmin {
-    padding: 20px;
     position: sticky;
     top: 0px;
     z-index: 1;
@@ -65,17 +79,13 @@
         display: flex;
         align-items: center;
         margin-right: 38px;
-
-        fa-icon {
-          margin-left: 10px;
-        }
       }
     }
   }
 
   .infoConteudoAdmin {
-    margin: 50px;
-    padding: 50px;
+    margin: 12px;
+    padding: 12px;
     background: inherit;
     backdrop-filter: blur(10px);
     box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
@@ -115,6 +125,133 @@
       textarea {
         padding: 8px 15px;
         background: #fff2;
+      }
+    }
+  }
+}
+
+@media (min-width: 820px) {
+  .admin {
+    display: flex;
+    * {
+      color: #fff;
+    }
+
+    .barAdmin {
+      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .logoAdmin {
+        padding: 20px;
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .menuAdmin {
+        height: calc(100% - 90px);
+        display: flex;
+        padding: 20px;
+        position: absolute;
+        bottom: 0;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .menu {
+          > * {
+            display: block;
+            margin-bottom: 24px;
+          }
+          svg {
+            width: 38px;
+          }
+        }
+      }
+    }
+
+    .conteudoAdmin {
+      width: 100%;
+      padding: 0 20px 20px;
+    }
+  }
+
+  .RouterOutlet {
+    * {
+      color: #fff;
+    }
+
+    .cabecalhoConteudoAdmin {
+      padding: 20px;
+      position: sticky;
+      top: 0px;
+      z-index: 1;
+      background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
+
+      .itensCabecalhoConteudoAdmin:first-child {
+        margin-left: 50px;
+      }
+
+      .itensCabecalhoConteudoAdmin {
+        height: 60px;
+        display: flex;
+        align-items: center;
+
+        a {
+          display: flex;
+          align-items: center;
+          margin-right: 38px;
+        }
+      }
+    }
+
+    .infoConteudoAdmin {
+      margin: 50px;
+      padding: 50px;
+      background: inherit;
+      backdrop-filter: blur(10px);
+      box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
+
+      .formulario {
+        form {
+          display: flex;
+
+          div > div {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+
+            label {
+              margin-bottom: 5px;
+            }
+          }
+
+          .esquerdo {
+            width: 62%;
+            padding-right: 50px;
+          }
+
+          .direito {
+            width: 32%;
+            height: fit-content;
+
+            button {
+              width: fit-content;
+              padding: 18px 22px;
+              background: rgba(219, 4, 35, 1);
+            }
+          }
+        }
+
+        input,
+        textarea {
+          padding: 8px 15px;
+          background: #fff2;
+        }
       }
     }
   }
