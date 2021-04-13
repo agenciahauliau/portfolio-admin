@@ -65,9 +65,9 @@ export interface Imovel {
   imgPlantaCondominio?: string[];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
-  galerias?: Galeria[] | string[];
+  galerias?: string[] | Galeria[];
   previsaoLancamento?: number;
-  tipologias?: Tipologia[] | string[];
+  tipologias?: string[] | Tipologia[];
   createdAt?: number;
   updatedAt?: number;
 }
@@ -76,5 +76,5 @@ export interface Galeria {
   nomeGaleria?: string;
   url?: [string];
   arquivoDestaque?: string;
-  idImovel?: Imovel[] | string[];
+  idImovel?: string[];
 }

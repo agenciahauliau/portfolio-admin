@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { GraphQlService } from '../../../services/graphql.service';
 import { Imovel } from '../../../helpers/types';
 import { environment } from '../../../../environments/environment';
@@ -91,11 +92,32 @@ export class CriarImovelComponent implements OnInit {
       statusLancamento: 'pendente',
       previsaoLancamento: 0,
       imgPlantaCondominio: [],
+      tipologias: this.formBuilder.array([]),
     });
   }
 
   get getControl() {
     return this.imovelForm.controls;
+  }
+
+  get tipologias() {
+    return this.imovelForm.get('tipologias') as FormArray;
+  }
+
+  addTipologia() {
+    this.tipologias.push(
+      this.formBuilder.group({
+        quartos: ['', Validators.min(0)],
+        suites: ['', Validators.min(0)],
+        tamanho: ['', Validators.min(0)],
+        valorEntrada: ['', Validators.min(0)],
+        valorParcela: ['', Validators.min(0)],
+      }),
+    );
+  }
+
+  removeTipologia(index: number): void {
+    this.tipologias.removeAt(index);
   }
 
   async onSubmit() {

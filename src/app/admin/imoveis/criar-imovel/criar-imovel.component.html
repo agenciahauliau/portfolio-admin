@@ -104,7 +104,73 @@
           </div>
 
           <!-------------------------------------------------------
-          ---- Statu Imóvel ---------------------------------------
+          ---- Tipologias ---------------------------------------
+          --------------------------------------------------------->
+
+          <div class="form-campo" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
+            <div
+              *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
+              class="text-danger"
+            ></div>
+            <label for="tipologias">Tipologias <b>*</b></label>
+            <div
+              formArrayName="tipologias"
+              *ngFor="let tipologia of tipologias.controls; index as idx"
+            >
+              <label>Tipologia {{ idx + 1 }}</label>
+              <div type="text" [formGroupName]="idx">
+                <label for="quartos">Quartos: <b>*</b></label>
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="quartos"
+                  formControlName="quartos"
+                  placeholder="3"
+                />
+                <label for="suites">Suítes: <b>*</b></label>
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="suites"
+                  formControlName="suites"
+                  placeholder="3"
+                />
+                <label for="tamanho">Tamanho: <b>*</b></label>
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="tamanho"
+                  placeholder="332,56 m²"
+                  formControlName="tamanho"
+                />
+                <label for="valorEntrada">Valor de Entrada: <b>*</b></label>
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="valorEntrada"
+                  formControlName="valorEntrada"
+                  placeholder="R$ 15.000,00"
+                />
+                <label for="valorParcela">Valor Parcela: <b>*</b></label>
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="valorParcela"
+                  formControlName="valorParcela"
+                  placeholder="R$ 15.000,00"
+                />
+                <button type="button" (click)="removeTipologia(idx)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <button type="button" (click)="addTipologia()">
+              <fa-icon [icon]="faPlusSquare"></fa-icon> Tipologia
+            </button>
+          </div>
+
+          <!-------------------------------------------------------
+          ---- Status Imóvel ---------------------------------------
           --------------------------------------------------------->
 
           <div class="form-campo">

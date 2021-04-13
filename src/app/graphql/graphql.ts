@@ -312,82 +312,8 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
 `;
 
 export const GQL_BUSCAR_IMOVEL = gql`
-  query imovel(
-    $_id: ID
-    $nomeImovel: String
-    $imagemPrincipal: String
-    $categoriaImovel: String
-    $jardins: Boolean
-    $descricaoImovel: String
-    $tipoNegociacao: String
-    $statusImovel: String
-    $aceitaPermuta: Boolean
-    $mobiliado: Boolean
-    $valorImovel: Float
-    $valorEntrada: Float
-    $valorParcela: Float
-    $valorIPTU: Float
-    $valorCondominio: Float
-    $areaTotal: Float
-    $areaConstruida: Float
-    $andarImovel: Float
-    $qtdeQuarto: Float
-    $qtdeBanheiro: Float
-    $qtdeSuites: Float
-    $qtdeVagas: Float
-    $previsaoLancamento: Float
-    $nomeConstrutora: String
-    $bairro: String
-    $logradouro: String
-    $numeroLogradouro: String
-    $complemento: String
-    $cep: String
-    $cidade: String
-    $uf: String
-    $statusLancamento: String
-    $imgPlantaCondominio: [String!]
-    $comodidadesImovel: [String!]
-    $comodidadesCondominio: [String!]
-  ) {
-    imovel(
-      dados: {
-        _id: $_id
-        nomeImovel: $nomeImovel
-        imagemPrincipal: $imagemPrincipal
-        categoriaImovel: $categoriaImovel
-        jardins: $jardins
-        descricaoImovel: $descricaoImovel
-        tipoNegociacao: $tipoNegociacao
-        statusLancamento: $statusLancamento
-        statusImovel: $statusImovel
-        aceitaPermuta: $aceitaPermuta
-        mobiliado: $mobiliado
-        valorImovel: $valorImovel
-        valorEntrada: $valorEntrada
-        valorParcela: $valorParcela
-        valorIPTU: $valorIPTU
-        valorCondominio: $valorCondominio
-        areaTotal: $areaTotal
-        areaConstruida: $areaConstruida
-        andarImovel: $andarImovel
-        qtdeQuarto: $qtdeQuarto
-        qtdeBanheiro: $qtdeBanheiro
-        qtdeSuites: $qtdeSuites
-        qtdeVagas: $qtdeVagas
-        nomeConstrutora: $nomeConstrutora
-        bairro: $bairro
-        logradouro: $logradouro
-        numeroLogradouro: $numeroLogradouro
-        complemento: $complemento
-        cep: $cep
-        cidade: $cidade
-        uf: $uf
-        previsaoLancamento: $previsaoLancamento
-        imgPlantaCondominio: $imgPlantaCondominio
-        comodidadesImovel: $comodidadesImovel
-        comodidadesCondominio: $comodidadesCondominio
-      }
-    ) {
+  query imovel($_id: ID!) {
+    imovel(dados: { _id: $_id }) {
       _id
       nomeImovel
       imagemPrincipal
@@ -423,7 +349,23 @@ export const GQL_BUSCAR_IMOVEL = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
+      galerias(populate: true) {
+        _id
+        nomeGaleria
+        url
+        arquivoDestaque
+        idImovel
+        createdAt
+        updatedAt
+      }
       previsaoLancamento
+      tipologias {
+        quartos
+        suites
+        tamanho
+        valorEntrada
+        valorParcela
+      }
       createdAt
       updatedAt
     }
