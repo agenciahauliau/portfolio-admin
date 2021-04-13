@@ -497,13 +497,13 @@ export const GQL_ATUALIZA_IMOVEL = gql`
   }
 `;
 
-export const CRIAR_LEAD = gql`
+export const GQL_CRIAR_LEAD = gql`
   mutation createLead($input: CreateLeadInput!) {
     createLead(dados: $input)
   }
 `;
 
-export const LISTAR_LEADS = gql`
+export const GQL_LISTAR_LEADS = gql`
   query listarLeads {
     leads {
       _id
@@ -523,13 +523,13 @@ export const LISTAR_LEADS = gql`
   }
 `;
 
-export const REMOVE_LEAD = gql`
+export const GQL_DELETA_LEAD = gql`
   mutation deletaImovel($_id: String!) {
     removeImovel(id: $_id)
   }
 `;
 
-export const ATUALIZA_LEAD = gql`
+export const GQL_ATUALIZA_LEAD = gql`
   mutation updateLead($id: String!, $input: UpdateLeadInput!) {
     updateLead(id: $id, dados: $input) {
       _id
@@ -548,7 +548,7 @@ export const ATUALIZA_LEAD = gql`
   }
 `;
 
-export const BUSCA_UNICO_LEAD = gql`
+export const GQL_BUSCA_UNICO_LEAD = gql`
   query lead($input: SearchLeadInput!) {
     lead(dados: $input) {
       _id
