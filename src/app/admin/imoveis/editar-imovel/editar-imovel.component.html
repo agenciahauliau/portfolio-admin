@@ -444,7 +444,13 @@
           ---- Tipologias ---------------------------------------
           --------------------------------------------------------->
 
-          <div class="form-campo">
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.tipoNegociacao.value === 'Lançamento' ||
+              imovelForm.value.tipologias.length > 0
+            "
+          >
             <div
               *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
               class="text-danger"
