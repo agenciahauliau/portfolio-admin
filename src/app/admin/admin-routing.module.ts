@@ -11,6 +11,10 @@ import { CriarGaleriaComponent } from './galerias/criar-galeria/criar-galeria.co
 import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 import { EditarGaleriaComponent } from './galerias/editar-galeria/editar-galeria.component';
+import { ListarLeadsComponent } from './leads/listar-leads/listar-leads.component';
+import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
+import { CriarLeadComponent } from './leads/criar-lead/criar-lead.component';
+import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 
 const routes: Routes = [
   {
@@ -57,6 +61,22 @@ const routes: Routes = [
           {
             path: 'upload',
             component: UploadImagensComponent,
+          },
+          {
+            path: 'leads',
+            component: ListarLeadsComponent,
+          },
+          {
+            path: 'lead/:id',
+            component: ExibirLeadComponent,
+          },
+          {
+            path: 'criar-lead',
+            component: CriarLeadComponent,
+          },
+          {
+            path: 'editar-lead/:id',
+            component: EditarLeadComponent,
           },
           {
             path: '',

@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 import { environment } from '../../../../environments/environment';
 import { UploadService } from '../../../services/upload.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-imovel',
@@ -101,6 +102,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       statusLancamento: 'pendente',
       previsaoLancamento: 0,
       imgPlantaCondominio: [[]],
+      tipologias: this.formBuilder.array([]),
     });
 
     const imovelId = this.route.snapshot.paramMap.get('id');
@@ -117,11 +119,42 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       this.mainImg = data.imovel.imagemPrincipal;
       this.plusImgs = [...data.imovel.imagensAdicionais];
       this.plantaFiles = [...data.imovel.imgPlantaCondominio];
+      for (const i of data.imovel.tipologias) {
+        this.tipologias.push(
+          this.formBuilder.group({
+            quartos: [i.quartos, Validators.min(0)],
+            suites: [i.suites, Validators.min(0)],
+            tamanho: [i.tamanho, Validators.min(0)],
+            valorEntrada: [i.valorEntrada, Validators.min(0)],
+            valorParcela: [i.valorParcela, Validators.min(0)],
+          }),
+        );
+      }
     });
   }
 
   get getControl() {
     return this.imovelForm.controls;
+  }
+
+  get tipologias() {
+    return this.imovelForm.get('tipologias') as FormArray;
+  }
+
+  addTipologia() {
+    this.tipologias.push(
+      this.formBuilder.group({
+        quartos: ['', Validators.min(0)],
+        suites: ['', Validators.min(0)],
+        tamanho: ['', Validators.min(0)],
+        valorEntrada: ['', Validators.min(0)],
+        valorParcela: ['', Validators.min(0)],
+      }),
+    );
+  }
+
+  removeTipologia(index: number): void {
+    this.tipologias.removeAt(index);
   }
 
   async onSubmit() {

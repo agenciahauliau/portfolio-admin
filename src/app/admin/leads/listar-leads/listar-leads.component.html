@@ -1,0 +1,53 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-lead']" routerLinkActive="router-link-active">
+        Criar Lead
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div class="tabelalinhaImovel">
+      <table class="tabelaImoveis">
+        <thead class="tabelaImoveisHeader">
+          <th>ID</th>
+          <th>Tipo do Lead</th>
+          <th>Email</th>
+          <th>Criado</th>
+          <th>Atualizado</th>
+          <th></th>
+          <th>Ações</th>
+          <th></th>
+        </thead>
+        <tbody class="tabelaImoveisCorpo" *ngIf="leads">
+          <tr class="tabelalinhaImovel" *ngFor="let lead of leads">
+            <td>{{ lead._id }}</td>
+            <td>{{ lead.tipoLead }}</td>
+            <td>{{ lead.email }}</td>
+            <td>{{ lead.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>{{ lead.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>
+              <button (click)="goToLead(lead._id)">
+                <fa-icon [icon]="faEye" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="editarLead(lead._id)">
+                <fa-icon [icon]="faEdit" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="remover(lead._id)">
+                <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="loading">Carregando...</div>
+      <div *ngIf="error">Erro :(</div>
+    </div>
+  </div>
+</div>

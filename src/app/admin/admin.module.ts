@@ -16,6 +16,10 @@ import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria
 import { EditarGaleriaComponent } from './galerias/editar-galeria/editar-galeria.component';
 import { ListarGaleriasComponent } from './galerias/listar-galerias/listar-galerias.component';
 import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
+import { ListarLeadsComponent } from './leads/listar-leads/listar-leads.component';
+import { CriarLeadComponent } from './leads/criar-lead/criar-lead.component';
+import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
+import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -28,6 +32,10 @@ import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens
     EditarGaleriaComponent,
     ListarGaleriasComponent,
     UploadImagensComponent,
+    ListarLeadsComponent,
+    CriarLeadComponent,
+    ExibirLeadComponent,
+    EditarLeadComponent,
   ],
   imports: [
     CommonModule,
