@@ -100,7 +100,8 @@
           }
         }
 
-        .text-danger ~ ::placeholder, .text-danger ~ select  {
+        .text-danger ~ ::placeholder,
+        .text-danger ~ select {
           color: yellow;
         }
 
@@ -112,12 +113,12 @@
           background: #ffffff02;
           border-bottom: 1px solid #fff5;
 
-          ::placeholder{
+          ::placeholder {
             font-weight: 200;
           }
         }
-        
-        textarea{
+
+        textarea {
           border: 1px solid #fff5;
           background: #fff1;
         }
@@ -168,7 +169,7 @@
           display: flex;
           justify-content: center;
           position: relative;
-          border: 1px solid #fff5;
+          border: 1px #fff2 dashed;
 
           div[id^='complemento'] {
             width: 100%;
@@ -186,17 +187,102 @@
         }
 
         .modal {
-          display: none;
-        }
-
-        .modal.active {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 48px;
           position: fixed;
           width: 100%;
           height: 100%;
           top: 0;
           left: 0;
+          z-index: 100;
           background: #272727;
+        
+
+        &.active {
+          display: flex;
+        }
+          
+
+          .fechar {
+            align-self: flex-end;
+            padding: 12px;
+            background: #0002;
+            border-radius: 10px;
+          }
+          .informacoes {
+            padding: 24px;
+            text-align: center;
+            h2 {
+              margin-bottom: 48px;
+            }
+            p {
+              font-weight: 200;
+              font-size: 0.9em;
+            }
+
+            p:first-child {
+              font-size: 0.8em;
+            }
+          }
+
+          .loadImagem {
+            width: calc(250px / 9 * 16);
+            height: 250px;
+            margin: 12px auto;
+            position: relative;
+            border: 1px #fff2 dashed;
+
+            .svg {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              padding: 24px;
+              margin: auto;
+              background: #272727;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: -1;
+              opacity: 0.3;
+
+              svg {
+                height: 50%;
+                margin-bottom: 12px;
+              }
+              h4:first-child {
+                display: block;
+              }
+
+              h4:last-child {
+                display: none;
+              }
+            }
+
+            .carregado ~ .svg {
+              
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: -2;
+              object-fit: cover;
+            }
+            input {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              opacity: 0;
+            }
+          }
         }
 
         .coluna {
@@ -268,12 +354,14 @@
           display: grid;
           grid-template-columns: 38% 62%;
 
-          textarea{
+          textarea {
             min-height: 400px;
           }
 
           .caixaImagem {
+            max-width: calc(250px / 9 * 16);
             height: 250px;
+            margin: auto;
           }
           .coluna {
             padding: 24px;
@@ -283,7 +371,7 @@
               position: sticky;
               top: 84px;
             }
-            &.direita{
+            &.direita {
               padding: 48px;
             }
           }
