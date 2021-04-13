@@ -16,6 +16,7 @@ import { ExibirGaleriaComponent } from './galerias/exibir-galeria/exibir-galeria
 import { EditarGaleriaComponent } from './galerias/editar-galeria/editar-galeria.component';
 import { ListarGaleriasComponent } from './galerias/listar-galerias/listar-galerias.component';
 import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens.component';
+import { LeadsComponent } from './leads/leads.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -28,6 +29,7 @@ import { UploadImagensComponent } from './galerias/upload-imagens/upload-imagens
     EditarGaleriaComponent,
     ListarGaleriasComponent,
     UploadImagensComponent,
+    LeadsComponent,
   ],
   imports: [
     CommonModule,
