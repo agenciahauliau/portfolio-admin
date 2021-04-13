@@ -715,16 +715,17 @@
           <!-------------------------------------------------------
           ---- Comodidades do condomínio --------------------------------------------
           --------------------------------------------------------->
-          <div class="form-campo" 
-          *ngIf="
-          getControl.categoriaImovel.value === 'Sala Comercial' ||
-          getControl.categoriaImovel.value === 'Cobertura' ||
-          getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-          getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-          getControl.categoriaImovel.value === 'Lote em Condomínio'
-        "
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
           >
-          >
+            >
             <label for="comodidadesCondominio">Comodidades do condomínio: </label>
             <textarea
               cols="20"

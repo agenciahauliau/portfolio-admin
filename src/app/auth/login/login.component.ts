@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  ano = new Date().getFullYear()
+  ano = new Date().getFullYear();
 
   constructor(
     private gqlService: GraphQlService,
