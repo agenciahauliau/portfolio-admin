@@ -47,10 +47,6 @@ export class CriarImovelComponent implements OnInit {
 
   imovelForm!: Imovel & FormGroup;
 
-  public isActive: boolean = false;
-  public isActiveImgAdicionais: boolean = false;
-  public isActiveImgPlantas: boolean = false;
-
   constructor(
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
@@ -379,22 +375,6 @@ export class CriarImovelComponent implements OnInit {
         array.splice(i, 1);
         i--;
       }
-    }
-  }
-
-  ativaModal(event: any) {
-    if (event.target.id === 'complemento') {
-      this.isActive ? (this.isActive = false) : (this.isActive = true);
-    }
-    if (event.target.id === 'complemento1') {
-      this.isActiveImgAdicionais 
-        ? (this.isActiveImgAdicionais = false)
-          : (this.isActiveImgAdicionais = true);
-    }
-    if (event.target.id === 'complemento2') {
-      this.isActiveImgPlantas
-        ? (this.isActiveImgPlantas = false)
-          : (this.isActiveImgPlantas = true);
     }
   }
 }

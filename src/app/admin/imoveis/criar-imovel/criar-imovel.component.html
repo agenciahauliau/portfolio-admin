@@ -10,52 +10,35 @@
   <div class="infoConteudoAdmin">
     <div class="formulario">
       <form [formGroup]="imovelForm" (ngSubmit)="onSubmit()">
-        <div class="coluna esquerda">
-          <!-------------------------------------------------------
-          ---- Imagem de destaque ----------------------------------
-          --------------------------------------------------------->
+        <div class="coluna direito">
           <div class="form-campo">
-
-            <div class="caixaImagem">
-              <div id="complemento" (click)="ativaModal($event)"></div>
-              <svg id="Guide" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="m73.938 487.321c-12.1 0-21.938-10.138-21.938-22.6v-420.121c0-12.462 9.841-22.6 21.938-22.6h-30c-12.097 0-21.938 10.138-21.938 22.6v420.122c0 12.461 9.841 22.6 21.938 22.6 3.186.025 315.354 2.492 438.474 2.679h.011a7.34 7.34 0 0 0 .976-.073c-137.017-.454-406.499-2.584-409.461-2.607z"
-                  fill="#fff2" />
-                <path
-                  d="m392.315 328.966a33.563 33.563 0 0 0 -54.35-3.721l-45.03 53.805a21.4 21.4 0 0 1 -18.452 7.764 21.636 21.636 0 0 1 -17.013-10.959l-81.253-140.576a33.583 33.583 0 0 0 -56.1-3.578l-108.653 125.481a6 6 0 1 0 9.072 7.855l108.785-125.637.271-.337a21.585 21.585 0 0 1 36.236 2.221l81.252 140.576a33.576 33.576 0 0 0 55.057 4.892l45.03-53.805a21.57 21.57 0 0 1 35.25 2.83l.356.591 108.274 111.277a6 6 0 1 0 8.6-8.369z"
-                  fill="#fff" />
-                <path
-                  d="m284.988 218.5c29.7 0 53.864-24.671 53.864-54.995s-24.164-54.995-53.864-54.995-53.863 24.671-53.863 54.995 24.163 54.995 53.863 54.995zm0-97.99c23.084 0 41.864 19.287 41.864 42.995s-18.78 43-41.864 43-41.863-19.288-41.863-42.995 18.775-42.996 41.863-42.996z"
-                  fill="#fff" />
-                <path
-                  d="m460.646 10h-416.708c-18.714 0-33.938 15.521-33.938 34.6v420.122c0 19.078 15.224 34.6 33.89 34.6 3.139.025 315.346 2.492 438.5 2.679h.03a19.282 19.282 0 0 0 13.827-5.813 19.917 19.917 0 0 0 5.753-14.418l-7.421-437.793c-.33-18.735-15.553-33.977-33.933-33.977zm27.059 477.764a7.377 7.377 0 0 1 -5.282 2.236h-.011c-123.12-.187-435.288-2.654-438.474-2.679-12.1 0-21.938-10.138-21.938-22.6v-420.121c0-12.462 9.841-22.6 21.938-22.6h416.708c11.879 0 21.719 9.954 21.935 22.184l7.419 437.784a8.007 8.007 0 0 1 -2.295 5.796z"
-                  fill="#fff" />
-              </svg>
+            <label for="imagemPrincipal">Imagem Principal: <b>*</b></label>
+            <div>
+              <input type="file" (change)="selectFiles($event)" />
+              <img [src]="imgPreview" width="300px" *ngIf="imgPreview" />
             </div>
-            <div class="modal" [class.active]="isActive">
-              <div>
-                <input type="file" (change)="selectFiles($event)" />
-                <img [src]="imgPreview" width="300px" *ngIf="imgPreview" />
-              </div>
-              <div>
-                <button type="button" class="" [disabled]="!selectedFiles" (click)="uploadFiles()">
-                  Upload
-                </button>
-              </div>
-              <div *ngFor="let progressInfo of progressInfos">
-                <span>{{ progressInfo.fileName }}</span>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                    [ngStyle]="{ width: progressInfo.value + '%' }">
-                    {{ progressInfo.value }}%
-                  </div>
-                  <img src="{{ mainImg }}" alt="" width="300px" srcset="{{mainImg}}" />
-                  <button type="button" (click)="deletaImgPrincipal(mainImg)">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                  </button>
+            <div>
+              <button type="button" class="" [disabled]="!selectedFiles" (click)="uploadFiles()">
+                Upload
+              </button>
+            </div>
+            <div *ngFor="let progressInfo of progressInfos">
+              <span>{{ progressInfo.fileName }}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progressInfo.value }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progressInfo.value + '%' }"
+                >
+                  {{ progressInfo.value }}%
                 </div>
+                <img src="{{ mainImg }}" alt="" width="300px" srcset="{{mainImg}}" />
+                <button type="button" (click)="deletaImgPrincipal(mainImg)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
               </div>
             </div>
           </div>
@@ -66,9 +49,12 @@
 
           <div class="definicaoImovel">
             <div class="form-campo categoriaImovel">
-              <div *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid" class="text-danger">
-              </div>
+              <div
+                *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid"
+                class="text-danger"
+              ></div>
               <label for="categoriaImovel"> Categoria do Imóvel: <b>*</b> </label>
+
               <select name="categoriaImovel" formControlName="categoriaImovel">
                 <option value="">Selecione a categoria do imóvel</option>
                 <option value="Sala Comercial">Sala Comercial</option>
@@ -87,10 +73,13 @@
           ---- Botão Jardins --------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo checkbox Jardins" *ngIf="
+            <div
+              class="form-campo checkbox Jardins"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
+              "
+            >
               <input type="checkbox" name="jardins" formControlName="jardins" />
               <label for="jardins">Jardins </label>
             </div>
@@ -101,11 +90,13 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid" class="text-danger">
-            </div>
+            <div
+              *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid"
+              class="text-danger"
+            ></div>
             <label for="tipoNegociacao">Tipo de Negociação: <b>*</b></label>
             <select name="tipoNegociacao" formControlName="tipoNegociacao">
-              <option value="">Selecione o tipo de negociação</option>
+              <option value="">Selecione...</option>
               <option value="Alugar">Para Alugar</option>
               <option value="Venda">Para Vender</option>
               <option value="Lançamento">Lançamento Imobiliário</option>
@@ -117,10 +108,13 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid" class="text-danger"></div>
+            <div
+              *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="statusImovel">Status do imóvel <b>*</b></label>
             <select name="statusImovel" formControlName="statusImovel">
-              <option value="">Selecione o status do imóvel</option>
+              <option value="">Selecione...</option>
               <option value="Pronto para Morar">Pronto para Morar</option>
               <option value="Entrega em Breve">Entrega em Breve</option>
               <option value="Pronto para Construir">Pronto para Construir</option>
@@ -135,7 +129,12 @@
           --------------------------------------------------------->
 
             <div class="form-campo checkbox">
-              <input type="checkbox" name="aceitaPermuta" formControlName="aceitaPermuta" value="false" />
+              <input
+                type="checkbox"
+                name="aceitaPermuta"
+                formControlName="aceitaPermuta"
+                value="false"
+              />
               <label for="aceitaPermuta">Aceita permuta? </label>
             </div>
 
@@ -154,14 +153,22 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.valorImovel.errors?.min">
                 Valor do imóvel não pode ser menor do que R$ 0,00
               </div>
             </div>
             <label for="valorImovel">Valor do imóvel: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="valorImovel" formControlName="valorImovel"
-              placeholder="Valor do imóvel - ex: 1.000.000,00" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorImovel"
+              formControlName="valorImovel"
+              placeholder="R$ 1.500.000,00"
+            />
           </div>
 
           <!-------------------------------------------------------
@@ -169,14 +176,22 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.valorIPTU.errors?.min">
                 Valor do IPTU não pode ser menor do que R$ 0,00
               </div>
             </div>
             <label for="valorIPTU">Valor do IPTU: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="valorIPTU" formControlName="valorIPTU"
-              placeholder="Valor do IPTU - ex: 400,45" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorIPTU"
+              formControlName="valorIPTU"
+              placeholder="R$ 400,45"
+            />
           </div>
 
           <!-------------------------------------------------------
@@ -184,26 +199,41 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.areaTotal.errors?.min">
                 A Área total do imóvel não pode ser menor que 0
               </div>
             </div>
             <label for="areaTotal">Área total do imovel: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="areaTotal" placeholder="Área total - ex: 332,56"
-              formControlName="areaTotal" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="areaTotal"
+              placeholder="332,56 m²"
+              formControlName="areaTotal"
+            />
           </div>
         </div>
-        <div class="coluna direita">
+        <div class="coluna esquerdo">
           <!-------------------------------------------------------
           ---- Descrição --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
-            <div *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid" class="text-danger">
-            </div>
+            <div
+              *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="descricaoImovel">Descrição do Imóvel: <b>*</b></label>
-            <textarea name="descricaoImovel" cols="40" rows="10" formControlName="descricaoImovel"
-              placeholder="Descriçaõ do Imóvel - Linda e ampla casa para morar com sua família"></textarea>
+            <textarea
+              name="descricaoImovel"
+              cols="40"
+              rows="10"
+              formControlName="descricaoImovel"
+              placeholder="Linda e ampla casa para morar com sua família"
+            ></textarea>
           </div>
 
           <!-------------------------------------------------------
@@ -211,25 +241,30 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-
-            <button type="button" name="complemento1" class="" (click)="ativaModal($event)"></button>
-
-
             <label for="inagensAdicionais">Adicionar mais Fotos: <b>*</b></label>
             <div>
               <input type="file" multiple (change)="selectFilesImagensAdicionais($event)" />
             </div>
-            <div [class.active]="isActiveImgAdicionais">
-              <button type="button" [disabled]="!selectedFilesImgsAdicionais" (click)="uploadFilesImagensAdicionais()">
+            <div>
+              <button
+                type="button"
+                [disabled]="!selectedFilesImgsAdicionais"
+                (click)="uploadFilesImagensAdicionais()"
+              >
                 Upload
               </button>
             </div>
             <div *ngFor="let progressInfo of progressInfosImgsAdicionais">
               <span>{{ progressInfo.fileName }}</span>
               <div class="progress">
-                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                  attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                  [ngStyle]="{ width: progressInfo.value + '%' }">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progressInfo.value }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progressInfo.value + '%' }"
+                >
                   {{ progressInfo.value }}%
                   <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
                   <button type="button" (click)="deletaImagensAdicionais(progressInfo.url)">
@@ -239,349 +274,477 @@
               </div>
             </div>
           </div>
-
-          <div class="infoCondominio" *ngIf="
-          getControl.categoriaImovel.value === 'Sala Comercial' ||
-          getControl.categoriaImovel.value === 'Cobertura' ||
-          getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-          getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-          getControl.categoriaImovel.value === 'Lote em Condomínio'
-        ">
-
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Nome Imóvel --------------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo nomeImovel" *ngIf="
+          <div
+            class="form-campo"
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
-              getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio' ||
               getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
-              <div *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid" class="text-danger"></div>
-              <label for="nomeImovel">Nome do Imóvel: <b>*</b></label>
-              <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="Nome do Condomínio" />
-            </div>
+            "
+          >
+            <div
+              *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid"
+              class="text-danger"
+            ></div>
+            <label for="nomeImovel">Nome do Imóvel: <b>*</b></label>
+            <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="" />
+          </div>
 
-            <!-------------------------------------------------------
-          ---- Construtora --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo nomeConstrutora" *ngIf="
-              getControl.categoriaImovel.value === 'Sala Comercial' ||
-              getControl.categoriaImovel.value === 'Cobertura' ||
-              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-              getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
-              <div *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid" class="text-danger">
-              </div>
-              <label for="nomeConstrutora">Construtora: <b>*</b></label>
-              <input type="text" name="nomeConstrutora" formControlName="nomeConstrutora"
-                placeholder="Construtora do imóvel - FGR Construtora" />
-            </div>
-
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Plantas --------------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo" *ngIf="
-              getControl.categoriaImovel.value === 'Casa em Condomínio' && getControl.jardins.value ||
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Lote em Condomínio' && getControl.jardins.value
-            ">
-              <label for="imgPlantaCondominio">Adicionar planta: <b>*</b></label>
-              <div>
-                <input type="file" (change)="selectFilesPlantaFiles($event)" />
-              </div>
-              <div>
-                <button type="button" [disabled]="!selectedPlantaFiles" (click)="uploadFilesPlantaFiles()">
-                  Upload
-                </button>
-              </div>
-              <div *ngFor="let progressInfo of progressInfosPlantaFiles">
-                <span>{{ progressInfo.fileName }}</span>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                    [ngStyle]="{ width: progressInfo.value + '%' }">
-                    {{ progressInfo.value }}%
-                    <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
-                    <button type="button" (click)="deletaImagensPlantas(progressInfo.url)">
-                      <fa-icon [icon]="faTrash"></fa-icon>
-                    </button>
-                  </div>
+            "
+          >
+            <label for="imgPlantaCondominio">Adicionar planta: <b>*</b></label>
+            <div>
+              <input type="file" (change)="selectFilesPlantaFiles($event)" />
+            </div>
+            <div>
+              <button
+                type="button"
+                [disabled]="!selectedPlantaFiles"
+                (click)="uploadFilesPlantaFiles()"
+              >
+                Upload
+              </button>
+            </div>
+            <div *ngFor="let progressInfo of progressInfosPlantaFiles">
+              <span>{{ progressInfo.fileName }}</span>
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progressInfo.value }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progressInfo.value + '%' }"
+                >
+                  {{ progressInfo.value }}%
+                  <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
+                  <button type="button" (click)="deletaImagensPlantas(progressInfo.url)">
+                    <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>
                 </div>
               </div>
             </div>
-            <!-------------------------------------------------------
+          </div>
+          <!-------------------------------------------------------
           ---- Previsão do lançamento --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
-              getControl.categoriaImovel.value === 'Casa em Condomínio' && getControl.jardins.value ||
-              getControl.categoriaImovel.value === 'Lote em Condomínio' && getControl.jardins.value
-            ">
-              <label for="previsaoLancamento">Previsão do lançamento</label>
-              <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento"
-                placeholder="Previsão do lançamento" />
-            </div>
-
+          <div
+            class="form-campo"
+            *ngIf="
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
+            "
+          >
+            <label for="previsaoLancamento">Previsão do lançamento</label>
+            <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento" />
           </div>
 
-          <div class="numeros" *ngIf="
-          getControl.categoriaImovel.value === 'Sala Comercial' ||
-          getControl.categoriaImovel.value === 'Cobertura' ||
-          getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-          getControl.categoriaImovel.value === 'Chácaras' ||
-          getControl.categoriaImovel.value === 'Casa Residencial' ||
-          getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-          getControl.categoriaImovel.value === 'Lote em Condomínio'
-        ">
-
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Valor do condomínio --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio' ||
               getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
-              <div *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid" class="text-danger">
-                <div *ngIf="getControl.valorCondominio.errors?.min">
-                  Valor do condomínio não pode ser menor do que R$ 0,00
-                </div>
+            "
+          >
+            <div
+              *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.valorCondominio.errors?.min">
+                Valor do condomínio não pode ser menor do que R$ 0,00
               </div>
-              <label for="valorCondominio">Valor do condomínio: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="valorCondominio" formControlName="valorCondominio"
-                placeholder="Valor cond. - ex: 1.500,13" />
             </div>
-            <!-------------------------------------------------------
+            <label for="valorCondominio">Valor do condomínio: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorCondominio"
+              formControlName="valorCondominio"
+              placeholder="R$ 1.500,13"
+            />
+          </div>
+          <!-------------------------------------------------------
           ---- Área Construída --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Chácaras' ||
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio'
-            ">
-              <label for="areaConstruida">Área construída: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="areaConstruida" formControlName="areaConstruida"
-                placeholder="Área cons. - ex: 230,56" />
-              <div *ngIf="getControl.areaConstruida.touched && getControl.areaConstruida.invalid" class="text-danger">
-                <div *ngIf="getControl.areaConstruida.errors?.min">
-                  A Área construída do imóvel não pode ser menor que 0
-                </div>
+            "
+          >
+            <label for="areaConstruida">Área construída: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="areaConstruida"
+              formControlName="areaConstruida"
+              placeholder="230,56 m²"
+            />
+            <div
+              *ngIf="getControl.areaConstruida.touched && getControl.areaConstruida.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.areaConstruida.errors?.min">
+                A Área construída do imóvel não pode ser menor que 0
               </div>
             </div>
+          </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Andar do imóvel --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão'
-            ">
-              <div *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid" class="text-danger"></div>
-              <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
-              <input type="number" onmousewheel="return false;" name="andarImovel" formControlName="andarImovel"
-                placeholder="Andar" />
-            </div>
+            "
+          >
+            <div
+              *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid"
+              class="text-danger"
+            ></div>
+            <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="andarImovel"
+              formControlName="andarImovel"
+              placeholder="0"
+            />
+          </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Quartos --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Chácaras' ||
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio'
-            ">
-              <div *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid" class="text-danger">
-                <div *ngIf="getControl.qtdeQuarto.errors?.min">
-                  A quantidade de quarto(s) não pode ser menor do que 0. Se for casa, deixe 0.
-                </div>
+            "
+          >
+            <div
+              *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeQuarto.errors?.min">
+                A quantidade de quarto(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
-              <label for="qtdeQuarto">Quantidade de quartos: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="qtdeQuarto" formControlName="qtdeQuarto"
-                placeholder="Quartos" />
             </div>
+            <label for="qtdeQuarto">Quantidade de quartos: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeQuarto"
+              formControlName="qtdeQuarto"
+              placeholder="3"
+            />
+          </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Banheiros --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Chácaras' ||
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio'
-            ">
-              <div *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid" class="text-danger">
-                <div *ngIf="getControl.qtdeBanheiro.errors?.min">
-                  A quantidade de banheiro(s) não pode ser menor do que 0. Se for casa, deixe 0.
-                </div>
+            "
+          >
+            <div
+              *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeBanheiro.errors?.min">
+                A quantidade de banheiro(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
-              <label for="qtdeBanheiro">Quantidade de banheiros: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="qtdeBanheiro" formControlName="qtdeBanheiro"
-                placeholder="Banheiros" />
             </div>
+            <label for="qtdeBanheiro">Quantidade de banheiros: <b>*</b></label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeBanheiro"
+              formControlName="qtdeBanheiro"
+              placeholder="2"
+            />
+          </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Suítes --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Chácaras' ||
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio'
-            ">
-              <div *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid" class="text-danger">
-                <div *ngIf="getControl.qtdeSuites.errors?.min">
-                  A quantidade de suíte(s) não pode ser menor do que 0. Se for casa, deixe 0.
-                </div>
+            "
+          >
+            <div
+              *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeSuites.errors?.min">
+                A quantidade de suíte(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
-              <label for="qtdeSuites">Quantidade de suítes: </label>
-              <input type="number" onmousewheel="return false;" name="qtdeSuites" formControlName="qtdeSuites"
-                placeholder="Suítes" />
             </div>
+            <label for="qtdeSuites">Quantidade de suítes: </label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeSuites"
+              formControlName="qtdeSuites"
+              placeholder="1"
+            />
+          </div>
 
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
           ---- Quantidade de vagas --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Chácaras' ||
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio'
-            ">
-              <div *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid" class="text-danger">
-                <div *ngIf="getControl.qtdeVagas.errors?.min">
-                  A quantidade de vaga(s) não pode ser menor do que 0. Se for casa, deixe 0.
-                </div>
+            "
+          >
+            <div
+              *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.qtdeVagas.errors?.min">
+                A quantidade de vaga(s) não pode ser menor do que 0. Se for casa, deixe 0.
               </div>
-              <label for="qtdeVagas">Quantidade de vagas: </label>
-              <input type="number" onmousewheel="return false;" name="qtdeVagas" formControlName="qtdeVagas"
-                placeholder="Vagas na garagem" />
             </div>
-
+            <label for="qtdeVagas">Quantidade de vagas: </label>
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="qtdeVagas"
+              formControlName="qtdeVagas"
+              placeholder="1"
+            />
           </div>
-          <div class="endereco">
 
-            <!-------------------------------------------------------
-          ---- CEP --------------------------------------------
+          <!-------------------------------------------------------
+          ---- Construtora --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.cep.touched && getControl.cep.invalid" class="text-danger">
-                <div *ngIf="getControl.cep.errors?.required">Obrigatório inserir CEP</div>
-                <div *ngIf="getControl.cep.errors?.min">
-                  CEP inválido, está faltando número. Menor CEP válido: 01001-000
-                </div>
-                <div *ngIf="getControl.cep.errors?.max">
-                  CEP inválido, composição maior que 8 dígitos
-                </div>
-              </div>
-              <label for="cep">CEP: <b>*</b></label>
-              <input type="text" onmousewheel="return false;" name="cep" formControlName="cep" placeholder="74000-000"
-                [mask]="this.maskCep" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Logadrarou --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
-              <label for="logradouro">Logradouro: <b>*</b></label>
-              <input type="text" name="logradouro" formControlName="logradouro" placeholder="Avenida dos Tupinambás" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Valor do condomínio --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
-                class="text-danger">
-                <div *ngIf="getControl.numeroLogradouro.errors?.min">
-                  É obrigatório que tenha um número, e é obrigatório que não seja menor que 0. Se caso
-                  não tiver número, deixe apenas o 0(zero);
-                </div>
-              </div>
-              <label for="numeroLogradouro">Número: </label>
-              <input type="text" name="numeroLogradouro" formControlName="numeroLogradouro" placeholder="456" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Complemento --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <label for="complemento">Complemento: </label>
-              <input type="text" name="complemento" formControlName="complemento" placeholder="Quadra 17, Lote 13" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Bairro/Setor --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.bairro.touched && getControl.bairro.invalid" class="text-danger"></div>
-              <label for="bairro">Bairro/Setor: <b>*</b></label>
-              <input type="text" name="bairro" formControlName="bairro" placeholder="Bairro Tesouro Perdido" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Cidade --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.cidade.touched && getControl.cidade.invalid" class="text-danger"></div>
-              <label for="cidade">Cidade: <b>*</b></label>
-              <input type="text" name="cidade" formControlName="cidade" placeholder="Goiânia" />
-            </div>
-            <!-------------------------------------------------------
-          ---- Estado --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo">
-              <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger"></div>
-              <label for="uf">Estado: <b>*</b></label>
-              <input type="text" name="uf" formControlName="uf" placeholder="GO" value="" required />
-            </div>
-          </div>
-          <div class="comodidades">
-            <!-------------------------------------------------------
-          ---- Comodidades Imóvel --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo comodidadesImovel">
-              <label for="comodidadesImovel">Comodidades do imóvel: </label>
-              <textarea cols="20" rows="10" type="text" name="comodidadesImovel" formControlName="comodidadesImovel"
-                placeholder="Comodidades do imóvel - ex: Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"></textarea>
-            </div>
-            <!-------------------------------------------------------
-          ---- Comodidades do condomínio --------------------------------------------
-          --------------------------------------------------------->
-            <div class="form-campo comodidadesCondominio" *ngIf="
+          <div
+            class="form-campo"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio' ||
               getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
-              <label for="comodidadesCondominio">Comodidades do condomínio: </label>
-              <textarea cols="20" rows="10" type="text" name="comodidadesCondominio"
-                formControlName="comodidadesCondominio"
-                placeholder="Comodidades do condomínio - ex:Segurança 24 horas, Posto de emergência privado"></textarea>
-            </div>
+            "
+          >
+            <div
+              *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid"
+              class="text-danger"
+            ></div>
+            <label for="nomeConstrutora">Construtora: <b>*</b></label>
+            <input
+              type="text"
+              name="nomeConstrutora"
+              formControlName="nomeConstrutora"
+              placeholder="FGR Construtora"
+            />
           </div>
-          <div class="botoes">
-            <!-------------------------------------------------------
+          <!-------------------------------------------------------
+          ---- CEP --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div *ngIf="getControl.cep.touched && getControl.cep.invalid" class="text-danger">
+              <div *ngIf="getControl.cep.errors?.required">Obrigatório inserir CEP</div>
+              <div *ngIf="getControl.cep.errors?.min">
+                CEP inválido, está faltando número. Menor CEP válido: 01001-000
+              </div>
+              <div *ngIf="getControl.cep.errors?.max">
+                CEP inválido, composição maior que 8 dígitos
+              </div>
+            </div>
+            <label for="cep">CEP: <b>*</b></label>
+            <input
+              type="text"
+              onmousewheel="return false;"
+              name="cep"
+              formControlName="cep"
+              placeholder="74000-000"
+              [mask]="this.maskCep"
+            />
+          </div>
+          <!-------------------------------------------------------
+          ---- Logadrarou --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
+              class="text-danger"
+            ></div>
+            <label for="logradouro">Logradouro: <b>*</b></label>
+            <input
+              type="text"
+              name="logradouro"
+              formControlName="logradouro"
+              placeholder="Avenida dos Tupinambás"
+            />
+          </div>
+          <!-------------------------------------------------------
+          ---- Valor do condomínio --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="getControl.numeroLogradouro.errors?.min">
+                É obrigatório que tenha um número, e é obrigatório que não seja menor que 0. Se caso
+                não tiver número, deixe apenas o 0(zero);
+              </div>
+            </div>
+            <label for="numeroLogradouro">Número: </label>
+            <input
+              type="text"
+              name="numeroLogradouro"
+              formControlName="numeroLogradouro"
+              placeholder="456"
+            />
+          </div>
+          <!-------------------------------------------------------
+          ---- Complemento --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <label for="complemento">Complemento: </label>
+            <input
+              type="text"
+              name="complemento"
+              formControlName="complemento"
+              placeholder="Quadra 17, Lote 13"
+            />
+          </div>
+          <!-------------------------------------------------------
+          ---- Bairro/Setor --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.bairro.touched && getControl.bairro.invalid"
+              class="text-danger"
+            ></div>
+            <label for="bairro">Bairro/Setor: <b>*</b></label>
+            <input
+              type="text"
+              name="bairro"
+              formControlName="bairro"
+              placeholder="Bairro Tesouro Perdido"
+            />
+          </div>
+          <!-------------------------------------------------------
+          ---- Cidade --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.cidade.touched && getControl.cidade.invalid"
+              class="text-danger"
+            ></div>
+            <label for="cidade">Cidade: <b>*</b></label>
+            <input type="text" name="cidade" formControlName="cidade" placeholder="Goiânia" />
+          </div>
+          <!-------------------------------------------------------
+          ---- Estado --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger"></div>
+            <label for="uf">Estado: <b>*</b></label>
+            <input type="text" name="uf" formControlName="uf" placeholder="GO" value="" required />
+          </div>
+          <!-------------------------------------------------------
+          ---- Comodidades Imóvel --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo">
+            <label for="comodidadesImovel">Comodidades do imóvel: </label>
+            <textarea
+              cols="20"
+              rows="10"
+              type="text"
+              name="comodidadesImovel"
+              formControlName="comodidadesImovel"
+              placeholder="Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
+            ></textarea>
+          </div>
+          <!-------------------------------------------------------
+          ---- Comodidades do condomínio --------------------------------------------
+          --------------------------------------------------------->
+          <div class="form-campo" 
+          *ngIf="
+          getControl.categoriaImovel.value === 'Sala Comercial' ||
+          getControl.categoriaImovel.value === 'Cobertura' ||
+          getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+          getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+          getControl.categoriaImovel.value === 'Lote em Condomínio'
+        "
+          >
+          >
+            <label for="comodidadesCondominio">Comodidades do condomínio: </label>
+            <textarea
+              cols="20"
+              rows="10"
+              type="text"
+              name="comodidadesCondominio"
+              formControlName="comodidadesCondominio"
+              placeholder="Segurança 24 horas, Posto de emergência privado"
+            ></textarea>
+          </div>
+          <!-------------------------------------------------------
           ---- Enviar dados --------------------------------------------
           --------------------------------------------------------->
-            <button class="limpar" type="reset" (click)="this.limpaArrayImgs()">Limpar dados</button>
-            <button class="enviar" [disabled]="!imovelForm.valid" type="submit">Enviar Dados</button>
+          <div>
+            <button [disabled]="!imovelForm.valid" type="submit">Enviar Dados</button>
           </div>
+          <input type="reset" value="Limpar o formulário" (click)="this.limpaArrayImgs()" />
         </div>
       </form>
+      <!--Fim .formulario-->
     </div>
-    <!--Fim .formulario-->
   </div>
 </div>
