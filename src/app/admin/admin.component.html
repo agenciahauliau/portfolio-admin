@@ -73,6 +73,13 @@
           </svg>
         </a>
       </div>
+      <div class="menuAdmin">
+        <div class="menu">
+          <a [routerLink]="['./leads']" routerLinkActive="router-link-active">
+            <fa-icon [icon]="faClipboard"></fa-icon>
+          </a>
+        </div>
+      </div>
       <div class="footerBarra">
         <a [routerLink]="['']" routerLinkActive="router-link-active" (click)="logout()">
           <p>SAIR</p>

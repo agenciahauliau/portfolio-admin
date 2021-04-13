@@ -5,6 +5,7 @@ import {
   faSyncAlt,
   faImage,
   faSignOutAlt,
+  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from '../services/token.service';
 
@@ -19,6 +20,7 @@ export class AdminComponent implements OnInit {
   faSyncAlt = faSyncAlt;
   faImage = faImage;
   faSignOutAlt = faSignOutAlt;
+  faClipboard = faClipboard;
 
   constructor(private tokenService: TokenService) {}
 
