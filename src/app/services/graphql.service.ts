@@ -38,7 +38,7 @@ export class GraphQlService {
       .mutate({
         mutation: GQL_CRIAR_IMOVEL,
         refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
-        variables: dados,
+        variables: { input: dados },
       })
       .toPromise();
     return result;
@@ -51,7 +51,9 @@ export class GraphQlService {
         refetchQueries: [{ query: GQL_LISTAR_IMOVEIS }],
         variables: {
           _id: id,
-          ...dados,
+          input: {
+            ...dados,
+          },
         },
       })
       .toPromise();
