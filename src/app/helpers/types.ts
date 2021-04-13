@@ -8,6 +8,27 @@ export interface User {
   updatedAt?: number;
 }
 
+export interface Tipologia {
+  quartos?: number;
+  suites?: number;
+  tamanho?: number;
+  valorEntrada?: number;
+  valorParcela?: number;
+}
+
+export interface Lead {
+  _id?: string;
+  tipoLead?: string;
+  nome?: string;
+  email?: string;
+  telefone?: number;
+  comentarios?: string;
+  preferenciaDeContato?: string;
+  imoveis?: Imovel[] | string[];
+  createdAt?: number;
+  updatedAt?: number;
+}
+
 export interface Imovel {
   _id?: string;
   nomeImovel?: string;
@@ -16,6 +37,7 @@ export interface Imovel {
   jardins?: boolean;
   descricaoImovel?: string;
   tipoNegociacao?: string;
+  statusLancamento?: string;
   statusImovel?: string;
   aceitaPermuta?: boolean;
   mobiliado?: boolean;
@@ -32,27 +54,27 @@ export interface Imovel {
   qtdeSuites?: number;
   qtdeVagas?: number;
   nomeConstrutora?: string;
-  cep?: number;
+  bairro?: string;
   logradouro?: string;
+  cep?: string;
   numeroLogradouro?: string;
   complemento?: string;
-  bairro?: string;
   cidade?: string;
   uf?: string;
-  statusLancamento?: string;
-  previsaoLancamento?: number;
-  imgPlantaCondominio?: [string];
   imagensAdicionais?: string[];
+  imgPlantaCondominio?: string[];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
+  galerias?: Galeria[] | string[];
+  previsaoLancamento?: number;
+  tipologias?: Tipologia[] | string[];
   createdAt?: number;
   updatedAt?: number;
 }
-
 export interface Galeria {
   _id?: string;
   nomeGaleria?: string;
   url?: [string];
   arquivoDestaque?: string;
-  idImovel?: [string];
+  idImovel?: Imovel[] | string[];
 }
