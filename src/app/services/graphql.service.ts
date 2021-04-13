@@ -12,8 +12,12 @@ import {
   GQL_LOGIN,
   GQL_ME,
   GQL_LISTAR_IMOVEIS,
+  GQL_CRIAR_LEAD,
+  GQL_LISTAR_LEADS,
+  GQL_ATUALIZA_LEAD,
+  GQL_DELETA_LEAD,
 } from '../graphql/graphql';
-import { Galeria, Imovel, User } from '../helpers/types';
+import { Galeria, Imovel, Lead, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -138,6 +142,55 @@ export class GraphQlService {
         },
         (error) => {
           console.log('erro', error);
+        },
+      );
+  }
+
+  async criarLead(dados: Lead) {
+    const result = this.apollo
+      .mutate({
+        mutation: GQL_CRIAR_LEAD,
+        refetchQueries: [{ query: GQL_LISTAR_LEADS }],
+        variables: { input: dados },
+      })
+      .toPromise();
+    return result;
+  }
+
+  async atualizaLead(id: any, dados: Lead) {
+    const result = this.apollo
+      .mutate({
+        mutation: GQL_ATUALIZA_LEAD,
+        refetchQueries: [{ query: GQL_LISTAR_LEADS }],
+        variables: {
+          _id: id,
+          input: {
+            ...dados,
+          },
+        },
+      })
+      .toPromise();
+    return result;
+  }
+
+  async deletarLead(id: string) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_DELETA_LEAD,
+        refetchQueries: [{ query: GQL_LISTAR_LEADS }],
+        variables: { _id: id },
+      })
+      .subscribe(
+        ({ errors, data }: any) => {
+          if (errors) {
+            return console.error('Erro ao deletar: ', errors[0].message);
+          }
+          if (data) {
+            return console.log('Deletado', data.removeLead);
+          }
+        },
+        (err) => {
+          console.error('Err: ', err);
         },
       );
   }
