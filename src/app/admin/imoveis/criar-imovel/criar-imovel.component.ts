@@ -409,14 +409,14 @@ export class CriarImovelComponent implements OnInit {
       this.isActive ? (this.isActive = false) : (this.isActive = true);
     }
     if (event.target.id === 'complemento1') {
-      this.isActiveImgAdicionais 
+      this.isActiveImgAdicionais
         ? (this.isActiveImgAdicionais = false)
-          : (this.isActiveImgAdicionais = true);
+        : (this.isActiveImgAdicionais = true);
     }
     if (event.target.id === 'complemento2') {
       this.isActiveImgPlantas
         ? (this.isActiveImgPlantas = false)
-          : (this.isActiveImgPlantas = true);
+        : (this.isActiveImgPlantas = true);
     }
   }
 }
