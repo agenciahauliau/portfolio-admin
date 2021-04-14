@@ -21,46 +21,57 @@
                 <svg id="Guide" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="m73.938 487.321c-12.1 0-21.938-10.138-21.938-22.6v-420.121c0-12.462 9.841-22.6 21.938-22.6h-30c-12.097 0-21.938 10.138-21.938 22.6v420.122c0 12.461 9.841 22.6 21.938 22.6 3.186.025 315.354 2.492 438.474 2.679h.011a7.34 7.34 0 0 0 .976-.073c-137.017-.454-406.499-2.584-409.461-2.607z"
-                    fill="#fff2" />
+                    fill="#fff2"
+                  />
                   <path
                     d="m392.315 328.966a33.563 33.563 0 0 0 -54.35-3.721l-45.03 53.805a21.4 21.4 0 0 1 -18.452 7.764 21.636 21.636 0 0 1 -17.013-10.959l-81.253-140.576a33.583 33.583 0 0 0 -56.1-3.578l-108.653 125.481a6 6 0 1 0 9.072 7.855l108.785-125.637.271-.337a21.585 21.585 0 0 1 36.236 2.221l81.252 140.576a33.576 33.576 0 0 0 55.057 4.892l45.03-53.805a21.57 21.57 0 0 1 35.25 2.83l.356.591 108.274 111.277a6 6 0 1 0 8.6-8.369z"
-                    fill="#fff" />
+                    fill="#fff"
+                  />
                   <path
                     d="m284.988 218.5c29.7 0 53.864-24.671 53.864-54.995s-24.164-54.995-53.864-54.995-53.863 24.671-53.863 54.995 24.163 54.995 53.863 54.995zm0-97.99c23.084 0 41.864 19.287 41.864 42.995s-18.78 43-41.864 43-41.863-19.288-41.863-42.995 18.775-42.996 41.863-42.996z"
-                    fill="#fff" />
+                    fill="#fff"
+                  />
                   <path
                     d="m460.646 10h-416.708c-18.714 0-33.938 15.521-33.938 34.6v420.122c0 19.078 15.224 34.6 33.89 34.6 3.139.025 315.346 2.492 438.5 2.679h.03a19.282 19.282 0 0 0 13.827-5.813 19.917 19.917 0 0 0 5.753-14.418l-7.421-437.793c-.33-18.735-15.553-33.977-33.933-33.977zm27.059 477.764a7.377 7.377 0 0 1 -5.282 2.236h-.011c-123.12-.187-435.288-2.654-438.474-2.679-12.1 0-21.938-10.138-21.938-22.6v-420.121c0-12.462 9.841-22.6 21.938-22.6h416.708c11.879 0 21.719 9.954 21.935 22.184l7.419 437.784a8.007 8.007 0 0 1 -2.295 5.796z"
-                    fill="#fff" />
+                    fill="#fff"
+                  />
                 </svg>
                 <img src="{{ mainImg }}" srcset="{{mainImg}}" />
               </div>
               <div class="acoes">
                 <div *ngFor="let progressInfo of progressInfos">
                   <div class="progress">
-                      <p>{{ progressInfo.fileName }}</p>
+                    <p>{{ progressInfo.fileName }}</p>
 
                     <div class="deletar" (click)="deletaImgPrincipal(mainImg)">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="-53 0 463 463">
                         <g fill="#fff2">
                           <path
-                            d="m89.992188 413v-271.800781h-50v271.800781c-.003907 22.09375 17.90625 40.007812 40 40h50c-22.09375.007812-40.003907-17.90625-40-40zm0 0" />
+                            d="m89.992188 413v-271.800781h-50v271.800781c-.003907 22.09375 17.90625 40.007812 40 40h50c-22.09375.007812-40.003907-17.90625-40-40zm0 0"
+                          />
                           <path
-                            d="m162.394531 22.101562c-.007812-3.210937 1.265625-6.292968 3.535157-8.5625 2.269531-2.273437 5.351562-3.542968 8.5625-3.539062h-50c-3.210938-.003906-6.292969 1.265625-8.5625 3.539062-2.269532 2.269532-3.542969 5.351563-3.535157 8.5625v39.199219h50zm0 0" />
+                            d="m162.394531 22.101562c-.007812-3.210937 1.265625-6.292968 3.535157-8.5625 2.269531-2.273437 5.351562-3.542968 8.5625-3.539062h-50c-3.210938-.003906-6.292969 1.265625-8.5625 3.539062-2.269532 2.269532-3.542969 5.351563-3.535157 8.5625v39.199219h50zm0 0"
+                          />
                           <path
-                            d="m59.992188 96.398438c-.003907-9.308594 3.691406-18.238282 10.277343-24.824219 6.582031-6.582031 15.511719-10.277344 24.824219-10.273438h-50c-9.3125-.003906-18.242188 3.691407-24.824219 10.273438-6.585937 6.585937-10.28125 15.515625-10.277343 24.824219-.003907 9.3125 3.691406 18.242187 10.277343 24.828124 6.582031 6.582032 15.511719 10.277344 24.824219 10.273438h50c-9.3125.003906-18.242188-3.691406-24.824219-10.273438-6.585937-6.585937-10.28125-15.515624-10.277343-24.828124zm0 0" />
+                            d="m59.992188 96.398438c-.003907-9.308594 3.691406-18.238282 10.277343-24.824219 6.582031-6.582031 15.511719-10.277344 24.824219-10.273438h-50c-9.3125-.003906-18.242188 3.691407-24.824219 10.273438-6.585937 6.585937-10.28125 15.515625-10.277343 24.824219-.003907 9.3125 3.691406 18.242187 10.277343 24.828124 6.582031 6.582032 15.511719 10.277344 24.824219 10.273438h50c-9.3125.003906-18.242188-3.691406-24.824219-10.273438-6.585937-6.585937-10.28125-15.515624-10.277343-24.828124zm0 0"
+                          />
                         </g>
                         <path
                           d="m312.292969 51.199219h-57.199219v-29.097657c-.003906-12.207031-9.898438-22.09765575-22.101562-22.101562h-108.597657c-12.207031.00390625-22.097656 9.894531-22.101562 22.101562v29.199219h-57.199219c-22.011719.003907-40.800781 15.890625-44.464844 37.59375-3.664062 21.703125 8.875 42.878907 29.664063 50.105469-.199219.714844-.296875 1.457031-.300781 2.199219v271.800781c.011718 27.609375 22.390624 49.988281 50 50h197.5c27.609374-.011719 49.992187-22.390625 50-50v-271.800781c.007812-.742188-.09375-1.484375-.300782-2.199219 20.816406-7.25 33.351563-28.46875 29.664063-50.199219s-22.523438-37.621093-44.5625-37.601562zm-189.898438-29.097657c.003907-1.160156.941407-2.09375 2.097657-2.101562h108.601562c1.15625.007812 2.09375.941406 2.097656 2.101562v29.199219h-112.796875zm185 390.898438c-.050781 16.546875-13.453125 29.953125-30 30h-197.402343c-16.546876-.046875-29.949219-13.453125-30-30v-271.5h257.5v271.5zm4.898438-291.5h-267.199219c-13.863281 0-25.101562-11.238281-25.101562-25.101562 0-13.859376 11.238281-25.097657 25.101562-25.097657h267.199219c13.863281 0 25.101562 11.238281 25.101562 25.097657 0 13.863281-11.238281 25.101562-25.101562 25.101562zm0 0"
-                          fill="#fff" />
+                          fill="#fff"
+                        />
                         <path
                           d="m178.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                          fill="#fff" />
+                          fill="#fff"
+                        />
                         <path
                           d="m242.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                          fill="#fff" />
+                          fill="#fff"
+                        />
                         <path
                           d="m114.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                          fill="#fff" />
+                          fill="#fff"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -71,18 +82,28 @@
               <div class="fechar" id="complemento" (click)="ativaModal($event)">X</div>
               <div class="informacoes">
                 <h2>Upload da imagem principal</h2>
-                <p>Após selecionar a imagem aperte em carregar para adicionar a imagem no banco de dados</p>
+                <p>
+                  Após selecionar a imagem aperte em carregar para adicionar a imagem no banco de
+                  dados
+                </p>
               </div>
               <div class="loadImagem">
                 <img [src]="imgPreview" width="300px" *ngIf="imgPreview" />
                 <div class="svg">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="420pt" viewBox="0 -30 420 420" width="420pt">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="420pt"
+                    viewBox="0 -30 420 420"
+                    width="420pt"
+                  >
                     <path
                       d="m410 174.175781c-5.515625.015625-9.984375 4.484375-10 10v126.199219c-.046875 16.546875-13.453125 29.953125-30 30h-320c-16.546875-.046875-29.953125-13.453125-30-30v-126.199219c0-5.523437-4.476562-10-10-10s-10 4.476563-10 10v126.199219c.0117188 27.609375 22.390625 49.988281 50 50h320c27.609375-.011719 49.988281-22.390625 50-50v-126.199219c-.015625-5.515625-4.484375-9.984375-10-10zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <path
                       d="m277.101562 56.976562-63.601562-54.5c-.054688 0-.101562-.046874-.101562-.101562l-.296876-.300781c-.101562-.097657-.300781-.199219-.402343-.300781-.09375-.121094-.242188-.195313-.398438-.199219-.101562-.097657-.300781-.199219-.402343-.300781-.097657-.097657-.199219-.097657-.398438-.199219-.199219-.097657-.300781-.199219-.5-.199219-.101562-.101562-.300781-.101562-.398438-.199219-.203124-.101562-.300781-.101562-.5-.199219-.101562 0-.300781-.101562-.402343-.101562-.199219 0-.300781-.101562-.5-.101562-.097657 0-.300781-.097657-.398438-.097657-.199219 0-.402343-.1015622-.601562-.1015622h-.300781c-.628907-.0976563-1.269532-.0976563-1.898438 0h-.300781c-.199219 0-.398438.1015622-.597657.1015622-.101562 0-.300781.097657-.402343.097657-.199219 0-.300781.101562-.5.101562-.097657 0-.300781.101562-.398438.101562-.199219.097657-.300781.097657-.5.199219-.101562.097657-.300781.097657-.402343.199219-.199219.101562-.296876.101562-.5.199219-.097657.101562-.296876.101562-.398438.199219-.101562.101562-.300781.203124-.398438.300781-.101562.101562-.203124.101562-.402343.199219-.097657.101562-.300781.203124-.398438.300781l-.300781.300781c-.054688 0-.101562.042969-.101562.101562l-63.597657 54.5c-4.199219 3.589844-4.691406 9.902344-1.101562 14.097657 3.589843 4.199219 9.902343 4.691406 14.101562 1.101562l47.199219-40.402343v246.402343c0 5.523438 4.476562 10 10 10s10-4.476562 10-10v-246.402343l47.101562 40.402343c4.195313 3.589844 10.507813 3.097657 14.097657-1.101562 3.589843-4.195313 3.097656-10.507813-1.097657-14.097657zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                   </svg>
                   <h4 class="p">fazer upload da imagem</h4>
                   <h4 class="s">Clique na imagem para mudar</h4>
@@ -91,9 +112,15 @@
 
                 <div *ngFor="let progressInfo of progressInfos">
                   <div class="progress">
-                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                      attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                      [ngStyle]="{ width: progressInfo.value + '%' }" style="width: { progressInfo.value }%;"></div>
+                    <div
+                      class="progress-bar progress-bar-info progress-bar-striped"
+                      role="progressbar"
+                      attr.aria-valuenow="{{ progressInfo.value }}"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      [ngStyle]="{ width: progressInfo.value + '%' }"
+                      style="width: { progressInfo.value }%;"
+                    ></div>
                     <div class="info">
                       <p>{{ progressInfo.fileName }}</p>
                       <p>{{ progressInfo.value }}%</p>
@@ -102,54 +129,76 @@
                 </div>
               </div>
               <div class="informacoes">
-                <p>depois que a imagem carregar 100%, aperte no botão de sair no canto superior direito</p>
+                <p>
+                  depois que a imagem carregar 100%, aperte no botão de sair no canto superior
+                  direito
+                </p>
               </div>
               <div class="botoesModal">
                 <button class="deletar" type="button" (click)="deletaImgPrincipal(mainImg)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-53 0 463 463">
                     <g fill="#fff2">
                       <path
-                        d="m89.992188 413v-271.800781h-50v271.800781c-.003907 22.09375 17.90625 40.007812 40 40h50c-22.09375.007812-40.003907-17.90625-40-40zm0 0" />
+                        d="m89.992188 413v-271.800781h-50v271.800781c-.003907 22.09375 17.90625 40.007812 40 40h50c-22.09375.007812-40.003907-17.90625-40-40zm0 0"
+                      />
                       <path
-                        d="m162.394531 22.101562c-.007812-3.210937 1.265625-6.292968 3.535157-8.5625 2.269531-2.273437 5.351562-3.542968 8.5625-3.539062h-50c-3.210938-.003906-6.292969 1.265625-8.5625 3.539062-2.269532 2.269532-3.542969 5.351563-3.535157 8.5625v39.199219h50zm0 0" />
+                        d="m162.394531 22.101562c-.007812-3.210937 1.265625-6.292968 3.535157-8.5625 2.269531-2.273437 5.351562-3.542968 8.5625-3.539062h-50c-3.210938-.003906-6.292969 1.265625-8.5625 3.539062-2.269532 2.269532-3.542969 5.351563-3.535157 8.5625v39.199219h50zm0 0"
+                      />
                       <path
-                        d="m59.992188 96.398438c-.003907-9.308594 3.691406-18.238282 10.277343-24.824219 6.582031-6.582031 15.511719-10.277344 24.824219-10.273438h-50c-9.3125-.003906-18.242188 3.691407-24.824219 10.273438-6.585937 6.585937-10.28125 15.515625-10.277343 24.824219-.003907 9.3125 3.691406 18.242187 10.277343 24.828124 6.582031 6.582032 15.511719 10.277344 24.824219 10.273438h50c-9.3125.003906-18.242188-3.691406-24.824219-10.273438-6.585937-6.585937-10.28125-15.515624-10.277343-24.828124zm0 0" />
+                        d="m59.992188 96.398438c-.003907-9.308594 3.691406-18.238282 10.277343-24.824219 6.582031-6.582031 15.511719-10.277344 24.824219-10.273438h-50c-9.3125-.003906-18.242188 3.691407-24.824219 10.273438-6.585937 6.585937-10.28125 15.515625-10.277343 24.824219-.003907 9.3125 3.691406 18.242187 10.277343 24.828124 6.582031 6.582032 15.511719 10.277344 24.824219 10.273438h50c-9.3125.003906-18.242188-3.691406-24.824219-10.273438-6.585937-6.585937-10.28125-15.515624-10.277343-24.828124zm0 0"
+                      />
                     </g>
                     <path
                       d="m312.292969 51.199219h-57.199219v-29.097657c-.003906-12.207031-9.898438-22.09765575-22.101562-22.101562h-108.597657c-12.207031.00390625-22.097656 9.894531-22.101562 22.101562v29.199219h-57.199219c-22.011719.003907-40.800781 15.890625-44.464844 37.59375-3.664062 21.703125 8.875 42.878907 29.664063 50.105469-.199219.714844-.296875 1.457031-.300781 2.199219v271.800781c.011718 27.609375 22.390624 49.988281 50 50h197.5c27.609374-.011719 49.992187-22.390625 50-50v-271.800781c.007812-.742188-.09375-1.484375-.300782-2.199219 20.816406-7.25 33.351563-28.46875 29.664063-50.199219s-22.523438-37.621093-44.5625-37.601562zm-189.898438-29.097657c.003907-1.160156.941407-2.09375 2.097657-2.101562h108.601562c1.15625.007812 2.09375.941406 2.097656 2.101562v29.199219h-112.796875zm185 390.898438c-.050781 16.546875-13.453125 29.953125-30 30h-197.402343c-16.546876-.046875-29.949219-13.453125-30-30v-271.5h257.5v271.5zm4.898438-291.5h-267.199219c-13.863281 0-25.101562-11.238281-25.101562-25.101562 0-13.859376 11.238281-25.097657 25.101562-25.097657h267.199219c13.863281 0 25.101562 11.238281 25.101562 25.097657 0 13.863281-11.238281 25.101562-25.101562 25.101562zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <path
                       d="m178.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <path
                       d="m242.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <path
                       d="m114.691406 255.5c-5.515625.015625-9.984375 4.484375-10 10v122c0 5.523438 4.480469 10 10 10 5.523438 0 10-4.476562 10-10v-122c-.015625-5.515625-4.480468-9.984375-10-10zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                   </svg>
                 </button>
-                <button type="button" class="upload" [disabled]="!selectedFiles" (click)="uploadFiles()">
+                <button
+                  type="button"
+                  class="upload"
+                  [disabled]="!selectedFiles"
+                  (click)="uploadFiles()"
+                >
                   <p>UPLOAD</p>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -98 419.98646 419">
                     <path
                       d="m161.429688 182.269531c-12.347657 0-19.675782-10.011719-16.367188-22.359375l39.972656-149.183594h-9.597656c-12.351562 0-25.042969 10.007813-28.351562 22.359376l-42.023438 156.824218c-3.308594 12.347656 4.019531 22.359375 16.367188 22.359375h217.402343c12.347657 0 25.042969-10.011719 28.351563-22.359375l2.046875-7.640625zm0 0"
-                      fill="#fff2" />
+                      fill="#fff2"
+                    />
                     <path
                       d="m261.601562 172.941406c-3.25.003906-6.300781-1.570312-8.171874-4.226562l-46.070313-65.117188-84.824219 48.242188c-4.800781 2.730468-10.90625 1.050781-13.636718-3.75-2.730469-4.800782-1.050782-10.902344 3.75-13.632813l92.699218-52.722656c4.46875-2.542969 10.136719-1.28125 13.105469 2.914063l45.746094 64.660156 62.546875-40.730469c3.46875-2.261719 7.96875-2.148437 11.320312.28125l45.667969 33.074219c4.472656 3.242187 5.472656 9.492187 2.234375 13.96875-3.238281 4.472656-9.492188 5.472656-13.964844 2.234375l-40.101562-29.046875-64.847656 42.230468c-1.621094 1.0625-3.519532 1.625-5.453126 1.621094zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <path
                       d="m88.132812 121.496094h-55.203124c-5.523438 0-10-4.476563-10-10 0-5.523438 4.476562-10 10-10h55.199218c5.523438 0 10 4.476562 10 10 0 5.523437-4.476562 10-10 10zm0 0"
-                      fill="#fff" />
+                      fill="#fff"
+                    />
                     <g fill="#fff">
                       <path
-                        d="m294.511719 36.597656c-19.894531 0-39.621094 15.46875-44.914063 35.214844-2.820312 10.527344-1.050781 20.980469 4.855469 28.675781 5.714844 7.449219 14.882813 11.71875 25.15625 11.71875 19.894531 0 39.625-15.46875 44.914063-35.21875 2.824218-10.523437 1.050781-20.976562-4.855469-28.675781-5.710938-7.445312-14.882813-11.714844-25.15625-11.714844zm10.695312 35.214844c-2.960937 11.054688-14.683593 20.394531-25.601562 20.394531-4.125 0-7.335938-1.347656-9.289063-3.890625-2.121094-2.765625-2.621094-6.789062-1.402344-11.328125 2.964844-11.050781 14.683594-20.390625 25.601563-20.390625 4.125 0 7.335937 1.34375 9.289063 3.890625 2.121093 2.765625 2.617187 6.785157 1.402343 11.324219zm0 0" />
+                        d="m294.511719 36.597656c-19.894531 0-39.621094 15.46875-44.914063 35.214844-2.820312 10.527344-1.050781 20.980469 4.855469 28.675781 5.714844 7.449219 14.882813 11.71875 25.15625 11.71875 19.894531 0 39.625-15.46875 44.914063-35.21875 2.824218-10.523437 1.050781-20.976562-4.855469-28.675781-5.710938-7.445312-14.882813-11.714844-25.15625-11.714844zm10.695312 35.214844c-2.960937 11.054688-14.683593 20.394531-25.601562 20.394531-4.125 0-7.335938-1.347656-9.289063-3.890625-2.121094-2.765625-2.621094-6.789062-1.402344-11.328125 2.964844-11.050781 14.683594-20.390625 25.601563-20.390625 4.125 0 7.335937 1.34375 9.289063 3.890625 2.121093 2.765625 2.617187 6.785157 1.402343 11.324219zm0 0"
+                      />
                       <path
-                        d="m20.191406 72.496094h93.417969c5.523437 0 10-4.476563 10-10 0-5.523438-4.476563-10-10-10h-93.417969c-5.523437 0-10 4.476562-10 10 0 5.523437 4.476563 10 10 10zm0 0" />
+                        d="m20.191406 72.496094h93.417969c5.523437 0 10-4.476563 10-10 0-5.523438-4.476563-10-10-10h-93.417969c-5.523437 0-10 4.476562-10 10 0 5.523437 4.476563 10 10 10zm0 0"
+                      />
                       <path
-                        d="m71.144531 150.496094h-61.144531c-5.523438 0-10 4.476562-10 10 0 5.523437 4.476562 10 10 10h61.144531c5.523438 0 10-4.476563 10-10 0-5.523438-4.476562-10-10-10zm0 0" />
+                        d="m71.144531 150.496094h-61.144531c-5.523438 0-10 4.476562-10 10 0 5.523437 4.476562 10 10 10h61.144531c5.523438 0 10-4.476563 10-10 0-5.523438-4.476562-10-10-10zm0 0"
+                      />
                       <path
-                        d="m392.835938.496094h-217.398438c-16.84375 0-33.539062 13.191406-38.011719 29.886718l-42.027343 156.878907c-2.425782 9.058593-.878907 18.226562 4.246093 24.902343 5.25 6.65625 13.308594 10.480469 21.785157 10.332032h217.402343c16.839844 0 33.535157-13.191406 38.011719-29.886719l42.019531-156.878906c2.425781-9.058594.878907-18.226563-4.242187-24.898438-5.25-6.65625-13.308594-10.480469-21.785156-10.335937zm6.710937 30-42.019531 156.9375c-2.136719 7.964844-10.871094 15.0625-18.695313 15.0625h-217.398437c-1.871094 0-4.417969-.523438-5.917969-2.476563-1.328125-1.730469-1.609375-4.417969-.792969-7.464843l42.019532-156.964844c2.132812-7.964844 10.867187-15.09375 18.691406-15.09375h217.402344c1.871093 0 4.417968.523437 5.917968 2.480468 1.328125 1.726563 1.609375 4.472657.792969 7.519532zm0 0" />
+                        d="m392.835938.496094h-217.398438c-16.84375 0-33.539062 13.191406-38.011719 29.886718l-42.027343 156.878907c-2.425782 9.058593-.878907 18.226562 4.246093 24.902343 5.25 6.65625 13.308594 10.480469 21.785157 10.332032h217.402343c16.839844 0 33.535157-13.191406 38.011719-29.886719l42.019531-156.878906c2.425781-9.058594.878907-18.226563-4.242187-24.898438-5.25-6.65625-13.308594-10.480469-21.785156-10.335937zm6.710937 30-42.019531 156.9375c-2.136719 7.964844-10.871094 15.0625-18.695313 15.0625h-217.398437c-1.871094 0-4.417969-.523438-5.917969-2.476563-1.328125-1.730469-1.609375-4.417969-.792969-7.464843l42.019532-156.964844c2.132812-7.964844 10.867187-15.09375 18.691406-15.09375h217.402344c1.871093 0 4.417968.523437 5.917968 2.480468 1.328125 1.726563 1.609375 4.472657.792969 7.519532zm0 0"
+                      />
                     </g>
                   </svg>
                 </button>
@@ -163,8 +212,10 @@
 
           <div class="definicaoImovel">
             <div class="form-campo categoriaImovel">
-              <div *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid" class="text-danger">
-              </div>
+              <div
+                *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid"
+                class="text-danger"
+              ></div>
               <label for="categoriaImovel"> Categoria do Imóvel: <b>*</b> </label>
               <select name="categoriaImovel" formControlName="categoriaImovel">
                 <option value="">Selecione a categoria do imóvel</option>
@@ -184,10 +235,13 @@
           ---- Botão Jardins --------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo checkbox Jardins" *ngIf="
+            <div
+              class="form-campo checkbox Jardins"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
+              "
+            >
               <input type="checkbox" name="jardins" formControlName="jardins" />
               <label for="jardins">Jardins </label>
             </div>
@@ -198,8 +252,10 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid" class="text-danger">
-            </div>
+            <div
+              *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid"
+              class="text-danger"
+            ></div>
             <label for="tipoNegociacao">Tipo de Negociação: <b>*</b></label>
             <select name="tipoNegociacao" formControlName="tipoNegociacao">
               <option value="">Selecione o tipo de negociação</option>
@@ -214,26 +270,57 @@
           --------------------------------------------------------->
 
           <div class="form-campo" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
-            <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger"></div>
+            <div
+              *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
+              class="text-danger"
+            ></div>
             <label for="tipologias">Tipologias <b>*</b></label>
-            <div formArrayName="tipologias" *ngFor="let tipologia of tipologias.controls; index as idx">
+            <div
+              formArrayName="tipologias"
+              *ngFor="let tipologia of tipologias.controls; index as idx"
+            >
               <label>Tipologia {{ idx + 1 }}</label>
               <div type="text" [formGroupName]="idx">
                 <label for="quartos">Quartos: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="quartos" formControlName="quartos"
-                  placeholder="3" />
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="quartos"
+                  formControlName="quartos"
+                  placeholder="3"
+                />
                 <label for="suites">Suítes: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="suites" formControlName="suites"
-                  placeholder="3" />
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="suites"
+                  formControlName="suites"
+                  placeholder="3"
+                />
                 <label for="tamanho">Tamanho: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="tamanho" placeholder="332,56 m²"
-                  formControlName="tamanho" />
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="tamanho"
+                  placeholder="332,56 m²"
+                  formControlName="tamanho"
+                />
                 <label for="valorEntrada">Valor de Entrada: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="valorEntrada" formControlName="valorEntrada"
-                  placeholder="R$ 15.000,00" />
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="valorEntrada"
+                  formControlName="valorEntrada"
+                  placeholder="R$ 15.000,00"
+                />
                 <label for="valorParcela">Valor Parcela: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
-                  placeholder="R$ 15.000,00" />
+                <input
+                  type="number"
+                  onmousewheel="return false;"
+                  name="valorParcela"
+                  formControlName="valorParcela"
+                  placeholder="R$ 15.000,00"
+                />
                 <button type="button" (click)="removeTipologia(idx)">
                   <fa-icon [icon]="faTrash"></fa-icon>
                 </button>
@@ -249,7 +336,10 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid" class="text-danger"></div>
+            <div
+              *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="statusImovel">Status do imóvel <b>*</b></label>
             <select name="statusImovel" formControlName="statusImovel">
               <option value="">Selecione o status do imóvel</option>
@@ -267,7 +357,12 @@
           --------------------------------------------------------->
 
             <div class="form-campo checkbox">
-              <input type="checkbox" name="aceitaPermuta" formControlName="aceitaPermuta" value="false" />
+              <input
+                type="checkbox"
+                name="aceitaPermuta"
+                formControlName="aceitaPermuta"
+                value="false"
+              />
               <label for="aceitaPermuta">Aceita permuta? </label>
             </div>
 
@@ -286,14 +381,22 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.valorImovel.errors?.min">
                 Valor do imóvel não pode ser menor do que R$ 0,00
               </div>
             </div>
             <label for="valorImovel">Valor do imóvel: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="valorImovel" formControlName="valorImovel"
-              placeholder="Valor do imóvel - ex: 1.000.000,00" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorImovel"
+              formControlName="valorImovel"
+              placeholder="Valor do imóvel - ex: 1.000.000,00"
+            />
           </div>
 
           <!-------------------------------------------------------
@@ -301,14 +404,22 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.valorIPTU.errors?.min">
                 Valor do IPTU não pode ser menor do que R$ 0,00
               </div>
             </div>
             <label for="valorIPTU">Valor do IPTU: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="valorIPTU" formControlName="valorIPTU"
-              placeholder="Valor do IPTU - ex: 400,45" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="valorIPTU"
+              formControlName="valorIPTU"
+              placeholder="Valor do IPTU - ex: 400,45"
+            />
           </div>
 
           <!-------------------------------------------------------
@@ -316,14 +427,22 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <div *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid" class="text-danger">
+            <div
+              *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid"
+              class="text-danger"
+            >
               <div *ngIf="getControl.areaTotal.errors?.min">
                 A Área total do imóvel não pode ser menor que 0
               </div>
             </div>
             <label for="areaTotal">Área total do imovel: <b>*</b></label>
-            <input type="number" onmousewheel="return false;" name="areaTotal" placeholder="Área total - ex: 332,56"
-              formControlName="areaTotal" />
+            <input
+              type="number"
+              onmousewheel="return false;"
+              name="areaTotal"
+              placeholder="Área total - ex: 332,56"
+              formControlName="areaTotal"
+            />
           </div>
         </div>
         <div class="coluna direita">
@@ -331,11 +450,18 @@
           ---- Descrição --------------------------------------------
           --------------------------------------------------------->
           <div class="form-campo">
-            <div *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid" class="text-danger">
-            </div>
+            <div
+              *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
+              class="text-danger"
+            ></div>
             <label for="descricaoImovel">Descrição do Imóvel: <b>*</b></label>
-            <textarea name="descricaoImovel" cols="40" rows="10" formControlName="descricaoImovel"
-              placeholder="Descriçaõ do Imóvel - Linda e ampla casa para morar com sua família"></textarea>
+            <textarea
+              name="descricaoImovel"
+              cols="40"
+              rows="10"
+              formControlName="descricaoImovel"
+              placeholder="Descriçaõ do Imóvel - Linda e ampla casa para morar com sua família"
+            ></textarea>
           </div>
 
           <!-------------------------------------------------------
@@ -343,23 +469,37 @@
           --------------------------------------------------------->
 
           <div class="form-campo">
-            <button type="button" name="complemento1" class="" (click)="ativaModal($event)"></button>
+            <button
+              type="button"
+              name="complemento1"
+              class=""
+              (click)="ativaModal($event)"
+            ></button>
 
             <label for="inagensAdicionais">Adicionar mais Fotos: <b>*</b></label>
             <div>
               <input type="file" multiple (change)="selectFilesImagensAdicionais($event)" />
             </div>
             <div [class.active]="isActiveImgAdicionais">
-              <button type="button" [disabled]="!selectedFilesImgsAdicionais" (click)="uploadFilesImagensAdicionais()">
+              <button
+                type="button"
+                [disabled]="!selectedFilesImgsAdicionais"
+                (click)="uploadFilesImagensAdicionais()"
+              >
                 Upload
               </button>
             </div>
             <div *ngFor="let progressInfo of progressInfosImgsAdicionais">
               <span>{{ progressInfo.fileName }}</span>
               <div class="progress">
-                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                  attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                  [ngStyle]="{ width: progressInfo.value + '%' }">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progressInfo.value }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progressInfo.value + '%' }"
+                >
                   {{ progressInfo.value }}%
                   <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
                   <button type="button" (click)="deletaImagensAdicionais(progressInfo.url)">
@@ -370,71 +510,106 @@
             </div>
           </div>
 
-          <div class="infoCondominio" *ngIf="
+          <div
+            class="infoCondominio"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio' ||
               getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
+            "
+          >
             <!-------------------------------------------------------
           ---- Nome Imóvel --------------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo nomeImovel" *ngIf="
+            <div
+              class="form-campo nomeImovel"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
-              <div *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid" class="text-danger"></div>
+              "
+            >
+              <div
+                *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid"
+                class="text-danger"
+              ></div>
               <label for="nomeImovel">Nome do Imóvel: <b>*</b></label>
-              <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="Nome do Condomínio" />
+              <input
+                type="text"
+                name="nomeImovel"
+                formControlName="nomeImovel"
+                placeholder="Nome do Condomínio"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Construtora --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo nomeConstrutora" *ngIf="
+            <div
+              class="form-campo nomeConstrutora"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
-              <div *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid" class="text-danger">
-              </div>
+              "
+            >
+              <div
+                *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid"
+                class="text-danger"
+              ></div>
               <label for="nomeConstrutora">Construtora: <b>*</b></label>
-              <input type="text" name="nomeConstrutora" formControlName="nomeConstrutora"
-                placeholder="Construtora do imóvel - FGR Construtora" />
+              <input
+                type="text"
+                name="nomeConstrutora"
+                formControlName="nomeConstrutora"
+                placeholder="Construtora do imóvel - FGR Construtora"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Plantas --------------------------------------------
           --------------------------------------------------------->
 
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 (getControl.categoriaImovel.value === 'Casa em Condomínio' &&
                   getControl.jardins.value) ||
                 (getControl.categoriaImovel.value === 'Lote em Condomínio' &&
                   getControl.jardins.value)
-              ">
+              "
+            >
               <label for="imgPlantaCondominio">Adicionar planta: <b>*</b></label>
               <div>
                 <input type="file" (change)="selectFilesPlantaFiles($event)" />
               </div>
               <div>
-                <button type="button" [disabled]="!selectedPlantaFiles" (click)="uploadFilesPlantaFiles()">
+                <button
+                  type="button"
+                  [disabled]="!selectedPlantaFiles"
+                  (click)="uploadFilesPlantaFiles()"
+                >
                   Upload
                 </button>
               </div>
               <div *ngFor="let progressInfo of progressInfosPlantaFiles">
                 <span>{{ progressInfo.fileName }}</span>
                 <div class="progress">
-                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                    [ngStyle]="{ width: progressInfo.value + '%' }">
+                  <div
+                    class="progress-bar progress-bar-info progress-bar-striped"
+                    role="progressbar"
+                    attr.aria-valuenow="{{ progressInfo.value }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [ngStyle]="{ width: progressInfo.value + '%' }"
+                  >
                     {{ progressInfo.value }}%
                     <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
                     <button type="button" (click)="deletaImagensPlantas(progressInfo.url)">
@@ -447,19 +622,28 @@
             <!-------------------------------------------------------
           ---- Previsão do lançamento --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 (getControl.categoriaImovel.value === 'Casa em Condomínio' &&
                   getControl.jardins.value) ||
                 (getControl.categoriaImovel.value === 'Lote em Condomínio' &&
                   getControl.jardins.value)
-              ">
+              "
+            >
               <label for="previsaoLancamento">Previsão do lançamento</label>
-              <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento"
-                placeholder="Previsão do lançamento" />
+              <input
+                type="date"
+                name="previsaoLancamento"
+                formControlName="previsaoLancamento"
+                placeholder="Previsão do lançamento"
+              />
             </div>
           </div>
 
-          <div class="numeros" *ngIf="
+          <div
+            class="numeros"
+            *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
@@ -467,41 +651,64 @@
               getControl.categoriaImovel.value === 'Casa Residencial' ||
               getControl.categoriaImovel.value === 'Casa em Condomínio' ||
               getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
+            "
+          >
             <!-------------------------------------------------------
           ---- Valor do condomínio --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
-              <div *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid" class="text-danger">
+              "
+            >
+              <div
+                *ngIf="getControl.valorCondominio.touched && getControl.valorCondominio.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.valorCondominio.errors?.min">
                   Valor do condomínio não pode ser menor do que R$ 0,00
                 </div>
               </div>
               <label for="valorCondominio">Valor do condomínio: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="valorCondominio" formControlName="valorCondominio"
-                placeholder="Valor cond. - ex: 1.500,13" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="valorCondominio"
+                formControlName="valorCondominio"
+                placeholder="Valor cond. - ex: 1.500,13"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Área Construída --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
+              "
+            >
               <label for="areaConstruida">Área construída: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="areaConstruida" formControlName="areaConstruida"
-                placeholder="Área cons. - ex: 230,56" />
-              <div *ngIf="getControl.areaConstruida.touched && getControl.areaConstruida.invalid" class="text-danger">
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="areaConstruida"
+                formControlName="areaConstruida"
+                placeholder="Área cons. - ex: 230,56"
+              />
+              <div
+                *ngIf="getControl.areaConstruida.touched && getControl.areaConstruida.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.areaConstruida.errors?.min">
                   A Área construída do imóvel não pode ser menor que 0
                 </div>
@@ -511,97 +718,152 @@
             <!-------------------------------------------------------
           ---- Andar do imóvel --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão'
-              ">
-              <div *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid" class="text-danger"></div>
+              "
+            >
+              <div
+                *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid"
+                class="text-danger"
+              ></div>
               <label for="andarImovel">Andar do imóvel (se for imóvel vertical): </label>
-              <input type="number" onmousewheel="return false;" name="andarImovel" formControlName="andarImovel"
-                placeholder="Andar" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="andarImovel"
+                formControlName="andarImovel"
+                placeholder="Andar"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Quartos --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid" class="text-danger">
+              "
+            >
+              <div
+                *ngIf="getControl.qtdeQuarto.touched && getControl.qtdeQuarto.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.qtdeQuarto.errors?.min">
                   A quantidade de quarto(s) não pode ser menor do que 0. Se for casa, deixe 0.
                 </div>
               </div>
               <label for="qtdeQuarto">Quantidade de quartos: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="qtdeQuarto" formControlName="qtdeQuarto"
-                placeholder="Quartos" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="qtdeQuarto"
+                formControlName="qtdeQuarto"
+                placeholder="Quartos"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Banheiros --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid" class="text-danger">
+              "
+            >
+              <div
+                *ngIf="getControl.qtdeBanheiro.touched && getControl.qtdeBanheiro.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.qtdeBanheiro.errors?.min">
                   A quantidade de banheiro(s) não pode ser menor do que 0. Se for casa, deixe 0.
                 </div>
               </div>
               <label for="qtdeBanheiro">Quantidade de banheiros: <b>*</b></label>
-              <input type="number" onmousewheel="return false;" name="qtdeBanheiro" formControlName="qtdeBanheiro"
-                placeholder="Banheiros" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="qtdeBanheiro"
+                formControlName="qtdeBanheiro"
+                placeholder="Banheiros"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Suítes --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid" class="text-danger">
+              "
+            >
+              <div
+                *ngIf="getControl.qtdeSuites.touched && getControl.qtdeSuites.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.qtdeSuites.errors?.min">
                   A quantidade de suíte(s) não pode ser menor do que 0. Se for casa, deixe 0.
                 </div>
               </div>
               <label for="qtdeSuites">Quantidade de suítes: </label>
-              <input type="number" onmousewheel="return false;" name="qtdeSuites" formControlName="qtdeSuites"
-                placeholder="Suítes" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="qtdeSuites"
+                formControlName="qtdeSuites"
+                placeholder="Suítes"
+              />
             </div>
 
             <!-------------------------------------------------------
           ---- Quantidade de vagas --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo" *ngIf="
+            <div
+              class="form-campo"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid" class="text-danger">
+              "
+            >
+              <div
+                *ngIf="getControl.qtdeVagas.touched && getControl.qtdeVagas.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.qtdeVagas.errors?.min">
                   A quantidade de vaga(s) não pode ser menor do que 0. Se for casa, deixe 0.
                 </div>
               </div>
               <label for="qtdeVagas">Quantidade de vagas: </label>
-              <input type="number" onmousewheel="return false;" name="qtdeVagas" formControlName="qtdeVagas"
-                placeholder="Vagas na garagem" />
+              <input
+                type="number"
+                onmousewheel="return false;"
+                name="qtdeVagas"
+                formControlName="qtdeVagas"
+                placeholder="Vagas na garagem"
+              />
             </div>
           </div>
           <div class="endereco">
@@ -619,51 +881,88 @@
                 </div>
               </div>
               <label for="cep">CEP: <b>*</b></label>
-              <input type="text" onmousewheel="return false;" name="cep" formControlName="cep" placeholder="74000-000"
-                [mask]="this.maskCep" />
+              <input
+                type="text"
+                onmousewheel="return false;"
+                name="cep"
+                formControlName="cep"
+                placeholder="74000-000"
+                [mask]="this.maskCep"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Logadrarou --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
+              <div
+                *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
+                class="text-danger"
+              ></div>
               <label for="logradouro">Logradouro: <b>*</b></label>
-              <input type="text" name="logradouro" formControlName="logradouro" placeholder="Avenida dos Tupinambás" />
+              <input
+                type="text"
+                name="logradouro"
+                formControlName="logradouro"
+                placeholder="Avenida dos Tupinambás"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Valor do condomínio --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
-              <div *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
-                class="text-danger">
+              <div
+                *ngIf="getControl.numeroLogradouro.touched && getControl.numeroLogradouro.invalid"
+                class="text-danger"
+              >
                 <div *ngIf="getControl.numeroLogradouro.errors?.min">
                   É obrigatório que tenha um número, e é obrigatório que não seja menor que 0. Se
                   caso não tiver número, deixe apenas o 0(zero);
                 </div>
               </div>
               <label for="numeroLogradouro">Número: </label>
-              <input type="text" name="numeroLogradouro" formControlName="numeroLogradouro" placeholder="456" />
+              <input
+                type="text"
+                name="numeroLogradouro"
+                formControlName="numeroLogradouro"
+                placeholder="456"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Complemento --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
               <label for="complemento">Complemento: </label>
-              <input type="text" name="complemento" formControlName="complemento" placeholder="Quadra 17, Lote 13" />
+              <input
+                type="text"
+                name="complemento"
+                formControlName="complemento"
+                placeholder="Quadra 17, Lote 13"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Bairro/Setor --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
-              <div *ngIf="getControl.bairro.touched && getControl.bairro.invalid" class="text-danger"></div>
+              <div
+                *ngIf="getControl.bairro.touched && getControl.bairro.invalid"
+                class="text-danger"
+              ></div>
               <label for="bairro">Bairro/Setor: <b>*</b></label>
-              <input type="text" name="bairro" formControlName="bairro" placeholder="Bairro Tesouro Perdido" />
+              <input
+                type="text"
+                name="bairro"
+                formControlName="bairro"
+                placeholder="Bairro Tesouro Perdido"
+              />
             </div>
             <!-------------------------------------------------------
           ---- Cidade --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
-              <div *ngIf="getControl.cidade.touched && getControl.cidade.invalid" class="text-danger"></div>
+              <div
+                *ngIf="getControl.cidade.touched && getControl.cidade.invalid"
+                class="text-danger"
+              ></div>
               <label for="cidade">Cidade: <b>*</b></label>
               <input type="text" name="cidade" formControlName="cidade" placeholder="Goiânia" />
             </div>
@@ -673,7 +972,14 @@
             <div class="form-campo">
               <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger"></div>
               <label for="uf">Estado: <b>*</b></label>
-              <input type="text" name="uf" formControlName="uf" placeholder="GO" value="" required />
+              <input
+                type="text"
+                name="uf"
+                formControlName="uf"
+                placeholder="GO"
+                value=""
+                required
+              />
             </div>
           </div>
           <div class="comodidades">
@@ -682,31 +988,49 @@
           --------------------------------------------------------->
             <div class="form-campo comodidadesImovel">
               <label for="comodidadesImovel">Comodidades do imóvel: </label>
-              <textarea cols="20" rows="10" type="text" name="comodidadesImovel" formControlName="comodidadesImovel"
-                placeholder="Comodidades do imóvel - ex: Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"></textarea>
+              <textarea
+                cols="20"
+                rows="10"
+                type="text"
+                name="comodidadesImovel"
+                formControlName="comodidadesImovel"
+                placeholder="Comodidades do imóvel - ex: Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
+              ></textarea>
             </div>
             <!-------------------------------------------------------
           ---- Comodidades do condomínio --------------------------------------------
           --------------------------------------------------------->
-            <div class="form-campo comodidadesCondominio" *ngIf="
+            <div
+              class="form-campo comodidadesCondominio"
+              *ngIf="
                 getControl.categoriaImovel.value === 'Sala Comercial' ||
                 getControl.categoriaImovel.value === 'Cobertura' ||
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
+              "
+            >
               <label for="comodidadesCondominio">Comodidades do condomínio: </label>
-              <textarea cols="20" rows="10" type="text" name="comodidadesCondominio"
+              <textarea
+                cols="20"
+                rows="10"
+                type="text"
+                name="comodidadesCondominio"
                 formControlName="comodidadesCondominio"
-                placeholder="Comodidades do condomínio - ex:Segurança 24 horas, Posto de emergência privado"></textarea>
+                placeholder="Comodidades do condomínio - ex:Segurança 24 horas, Posto de emergência privado"
+              ></textarea>
             </div>
           </div>
           <!-------------------------------------------------------
           ---- Enviar dados --------------------------------------------
           --------------------------------------------------------->
           <div class="botoes">
-            <button class="limpar" type="reset" (click)="this.limpaArrayImgs()">Limpar dados</button>
-            <button class="enviar" [disabled]="!imovelForm.valid" type="submit">Enviar Dados</button>
+            <button class="limpar" type="reset" (click)="this.limpaArrayImgs()">
+              Limpar dados
+            </button>
+            <button class="enviar" [disabled]="!imovelForm.valid" type="submit">
+              Enviar Dados
+            </button>
           </div>
         </div>
       </form>

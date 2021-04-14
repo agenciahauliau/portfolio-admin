@@ -204,22 +204,22 @@
           }
 
           .acoes {
-            .progress{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .deletar {
-              width: 24px;
-              height: 38px;
-              margin: 24px 12px 12px 24px;
+            .progress {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .deletar {
+                width: 24px;
+                height: 38px;
+                margin: 24px 12px 12px 24px;
+              }
+              p {
+                width: 50%;
+                text-overflow: ellipsis;
+                overflow-x: hidden;
+                white-space: nowrap;
+              }
             }
-            p {
-              width: 50%;
-              text-overflow: ellipsis;
-              overflow-x: hidden;
-              white-space: nowrap;
-            }
-          }
           }
         }
         .modal {
