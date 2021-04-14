@@ -72,9 +72,8 @@ export interface Imovel {
   updatedAt?: number;
 }
 export interface Galeria {
-  _id?: string;
+  tipoGaleria?: string;
   nomeGaleria?: string;
-  url?: [string];
+  arquivos?: [string];
   arquivoDestaque?: string;
-  idImovel?: string[];
 }
