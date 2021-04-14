@@ -77,6 +77,54 @@
       }
     }
 
+    .tipologias {
+      width: 100%;
+
+      .tipologia:first-child {
+        border-top: none;
+      }
+
+      .tipologia {
+        padding-top: 24px;
+        margin-bottom: 24px;
+        border-top: 1px solid #fff5;
+
+        .infoTipologia {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+
+          > div {
+            width: calc(90% / 3);
+            margin: 0 calc(5% / 3) 12px;
+
+            button {
+              background: none;
+              padding: 6px;
+            }
+          }
+
+          > div:nth-child(3n + 1) {
+            margin-left: 0;
+          }
+        }
+      }
+      .botaoTipologia {
+        display: flex;
+        align-items: center;
+        margin: 12px auto 0;
+        background: none !important;
+
+        p {
+          margin-left: 12px;
+        }
+
+        svg {
+          width: 36px;
+        }
+      }
+    }
+
     .botoes {
       display: flex;
       justify-content: flex-end;
