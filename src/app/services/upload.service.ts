@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Apollo } from 'apollo-angular';
-import { GQL_DELETA_ARQUIVO } from '../graphql/graphql';
+import { GQL_DELETA_ARQUIVO, GQL_LISTAR_ARQUIVOS } from '../graphql/graphql';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,7 @@ export class UploadService {
       .mutate({
         mutation: GQL_DELETA_ARQUIVO,
         variables: { nome: arquivo.replace(`${environment.API}files/`, '') },
+        refetchQueries: [{ query: GQL_LISTAR_ARQUIVOS }],
       })
       .toPromise();
     return result;
