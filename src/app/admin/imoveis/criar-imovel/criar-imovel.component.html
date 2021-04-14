@@ -418,13 +418,7 @@
                   formControlName="nomeGaleria"
                   placeholder="Casa dos x-men"
                 />
-                <input type="hidden" formControlName="arquivoDestaque" />
-                <input
-                  type="file"
-                  formControlName="arquivos"
-                  multiple
-                  (change)="selectFilesGalerias($event)"
-                />
+                <input type="file" multiple (change)="selectFilesGalerias($event)" />
                 <div [class.active]="isActiveImgAdicionais">
                   <button
                     type="button"
