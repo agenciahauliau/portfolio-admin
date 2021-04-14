@@ -32,7 +32,6 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.leadsQuery = this.apollo.watchQuery<any>({
       query: GQL_LISTAR_LEADS,
-      nextFetchPolicy: 'cache-and-network',
     });
 
     this.querySubs = this.leadsQuery.valueChanges.subscribe(({ data, loading }) => {
@@ -54,7 +53,7 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
   }
 
   async remover(id: any) {
-    await this.gqlService.deletarImovel(id);
+    await this.gqlService.deletarLead(id);
     this.refresh();
   }
 

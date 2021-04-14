@@ -58,6 +58,11 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
               return incoming;
             },
           },
+          leads: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
         },
       },
     },

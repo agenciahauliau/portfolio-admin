@@ -116,7 +116,7 @@ export class GraphQlService {
       .mutate({
         mutation: GQL_DELETA_LEAD,
         refetchQueries: [{ query: GQL_LISTAR_LEADS }],
-        variables: { _id: id },
+        variables: { id: id },
       })
       .subscribe(
         ({ errors, data }: any) => {
