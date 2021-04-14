@@ -100,8 +100,8 @@
           <h2>Imagens Adicionais</h2>
         </div>
         <ul>
-          <li *ngFor="let img of imovel.imagensAdicionais">
-            <img src="{{ img }}" width="280px" alt="" srcset="{{img}}" />
+          <li *ngFor="let img; in: imovel.imagensAdicionais">
+            <img src="{{ img.imagemDestaque }}" width="280px" alt="" srcset="{{img}}" />
           </li>
         </ul>
       </div>

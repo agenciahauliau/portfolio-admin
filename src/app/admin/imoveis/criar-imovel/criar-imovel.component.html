@@ -466,8 +466,59 @@
           <!-------------------------------------------------------
           ---- Galeria --------------------------------------------
           --------------------------------------------------------->
-
           <div class="form-campo">
+            <label for="galerias">Adicionar Galeria(s) de imagens: <b>*</b></label>
+            <div formArrayName="galerias" *ngFor="let galeria of galerias.controls; index as idx">
+              <label>Galeria {{ idx + 1 }}</label>
+              <div [formGroupName]="idx">
+                <label for="tipoGaleria">Tipo da Galeria: <b>*</b></label>
+                <select name="tipoGaleria" formControlName="tipoGaleria">
+                  <option value="">Selecione o tipo da galeria</option>
+                  <option value="Imagens Adicionais">Imagens Adicionais</option>
+                  <option value="Plantas Adicionais">Plantas Adicionais</option>
+                </select>
+                <label for="nomeGaleria">Nome para a Galeria <b>*</b></label>
+                <input
+                  type="text"
+                  name="nomeGaleria"
+                  formControlName="nomeGaleria"
+                  placeholder="Casa dos x-men"
+                />
+                <input type="hidden" formControlName="arquivoDestaque" />
+                <input
+                  type="file"
+                  formControlName="arquivos"
+                  multiple
+                  (change)="selectFilesGalerias($event)"
+                />
+                <div [class.active]="isActiveImgAdicionais">
+                  <button
+                    type="button"
+                    [disabled]="!selectedFilesGalerias"
+                    (click)="uploadFilesGalerias(idx)"
+                  >
+                    Upload
+                  </button>
+                </div>
+                <div *ngIf="plusImgs[idx]?.arquivos != undefined">
+                  <div *ngFor="let item of plusImgs[idx]?.arquivos; index as i">
+                    <img src="{{ item }}" width="100px" />
+                    <button type="button" (click)="deletaImagemGaleria(item, idx)">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                  </div>
+                </div>
+                <button type="button" (click)="removeGaleria(idx)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <button type="button" (click)="addGaleria()">
+              <fa-icon [icon]="faPlusSquare"></fa-icon> Galeria
+            </button>
+          </div>
+
+          <!-- <div class="form-campo">
             <button
               type="button"
               name="complemento1"
@@ -507,7 +558,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div
             class="infoCondominio"

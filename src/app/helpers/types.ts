@@ -61,16 +61,16 @@ export interface Imovel {
   complemento?: string;
   cidade?: string;
   uf?: string;
-  imagensAdicionais?: string[];
+  galerias?: Galeria[];
   imgPlantaCondominio?: string[];
   comodidadesImovel?: [string];
   comodidadesCondominio?: [string];
-  galerias?: string[] | Galeria[];
   previsaoLancamento?: number;
   tipologias?: string[] | Tipologia[];
   createdAt?: number;
   updatedAt?: number;
 }
+
 export interface Galeria {
   tipoGaleria?: string;
   nomeGaleria?: string;

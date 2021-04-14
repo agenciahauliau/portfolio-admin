@@ -72,16 +72,15 @@ export const GQL_CRIAR_IMOVEL = gql`
       cep
       cidade
       uf
-      imagensAdicionais
-      imgPlantaCondominio
-      comodidadesImovel
-      comodidadesCondominio
       galerias {
         tipoGaleria
         nomeGaleria
         arquivos
         arquivoDestaque
       }
+      imgPlantaCondominio
+      comodidadesImovel
+      comodidadesCondominio
       previsaoLancamento
       tipologias {
         quartos
@@ -91,6 +90,7 @@ export const GQL_CRIAR_IMOVEL = gql`
         valorParcela
       }
       createdAt
+      updatedAt
     }
   }
 `;
@@ -129,16 +129,15 @@ export const GQL_LISTAR_IMOVEIS = gql`
       cep
       cidade
       uf
-      imagensAdicionais
-      imgPlantaCondominio
-      comodidadesImovel
-      comodidadesCondominio
       galerias {
         tipoGaleria
         nomeGaleria
         arquivos
         arquivoDestaque
       }
+      imgPlantaCondominio
+      comodidadesImovel
+      comodidadesCondominio
       previsaoLancamento
       tipologias {
         quartos
@@ -187,16 +186,15 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       cep
       cidade
       uf
-      imagensAdicionais
-      imgPlantaCondominio
-      comodidadesImovel
-      comodidadesCondominio
       galerias {
         tipoGaleria
         nomeGaleria
         arquivos
         arquivoDestaque
       }
+      imgPlantaCondominio
+      comodidadesImovel
+      comodidadesCondominio
       previsaoLancamento
       tipologias {
         quartos
@@ -245,16 +243,15 @@ export const GQL_BUSCAR_IMOVEL = gql`
       cep
       cidade
       uf
-      imagensAdicionais
-      imgPlantaCondominio
-      comodidadesImovel
-      comodidadesCondominio
       galerias {
         tipoGaleria
         nomeGaleria
         arquivos
         arquivoDestaque
       }
+      imgPlantaCondominio
+      comodidadesImovel
+      comodidadesCondominio
       previsaoLancamento
       tipologias {
         quartos
@@ -309,16 +306,15 @@ export const GQL_ATUALIZA_IMOVEL = gql`
       cep
       cidade
       uf
-      imagensAdicionais
-      imgPlantaCondominio
-      comodidadesImovel
-      comodidadesCondominio
       galerias {
         tipoGaleria
         nomeGaleria
         arquivos
         arquivoDestaque
       }
+      imgPlantaCondominio
+      comodidadesImovel
+      comodidadesCondominio
       previsaoLancamento
       tipologias {
         quartos
@@ -360,8 +356,8 @@ export const GQL_LISTAR_LEADS = gql`
 `;
 
 export const GQL_DELETA_LEAD = gql`
-  mutation deletaImovel($_id: String!) {
-    removeImovel(id: $_id)
+  mutation deletaLead($id: String!) {
+    removeLead(id: $id)
   }
 `;
 
