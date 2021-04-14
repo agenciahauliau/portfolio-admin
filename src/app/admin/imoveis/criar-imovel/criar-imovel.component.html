@@ -37,7 +37,7 @@
               <div class="acoes">
                 <div *ngFor="let progressInfo of progressInfos">
                   <div class="progress">
-                      <p>{{ progressInfo.fileName }}</p>
+                    <p>{{ progressInfo.fileName }}</p>
 
                     <div class="deletar" (click)="deletaImgPrincipal(mainImg)">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="-53 0 463 463">
@@ -210,41 +210,6 @@
           </div>
 
           <!-------------------------------------------------------
-          ---- Tipologias ---------------------------------------
-          --------------------------------------------------------->
-
-          <div class="form-campo" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
-            <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger"></div>
-            <label for="tipologias">Tipologias <b>*</b></label>
-            <div formArrayName="tipologias" *ngFor="let tipologia of tipologias.controls; index as idx">
-              <label>Tipologia {{ idx + 1 }}</label>
-              <div type="text" [formGroupName]="idx">
-                <label for="quartos">Quartos: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="quartos" formControlName="quartos"
-                  placeholder="3" />
-                <label for="suites">Suítes: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="suites" formControlName="suites"
-                  placeholder="3" />
-                <label for="tamanho">Tamanho: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="tamanho" placeholder="332,56 m²"
-                  formControlName="tamanho" />
-                <label for="valorEntrada">Valor de Entrada: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="valorEntrada" formControlName="valorEntrada"
-                  placeholder="R$ 15.000,00" />
-                <label for="valorParcela">Valor Parcela: <b>*</b></label>
-                <input type="number" onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
-                  placeholder="R$ 15.000,00" />
-                <button type="button" (click)="removeTipologia(idx)">
-                  <fa-icon [icon]="faTrash"></fa-icon>
-                </button>
-              </div>
-            </div>
-            <button type="button" (click)="addTipologia()">
-              <fa-icon [icon]="faPlusSquare"></fa-icon> Tipologia
-            </button>
-          </div>
-
-          <!-------------------------------------------------------
           ---- Status Imóvel ---------------------------------------
           --------------------------------------------------------->
 
@@ -408,6 +373,53 @@
               <label for="nomeConstrutora">Construtora: <b>*</b></label>
               <input type="text" name="nomeConstrutora" formControlName="nomeConstrutora"
                 placeholder="Construtora do imóvel - FGR Construtora" />
+            </div>
+
+            <!-------------------------------------------------------
+          ---- Tipologias ---------------------------------------
+          --------------------------------------------------------->
+
+            <div class="form-campo tipologias" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
+              <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger"></div>
+              <div class="tipologia" formArrayName="tipologias" *ngFor="let tipologia of tipologias.controls; index as idx">
+                <h4>Tipologia {{ idx + 1 }}</h4>
+                <div class="infoTipologia" type="text" [formGroupName]="idx">
+                  <div>
+                    <label for="quartos">Quartos: <b>*</b></label>
+                    <input type="number" onmousewheel="return false;" name="quartos" formControlName="quartos"
+                      placeholder="3" />
+                  </div>
+                  <div>
+                    <label for="suites">Suítes: <b>*</b></label>
+                    <input type="number" onmousewheel="return false;" name="suites" formControlName="suites"
+                      placeholder="3" />
+                  </div>
+                  <div>
+                    <label for="tamanho">Tamanho: <b>*</b></label>
+                    <input type="number" onmousewheel="return false;" name="tamanho" placeholder="332,56 m²"
+                      formControlName="tamanho" />
+                  </div>
+                  <div>
+                    <label for="valorEntrada">Valor de Entrada: <b>*</b></label>
+                    <input type="number" onmousewheel="return false;" name="valorEntrada" formControlName="valorEntrada"
+                      placeholder="R$ 15.000,00" />
+                  </div>
+                  <div>
+                    <label for="valorParcela">Valor Parcela: <b>*</b></label>
+                    <input type="number" onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
+                      placeholder="R$ 15.000,00" />
+                  </div>
+                  <div>
+                    <button type="button" (click)="removeTipologia(idx)">
+                      <p>Excluir tipologia</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button class="botaoTipologia" type="button" (click)="addTipologia()">
+                <p>Adicionar Tipologia</p>
+              </button>
             </div>
 
             <!-------------------------------------------------------
