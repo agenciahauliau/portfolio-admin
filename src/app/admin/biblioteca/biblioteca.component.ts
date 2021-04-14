@@ -2,21 +2,19 @@ import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faSyncAlt, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSyncAlt, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { GQL_LISTAR_ARQUIVOS } from '../../../graphql/graphql';
-import { GraphQlService } from '../../../services/graphql.service';
-import { TokenService } from '../../../services/token.service';
-import { UploadService } from '../../../services/upload.service';
+import { environment } from '../../../environments/environment';
+import { GQL_LISTAR_ARQUIVOS } from '../../graphql/graphql';
+import { UploadService } from '../../services/upload.service';
 HttpClient;
 @Component({
-  selector: 'app-upload-imagens',
-  templateUrl: './upload-imagens.component.html',
-  styleUrls: ['./upload-imagens.component.scss', '../../admin.component.scss'],
+  selector: 'app-biblioteca',
+  templateUrl: './biblioteca.component.html',
+  styleUrls: ['./biblioteca.component.scss', '../../admin/admin.component.scss'],
 })
-export class UploadImagensComponent implements OnInit, OnDestroy {
+export class BibliotecaComponent implements OnInit, OnDestroy {
   url = `${environment.API}files/`;
   midias!: [string];
   midiasQuery!: QueryRef<any>;
@@ -29,6 +27,7 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   faHome = faHome;
   faSyncAlt = faSyncAlt;
   faImage = faImage;
+  faTrash = faTrash;
 
   selectedFiles?: FileList;
   progressInfos: any[] = [];
@@ -43,15 +42,14 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.querySubs = this.apollo
-      .watchQuery<any>({
-        query: GQL_LISTAR_ARQUIVOS,
-        pollInterval: 2000,
-      })
-      .valueChanges.subscribe(({ data, loading }) => {
-        this.loading = loading;
-        this.midias = data.listarUploads;
-      });
+    this.midiasQuery = this.apollo.watchQuery<any>({
+      query: GQL_LISTAR_ARQUIVOS,
+    });
+
+    this.querySubs = this.midiasQuery.valueChanges.subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.midias = data.listarUploads;
+    });
   }
 
   selectFiles(event: any): void {
@@ -77,8 +75,12 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
           if (event.type === HttpEventType.UploadProgress) {
             this.progressInfos[idx].value = Math.round((100 * event.loaded) / event.total);
           } else if (event instanceof HttpResponse) {
-            const msg = 'Arquivo enviado com sucesso ' + file.name;
-            this.message.push(msg);
+            this.message.push(`Arquivo enviado com sucesso ${file.name}`);
+            this.refresh();
+            setTimeout(() => {
+              this.progressInfos.splice(idx, 1);
+              this.message.splice(idx, 1);
+            }, 5000);
           }
         },
         (error: any) => {
@@ -90,15 +92,34 @@ export class UploadImagensComponent implements OnInit, OnDestroy {
     }
   }
 
+  deletaImagem(imgUrl: string): void {
+    this.uploadService
+      .deletaArquivo(imgUrl)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          this.message = [];
+          this.progressInfos = [];
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  }
+
   ngOnDestroy() {
     this.querySubs.unsubscribe();
   }
 
-  /* ngAfterViewInit() {
-    (document.querySelector('.app-alerts') as HTMLElement).style.top = '150px';
-  }*/
+  refresh() {
+    this.midiasQuery.refetch();
+  }
 
   voltar() {
-    this.router.navigate(['/admin/upload']);
+    this.router.navigate(['/admin/biblioteca']);
   }
 }

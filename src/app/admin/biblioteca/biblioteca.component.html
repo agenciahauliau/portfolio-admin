@@ -1,15 +1,6 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a
-        class="temporario"
-        [routerLink]="['/admin/galerias']"
-        routerLinkActive="router-link-active"
-      >
-        Galerias
-        <fa-icon [icon]="faImage"></fa-icon>
-      </a>
-
       <div>
         <div class="">
           <label class="">
@@ -50,6 +41,9 @@
         <b>URL: </b>
         {{ url }}{{ midia }}
       </p>
+      <button type="button" (click)="deletaImagem(midia)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
     </div>
     <div *ngIf="loading">Carregando...</div>
     <div *ngIf="error">Erro :(</div>
