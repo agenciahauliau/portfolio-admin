@@ -163,31 +163,67 @@
             }
           }
         }
-        .caixaImagem {
+        .imgPrin {
           width: 100%;
-          height: 150px;
-          display: flex;
-          justify-content: center;
-          position: relative;
-          border: 1px #fff2 dashed;
-
-          div[id^='complemento'] {
+          .caixaImagem {
             width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 5;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            border: 1px #fff2 dashed;
+
+            div[id^='complemento'] {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 5;
+            }
+            svg {
+              width: 100%;
+              height: 100%;
+              padding: 24px;
+              position: absolute;
+              top: 0;
+              left: 0;
+              opacity: 0.5;
+            }
+            img[src=''] {
+              display: none;
+            }
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
           }
-          svg {
-            height: 100%;
-            padding: 24px;
-            opacity: 0.5;
+
+          .acoes {
+            .progress{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .deletar {
+              width: 24px;
+              height: 38px;
+              margin: 24px 12px 12px 24px;
+            }
+            p {
+              width: 50%;
+              text-overflow: ellipsis;
+              overflow-x: hidden;
+              white-space: nowrap;
+            }
+          }
           }
         }
-
         .modal {
-          display: flex;
+          display: none;
           flex-direction: column;
           justify-content: space-between;
           padding: 48px;
@@ -198,12 +234,10 @@
           left: 0;
           z-index: 100;
           background: #272727;
-        
 
-        &.active {
-          display: flex;
-        }
-          
+          &.active {
+            display: flex;
+          }
 
           .fechar {
             align-self: flex-end;
@@ -212,7 +246,7 @@
             border-radius: 10px;
           }
           .informacoes {
-            padding: 24px;
+            padding: 12px 24px;
             text-align: center;
             h2 {
               margin-bottom: 48px;
@@ -228,8 +262,9 @@
           }
 
           .loadImagem {
-            width: calc(250px / 9 * 16);
-            height: 250px;
+            width: 100%;
+            max-width: calc(200px / 9 * 16);
+            height: 200px;
             margin: 12px auto;
             position: relative;
             border: 1px #fff2 dashed;
@@ -254,17 +289,23 @@
                 height: 50%;
                 margin-bottom: 12px;
               }
-              h4:first-child {
+              h4.p {
                 display: block;
               }
 
-              h4:last-child {
+              h4.s {
                 display: none;
               }
             }
 
-            .carregado ~ .svg {
-              
+            img ~ .svg {
+              h4.p {
+                display: none !important;
+              }
+
+              h4.s {
+                display: block !important;
+              }
             }
 
             img {
@@ -281,6 +322,56 @@
               height: 100%;
               position: relative;
               opacity: 0;
+            }
+
+            .progress {
+              .progress-bar {
+                height: 2px;
+                background: #db0423;
+                transition: 0.5s ease;
+              }
+              .info {
+                display: flex;
+                justify-content: space-between;
+                font-weight: 200;
+
+                p {
+                  width: fit-content;
+                }
+
+                p:first-child {
+                  width: 50%;
+                  text-overflow: ellipsis;
+                  overflow-x: hidden;
+                  white-space: nowrap;
+                }
+              }
+            }
+          }
+
+          .botoesModal {
+            display: flex;
+            justify-content: space-between;
+            svg {
+              width: 28px;
+            }
+            .deletar {
+              padding: 12px 24px;
+              background: #000;
+            }
+
+            .upload {
+              display: flex;
+              align-items: center;
+              padding: 12px 24px;
+              text-transform: uppercase;
+              p {
+                margin-right: 12px;
+              }
+            }
+
+            .upload:disabled {
+              background: #db042355;
             }
           }
         }
@@ -355,13 +446,15 @@
           grid-template-columns: 38% 62%;
 
           textarea {
-            min-height: 400px;
+            min-height: 300px;
           }
-
-          .caixaImagem {
-            max-width: calc(250px / 9 * 16);
-            height: 250px;
+          .imgPrin {
+            max-width: calc(200px / 9 * 16);
             margin: auto;
+            .caixaImagem {
+              max-width: calc(200px / 9 * 16);
+              height: 200px;
+            }
           }
           .coluna {
             padding: 24px;
@@ -369,7 +462,7 @@
             &.esquerda {
               height: fit-content;
               position: sticky;
-              top: 84px;
+              top: 72px;
             }
             &.direita {
               padding: 48px;
