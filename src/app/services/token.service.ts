@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { GQL_CHECK } from '../graphql/graphql';
 
 @Injectable({
   providedIn: 'root',
