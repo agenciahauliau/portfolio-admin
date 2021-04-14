@@ -12,97 +12,6 @@ export const GQL_CHECK = gql`
   }
 `;
 
-export const GQL_BUSCAR_GALERIA = gql`
-  query procurarUmaGaleria(
-    $id: ID
-    $idImovel: [String!]
-    $nomeGaleria: String
-    $url: [String!]
-    $arquivoDestaque: String
-  ) {
-    galeria(
-      dados: {
-        _id: $id
-        nomeGaleria: $nomeGaleria
-        url: $url
-        idImovel: $idImovel
-        arquivoDestaque: $arquivoDestaque
-      }
-    ) {
-      _id
-      nomeGaleria
-      url
-      arquivoDestaque
-      idImovel
-    }
-  }
-`;
-
-export const GQL_CRIA_GALERIA = gql`
-  mutation criarGaleria(
-    $idImovel: [String!]!
-    $nomeGaleria: String!
-    $url: [String!]!
-    $arquivoDestaque: String!
-  ) {
-    createGaleria(
-      dados: {
-        idImovel: $idImovel
-        nomeGaleria: $nomeGaleria
-        url: $url
-        arquivoDestaque: $arquivoDestaque
-      }
-    ) {
-      _id
-      nomeGaleria
-      url
-      arquivoDestaque
-    }
-  }
-`;
-
-export const GQL_ATUALIZA_GALERIA = gql`
-  mutation atualizarGaleria(
-    $id: String!
-    $idImovel: [String!]
-    $nomeGaleria: String
-    $arquivoDestaque: String
-    $url: [String!]
-  ) {
-    updateGaleria(
-      id: $id
-      dados: {
-        nomeGaleria: $nomeGaleria
-        url: $url
-        arquivoDestaque: $arquivoDestaque
-        idImovel: $idImovel
-      }
-    ) {
-      _id
-      nomeGaleria
-      url
-      arquivoDestaque
-      idImovel
-    }
-  }
-`;
-
-export const GQL_LISTAR_GALERIAS = gql`
-  query listaGalerias {
-    galerias {
-      _id
-      nomeGaleria
-      url
-    }
-  }
-`;
-
-export const GQL_DELETA_GALERIA = gql`
-  mutation deletarGaleria($id: String!) {
-    removeGaleria(id: $id)
-  }
-`;
-
 export const GQL_ENVIA_ARQUIVO = gql`
   mutation upload($file: Upload!) {
     uploadFileRemoto(file: $file)
@@ -167,14 +76,11 @@ export const GQL_CRIAR_IMOVEL = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
-      galerias(populate: true) {
-        _id
+      galerias {
+        tipoGaleria
         nomeGaleria
-        url
+        arquivos
         arquivoDestaque
-        idImovel
-        createdAt
-        updatedAt
       }
       previsaoLancamento
       tipologias {
@@ -227,14 +133,11 @@ export const GQL_LISTAR_IMOVEIS = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
-      galerias(populate: true) {
-        _id
+      galerias {
+        tipoGaleria
         nomeGaleria
-        url
+        arquivos
         arquivoDestaque
-        idImovel
-        createdAt
-        updatedAt
       }
       previsaoLancamento
       tipologias {
@@ -288,14 +191,11 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
-      galerias(populate: true) {
-        _id
+      galerias {
+        tipoGaleria
         nomeGaleria
-        url
+        arquivos
         arquivoDestaque
-        idImovel
-        createdAt
-        updatedAt
       }
       previsaoLancamento
       tipologias {
@@ -349,14 +249,11 @@ export const GQL_BUSCAR_IMOVEL = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
-      galerias(populate: true) {
-        _id
+      galerias {
+        tipoGaleria
         nomeGaleria
-        url
+        arquivos
         arquivoDestaque
-        idImovel
-        createdAt
-        updatedAt
       }
       previsaoLancamento
       tipologias {
@@ -416,14 +313,11 @@ export const GQL_ATUALIZA_IMOVEL = gql`
       imgPlantaCondominio
       comodidadesImovel
       comodidadesCondominio
-      galerias(populate: true) {
-        _id
+      galerias {
+        tipoGaleria
         nomeGaleria
-        url
+        arquivos
         arquivoDestaque
-        idImovel
-        createdAt
-        updatedAt
       }
       previsaoLancamento
       tipologias {
