@@ -192,7 +192,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   removeGaleria(index: number): void {
     this.galerias.removeAt(index);
     this.plusImgs.splice(index, 1);
-    console.log(this.imovelForm.value.galerias);
   }
 
   async onSubmit() {
