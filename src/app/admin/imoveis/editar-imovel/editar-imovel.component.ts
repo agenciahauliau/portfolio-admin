@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -11,7 +12,6 @@ import { Imovel } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 import { environment } from '../../../../environments/environment';
 import { UploadService } from '../../../services/upload.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-imovel',
@@ -31,7 +31,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   selectedPlantaFiles?: FileList;
   progressInfosPlantaFiles: any[] = [];
   messagePlantaFiles: string[] = [];
-  plantaFiles = [''];
+  plantaFiles: any = [];
 
   // Filtros e mascaras
   prefixReal = 'R$';
@@ -39,11 +39,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   maskCep = '00000-000';
   maskM2 = '000.00';
 
-  // Para Upload Imagens Adicionais
-  selectedFilesImgsAdicionais?: FileList;
-  progressInfosImgsAdicionais: any[] = [];
-  messageImgAdicionais: string[] = [];
-  plusImgs = [''];
+  // Para Upload de Galerias
+  selectedFilesGalerias!: FileList;
+  progressInfosGalerias: any = [];
+  messageGalerias = [{}];
+  plusImgs: any = [];
 
   faPlusSquare = faPlusSquare;
   faHome = faHome;
@@ -55,7 +55,12 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   loading = true;
   error: any;
 
+  public isActive: boolean = false;
+  public isActiveImgAdicionais: boolean = false;
+  public isActiveImgPlantas: boolean = false;
+
   private querySubs = new Subscription();
+
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
@@ -67,19 +72,19 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.imovelForm = this.formBuilder.group({
-      nomeImovel: ['', [Validators.required, Validators.minLength(4)]],
+      nomeImovel: [''],
       imagemPrincipal: [''],
-      categoriaImovel: ['', [Validators.required]],
+      categoriaImovel: [''],
       jardins: [false],
-      descricaoImovel: ['', [Validators.required]],
-      tipoNegociacao: ['', [Validators.required]],
-      statusImovel: ['', [Validators.required]],
+      descricaoImovel: [''],
+      tipoNegociacao: [''],
+      statusImovel: [''],
       aceitaPermuta: [false],
       mobiliado: [false],
       valorImovel: ['', [Validators.required, Validators.min(0)]],
       valorEntrada: ['', Validators.min(0)],
       valorParcela: ['', Validators.min(0)],
-      valorIPTU: ['', [Validators.required, Validators.min(0)]],
+      valorIPTU: ['', [Validators.min(0)]],
       valorCondominio: ['', Validators.min(0)],
       areaTotal: ['', [Validators.required, Validators.min(0)]],
       areaConstruida: ['', Validators.min(0)],
@@ -88,20 +93,20 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       qtdeBanheiro: ['', Validators.min(0)],
       qtdeSuites: ['', Validators.min(0)],
       qtdeVagas: ['', Validators.min(0)],
-      nomeConstrutora: ['', Validators.required],
-      cep: ['', [Validators.required, Validators.min(0o1001000), Validators.max(99999999)]],
-      logradouro: ['', Validators.required],
+      nomeConstrutora: [''],
+      cep: ['', [Validators.min(0o1001000), Validators.max(99999999)]],
+      logradouro: [''],
       numeroLogradouro: [''],
       complemento: [''],
-      bairro: ['', Validators.required],
-      cidade: ['', Validators.required],
-      uf: ['', Validators.required],
-      imagensAdicionais: [[]],
+      bairro: [''],
+      cidade: [''],
+      uf: [''],
       comodidadesImovel: [[]],
       comodidadesCondominio: [[]],
       statusLancamento: 'pendente',
       previsaoLancamento: 0,
-      imgPlantaCondominio: [[]],
+      galerias: this.formBuilder.array([]),
+      imgPlantaCondominio: [],
       tipologias: this.formBuilder.array([]),
     });
 
@@ -117,7 +122,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       this.loading = loading;
       this.imovelForm.patchValue(data.imovel);
       this.mainImg = data.imovel.imagemPrincipal;
-      this.plusImgs = [...data.imovel.imagensAdicionais];
       this.plantaFiles = [...data.imovel.imgPlantaCondominio];
       for (const i of data.imovel.tipologias) {
         this.tipologias.push(
@@ -130,6 +134,19 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
           }),
         );
       }
+      for (const i of data.imovel.galerias) {
+        this.plusImgs.push({ arquivos: i.arquivos, arquivoDestaque: i.arquivoDestaque });
+        console.log(this.plusImgs);
+        this.galerias.push(
+          this.formBuilder.group({
+            tipoGaleria: [i.tipoGaleria],
+            nomeGaleria: [i.nomeGaleria],
+            arquivos: [[...i.arquivos]],
+            arquivoDestaque: [i.arquivoDestaque],
+          }),
+        );
+      }
+      this.patchDadosImovelForm();
     });
   }
 
@@ -157,9 +174,61 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.tipologias.removeAt(index);
   }
 
+  /* Método get e função para adicionar ou remover uma nova galeria para planta do condomínio */
+  get galerias() {
+    return this.imovelForm.get('galerias') as FormArray;
+  }
+
+  addGaleria() {
+    this.galerias.push(
+      this.formBuilder.group({
+        tipoGaleria: [''],
+        nomeGaleria: [''],
+        arquivos: [['']],
+        arquivoDestaque: [''],
+      }),
+    );
+  }
+
+  removeGaleria(index: number): void {
+    this.galerias.removeAt(index);
+    this.plusImgs.splice(index, 1);
+    console.log(this.imovelForm.value.galerias);
+  }
+
   async onSubmit() {
     const imovelId = this.route.snapshot.paramMap.get('id');
+    await this.gqlService
+      .atualizaImovel(imovelId, this.imovelForm.value)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data);
+          window.alert('Imóvel atualizado');
+          this.voltar();
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+          window.alert(`Erro: ${res.errors[0].message}`);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  }
 
+  refresh() {
+    this.imovelQuery.refetch();
+  }
+
+  voltar() {
+    this.router.navigate(['../']);
+  }
+
+  ngOnDestroy(): void {
+    this.querySubs.unsubscribe();
+  }
+
+  patchDadosImovelForm() {
     /* Tratamento de dados das comodidades de imóvel e de condomínio */
     if (this.imovelForm.value.comodidadesImovel) {
       this.imovelForm.value.comodidadesImovel = this.separa(
@@ -195,35 +264,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
           this.imovelForm.value.previsaoLancamento,
         ))
       : (this.imovelForm.value.previsaoLancamento = 0);
-
-    await this.gqlService
-      .atualizaImovel(imovelId, this.imovelForm.value)
-      .then((res: any) => {
-        if (res.data) {
-          console.log('Sucesso', res?.data);
-          window.alert('Imóvel atualizado');
-          this.voltar();
-        }
-        if (res.errors) {
-          console.log('Erro', res?.errors[0]?.message);
-          window.alert(`Erro: ${res.errors[0].message}`);
-        }
-      })
-      .catch((err) => {
-        console.log('err', err);
-      });
-  }
-
-  refresh() {
-    this.imovelQuery.refetch();
-  }
-
-  voltar() {
-    this.router.navigate(['../']);
-  }
-
-  ngOnDestroy(): void {
-    this.querySubs.unsubscribe();
   }
 
   separa(data: any) {
@@ -242,10 +282,15 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   limpaArrayImgs() {
     this.mainImg = '';
     this.plantaFiles = [''];
-    this.plusImgs = [''];
+    this.plusImgs = [
+      {
+        arquivos: [''],
+        arquivoDestaque: '',
+      },
+    ];
     this.progressInfos = [];
     this.progressInfosPlantaFiles = [];
-    this.progressInfosImgsAdicionais = [];
+    this.progressInfosGalerias = [];
   }
 
   selectFiles(event: any): void {
@@ -321,65 +366,69 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       });
   }
 
-  /* Imagens adicionais */
-  selectFilesImagensAdicionais(event: any): void {
-    this.messageImgAdicionais = [];
-    this.progressInfosImgsAdicionais = [];
-    this.selectedFilesImgsAdicionais = event.target.files;
+  /* GALERIAS */
+  selectFilesGalerias(event: any): void {
+    this.messageGalerias = [];
+    this.progressInfosGalerias = [];
+    this.selectedFilesGalerias = event.target.files;
   }
 
-  uploadFilesImagensAdicionais(): void {
+  uploadFilesGalerias(index: number): void {
     this.message = [];
-    if (this.selectedFilesImgsAdicionais) {
-      for (let i = 0; i < this.selectedFilesImgsAdicionais.length; i++) {
-        this.uploadImagensAdicionais(i, this.selectedFilesImgsAdicionais[i]);
+    if (this.selectedFilesGalerias) {
+      if (!this.plusImgs[index]) {
+        this.plusImgs[index] = {
+          arquivos: [''],
+          arquivoDestaque: '',
+        };
+      }
+      if (!this.progressInfosGalerias[index]) {
+        this.progressInfosGalerias[index] = {};
+      }
+      for (let i = 0; i < this.selectedFilesGalerias.length; i++) {
+        this.uploadImagensGaleria(i, this.selectedFilesGalerias[i], index);
+        this.galerias.at(index).get('arquivos')?.setValue(this.plusImgs[index].arquivos);
+        this.patchDadosImovelForm();
       }
     }
   }
 
-  uploadImagensAdicionais(idx: number, file: File): void {
-    this.progressInfosImgsAdicionais[idx] = { value: 0, fileName: file.name, url: '' };
+  uploadImagensGaleria(idx: number, file: File, index: number): void {
+    this.progressInfosGalerias[index][idx] = { value: 0, fileName: file.name, url: '' };
     if (file) {
       this.uploadService.upload(file).subscribe(
         (event: any) => {
           if (event.type === HttpEventType.UploadProgress) {
-            this.progressInfosImgsAdicionais[idx].value = Math.round(
+            this.progressInfosGalerias[index][idx].value = Math.round(
               (100 * event.loaded) / event.total,
             );
           } else if (event instanceof HttpResponse) {
             const msg = 'Arquivo enviado com sucesso ' + file.name;
-            this.messageImgAdicionais.unshift(msg);
-            this.progressInfosImgsAdicionais[idx].url = this.url + event.body[0];
-            this.plusImgs.unshift(this.url + event.body[0]);
-            this.plusImgs = this.plusImgs.filter((x) => x.trim() != '');
+            const url = this.url + event.body[0];
+            this.messageGalerias.push(msg);
+            this.progressInfosGalerias[index][idx].url = url;
+            this.plusImgs[index].arquivos.push(url);
           }
         },
         (error: any) => {
-          this.progressInfosImgsAdicionais[idx].value = 0;
+          this.progressInfosGalerias[index][idx].value = 0;
           const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
-          this.messageImgAdicionais.unshift(msg);
+          this.messageGalerias.push(msg);
         },
+      );
+      this.plusImgs[index].arquivos = this.plusImgs[index].arquivos.filter(
+        (x: any) => x.trim() != '',
       );
     }
   }
 
-  deletaImagensAdicionais(imgUrl: string): void {
-    this.uploadService
-      .deletaArquivo(imgUrl)
-      .then((res: any) => {
-        if (res.data) {
-          console.log('Sucesso', res?.data);
-          this.removeLinkDoArray(this.plusImgs, imgUrl);
-          this.removeLinkDoArray(this.progressInfosImgsAdicionais, imgUrl);
-        }
-        if (res.errors) {
-          console.log('Erro', res?.errors[0]?.message);
-          window.alert(`Erro: ${res.errors[0].message}`);
-        }
-      })
-      .catch((err) => {
-        console.log('err', err);
-      });
+  deletaImagemGaleria(imgUrl: string, idx?: any): void {
+    for (let i = 0; i < this.plusImgs[idx]?.arquivos.length; i++) {
+      if (this.plusImgs[idx]?.arquivos[i] === imgUrl) {
+        this.plusImgs[idx]?.arquivos.splice(i, 1);
+        i--;
+      }
+    }
   }
 
   /* Planta imagens */
@@ -412,7 +461,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.messagePlantaFiles.unshift(msg);
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
             this.plantaFiles.unshift(this.url + event.body[0]);
-            this.plantaFiles = this.plantaFiles.filter((x) => x.trim() != '');
+            this.plantaFiles = this.plantaFiles.filter((x: any) => x.trim() != '');
           }
         },
         (error: any) => {
@@ -453,6 +502,22 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         array.splice(i, 1);
         i--;
       }
+    }
+  }
+
+  ativaModal(event: any) {
+    if (event.target.id === 'complemento') {
+      this.isActive ? (this.isActive = false) : (this.isActive = true);
+    }
+    if (event.target.id === 'complemento1') {
+      this.isActiveImgAdicionais
+        ? (this.isActiveImgAdicionais = false)
+        : (this.isActiveImgAdicionais = true);
+    }
+    if (event.target.id === 'complemento2') {
+      this.isActiveImgPlantas
+        ? (this.isActiveImgPlantas = false)
+        : (this.isActiveImgPlantas = true);
     }
   }
 }

@@ -151,7 +151,7 @@ export class CriarImovelComponent implements OnInit {
     console.log(this.imovelForm.value.galerias);
   }
   async onSubmit() {
-    this.patchNumerais();
+    this.patchDadosImovelForm();
     await this.gqlService
       .criarImovel(this.imovelForm.value)
       .then((res: any) => {
@@ -170,7 +170,7 @@ export class CriarImovelComponent implements OnInit {
       });
   }
 
-  patchNumerais() {
+  patchDadosImovelForm() {
     /* Checagem de números */
     if (!this.imovelForm.value.valorImovel) this.imovelForm.value.valorImovel = 0;
     if (!this.imovelForm.value.valorEntrada) this.imovelForm.value.valorEntrada = 0;
@@ -324,7 +324,7 @@ export class CriarImovelComponent implements OnInit {
       for (let i = 0; i < this.selectedFilesGalerias.length; i++) {
         this.uploadImagensGaleria(i, this.selectedFilesGalerias[i], index);
         this.galerias.at(index).get('arquivos')?.setValue(this.plusImgs[index].arquivos);
-        this.patchNumerais();
+        this.patchDadosImovelForm();
         console.log(this.imovelForm);
       }
     }
