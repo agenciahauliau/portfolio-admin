@@ -7,6 +7,7 @@ import { NgxMaskModule } from 'ngx-mask';
 
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
+import { FooterComponent } from './footer/footer.component';
 
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
@@ -22,6 +23,7 @@ import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 @NgModule({
   declarations: [
     AdminComponent,
+    FooterComponent,
     ListarImoveisComponent,
     ExibirImovelComponent,
     EditarImovelComponent,

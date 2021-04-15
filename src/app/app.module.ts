@@ -9,10 +9,9 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql/graphql.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, FooterComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     FormsModule,
