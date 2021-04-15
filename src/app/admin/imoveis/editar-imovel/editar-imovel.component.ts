@@ -135,8 +135,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         );
       }
       for (const i of data.imovel.galerias) {
-        this.plusImgs.push({ arquivos: i.arquivos, arquivoDestaque: i.arquivoDestaque });
-        console.log(this.plusImgs);
+        this.plusImgs.push({ arquivos: [...i.arquivos], arquivoDestaque: i.arquivoDestaque });
         this.galerias.push(
           this.formBuilder.group({
             tipoGaleria: [i.tipoGaleria],
@@ -202,7 +201,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       .atualizaImovel(imovelId, this.imovelForm.value)
       .then((res: any) => {
         if (res.data) {
-          console.log('Sucesso', res?.data);
           window.alert('Imóvel atualizado');
           this.voltar();
         }
@@ -257,7 +255,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
 
     /* Recebe as imagens */
     this.imovelForm.value.imagemPrincipal = this.mainImg;
-    this.imovelForm.value.imagensAdicionais = this.plusImgs;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
     this.imovelForm.value.previsaoLancamento != 0
       ? (this.imovelForm.value.previsaoLancamento = Date.parse(
@@ -426,6 +423,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.plusImgs[idx]?.arquivos.length; i++) {
       if (this.plusImgs[idx]?.arquivos[i] === imgUrl) {
         this.plusImgs[idx]?.arquivos.splice(i, 1);
+        this.galerias.at(idx).get('arquivos')?.patchValue(this.plusImgs[idx].arquivos);
         i--;
       }
     }
