@@ -265,7 +265,7 @@
             </p>
           </div>
           <div class="loadImagem">
-            <img [src]="imgPreview" width="300px" *ngIf="imgPreview" />
+            <img [src]="plantaFiles" width="300px" *ngIf="plantaFiles" />
             <div class="svg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -657,13 +657,6 @@
                   <option value="Galeria Condomínio">Galeria Condomínio</option>
                   <option value="Galeria Planta Condomínio">Galeria Planta Condomínio</option>
                 </select>
-                <label for="nomeGaleria">Nome para a Galeria <b>*</b></label>
-                <input
-                  type="text"
-                  name="nomeGaleria"
-                  formControlName="nomeGaleria"
-                  placeholder="Galeria de imagens | Galeria de plantas"
-                />
                 <input type="file" multiple (change)="selectFilesGalerias($event)" />
                 <div [class.active]="isActiveImgAdicionais">
                   <button
@@ -691,48 +684,6 @@
               <fa-icon [icon]="faPlusSquare"></fa-icon> Galeria
             </button>
           </div>
-
-          <!-- <div class="form-campo">
-            <button
-              type="button"
-              name="complemento1"
-              class=""
-              (click)="ativaModal($event)"
-            ></button>
-
-            <label for="inagensAdicionais">Adicionar mais Fotos: <b>*</b></label>
-            <div>
-              <input type="file" multiple (change)="selectFilesImagensAdicionais($event)" />
-            </div>
-            <div [class.active]="isActiveImgAdicionais">
-              <button
-                type="button"
-                [disabled]="!selectedFilesImgsAdicionais"
-                (click)="uploadFilesImagensAdicionais()"
-              >
-                Upload
-              </button>
-            </div>
-            <div *ngFor="let progressInfo of progressInfosImgsAdicionais">
-              <span>{{ progressInfo.fileName }}</span>
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-info progress-bar-striped"
-                  role="progressbar"
-                  attr.aria-valuenow="{{ progressInfo.value }}"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  [ngStyle]="{ width: progressInfo.value + '%' }"
-                >
-                  {{ progressInfo.value }}%
-                  <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
-                  <button type="button" (click)="deletaImagensAdicionais(progressInfo.url)">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div> -->
 
           <div
             class="infoCondominio"
