@@ -657,11 +657,11 @@
                   <option value="Galeria Condomínio">Galeria Condomínio</option>
                   <option value="Galeria Planta Condomínio">Galeria Planta Condomínio</option>
                 </select>
-                <input type="file" multiple (change)="selectFilesGalerias($event)" />
+                <input type="file" #inputGaleria multiple (change)="selectFilesGalerias($event)" />
                 <div [class.active]="isActiveImgAdicionais">
                   <button
                     type="button"
-                    [disabled]="!selectedFilesGalerias"
+                    [disabled]="!selectedFilesGalerias?.length"
                     (click)="uploadFilesGalerias(idx)"
                   >
                     Upload
