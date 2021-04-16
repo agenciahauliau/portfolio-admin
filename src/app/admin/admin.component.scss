@@ -225,7 +225,7 @@
         .modal {
           width: 100%;
           height: fit-content;
-          min-height: calc(100vh - 72px);          
+          min-height: calc(100vh - 72px);
           display: none;
           flex-direction: column;
           justify-content: space-between;
@@ -377,7 +377,7 @@
           }
         }
 
-        .modal.active{
+        .modal.active {
           ~ .coluna {
             display: none;
           }
