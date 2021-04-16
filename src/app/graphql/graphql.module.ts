@@ -53,12 +53,21 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
               return incoming;
             },
           },
+          leads: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
+      Imovel: {
+        fields: {
           galerias: {
             merge(existing, incoming) {
               return incoming;
             },
           },
-          leads: {
+          tipologias: {
             merge(existing, incoming) {
               return incoming;
             },

@@ -1,5 +1,5 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Apollo, QueryRef } from 'apollo-angular';
@@ -19,6 +19,8 @@ import { UploadService } from '../../../services/upload.service';
   styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit, OnDestroy {
+  @ViewChildren('inputGaleria') inputGaleria: any;
+
   //Para upload
   url = `${environment.API}files/`;
   selectedFiles?: FileList;
@@ -29,7 +31,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
 
   // Para Upload de Planta
   selectedPlantaFiles?: FileList;
-  progressInfosPlantaFiles: any[] = [];
+  progressInfosPlantaFiles: any = [];
   messagePlantaFiles: string[] = [];
   plantaFiles: any = [];
 
@@ -192,11 +194,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   removeGaleria(index: number): void {
     this.galerias.removeAt(index);
     this.plusImgs.splice(index, 1);
-    console.log(this.imovelForm.value.galerias);
   }
 
   async onSubmit() {
     const imovelId = this.route.snapshot.paramMap.get('id');
+    this.patchDadosImovelForm();
     await this.gqlService
       .atualizaImovel(imovelId, this.imovelForm.value)
       .then((res: any) => {
@@ -386,7 +388,9 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         this.uploadImagensGaleria(i, this.selectedFilesGalerias[i], index);
         this.galerias.at(index).get('arquivos')?.setValue(this.plusImgs[index].arquivos);
         this.patchDadosImovelForm();
+        this.selectedFilesGalerias[i].slice(0);
       }
+      this.inputGaleria._results[index].nativeElement.value = '';
     }
   }
 
@@ -458,8 +462,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             const msg = 'Arquivo enviado com sucesso ' + file.name;
             this.messagePlantaFiles.unshift(msg);
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
-            this.plantaFiles.unshift(this.url + event.body[0]);
-            this.plantaFiles = this.plantaFiles.filter((x: any) => x.trim() != '');
+            this.plantaFiles = this.url + event.body[0];
           }
         },
         (error: any) => {
@@ -472,22 +475,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   }
 
   deletaImagensPlantas(imgUrl: string): void {
-    this.uploadService
-      .deletaArquivo(imgUrl)
-      .then((res: any) => {
-        if (res.data) {
-          console.log('Sucesso', res?.data);
-          this.removeLinkDoArray(this.plantaFiles, imgUrl);
-          this.removeLinkDoArray(this.progressInfosPlantaFiles, imgUrl);
-        }
-        if (res.errors) {
-          console.log('Erro', res?.errors[0]?.message);
-          window.alert(`Erro: ${res.errors[0].message}`);
-        }
-      })
-      .catch((err) => {
-        console.log('err', err);
-      });
+    this.removeLinkDoArray(this.plantaFiles, imgUrl);
+    this.removeLinkDoArray(this.progressInfosPlantaFiles, imgUrl);
   }
 
   removeLinkDoArray(array: any, url: string) {

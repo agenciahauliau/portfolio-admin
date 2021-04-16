@@ -408,21 +408,16 @@
                 <label for="tipoGaleria">Tipo da Galeria: <b>*</b></label>
                 <select name="tipoGaleria" formControlName="tipoGaleria">
                   <option value="">Selecione o tipo da galeria</option>
-                  <option value="Imagens Adicionais">Imagens Adicionais</option>
-                  <option value="Plantas Adicionais">Plantas Adicionais</option>
+                  <option value="Galeria Principal">Galeria Principal</option>
+                  <option value="Galeria Planta Imóvel">Galeria Planta Imóvel</option>
+                  <option value="Galeria Condomínio">Galeria Condomínio</option>
+                  <option value="Galeria Planta Condomínio">Galeria Planta Condomínio</option>
                 </select>
-                <label for="nomeGaleria">Nome para a Galeria <b>*</b></label>
-                <input
-                  type="text"
-                  name="nomeGaleria"
-                  formControlName="nomeGaleria"
-                  placeholder="Casa dos x-men"
-                />
-                <input type="file" multiple (change)="selectFilesGalerias($event)" />
+                <input type="file" #inputGaleria multiple (change)="selectFilesGalerias($event)" />
                 <div [class.active]="isActiveImgAdicionais">
                   <button
                     type="button"
-                    [disabled]="!selectedFilesGalerias"
+                    [disabled]="!selectedFilesGalerias?.length"
                     (click)="uploadFilesGalerias(idx)"
                   >
                     Upload
@@ -646,6 +641,7 @@
                   getControl.jardins.value)
               "
             >
+              <img src="{{ plantaFiles }}" srcset="{{ plantaFiles }}" width="200px" />
               <label for="imgPlantaCondominio">Adicionar planta: <b>*</b></label>
               <div>
                 <input type="file" (change)="selectFilesPlantaFiles($event)" />
