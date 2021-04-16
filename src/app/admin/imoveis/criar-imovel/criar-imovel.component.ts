@@ -200,7 +200,6 @@ export class CriarImovelComponent implements OnInit {
     /* Recebe as imagens */
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
-
     this.imovelForm.value.previsaoLancamento != 0
       ? (this.imovelForm.value.previsaoLancamento = Date.parse(
           this.imovelForm.value.previsaoLancamento,
