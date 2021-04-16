@@ -92,50 +92,91 @@
 
     .formulario {
       form {
-        label {
-          display: none;
 
-          b {
-            color: #db0423;
+        div, .form-campo {
+          margin-bottom: 36px;
+          position: relative;
+
+          input,
+          textarea,
+          select {
+            width: 100%;
+            padding: 6px 12px;
+            background: #ffffff02;
+            border-bottom: 1px solid #fff5;
+  
+            &::placeholder {
+              color: transparent;
+              font-weight: 200;
+            }
+
+            &:focus {
+              outline: 0;
+            }
+
+            &:focus ~ label, &:-webkit-autofill ~ label, &:not(:placeholder-shown)  ~ label {
+              top: -24px;
+              font-size: 0.7em;
+              opacity: 0.3;
+            }
           }
-        }
 
-        .text-danger ~ ::placeholder,
-        .text-danger ~ select {
-          color: yellow;
-        }
-
-        input,
-        textarea,
-        select {
-          width: 100%;
-          padding: 6px 12px;
-          background: #ffffff02;
-          border-bottom: 1px solid #fff5;
-
-          ::placeholder {
+          label {
+            width: 100%;
+            padding: 6px 12px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            font-size: 0.9em;
             font-weight: 200;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            b {
+              color: #db0423;
+            }
+          }   
+
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #272727 inset !important;
+            fill: none !important
+          }
+  
+          textarea {
+            border: 1px solid #fff5;
+            background: #fff1;
+
+            &:focus ~ label, &:not(:placeholder-shown)  ~ label {
+              top: -28px;
+              font-size: 0.7em;
+              opacity: 0.3;
+            }
+          }
+  
+          select {
+            padding-left: 0;
+
+          }
+
+  
+          option {
+            background: #272727;
+            border-bottom: 1px solid #fff5;
+          }
+  
+          button {
+            width: fit-content;
+            padding: 12px 18px;
+            background: rgba(219, 4, 35, 1);
           }
         }
-
-        textarea {
-          border: 1px solid #fff5;
-          background: #fff1;
-        }
-
-        select {
-          padding-left: 0;
-        }
-
-        option {
-          background: #272727;
-          border-bottom: 1px solid #fff5;
-        }
-
-        button {
-          width: fit-content;
-          padding: 12px 18px;
-          background: rgba(219, 4, 35, 1);
+        .text-danger ~ label {
+          color: yellow;
         }
 
         div.checkbox {
@@ -155,7 +196,11 @@
               display: block;
               padding: 6px 12px;
               margin-bottom: 0 !important;
+              position: relative;
+              top: 0;
+              font-size: 1em;
               background: #272727;
+              opacity: 1;
             }
 
             &:checked ~ label {
@@ -386,10 +431,6 @@
         .coluna {
           padding: 12px;
         }
-      }
-
-      .form-campo {
-        margin-bottom: 24px;
       }
 
       /* Chrome, Safari, Edge, Opera */
