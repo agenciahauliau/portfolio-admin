@@ -77,6 +77,58 @@
       }
     }
 
+    .galerias {
+      width: 100%;
+
+      .galeria:first-child {
+        border-top: none;
+      }
+
+      .galeria {
+        padding-top: 24px;
+        margin-bottom: 24px;
+        border-top: 1px solid #fff5;
+
+        .tipoGaleria {
+          display: flex;
+          margin-bottom: 12px;
+
+          button {
+            width: 216px;
+            padding: 6px;
+            margin-left: 24px;
+            background: #000;
+          }
+        }
+
+        .upImagensGaleria {
+          display: flex;
+          margin-bottom: 12px;
+
+          button {
+            width: 144px;
+            padding: 6px ;
+            margin-left: 24px;
+            background: #db0423;
+          }
+        }
+      }
+      .botaoGalerias {
+        display: flex;
+        align-items: center;
+        margin: 12px auto 0;
+        background: none !important;
+
+        p {
+          margin-left: 12px;
+        }
+
+        svg {
+          width: 36px;
+        }
+      }
+    }
+
     .tipologias {
       width: 100%;
 
