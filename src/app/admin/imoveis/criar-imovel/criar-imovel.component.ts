@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -16,6 +16,8 @@ import { UploadService } from '../../../services/upload.service';
   styleUrls: ['../form-imovel.component.scss', '../../admin.component.scss'],
 })
 export class CriarImovelComponent implements OnInit {
+  @ViewChildren('inputGaleria') inputGaleria: any;
+
   //Para upload
   url = `${environment.API}files/`;
   selectedFiles?: FileList;
@@ -326,8 +328,9 @@ export class CriarImovelComponent implements OnInit {
         this.uploadImagensGaleria(i, this.selectedFilesGalerias[i], index);
         this.galerias.at(index).get('arquivos')?.setValue(this.plusImgs[index].arquivos);
         this.patchDadosImovelForm();
-        console.log(this.imovelForm);
+        this.selectedFilesGalerias[i].slice(0);
       }
+      this.inputGaleria._results[index].nativeElement.value = '';
     }
   }
 

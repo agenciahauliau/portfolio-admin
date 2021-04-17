@@ -92,7 +92,11 @@
 
     .formulario {
       form {
+<<<<<<< HEAD
 
+=======
+        div,
+>>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03
         .form-campo {
           margin-bottom: 36px;
           position: relative;
@@ -104,7 +108,7 @@
             padding: 6px 12px;
             background: #ffffff02;
             border-bottom: 1px solid #fff5;
-  
+
             &::placeholder {
               color: transparent;
               font-weight: 200;
@@ -114,7 +118,9 @@
               outline: 0;
             }
 
-            &:focus ~ label, &:-webkit-autofill ~ label, &:not(:placeholder-shown)  ~ label {
+            &:focus ~ label,
+            &:-webkit-autofill ~ label,
+            &:not(:placeholder-shown) ~ label {
               top: -24px;
               font-size: 0.7em;
               opacity: 0.3;
@@ -137,37 +143,45 @@
             b {
               color: #db0423;
             }
-          }   
+          }
 
           input:-webkit-autofill,
           input:-webkit-autofill:hover,
           input:-webkit-autofill:focus,
           input:-webkit-autofill:active {
             -webkit-box-shadow: 0 0 0 30px #272727 inset !important;
-            fill: none !important
+            fill: none !important;
           }
-  
+
           textarea {
             border: 1px solid #fff5;
             background: #fff1;
 
-            &:focus ~ label, &:not(:placeholder-shown)  ~ label {
+            &:focus ~ label,
+            &:not(:placeholder-shown) ~ label {
               top: -28px;
               font-size: 0.7em;
               opacity: 0.3;
             }
           }
-  
+
           select {
             padding-left: 0;
-
           }
 
-  
           option {
             background: #272727;
             border-bottom: 1px solid #fff5;
           }
+<<<<<<< HEAD
+=======
+
+          button {
+            width: fit-content;
+            padding: 12px 18px;
+            background: rgba(219, 4, 35, 1);
+          }
+>>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03
         }
 
         button {
