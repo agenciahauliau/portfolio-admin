@@ -527,19 +527,12 @@
                     </button>
                   </div>
                 </div>
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
                 <div class="imagensGaleria" *ngIf="plusImgs[idx]?.arquivos != undefined">
                   <div class="imagemGaleria" *ngFor="let item of plusImgs[idx]?.arquivos; index as i">
                     <img src="{{ item }}" />
                     <button type="button" (click)="deletaImagemGaleria(item, idx)">
                       X
                     </button>
-=======
-                <div *ngIf="plusImgs[idx]?.arquivos != undefined">
-                  <div *ngFor="let item of plusImgs[idx]?.arquivos; index as i">
-                    <img src="{{ item }}" width="100px" />
-                    <button type="button" (click)="deletaImagemGaleria(item, idx)">X</button>
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
                   </div>
                 </div>
               </diV>
@@ -674,7 +667,6 @@
                 <h4>Tipologia {{ idx + 1 }}</h4>
                 <div class="infoTipologia" type="text" [formGroupName]="idx">
                   <div>
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
                     <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
                     </div>
 
@@ -706,72 +698,6 @@
                   <div>
                     <input type="number" onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
                       placeholder="Parcelas" />
-=======
-                    <div
-                      *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
-                      class="text-danger"
-                    ></div>
-
-                    <input
-                      type="number"
-                      onmousewheel="return false;"
-                      name="quartos"
-                      formControlName="quartos"
-                      placeholder="Quartos"
-                    />
-                    <label for="quartos">Quartos - ex: 3<b>*</b></label>
-                  </div>
-                  <div>
-                    <div
-                      *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
-                      class="text-danger"
-                    ></div>
-                    <input
-                      type="number"
-                      onmousewheel="return false;"
-                      name="suites"
-                      formControlName="suites"
-                      placeholder="Suítes"
-                    />
-                    <label for="suites">Suítes - ex: 3 <b>*</b></label>
-                  </div>
-                  <div>
-                    <div
-                      *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
-                      class="text-danger"
-                    ></div>
-                    <input
-                      type="number"
-                      onmousewheel="return false;"
-                      name="tamanho"
-                      placeholder="Tamanho"
-                      formControlName="tamanho"
-                    />
-                    <label for="tamanho">Tamanho - ex: 332,56 <b>*</b></label>
-                  </div>
-                  <div>
-                    <div
-                      *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid"
-                      class="text-danger"
-                    ></div>
-                    <input
-                      type="number"
-                      onmousewheel="return false;"
-                      name="valorEntrada"
-                      formControlName="valorEntrada"
-                      placeholder="Entrada"
-                    />
-                    <label for="valorEntrada">Entrada - ex: 15.000,00 <b>*</b></label>
-                  </div>
-                  <div>
-                    <input
-                      type="number"
-                      onmousewheel="return false;"
-                      name="valorParcela"
-                      formControlName="valorParcela"
-                      placeholder="Parcelas"
-                    />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
                     <label for="valorParcela">Parcelas - ex: 15.000,00 <b>*</b></label>
                   </div>
                   <div>
@@ -791,18 +717,11 @@
           ---- Plantas --------------------------------------------
           --------------------------------------------------------->
 
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
             <div class="plantaJardins form-campo" *ngIf="
-=======
-            <div
-              class="form-campo"
-              *ngIf="
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
                 (getControl.categoriaImovel.value === 'Casa em Condomínio' &&
                   getControl.jardins.value) ||
                 (getControl.categoriaImovel.value === 'Lote em Condomínio' &&
                   getControl.jardins.value)
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <div class="caixaImagem">
                 <div id="complemento2" (click)="ativaModal($event)"></div>
@@ -851,39 +770,6 @@
                           fill="#fff" />
                       </svg>
                     </div>
-=======
-              "
-            >
-              <label for="imgPlantaCondominio">Adicionar planta: <b>*</b></label>
-              <div>
-                <input type="file" (change)="selectFilesPlantaFiles($event)" />
-              </div>
-              <div>
-                <button
-                  type="button"
-                  [disabled]="!selectedPlantaFiles"
-                  (click)="uploadFilesPlantaFiles()"
-                >
-                  Upload
-                </button>
-              </div>
-              <div *ngFor="let progressInfo of progressInfosPlantaFiles">
-                <span>{{ progressInfo.fileName }}</span>
-                <div class="progress">
-                  <div
-                    class="progress-bar progress-bar-info progress-bar-striped"
-                    role="progressbar"
-                    attr.aria-valuenow="{{ progressInfo.value }}"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    [ngStyle]="{ width: progressInfo.value + '%' }"
-                  >
-                    {{ progressInfo.value }}%
-                    <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
-                    <button type="button" (click)="deletaImagensPlantas(progressInfo.url)">
-                      <fa-icon [icon]="faTrash"></fa-icon>
-                    </button>
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
                   </div>
                 </div>
               </div>
@@ -892,31 +778,14 @@
             <!-------------------------------------------------------
           ---- Previsão do lançamento --------------------------------------------
           --------------------------------------------------------->
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
             <div class="dataLancamento form-campo" *ngIf="
-=======
-            <div
-              class="form-campo"
-              *ngIf="
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
                 (getControl.categoriaImovel.value === 'Casa em Condomínio' &&
                   getControl.jardins.value) ||
                 (getControl.categoriaImovel.value === 'Lote em Condomínio' &&
                   getControl.jardins.value)
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento"
                 placeholder=">Previsão do lançamento" />
-=======
-              "
-            >
-              <input
-                type="date"
-                name="previsaoLancamento"
-                formControlName="previsaoLancamento"
-                placeholder=">Previsão do lançamento"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="previsaoLancamento">Previsão do lançamento</label>
             </div>
           </div>
@@ -944,21 +813,9 @@
                 getControl.categoriaImovel.value === 'Apartamento Padrão' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <input type="number" onmousewheel="return false;" name="valorCondominio" formControlName="valorCondominio"
                 placeholder="Valor condomínio" />
-=======
-              "
-            >
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="valorCondominio"
-                formControlName="valorCondominio"
-                placeholder="Valor condomínio"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="valorCondominio">Valor cond. - ex: 1.500,13 <b>*</b></label>
             </div>
             <!-------------------------------------------------------
@@ -973,26 +830,10 @@
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="number" onmousewheel="return false;" name="areaConstruida" formControlName="areaConstruida"
                 placeholder="Área construída" />
-=======
-              "
-            >
-              <div
-                *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
-                class="text-danger"
-              ></div>
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="areaConstruida"
-                formControlName="areaConstruida"
-                placeholder="Área construída"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="areaConstruida">Área cons. - ex: 230,56 <b>*</b></label>
             </div>
 
@@ -1032,26 +873,10 @@
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="number" onmousewheel="return false;" name="qtdeQuarto" formControlName="qtdeQuarto"
                 placeholder="Quartos" />
-=======
-              "
-            >
-              <div
-                *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
-                class="text-danger"
-              ></div>
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="qtdeQuarto"
-                formControlName="qtdeQuarto"
-                placeholder="Quartos"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="qtdeQuarto">Quartos - ex: 2 <b>*</b></label>
             </div>
 
@@ -1067,26 +892,10 @@
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="number" onmousewheel="return false;" name="qtdeBanheiro" formControlName="qtdeBanheiro"
                 placeholder="Banheiros" />
-=======
-              "
-            >
-              <div
-                *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
-                class="text-danger"
-              ></div>
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="qtdeBanheiro"
-                formControlName="qtdeBanheiro"
-                placeholder="Banheiros"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="qtdeBanheiro">Banheiros - ex: 2 <b>*</b></label>
             </div>
 
@@ -1101,26 +910,10 @@
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="number" onmousewheel="return false;" name="qtdeSuites" formControlName="qtdeSuites"
                 placeholder="Suítes" />
-=======
-              "
-            >
-              <div
-                *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid"
-                class="text-danger"
-              ></div>
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="qtdeSuites"
-                formControlName="qtdeSuites"
-                placeholder="Suítes"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="qtdeSuites">Suítes - ex: 1 </label>
             </div>
 
@@ -1136,21 +929,9 @@
                 getControl.categoriaImovel.value === 'Chácaras' ||
                 getControl.categoriaImovel.value === 'Casa Residencial' ||
                 getControl.categoriaImovel.value === 'Casa em Condomínio'
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               ">
               <input type="number" onmousewheel="return false;" name="qtdeVagas" formControlName="qtdeVagas"
                 placeholder="Vagas garagem" />
-=======
-              "
-            >
-              <input
-                type="number"
-                onmousewheel="return false;"
-                name="qtdeVagas"
-                formControlName="qtdeVagas"
-                placeholder="Vagas garagem"
-              />
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label for="qtdeVagas">Vagas garagem - ex: 5 </label>
             </div>
           </div>
@@ -1258,21 +1039,9 @@
           ---- Comodidades Imóvel --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo comodidadesImovel">
-<<<<<<< HEAD:src/app/admin/imoveis/form-imovel.component.html
               <textarea cols="20" rows="10" type="text" name="comodidadesImovel" formControlName="comodidadesImovel"
                 placeholder="Comodidades
                 do Imóvel"></textarea>
-=======
-              <textarea
-                cols="20"
-                rows="10"
-                type="text"
-                name="comodidadesImovel"
-                formControlName="comodidadesImovel"
-                placeholder="Comodidades
-                do Imóvel"
-              ></textarea>
->>>>>>> c328ee505c8d2296e9845065f12fd591baf65a03:src/app/admin/imoveis/criar-imovel/criar-imovel.component.html
               <label
                 for="Comodidades do imóvel - ex: Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro"
                 >Comodidades do Imóvel - ex: Piscina, Churrasqueira ...
