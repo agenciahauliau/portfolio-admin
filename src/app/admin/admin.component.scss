@@ -93,7 +93,7 @@
     .formulario {
       form {
 
-        div, .form-campo {
+        .form-campo {
           margin-bottom: 36px;
           position: relative;
 
@@ -168,13 +168,14 @@
             background: #272727;
             border-bottom: 1px solid #fff5;
           }
-  
-          button {
-            width: fit-content;
-            padding: 12px 18px;
-            background: rgba(219, 4, 35, 1);
-          }
         }
+
+        button {
+          width: fit-content;
+          padding: 12px 18px;
+          background: rgba(219, 4, 35, 1);
+        }
+        
         .text-danger ~ label {
           color: yellow;
         }
@@ -205,65 +206,6 @@
 
             &:checked ~ label {
               background: rgba(219, 4, 35, 1);
-            }
-          }
-        }
-        .imgPrin {
-          width: 100%;
-          .caixaImagem {
-            width: 100%;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            border: 1px #fff2 dashed;
-
-            div[id^='complemento'] {
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
-              z-index: 5;
-            }
-            svg {
-              width: 100%;
-              height: 100%;
-              padding: 24px;
-              position: absolute;
-              top: 0;
-              left: 0;
-              opacity: 0.5;
-            }
-            img[src=''] {
-              display: none;
-            }
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-          }
-
-          .acoes {
-            .progress {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              .deletar {
-                width: 24px;
-                height: 38px;
-                margin: 24px 12px 12px 24px;
-              }
-              p {
-                width: 50%;
-                text-overflow: ellipsis;
-                overflow-x: hidden;
-                white-space: nowrap;
-              }
             }
           }
         }
@@ -337,10 +279,12 @@
               }
               h4.p {
                 display: block;
+                text-align: center;
               }
 
               h4.s {
                 display: none;
+                text-align: center;
               }
             }
 

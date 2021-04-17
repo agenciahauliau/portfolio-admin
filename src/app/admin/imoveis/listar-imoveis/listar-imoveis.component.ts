@@ -11,7 +11,7 @@ import { Imovel } from '../../../helpers/types';
 @Component({
   selector: 'app-listar-imoveis',
   templateUrl: './listar-imoveis.component.html',
-  styleUrls: ['./listar-imoveis.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../listar-imoveis.component.scss', '../../admin.component.scss'],
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
   faEye = faEye;

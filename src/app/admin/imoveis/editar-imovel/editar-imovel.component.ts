@@ -15,8 +15,8 @@ import { UploadService } from '../../../services/upload.service';
 
 @Component({
   selector: 'app-editar-imovel',
-  templateUrl: './editar-imovel.component.html',
-  styleUrls: ['./editar-imovel.component.scss', '../../admin.component.scss'],
+  templateUrl: '../form-imovel.component.html',
+  styleUrls: ['../form-imovel.component.scss', '../../admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit, OnDestroy {
   @ViewChildren('inputGaleria') inputGaleria: any;
@@ -34,6 +34,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   progressInfosPlantaFiles: any = [];
   messagePlantaFiles: string[] = [];
   plantaFiles: any = [];
+  imgPreviewPlantas: any;
 
   // Filtros e mascaras
   prefixReal = 'R$';
@@ -258,6 +259,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     /* Recebe as imagens */
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
+
     this.imovelForm.value.previsaoLancamento != 0
       ? (this.imovelForm.value.previsaoLancamento = Date.parse(
           this.imovelForm.value.previsaoLancamento,
@@ -438,6 +440,19 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.messagePlantaFiles = [];
     this.progressInfosPlantaFiles = [];
     this.selectedPlantaFiles = event.target.files;
+
+    /* Previsualização da imagem */
+    let mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      alert('Campo somente para imagens.');
+      return;
+    }
+
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (e) => {
+      this.imgPreviewPlantas = reader.result;
+    };
   }
 
   uploadFilesPlantaFiles(): void {
