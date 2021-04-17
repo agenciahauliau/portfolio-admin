@@ -99,11 +99,13 @@
         <div class="tituloInfo">
           <h2>Imagens Adicionais</h2>
         </div>
-        <ul>
-          <li *ngFor="let img; in: imovel.imagensAdicionais">
-            <img src="{{ img.imagemDestaque }}" width="280px" alt="" srcset="{{img}}" />
-          </li>
-        </ul>
+        <div *ngFor="let galeria of imovel.galerias">
+          <ul>
+            <li *ngFor="let img of galeria.arquivos">
+              <img src="{{ img }}" alt="" srcset="{{img}}" width="200px" />
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
