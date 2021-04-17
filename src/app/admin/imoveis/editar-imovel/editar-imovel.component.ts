@@ -149,6 +149,9 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         );
       }
       this.patchDadosImovelForm();
+      this.imovelForm.patchValue({
+        previsaoLancamento: this.converteData(data.imovel.previsaoLancamento),
+      });
     });
   }
 

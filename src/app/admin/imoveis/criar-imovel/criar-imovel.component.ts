@@ -203,7 +203,7 @@ export class CriarImovelComponent implements OnInit {
     /* Recebe as imagens */
     this.imovelForm.value.imagemPrincipal = this.mainImg;
     this.imovelForm.value.imgPlantaCondominio = this.plantaFiles;
-    
+
     this.imovelForm.value.previsaoLancamento != 0
       ? (this.imovelForm.value.previsaoLancamento = Date.parse(
           this.imovelForm.value.previsaoLancamento,
@@ -213,6 +213,15 @@ export class CriarImovelComponent implements OnInit {
 
   separa(data: any) {
     return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
+  }
+
+  converteData(data: number) {
+    let ano = new Date(data).getUTCFullYear().toString();
+    let mes = (new Date(data).getUTCMonth() + 1).toString();
+    let dia = new Date(data).getUTCDate().toString();
+    dia.length == 1 ? (dia = `0${dia}`) : dia;
+    mes.length == 1 ? (mes = `0${mes}`) : mes;
+    return `${ano}-${mes}-${dia}`;
   }
 
   limpaArrayImgs() {
