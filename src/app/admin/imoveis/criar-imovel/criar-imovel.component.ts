@@ -18,7 +18,7 @@ import { UploadService } from '../../../services/upload.service';
 export class CriarImovelComponent implements OnInit {
   @ViewChildren('inputGaleria') inputGaleria: any;
 
-  //Para upload
+  /* Para upload */
   url = `${environment.API}files/`;
   selectedFiles?: FileList;
   progressInfos: any[] = [];
@@ -26,20 +26,20 @@ export class CriarImovelComponent implements OnInit {
   mainImg = '';
   imgPreview: any;
 
-  // Para Upload de Planta
+  /* Para Upload de Planta */
   selectedPlantaFiles?: FileList;
   progressInfosPlantaFiles: any[] = [];
   messagePlantaFiles: string[] = [];
   plantaFiles: any = [];
   imgPreviewPlantas: any;
 
-  // Filtros e mascaras
+  /* Filtros e mascaras */
   prefixReal = 'R$';
   sufixoM2 = ' m²';
   maskCep = '00000-000';
   maskM2 = '000.00';
 
-  // Para Upload de Galerias
+  /* Para Upload de Galerias */
   selectedFilesGalerias!: FileList;
   progressInfosGalerias: any = [];
   messageGalerias = [{}];
