@@ -498,17 +498,23 @@
               *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid"
               class="text-danger"
             ></div>
-
-            <textarea
-              name="descricaoImovel"
-              cols="40"
-              rows="10"
+            <editor
               formControlName="descricaoImovel"
-              placeholder="Descriçaõ do Imóvel"
-            ></textarea>
-            <label for="descricaoImovel"
-              >Descriçaõ do Imóvel - Linda e ampla casa para morar com sua família <b>*</b></label
-            >
+              name="descricaoImovel"
+              [init]="{
+                base_url: '/tinymce',
+                suffix: '.min',
+                height: 300,
+                menubar: false,
+                language: 'pt_BR',
+                placeholder: 'Linda e ampla casa para morar com sua família (campo obrigatório)',
+                plugins: [
+                  'autolink lists link charmap anchor table paste help wordcount emoticons'
+                ],
+                toolbar:
+                  'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent table link emoticons | removeformat | help'
+              }"
+            ></editor>
           </div>
 
           <!-------------------------------------------------------
