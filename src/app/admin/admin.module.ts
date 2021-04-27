@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -42,6 +43,8 @@ import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
     FontAwesomeModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
+    EditorModule,
   ],
+  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
 })
 export class AdminModule {}
