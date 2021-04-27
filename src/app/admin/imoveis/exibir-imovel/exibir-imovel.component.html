@@ -37,7 +37,7 @@
           <h2>Informações de venda do Imóvel</h2>
         </div>
 
-        <p class="descricao">{{ imovel.descricaoImovel }}</p>
+        <div class="descricao" [innerHtml]="imovel.descricaoImovel"></div>
         <p>Categoria: {{ imovel.categoriaImovel }}</p>
         <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
         <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
@@ -55,7 +55,7 @@
       </div>
       <div class="tamanhoImovel">
         <div class="tituloInfo">
-          <h2>Área e quantidade de cômodos do imóvel</h2>
+          <h2>Área, quantidade de cômodos...</h2>
         </div>
         <p>Área total: {{ imovel.areaTotal }}m²</p>
         <p>Área construída: {{ imovel.areaConstruida }}m²</p>
