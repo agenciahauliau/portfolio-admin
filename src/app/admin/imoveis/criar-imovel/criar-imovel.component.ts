@@ -10,6 +10,9 @@ import { Imovel } from '../../../helpers/types';
 import { environment } from '../../../../environments/environment';
 import { UploadService } from '../../../services/upload.service';
 
+import { NgxViacepService, Endereco, CEPError } from '@brunoc/ngx-viacep';
+import { catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 @Component({
   selector: 'app-criar-imovel',
   templateUrl: '../form-imovel.component.html',
@@ -65,6 +68,7 @@ export class CriarImovelComponent implements OnInit {
     private gqlService: GraphQlService,
     private uploadService: UploadService,
     private router: Router,
+    private viacep: NgxViacepService,
   ) {}
 
   ngOnInit(): void {
@@ -153,6 +157,30 @@ export class CriarImovelComponent implements OnInit {
     this.plusImgs.splice(index, 1);
     console.log(this.imovelForm.value.galerias);
   }
+
+  async buscaCEP() {
+    this.viacep
+      .buscarPorCep(this.imovelForm.value.cep)
+      .pipe(
+        catchError((error: CEPError) => {
+          // Ocorreu algum erro :/
+          alert(error.message);
+          console.log(error.message);
+          return EMPTY;
+        }),
+      )
+      .subscribe((endereco: Endereco) => {
+        // Endereço retornado :)
+        console.log(endereco);
+        this.imovelForm.patchValue({
+          logradouro: endereco.logradouro,
+          uf: endereco.uf,
+          bairro: endereco.bairro,
+          cidade: endereco.localidade,
+        });
+      });
+  }
+
   async onSubmit() {
     this.patchDadosImovelForm();
     await this.gqlService

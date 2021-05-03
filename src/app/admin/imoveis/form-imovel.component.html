@@ -1079,6 +1079,7 @@
                 name="cep"
                 formControlName="cep"
                 [mask]="this.maskCep"
+                (blur)="buscaCEP()"
                 placeholder="CEP"
               />
               <label for="cep">CEP - ex: 74.000.000 <b>*</b></label>

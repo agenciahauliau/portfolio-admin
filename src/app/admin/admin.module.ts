@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 import { AdminComponent } from './admin.component';
@@ -44,6 +45,7 @@ import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
     HttpClientModule,
     NgxMaskModule.forRoot(),
     EditorModule,
+    NgxViacepModule,
   ],
   providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
 })
