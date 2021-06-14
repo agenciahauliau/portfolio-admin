@@ -65,6 +65,8 @@ export const GQL_CRIAR_IMOVEL = gql`
       qtdeSuites
       qtdeVagas
       nomeConstrutora
+      nomeProprietario
+      telefoneProprietario
       bairro
       logradouro
       numeroLogradouro
@@ -122,6 +124,8 @@ export const GQL_LISTAR_IMOVEIS = gql`
       qtdeSuites
       qtdeVagas
       nomeConstrutora
+      nomeProprietario
+      telefoneProprietario
       bairro
       logradouro
       numeroLogradouro
@@ -148,6 +152,7 @@ export const GQL_LISTAR_IMOVEIS = gql`
       }
       createdAt
       updatedAt
+      imovelId
     }
   }
 `;
@@ -179,6 +184,8 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       qtdeSuites
       qtdeVagas
       nomeConstrutora
+      nomeProprietario
+      telefoneProprietario
       bairro
       logradouro
       numeroLogradouro
@@ -205,6 +212,7 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       }
       createdAt
       updatedAt
+      imovelId
     }
   }
 `;
@@ -236,6 +244,8 @@ export const GQL_BUSCAR_IMOVEL = gql`
       qtdeSuites
       qtdeVagas
       nomeConstrutora
+      nomeProprietario
+      telefoneProprietario
       bairro
       logradouro
       numeroLogradouro
@@ -262,6 +272,7 @@ export const GQL_BUSCAR_IMOVEL = gql`
       }
       createdAt
       updatedAt
+      imovelId
     }
   }
 `;
@@ -299,6 +310,8 @@ export const GQL_ATUALIZA_IMOVEL = gql`
       qtdeSuites
       qtdeVagas
       nomeConstrutora
+      nomeProprietario
+      telefoneProprietario
       bairro
       logradouro
       numeroLogradouro
@@ -339,6 +352,7 @@ export const GQL_LISTAR_LEADS = gql`
   query listarLeads {
     leads {
       _id
+      leadId
       tipoLead
       nome
       email
@@ -365,6 +379,7 @@ export const GQL_ATUALIZA_LEAD = gql`
   mutation updateLead($id: String!, $input: UpdateLeadInput!) {
     updateLead(id: $id, dados: $input) {
       _id
+      leadId
       tipoLead
       nome
       email
@@ -384,6 +399,7 @@ export const GQL_BUSCA_UNICO_LEAD = gql`
   query lead($input: SearchLeadInput!) {
     lead(dados: $input) {
       _id
+      leadId
       tipoLead
       nome
       email
@@ -397,5 +413,100 @@ export const GQL_BUSCA_UNICO_LEAD = gql`
       createdAt
       updatedAt
     }
+  }
+`;
+
+export const GQL_CRIAR_POST = gql`
+  mutation createPost($input: CreatePostInput!) {
+    createPost(dados: $input) {
+      _id
+      postId
+      status
+      titulo
+      descricao
+      conteudo
+      imagemPrincipal
+      categoria
+      tags
+      createdAt
+    }
+  }
+`;
+
+export const GQL_ATUALIZA_POST = gql`
+  mutation updatePost($id: String!, $input: UpdatePostInput!) {
+    updatePost(id: $id, dados: $input) {
+      _id
+      postId
+      status
+      titulo
+      descricao
+      conteudo
+      imagemPrincipal
+      categoria
+      tags
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_LISTAR_POSTS = gql`
+  query todosPosts {
+    posts {
+      _id
+      postId
+      status
+      titulo
+      descricao
+      conteudo
+      imagemPrincipal
+      categoria
+      tags
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_BUSCAR_POSTS_COM_FILTRO = gql`
+  query filtrarPosts($filtros: SearchPostCondInput, $qtde: Float) {
+    posts(filtros: $filtros, quantidade: $qtde) {
+      _id
+      postId
+      status
+      titulo
+      descricao
+      conteudo
+      imagemPrincipal
+      categoria
+      tags
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_BUSCAR_POST = gql`
+  query post($id: String!) {
+    post(id: $id) {
+      _id
+      postId
+      status
+      titulo
+      descricao
+      conteudo
+      imagemPrincipal
+      categoria
+      tags
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_DELETA_POST = gql`
+  mutation deletaPost($id: String!) {
+    removePost(id: $id)
   }
 `;
