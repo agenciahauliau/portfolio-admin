@@ -14,10 +14,10 @@
       <div class="infoPostImovel">
         <p>ID: {{ imovel._id }}</p>
         <div class="infoPostImovelDatas">
-          <p>{{ imovel.createdAt | date: 'dd - MMM - yyyy - HH:mm' }}</p>
+          <p>{{ imovel.createdAt | date: 'dd/MMMM/yyyy - HH:mm' }}</p>
           <p>
             <fa-icon [icon]="faSyncAlt"></fa-icon
-            >{{ imovel.updatedAt | date: 'dd - MMM - yyyy - HH:mm' }}
+            >{{ imovel.updatedAt | date: 'dd/MMMM/yyyy - HH:mm' }}
           </p>
         </div>
       </div>

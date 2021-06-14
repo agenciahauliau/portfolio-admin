@@ -21,8 +21,11 @@
           <th></th>
         </thead>
         <tbody class="tabelaImoveisCorpo" *ngIf="leads">
-          <tr class="tabelalinhaImovel" *ngFor="let lead of leads">
-            <td>{{ lead._id }}</td>
+          <tr
+            class="tabelalinhaImovel"
+            *ngFor="let lead of leads | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }"
+          >
+            <td>{{ lead.leadId }}</td>
             <td>{{ lead.tipoLead }}</td>
             <td>{{ lead.email }}</td>
             <td>{{ lead.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
@@ -45,7 +48,16 @@
           </tr>
         </tbody>
       </table>
-
+      <div class="paginacao">
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          nextLabel="Próx."
+          previousLabel="Voltar"
+          (pageChange)="p = $event"
+        ></pagination-controls>
+      </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>
     </div>

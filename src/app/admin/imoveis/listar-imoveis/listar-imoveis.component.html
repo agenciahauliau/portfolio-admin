@@ -11,20 +11,31 @@
     <div class="tabelalinhaImovel">
       <table class="tabelaImoveis">
         <thead class="tabelaImoveisHeader">
-          <th>ID Imóvel</th>
-          <th>Categoria</th>
-          <th>Valor</th>
-          <th>Criado</th>
-          <th>Atualizado</th>
-          <th>Status</th>
-          <th></th>
-          <th>Ações</th>
-          <th></th>
+          <tr>
+            <th [appSort]="imoveis" data-order="desc" data-name="imovelId">ID</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="categoriaImovel">Categoria</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="bairro">Bairro</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="valorImovel">Valor</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="createdAt">Criado</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="updatedAt">Atualizado</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="statusLancamento">Status</th>
+            <th></th>
+            <th>Ações</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
-          <tr class="tabelalinhaImovel" *ngFor="let imovel of imoveis">
-            <td>{{ imovel._id }}</td>
+          <tr
+            class="tabelalinhaImovel"
+            *ngFor="
+              let imovel of imoveis
+                | paginate
+                  : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
+            "
+          >
+            <td>{{ imovel.imovelId }}</td>
             <td>{{ imovel.categoriaImovel }}</td>
+            <td>{{ imovel.bairro }}</td>
             <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
             <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
@@ -57,7 +68,16 @@
           </tr>
         </tbody>
       </table>
-
+      <div class="paginacao">
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          nextLabel="Próx."
+          previousLabel="Voltar"
+          (pageChange)="p = $event"
+        ></pagination-controls>
+      </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>
     </div>
