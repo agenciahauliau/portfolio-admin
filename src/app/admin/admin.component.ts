@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  faRocket,
-  faHome,
-  faSyncAlt,
-  faImage,
-  faSignOutAlt,
-  faClipboard,
-} from '@fortawesome/free-solid-svg-icons';
+import { faRss } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -15,13 +8,7 @@ import { TokenService } from '../services/token.service';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  faRocket = faRocket;
-  faHome = faHome;
-  faSyncAlt = faSyncAlt;
-  faImage = faImage;
-  faSignOutAlt = faSignOutAlt;
-  faClipboard = faClipboard;
-
+  faRss = faRss;
   constructor(private tokenService: TokenService) {}
 
   ngOnInit(): void {}
