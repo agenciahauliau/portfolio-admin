@@ -114,6 +114,9 @@
             />
           </svg>
         </a>
+        <a [routerLink]="['./posts']" routerLinkActive="router-link-active">
+          <fa-icon [icon]="faRss" size="2x"></fa-icon>
+        </a>
       </div>
       <div class="footerBarra">
         <a [routerLink]="['']" routerLinkActive="router-link-active" (click)="logout()">

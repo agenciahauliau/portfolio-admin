@@ -37,10 +37,8 @@ export class CriarImovelComponent implements OnInit {
   imgPreviewPlantas: any;
 
   /* Filtros e mascaras */
-  prefixReal = 'R$';
-  sufixoM2 = ' m²';
   maskCep = '00000-000';
-  maskM2 = '000.00';
+  maskPhone = '(00) 0 0000-0000';
 
   /* Para Upload de Galerias */
   selectedFilesGalerias!: FileList;
@@ -95,6 +93,8 @@ export class CriarImovelComponent implements OnInit {
       qtdeSuites: ['', Validators.min(0)],
       qtdeVagas: ['', Validators.min(0)],
       nomeConstrutora: [''],
+      nomeProprietario: [''],
+      telefoneProprietario: [''],
       cep: ['', [Validators.min(0o1001000), Validators.max(99999999)]],
       logradouro: [''],
       numeroLogradouro: [''],
@@ -240,7 +240,7 @@ export class CriarImovelComponent implements OnInit {
   }
 
   separa(data: any) {
-    return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
+    return data.split(/\n+|\r+|,\s+|,/g).filter(Boolean);
   }
 
   converteData(data: number) {

@@ -1,0 +1,53 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        Novo Post
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+      <a [routerLink] (click)="editarPost(post._id)">
+        Editar post
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="error">Erro :(</div>
+    <div class="post" *ngIf="post">
+      <div class="infoPostImovel">
+        <p>ID: {{ post.postId }}</p>
+        <div class="infoPostImovelDatas">
+          <p>{{ post.createdAt | date: 'dd/MMMM/yyyy - HH:mm' }}</p>
+          <p>
+            <fa-icon [icon]="faSyncAlt"></fa-icon
+            >{{ post.updatedAt | date: 'dd/MMMM/yyyy - HH:mm' }}
+          </p>
+        </div>
+      </div>
+      <div class="tituloImovel">
+        <h1>{{ post.titulo }}</h1>
+        <h3>{{ post.descricao }}</h3>
+      </div>
+      <div class="imagemDestaque">
+        <img src="{{ post.imagemPrincipal }}" width="500px" alt="" title="" />
+      </div>
+      <div class="infoImovel">
+        <div class="descricao">
+          <p>
+            Categoria: <span *ngFor="let i of post.categoria | slice: 0">{{ i }} </span>
+          </p>
+          <p>
+            Tags: <span *ngFor="let i of post.tags | slice: 0">{{ i }} </span>
+          </p>
+          <p>Status de publicação: {{ post.status }}</p>
+        </div>
+      </div>
+      <br />
+      <div>
+        <h2>Conteúdo</h2>
+        <div [innerHtml]="post.conteudo"></div>
+      </div>
+    </div>
+  </div>
+</div>

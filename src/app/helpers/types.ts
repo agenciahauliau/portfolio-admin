@@ -18,6 +18,7 @@ export interface Tipologia {
 
 export interface Lead {
   _id?: string;
+  leadId?: number;
   tipoLead?: string;
   nome?: string;
   email?: string;
@@ -31,6 +32,7 @@ export interface Lead {
 
 export interface Imovel {
   _id?: string;
+  imovelId?: number;
   nomeImovel?: string;
   imagemPrincipal?: string;
   categoriaImovel?: string;
@@ -54,6 +56,8 @@ export interface Imovel {
   qtdeSuites?: number;
   qtdeVagas?: number;
   nomeConstrutora?: string;
+  nomeProprietario?: string;
+  telefoneProprietario?: string;
   bairro?: string;
   logradouro?: string;
   cep?: string;
@@ -76,4 +80,18 @@ export interface Galeria {
   nomeGaleria?: string;
   arquivos?: [string];
   arquivoDestaque?: string;
+}
+
+export interface Post {
+  _id?: string;
+  postId?: number;
+  status?: string;
+  titulo?: string;
+  descricao?: string;
+  conteudo?: string;
+  imagemPrincipal?: string;
+  categoria?: string[];
+  tags?: string[];
+  createdAt?: number;
+  updatedAt?: number;
 }

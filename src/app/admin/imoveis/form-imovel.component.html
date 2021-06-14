@@ -433,6 +433,44 @@
           </div>
 
           <!-------------------------------------------------------
+            ---- Nome do Proprietário--------------------------------
+            --------------------------------------------------------->
+          <div class="form-campo nomeProprietario">
+            <div
+              *ngIf="getControl.nomeProprietario.touched && getControl.nomeProprietario.invalid"
+              class="text-danger"
+            ></div>
+            <input
+              type="text"
+              name="nomeProprietario"
+              formControlName="nomeProprietario"
+              placeholder="Fulano de tal"
+            />
+            <label for="nomeProprietario">Nome do Proprietário(a) <b>*</b></label>
+          </div>
+
+          <!-------------------------------------------------------
+            ---- Telefone do Properitário ---------------------------
+            --------------------------------------------------------->
+          <div class="form-campo telefoneProprietario">
+            <div
+              *ngIf="
+                getControl.telefoneProprietario.touched && getControl.telefoneProprietario.invalid
+              "
+              class="text-danger"
+            ></div>
+            <input
+              type="text"
+              name="telefone"
+              formControlName="telefoneProprietario"
+              placeholder="(62) 9 8789-9890"
+              [mask]="this.maskPhone"
+              [showMaskTyped]="true"
+            />
+            <label for="telefoneProprietario">Telefone do(a) proprietário(a) <b>*</b></label>
+          </div>
+
+          <!-------------------------------------------------------
           ---- Valor Imóvel --------------------------------------------
           --------------------------------------------------------->
 
@@ -442,7 +480,8 @@
               class="text-danger"
             ></div>
             <input
-              type="number"
+              currencyMask
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
               onmousewheel="return false;"
               name="valorImovel"
               formControlName="valorImovel"
@@ -461,7 +500,8 @@
               class="text-danger"
             ></div>
             <input
-              type="number"
+              currencyMask
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
               onmousewheel="return false;"
               name="valorIPTU"
               formControlName="valorIPTU"
@@ -480,8 +520,14 @@
               class="text-danger"
             ></div>
             <input
-              type="number"
-              onmousewheel="return false;"
+              currencyMask
+              [options]="{
+                prefix: '',
+                suffix: ' m² ',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }"
               name="areaTotal"
               formControlName="areaTotal"
               placeholder="Área total"
@@ -680,8 +726,8 @@
             </div>
 
             <!-------------------------------------------------------
-          ---- Tipologias ---------------------------------------
-          --------------------------------------------------------->
+            ---- Tipologias -----------------------------------------
+            --------------------------------------------------------->
 
             <div
               class="form-campo tipologias"
@@ -733,7 +779,14 @@
                       class="text-danger"
                     ></div>
                     <input
-                      type="number"
+                      currencyMask
+                      [options]="{
+                        prefix: '',
+                        suffix: ' m² ',
+                        thousands: '.',
+                        decimal: ',',
+                        align: 'left'
+                      }"
                       onmousewheel="return false;"
                       name="tamanho"
                       placeholder="Tamanho"
@@ -747,7 +800,8 @@
                       class="text-danger"
                     ></div>
                     <input
-                      type="number"
+                      currencyMask
+                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                       onmousewheel="return false;"
                       name="valorEntrada"
                       formControlName="valorEntrada"
@@ -757,7 +811,8 @@
                   </div>
                   <div>
                     <input
-                      type="number"
+                      currencyMask
+                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                       onmousewheel="return false;"
                       name="valorParcela"
                       formControlName="valorParcela"
@@ -897,7 +952,8 @@
               "
             >
               <input
-                type="number"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
                 onmousewheel="return false;"
                 name="valorCondominio"
                 formControlName="valorCondominio"
@@ -924,7 +980,14 @@
                 class="text-danger"
               ></div>
               <input
-                type="number"
+                currencyMask
+                [options]="{
+                  prefix: '',
+                  suffix: ' m² ',
+                  thousands: '.',
+                  decimal: ',',
+                  align: 'left'
+                }"
                 onmousewheel="return false;"
                 name="areaConstruida"
                 formControlName="areaConstruida"
@@ -1084,8 +1147,9 @@
               />
               <label for="cep">CEP - ex: 74.000.000 <b>*</b></label>
             </div>
+
             <!-------------------------------------------------------
-          ---- Logadrarou --------------------------------------------
+          ---- Logradouro --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
               <div
@@ -1100,8 +1164,9 @@
               />
               <label for="logradouro">Logradouro - ex:Av. Anhanguera, Rua 12 ...<b>*</b></label>
             </div>
+
             <!-------------------------------------------------------
-          ---- Valor do condomínio --------------------------------------------
+          ---- Número do logradouro --------------------------------------------
           --------------------------------------------------------->
             <div class="form-campo">
               <div

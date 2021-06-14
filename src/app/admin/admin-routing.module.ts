@@ -16,6 +16,11 @@ import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
 import { CriarLeadComponent } from './leads/criar-lead/criar-lead.component';
 import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 
+import { ExibirPostComponent } from './blog/exibir-post/exibir-post.component';
+import { EditarPostComponent } from './blog/editar-post/editar-post.component';
+import { CriarPostComponent } from './blog/criar-post/criar-post.component';
+import { ListarPostsComponent } from './blog/listar-posts/listar-posts.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -61,6 +66,22 @@ const routes: Routes = [
           {
             path: 'editar-lead/:id',
             component: EditarLeadComponent,
+          },
+          {
+            path: 'posts',
+            component: ListarPostsComponent,
+          },
+          {
+            path: 'post/:id',
+            component: ExibirPostComponent,
+          },
+          {
+            path: 'criar-post',
+            component: CriarPostComponent,
+          },
+          {
+            path: 'editar-post/:id',
+            component: EditarPostComponent,
           },
           {
             path: '',

@@ -1,0 +1,77 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-post']" routerLinkActive="router-link-active">
+        Novo Post
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div class="tabelalinhaImovel">
+      <table class="tabelaImoveis">
+        <thead class="tabelaImoveisHeader">
+          <th [appSort]="posts" data-order="desc" data-name="postId">ID</th>
+          <th [appSort]="posts" data-order="desc" data-name="titulo">Título</th>
+          <th [appSort]="posts" data-order="desc" data-name="categoria">Categorias</th>
+          <th [appSort]="posts" data-order="desc" data-name="tags">Tags</th>
+          <th [appSort]="posts" data-order="desc" data-name="createdAt">Criado</th>
+          <th [appSort]="posts" data-order="desc" data-name="updatedAt">Atualizado</th>
+          <th></th>
+          <th>Ações</th>
+          <th></th>
+        </thead>
+        <tbody class="tabelaImoveisCorpo" *ngIf="posts">
+          <tr
+            class="tabelalinhaImovel"
+            *ngFor="let post of posts | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }"
+          >
+            <td>{{ post.postId }}</td>
+            <td>{{ post.titulo | truncate: 4:20:'...' }}</td>
+            <td>{{ post.categoria?.join(', ') }}</td>
+            <td>{{ post.tags?.join(', ') }}</td>
+            <td>{{ post.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>{{ post.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>
+              <select
+                name="status"
+                (change)="atualizaStatus(post._id, $event)"
+                [value]="post.status"
+              >
+                <option value="rascunho">Rascunho</option>
+                <option value="publicado">Publicado</option>
+              </select>
+            </td>
+            <td>
+              <button (click)="goToPost(post._id)">
+                <fa-icon [icon]="faEye" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="editarPost(post._id)">
+                <fa-icon [icon]="faEdit" size="2x"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="remover(post._id)">
+                <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="paginacao">
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          nextLabel="Próx."
+          previousLabel="Voltar"
+          (pageChange)="p = $event"
+        ></pagination-controls>
+      </div>
+      <div *ngIf="loading">Carregando...</div>
+      <div *ngIf="error">Erro :(</div>
+    </div>
+  </div>
+</div>

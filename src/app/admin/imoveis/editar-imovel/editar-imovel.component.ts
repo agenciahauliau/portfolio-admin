@@ -40,10 +40,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   imgPreviewPlantas: any;
 
   /* Filtros e mascaras */
-  prefixReal = 'R$';
-  sufixoM2 = ' m²';
   maskCep = '00000-000';
-  maskM2 = '000.00';
+  maskPhone = '(00) 0 0000-0000';
 
   /* Para Upload de Galerias */
   selectedFilesGalerias!: FileList;
@@ -101,6 +99,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       qtdeSuites: ['', Validators.min(0)],
       qtdeVagas: ['', Validators.min(0)],
       nomeConstrutora: [''],
+      nomeProprietario: [''],
+      telefoneProprietario: [''],
       cep: ['', [Validators.min(0o1001000), Validators.max(99999999)]],
       logradouro: [''],
       numeroLogradouro: [''],
@@ -155,6 +155,12 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
       this.patchDadosImovelForm();
       this.imovelForm.patchValue({
         previsaoLancamento: this.converteData(data.imovel.previsaoLancamento),
+      });
+      this.imovelForm.patchValue({
+        comodidadesCondominio: data.imovel.comodidadesCondominio.join(', '),
+      });
+      this.imovelForm.patchValue({
+        comodidadesImovel: data.imovel.comodidadesImovel.join(', '),
       });
     });
   }
@@ -298,7 +304,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   }
 
   separa(data: any) {
-    return data.split(/\n+|\r+|,\s+/g).filter(Boolean);
+    return data.split(/\n+|\r+|,\s+|,/g).filter(Boolean);
   }
 
   converteData(data: number) {

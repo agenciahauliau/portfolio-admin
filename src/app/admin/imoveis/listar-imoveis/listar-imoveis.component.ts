@@ -14,16 +14,18 @@ import { Imovel } from '../../../helpers/types';
   styleUrls: ['../listar-imoveis.component.scss', '../../admin.component.scss'],
 })
 export class ListarImoveisComponent implements OnInit, OnDestroy {
-  faEye = faEye;
-  faEdit = faEdit;
-  faTrashAlt = faTrashAlt;
-  faImage = faImage;
-  faPlusSquare = faPlusSquare;
+  public faEye = faEye;
+  public faEdit = faEdit;
+  public faTrashAlt = faTrashAlt;
+  public faImage = faImage;
+  public faPlusSquare = faPlusSquare;
 
-  imoveis!: Imovel[];
-  imoveisQuery!: QueryRef<any>;
-  loading = true;
-  error: any;
+  public imoveis!: Imovel[];
+  private imoveisQuery!: QueryRef<any>;
+  public loading = true;
+  public error: any;
+
+  p: number = 1;
 
   private querySubs = new Subscription();
 
@@ -37,7 +39,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
 
     this.querySubs = this.imoveisQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
-      this.imoveis = data.imoveis;
+      this.imoveis = [...data.imoveis];
     });
   }
 
@@ -77,8 +79,12 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   }
 
   async remover(id: any) {
-    await this.gqlService.deletarImovel(id);
-    this.refresh();
+    if (confirm(`Têm certeza que quer deletar?`)) {
+      await this.gqlService.deletarImovel(id);
+      this.refresh();
+    } else {
+      this.refresh();
+    }
   }
 
   ngOnDestroy() {

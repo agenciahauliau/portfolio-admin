@@ -36,11 +36,24 @@
   </div>
   <div class="infoConteudoAdmin">
     <div class="biblioteca">
-      <div class="itemBiblioteca" *ngFor="let midia of midias">
+      <div
+        class="itemBiblioteca"
+        *ngFor="let midia of midias | paginate: { id: 'server', itemsPerPage: 10, currentPage: p }"
+      >
         <div class="imagem"><img src="{{ url }}{{ midia }}" alt="" title="" /></div>
         <p><b>URL: </b>{{ url }}{{ midia }}</p>
         <button type="button" (click)="deletaImagem(midia)">X</button>
       </div>
+    </div>
+    <div class="paginacao">
+      <pagination-controls
+        class="controle"
+        id="server"
+        [autoHide]="true"
+        nextLabel="Próx."
+        previousLabel="Voltar"
+        (pageChange)="p = $event"
+      ></pagination-controls>
     </div>
     <div *ngIf="loading">Carregando...</div>
     <div *ngIf="error">Erro :(</div>
