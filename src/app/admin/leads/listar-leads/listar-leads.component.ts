@@ -25,6 +25,8 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
   loading = true;
   error: any;
 
+  p: number = 1;
+
   private querySubs = new Subscription();
 
   constructor(private apollo: Apollo, private router: Router, private gqlService: GraphQlService) {}
@@ -36,7 +38,7 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
 
     this.querySubs = this.leadsQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
-      this.leads = data.leads;
+      this.leads = [...data.leads];
     });
   }
 
@@ -53,8 +55,12 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
   }
 
   async remover(id: any) {
-    await this.gqlService.deletarLead(id);
-    this.refresh();
+    if (confirm(`Têm certeza que quer deletar?`)) {
+      await this.gqlService.deletarLead(id);
+      this.refresh();
+    } else {
+      this.refresh();
+    }
   }
 
   ngOnDestroy() {
