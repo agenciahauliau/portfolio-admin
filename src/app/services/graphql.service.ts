@@ -13,8 +13,12 @@ import {
   GQL_LISTAR_LEADS,
   GQL_ATUALIZA_LEAD,
   GQL_DELETA_LEAD,
+  GQL_CRIAR_POST,
+  GQL_LISTAR_POSTS,
+  GQL_ATUALIZA_POST,
+  GQL_DELETA_POST,
 } from '../graphql/graphql';
-import { Imovel, Lead, User } from '../helpers/types';
+import { Imovel, Lead, Post, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -116,6 +120,55 @@ export class GraphQlService {
       .mutate({
         mutation: GQL_DELETA_LEAD,
         refetchQueries: [{ query: GQL_LISTAR_LEADS }],
+        variables: { id: id },
+      })
+      .subscribe(
+        ({ errors, data }: any) => {
+          if (errors) {
+            return console.error('Erro ao deletar: ', errors[0].message);
+          }
+          if (data) {
+            return console.log('Deletado', data.removeLead);
+          }
+        },
+        (err) => {
+          console.error('Err: ', err);
+        },
+      );
+  }
+
+  async criarPost(dados: Post) {
+    const result = this.apollo
+      .mutate({
+        mutation: GQL_CRIAR_POST,
+        refetchQueries: [{ query: GQL_LISTAR_POSTS }],
+        variables: { input: dados },
+      })
+      .toPromise();
+    return result;
+  }
+
+  async atualizaPost(id: any, dados: Post) {
+    const result = this.apollo
+      .mutate({
+        mutation: GQL_ATUALIZA_POST,
+        refetchQueries: [{ query: GQL_LISTAR_POSTS }],
+        variables: {
+          id: id,
+          input: {
+            ...dados,
+          },
+        },
+      })
+      .toPromise();
+    return result;
+  }
+
+  async deletarPost(id: string) {
+    return this.apollo
+      .mutate({
+        mutation: GQL_DELETA_POST,
+        refetchQueries: [{ query: GQL_LISTAR_POSTS }],
         variables: { id: id },
       })
       .subscribe(
