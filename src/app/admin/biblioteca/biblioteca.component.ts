@@ -33,6 +33,8 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
   progressInfos: any[] = [];
   message: string[] = [];
 
+  p: number = 1;
+
   private querySubs = new Subscription();
 
   constructor(
