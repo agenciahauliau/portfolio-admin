@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //API: 'https://api.portfolio.imb.br/v1/',
-  API: 'http://localhost:8080/v1/',
+  API: 'https://back-portfolio-imb-br-dot-rangell-consultoria-ti.rj.r.appspot.com/v1/',
+  //API: 'http://localhost:8080/v1/',
   TOKEN_KEY: 'auth-token',
   USER_KEY: 'auth-user',
 };
