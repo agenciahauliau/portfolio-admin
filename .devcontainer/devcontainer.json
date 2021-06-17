@@ -22,7 +22,12 @@
     "editorconfig.editorconfig",
     "christian-kohler.path-intellisense",
     "esbenp.prettier-vscode",
-    "pkief.material-icon-theme"
+    "pkief.material-icon-theme",
+    "eamodio.gitlens",
+    "ritwickdey.liveserver",
+    "ms-vsliveshare.vsliveshare",
+    "ms-vsliveshare.vsliveshare-audio",
+    "ms-vsliveshare.vsliveshare-pack"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
