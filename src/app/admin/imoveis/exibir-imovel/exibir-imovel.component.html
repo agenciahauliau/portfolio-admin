@@ -5,6 +5,10 @@
         Criar Imovel
         <fa-icon [icon]="faPlusSquare"></fa-icon>
       </a>
+      <a [routerLink] (click)="editarImovel(imovel._id)">
+        Editar este Imovel
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </a>
     </div>
   </div>
   <div class="infoConteudoAdmin">

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faPlusSquare, faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faHome, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
@@ -15,6 +15,7 @@ import { Imovel } from '../../../helpers/types';
 export class ExibirImovelComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;
   faHome = faHome;
+  faEdit = faEdit;
   faSyncAlt = faSyncAlt;
 
   imovel!: Imovel;
@@ -43,6 +44,10 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
 
   refresh() {
     this.imovelQuery.refetch();
+  }
+
+  editarImovel(imovelId: any) {
+    this.router.navigate(['admin/editar-imovel', imovelId]);
   }
 
   voltar() {
