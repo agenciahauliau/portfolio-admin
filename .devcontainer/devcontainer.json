@@ -17,17 +17,13 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
-    "angular.ng-template",
-    "johnpapa.angular2",
-    "editorconfig.editorconfig",
-    "christian-kohler.path-intellisense",
-    "esbenp.prettier-vscode",
-    "pkief.material-icon-theme",
-    "eamodio.gitlens",
-    "ritwickdey.liveserver",
-    "ms-vsliveshare.vsliveshare",
-    "ms-vsliveshare.vsliveshare-audio",
-    "ms-vsliveshare.vsliveshare-pack"
+		"angular.ng-template",
+		"johnpapa.angular2",
+		"editorconfig.editorconfig",
+		"christian-kohler.path-intellisense",
+		"esbenp.prettier-vscode",
+		"pkief.material-icon-theme",
+		"eamodio.gitlens",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
