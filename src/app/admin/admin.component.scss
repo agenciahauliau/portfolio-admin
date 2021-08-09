@@ -3,22 +3,22 @@
   height: 100%;
   min-height: 100vh;
   background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
-
+  
   * {
     color: #fff;
   }
-
+  
   .barAdmin {
+    border-right: 1px solid #fff1;
     .logoAdmin {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      align-items: center;
       padding: 20px;
-      border-bottom: 1px solid #fff5;
+      border-bottom: 1px solid #fff1;
 
       img {
-        width: 50px;
-        height: 50px;
+        width: 34px;
       }
 
       .menuMobile {
@@ -44,7 +44,10 @@
           margin-bottom: 24px;
         }
         svg {
-          width: 38px;
+          width: 24px;
+        }
+        p{
+          font-weight: 200;
         }
       }
     }
@@ -65,15 +68,12 @@
     top: 0px;
     z-index: 1;
     background: url(../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
-
-    .itensCabecalhoConteudoAdmin:first-child {
-      margin-left: 50px;
-    }
+    border-bottom: #fff1 solid 1px;
 
     .itensCabecalhoConteudoAdmin {
-      height: 60px;
       display: flex;
       align-items: center;
+      padding: 24px;
 
       a {
         display: flex;
@@ -84,7 +84,7 @@
   }
 
   .infoConteudoAdmin {
-    margin: 12px;
+    margin: 12px 24px;
     padding: 12px;
     background: inherit;
     backdrop-filter: blur(10px);
@@ -401,6 +401,7 @@
     }
 
     .barAdmin {
+      min-width: 320px;
       height: 100%;
       min-height: 100vh;
       display: flex;
@@ -409,12 +410,8 @@
       top: 0;
 
       .logoAdmin {
+        min-height: 90px;
         padding: 20px;
-
-        img {
-          width: 50px;
-          height: 50px;
-        }
 
         .menuMobile {
           display: none;
@@ -425,13 +422,12 @@
         left: 0;
       }
     }
-
-    .conteudoAdmin {
-      padding: 0 20px 20px;
-    }
   }
 
   .RouterOutlet {
+    .cabecalhoConteudoAdmin {
+      height: 90px;
+    }
     .infoConteudoAdmin {
       .formulario {
         form {

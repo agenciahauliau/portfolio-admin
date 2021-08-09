@@ -14,6 +14,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { FooterComponent } from './footer/footer.component';
 
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
+import { AprovarImoveisComponent } from './imoveis/aprovar-imovel/aprovar-imoveis.component';
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
@@ -36,6 +37,7 @@ import { SortDirective } from '../helpers/sort.directive';
     AdminComponent,
     FooterComponent,
     ListarImoveisComponent,
+    AprovarImoveisComponent,
     ExibirImovelComponent,
     EditarImovelComponent,
     CriarImovelComponent,

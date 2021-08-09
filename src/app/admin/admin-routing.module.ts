@@ -6,6 +6,7 @@ import { AdminComponent } from '../admin/admin.component';
 
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
+import { AprovarImoveisComponent } from './imoveis/aprovar-imovel/aprovar-imoveis.component';
 import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.component';
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 
@@ -34,6 +35,10 @@ const routes: Routes = [
           {
             path: 'imoveis',
             component: ListarImoveisComponent,
+          },
+          {
+            path: 'imoveis/aprovar',
+            component: AprovarImoveisComponent,
           },
           {
             path: 'imovel/:id',

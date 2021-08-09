@@ -10,11 +10,11 @@ import { Imovel } from '../../../helpers/types';
 
 
 @Component({
-  selector: 'app-listar-imoveis',
-  templateUrl: './listar-imoveis.component.html',
-  styleUrls: ['./listar-imoveis.component.scss', '../../admin.component.scss'],
+  selector: 'app-aprovar-imoveis',
+  templateUrl: './aprovar-imoveis.component.html',
+  styleUrls: ['./aprovar-imoveis.component.scss', '../../admin.component.scss'],
 })
-export class ListarImoveisComponent implements OnInit, OnDestroy {
+export class AprovarImoveisComponent implements OnInit, OnDestroy {
   public faEye = faEye;
   public faEdit = faEdit;
   public faTrashAlt = faTrashAlt;
