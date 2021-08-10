@@ -16,7 +16,7 @@ import { GraphQlService } from '../../../services/graphql.service';
 @Component({
   selector: 'app-listar-posts',
   templateUrl: './listar-posts.component.html',
-  styleUrls: ['./listar-posts.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../../assets/lista-itens.component.scss', '../../assets/admin.component.scss'],
 })
 export class ListarPostsComponent implements OnInit, OnDestroy {
   faEye = faEye;
@@ -44,7 +44,8 @@ export class ListarPostsComponent implements OnInit, OnDestroy {
     this.querySubs = this.postsQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
       this.posts = [...data.posts];
-      console.log(data.posts);
+
+      console.log(this.posts)
     });
   }
 
@@ -74,25 +75,30 @@ export class ListarPostsComponent implements OnInit, OnDestroy {
   }
 
   async atualizaStatus(id: unknown, event: any) {
-    const status = { status: event.target.value };
+    // const status = { status: event.target.value };
+    const status = () => {
+      if(event.target.checked === true){
+        return 'publicado'
+      } else {
+        return 'rascunho'
+      }
+    };
+    const statusPub = {status: status()}
+
     console.log(event);
-    if (confirm(`Confirma alteração para "${event.target.value}" ?`)) {
-      await this.gqlService
-        .atualizaPost(id, status)
-        .then((res: any) => {
-          if (res.data) {
-            console.log('Sucesso', res?.data?.updatePost?.status);
-          }
-          if (res.errors) {
-            console.log('Erro', res?.errors[0]?.message);
-            window.alert(`Erro: ${res.errors[0].message}`);
-          }
-        })
-        .catch((err) => {
-          console.log('err', err);
-        });
-    } else {
-      this.router.navigateByUrl('./', { skipLocationChange: true });
-    }
+
+    await this.gqlService
+      .atualizaPost(id, statusPub)
+      .then((res: any) => {
+        if (res.data) {
+          console.log('Sucesso', res?.data?.updatePost?.status);
+        }
+        if (res.errors) {
+          console.log('Erro', res?.errors[0]?.message);
+        }
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
   }
 }

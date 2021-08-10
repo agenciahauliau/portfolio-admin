@@ -11,7 +11,7 @@ import { Lead } from '../../../helpers/types';
 @Component({
   selector: 'app-listar-leads',
   templateUrl: './listar-leads.component.html',
-  styleUrls: ['./listar-leads.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../../assets/lista-itens.component.scss', '../../assets/admin.component.scss'],
 })
 export class ListarLeadsComponent implements OnInit, OnDestroy {
   faEye = faEye;

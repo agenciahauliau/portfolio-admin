@@ -11,7 +11,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-criar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class CriarPostComponent implements OnInit {
   /* Para upload */

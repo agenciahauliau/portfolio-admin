@@ -10,7 +10,7 @@ import { Post } from '../../../helpers/types';
 @Component({
   selector: 'app-exibir-post',
   templateUrl: './exibir-post.component.html',
-  styleUrls: ['./exibir-post.component.scss', '../../admin.component.scss'],
+  styleUrls: ['./exibir-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class ExibirPostComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;

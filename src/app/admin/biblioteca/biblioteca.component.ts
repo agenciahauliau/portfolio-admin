@@ -12,7 +12,7 @@ HttpClient;
 @Component({
   selector: 'app-biblioteca',
   templateUrl: './biblioteca.component.html',
-  styleUrls: ['./biblioteca.component.scss', '../../admin/admin.component.scss'],
+  styleUrls: ['./biblioteca.component.scss', '../assets/admin.component.scss'],
 })
 export class BibliotecaComponent implements OnInit, OnDestroy {
   url = `${environment.API}files/`;

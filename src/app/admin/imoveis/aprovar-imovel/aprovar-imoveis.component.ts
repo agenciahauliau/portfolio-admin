@@ -12,7 +12,7 @@ import { Imovel } from '../../../helpers/types';
 @Component({
   selector: 'app-aprovar-imoveis',
   templateUrl: './aprovar-imoveis.component.html',
-  styleUrls: ['./aprovar-imoveis.component.scss', '../../admin.component.scss'],
+  styleUrls: ['./aprovar-imoveis.component.scss', '../../assets/admin.component.scss'],
 })
 export class AprovarImoveisComponent implements OnInit, OnDestroy {
   public faEye = faEye;

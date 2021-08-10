@@ -14,7 +14,7 @@ import { GQL_BUSCAR_POST } from 'src/app/graphql/graphql';
 @Component({
   selector: 'app-editar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class EditarPostComponent implements OnInit, OnDestroy {
   /* Para upload */

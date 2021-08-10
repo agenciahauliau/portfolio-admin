@@ -10,7 +10,7 @@ import { Imovel } from '../../../helpers/types';
 @Component({
   selector: 'app-exibir-imovel',
   templateUrl: './exibir-imovel.component.html',
-  styleUrls: ['./exibir-imovel.component.scss', '../../admin.component.scss'],
+  styleUrls: ['./exibir-imovel.component.scss', '../../assets/admin.component.scss'],
 })
 export class ExibirImovelComponent implements OnInit, OnDestroy {
   faPlusSquare = faPlusSquare;

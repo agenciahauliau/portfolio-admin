@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { TokenService } from './token.service';
 import {
+  GQL_LOGIN,
+  GQL_ME,
   GQL_CRIAR_IMOVEL,
   GQL_ATUALIZA_IMOVEL,
   GQL_DELETA_IMOVEL,
-  GQL_LOGIN,
-  GQL_ME,
   GQL_LISTAR_IMOVEIS,
   GQL_CRIAR_LEAD,
   GQL_LISTAR_LEADS,

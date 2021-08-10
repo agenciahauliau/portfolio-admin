@@ -22,7 +22,6 @@ import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.compon
 import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 
 import { ListarLeadsComponent } from './leads/listar-leads/listar-leads.component';
-import { CriarLeadComponent } from './leads/criar-lead/criar-lead.component';
 import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
 import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 
@@ -43,7 +42,6 @@ import { SortDirective } from '../helpers/sort.directive';
     CriarImovelComponent,
     BibliotecaComponent,
     ListarLeadsComponent,
-    CriarLeadComponent,
     ExibirLeadComponent,
     EditarLeadComponent,
     ExibirPostComponent,

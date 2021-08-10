@@ -396,8 +396,8 @@ export const GQL_ATUALIZA_LEAD = gql`
 `;
 
 export const GQL_BUSCA_UNICO_LEAD = gql`
-  query lead($input: SearchLeadInput!) {
-    lead(dados: $input) {
+  query lead($_id: ID!) {
+    lead(dados: { _id: $_id }) {
       _id
       leadId
       tipoLead

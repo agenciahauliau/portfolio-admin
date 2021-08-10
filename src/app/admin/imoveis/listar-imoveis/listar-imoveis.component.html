@@ -27,42 +27,53 @@
     </div>
   </div>
   <div class="infoConteudoAdmin">
-    <div class="tabelalinhaImovel">
-      <table class="tabelaImoveis">
-        <thead class="tabelaImoveisHeader">
+    <div class="tabelalinhaItem">
+      <table class="tabelaItens">
+        <thead class="tabelaItensHeader">
           <tr>
             <th [appSort]="imoveis" data-order="desc" data-name="imovelId">ID</th>
             <th [appSort]="imoveis" data-order="desc" data-name="categoriaImovel">Categoria</th>
             <th [appSort]="imoveis" data-order="desc" data-name="bairro">Bairro</th>
             <th [appSort]="imoveis" data-order="desc" data-name="valorImovel">Valor</th>
             <th [appSort]="imoveis" data-order="desc" data-name="updatedAt">Atualizado</th>
-            <th></th>
             <th>Ações</th>
-            <th></th>
           </tr>
         </thead>
-        <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
-          <tr class="tabelalinhaImovel" *ngFor="
+        <tbody class="tabelaItensCorpo" *ngIf="imoveis">
+          <tr class="tabelalinhaItem" *ngFor="
               let imovel of imoveis
                 | paginate
                   : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
             ">
-            <td>{{ imovel.imovelId }}</td>
-            <td>{{ imovel.categoriaImovel }}</td>
-            <td>{{ imovel.bairro }}</td>
-            <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
-            <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>
-              <button (click)="goToImovel(imovel._id)">
-                <fa-icon [icon]="faEye"></fa-icon>
-              </button>
+              <a routerLink="/admin/imovel/{{imovel._id}}">
+                {{ imovel.imovelId }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/imovel/{{imovel._id}}">
+                {{ imovel.categoriaImovel }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/imovel/{{imovel._id}}">
+                {{ imovel.bairro }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/imovel/{{imovel._id}}">
+                {{ imovel.valorImovel | currency: 'BRL' }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/imovel/{{imovel._id}}">
+                {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}
+              </a>
             </td>
             <td>
               <button (click)="editarImovel(imovel._id)">
                 <fa-icon [icon]="faEdit"></fa-icon>
               </button>
-            </td>
-            <td>
               <button (click)="remover(imovel._id)">
                 <fa-icon [icon]="faTrashAlt"></fa-icon>
               </button>

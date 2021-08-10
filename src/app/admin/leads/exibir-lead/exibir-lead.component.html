@@ -1,1 +1,37 @@
-<p>exibir-lead works!</p>
+<div class="RouterOutlet">
+    <div class="cabecalhoConteudoAdmin">
+        <div class="itensCabecalhoConteudoAdmin">
+            <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+                <h2>Lead</h2>
+            </a>
+        </div>
+    </div>
+
+    <div class="infoConteudoAdmin">
+        <div *ngIf="loading">Carregando...</div>
+        <div *ngIf="error">Erro :(</div>
+        <div class="imovel" *ngIf="lead">
+            <header>
+                <div class="nomeId">
+                    <h2>{{lead.nome}}</h2>
+                    <p>{{lead._id}}</p>
+                </div>
+                <div class="atualizacoes">
+                    <p>{{lead.updatedAt}}</p>
+                    <p>{{lead.createdAt}}</p>
+                </div>
+            </header>
+            <section>
+                <p>{{lead.leadId}}</p>
+                <p>{{lead.tipoLead}}</p>
+                <p>{{lead.email}}</p>
+                <p>{{lead.telefone}}</p>
+                <p>{{lead.preferenciaDeContato}}</p>
+            </section>
+            <section>
+                <p>{{lead.comentarios}}</p>
+            </section>
+
+        </div>
+    </div>
+</div>

@@ -14,7 +14,6 @@ import { BibliotecaComponent } from './biblioteca/biblioteca.component';
 
 import { ListarLeadsComponent } from './leads/listar-leads/listar-leads.component';
 import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
-import { CriarLeadComponent } from './leads/criar-lead/criar-lead.component';
 import { EditarLeadComponent } from './leads/editar-lead/editar-lead.component';
 
 import { ExibirPostComponent } from './blog/exibir-post/exibir-post.component';
@@ -63,14 +62,6 @@ const routes: Routes = [
           {
             path: 'lead/:id',
             component: ExibirLeadComponent,
-          },
-          {
-            path: 'criar-lead',
-            component: CriarLeadComponent,
-          },
-          {
-            path: 'editar-lead/:id',
-            component: EditarLeadComponent,
           },
           {
             path: 'posts',
