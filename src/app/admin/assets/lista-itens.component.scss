@@ -75,6 +75,25 @@
             transition: 1s ease;
           }
         }
+        button {
+          cursor: pointer;
+          &:hover {
+            svg {
+              path {
+                stroke: #fff;
+                transition: 0.4s ease;
+              }
+            }
+          }
+        }
+        svg {
+          width: 36px;
+          padding: 6px;
+          path {
+            stroke: #fff5;
+            transition: 0.2s ease;
+          }
+        }
       }
 
       &:hover {

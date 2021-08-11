@@ -1,13 +1,18 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+      <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
         <h2>Publicações</h2>
       </a>
-      <a [routerLink]="['/admin/criar-post']" routerLinkActive="router-link-active">
-        Novo Post
-      </a>
+      <div class="submenu">
+        <a [routerLink]="['/admin/criar-post']" routerLinkActive="router-link-active">
+          Novo Post
+        </a>
+      </div>
     </div>
+  </div>
+  <div class="caminho">
+    <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">posts</a></p>
   </div>
   <div class="infoConteudoAdmin">
     <div class="tabelalinhaItem">
@@ -23,29 +28,55 @@
           <tr class="tabelalinhaItem"
             *ngFor="let post of posts | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }">
             <td>
-              {{ post.postId }}
+              <a routerLink="/admin/post/{{post._id}}">
+                {{ post.postId }}
+              </a>
             </td>
-            <td>{{ post.titulo | truncate: 4:20:'...' }}</td>
-            <td>{{ post.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>
-              <input id='statusPost-{{post.postId}}' type="checkbox" [checked]="post.status === 'publicado' ? true :  false" (change)="atualizaStatus(post._id, $event)"/>
-              <label for='statusPost-{{post.postId}}' [class]="post.status === 'publicado' ? 'publicar ativo' :  'publicar'">
-                  <div class="chave"></div>
+              <a routerLink="/admin/post/{{post._id}}">
+                {{ post.titulo | truncate: 4:20:'...' }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/post/{{post._id}}">
+                {{ post.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}
+              </a>
+            </td>
+            <td>
+              <input id='statusPost-{{post.postId}}' type="checkbox"
+                [checked]="post.status === 'publicado' ? true :  false" (change)="atualizaStatus(post._id, $event)" />
+              <label for='statusPost-{{post.postId}}'
+                [class]="post.status === 'publicado' ? 'publicar ativo' :  'publicar'">
+                <div class="chave"></div>
               </label>
             </td>
             <td>
               <button (click)="editarPost(post._id)">
-                <fa-icon [icon]="faEdit"></fa-icon>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3 21L12 21H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path
+                    d="M12.2218 5.82839L15.0503 2.99996L20 7.94971L17.1716 10.7781M12.2218 5.82839L6.61522 11.435C6.42769 11.6225 6.32233 11.8769 6.32233 12.1421L6.32233 16.6776L10.8579 16.6776C11.1231 16.6776 11.3774 16.5723 11.565 16.3847L17.1716 10.7781M12.2218 5.82839L17.1716 10.7781"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
               <button (click)="remover(post._id)">
-                <fa-icon [icon]="faTrashAlt"></fa-icon>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M8.99219 13H11.9922H14.9922" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path
+                    d="M3.03919 4.2939C3.01449 4.10866 3.0791 3.92338 3.23133 3.81499C3.9272 3.31953 6.3142 2 12 2C17.6858 2 20.0728 3.31952 20.7687 3.81499C20.9209 3.92338 20.9855 4.10866 20.9608 4.2939L19.2616 17.0378C19.0968 18.2744 18.3644 19.3632 17.2813 19.9821L16.9614 20.1649C13.8871 21.9217 10.1129 21.9217 7.03861 20.1649L6.71873 19.9821C5.6356 19.3632 4.90325 18.2744 4.73838 17.0378L3.03919 4.2939Z"
+                    stroke="currentColor" stroke-width="1.5" />
+                  <path d="M3 5C5.57143 7.66666 18.4286 7.66662 21 5" stroke="currentColor" stroke-width="1.5" />
+                </svg>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls class="controle" id="server" [autoHide]="false" previousLabel="Voltar" nextLabel="Próx." (pageChange)="p = $event" [maxSize]="7"></pagination-controls>
+        <pagination-controls class="controle" id="server" [autoHide]="false" previousLabel="Voltar" nextLabel="Próx."
+          (pageChange)="p = $event" [maxSize]="7"></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

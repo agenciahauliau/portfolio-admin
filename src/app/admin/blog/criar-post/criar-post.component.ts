@@ -88,6 +88,12 @@ export class CriarPostComponent implements OnInit {
     return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
   }
 
+  async textareaResized(event: any) {
+    console.log(event)
+    event.style.height = '1px';
+    event.style.height = 12 + event.scrollHeight + 'px';
+  }
+
   selectFiles(event: any): void {
     this.message = [];
     this.progressInfos = [];

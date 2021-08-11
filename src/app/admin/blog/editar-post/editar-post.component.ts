@@ -109,6 +109,11 @@ export class EditarPostComponent implements OnInit, OnDestroy {
     return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
   }
 
+  async textareaResized(event: any) {
+    event.target.style.height = '0px';
+    event.target.style.height = 1 + event.target.scrollHeight + 'px';
+  }
+
   selectFiles(event: any): void {
     this.message = [];
     this.progressInfos = [];

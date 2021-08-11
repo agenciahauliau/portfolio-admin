@@ -3,11 +3,11 @@
   height: 100%;
   min-height: 100vh;
   background: url(../../../assets/linhas.svg) no-repeat fixed bottom / 100% auto, #272727;
-  
+
   * {
     color: #fff;
   }
-  
+
   .barAdmin {
     border-right: 1px solid #fff1;
     .logoAdmin {
@@ -29,9 +29,9 @@
     }
 
     .menuAdmin {
+      width: 100%;
       height: calc(100% - 90px);
       display: flex;
-      padding: 20px;
       position: absolute;
       bottom: 0;
       left: -100px;
@@ -39,15 +39,26 @@
       justify-content: space-between;
 
       .menu {
+        width: 100%;
+        margin-top: 48px;
         > * {
           display: block;
-          margin-bottom: 24px;
         }
-        svg {
-          width: 24px;
-        }
-        p{
-          font-weight: 200;
+        a {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 12px 24px;
+          svg {
+            width: 24px;
+          }
+          p {
+            margin-left: 12px;
+            font-weight: 200;
+          }
+          &:hover {
+            background: #ffffff05;
+          }
         }
       }
     }
@@ -73,18 +84,32 @@
     .itensCabecalhoConteudoAdmin {
       display: flex;
       align-items: center;
-      padding: 24px;
+      justify-content: space-between;
+      padding: 24px 48px;
+      .submenu {
+        a {
+          padding: 6px;
+          margin-left: 24px;
+        }
+      }
+    }
+  }
 
-      a {
-        display: flex;
-        align-items: center;
-        margin-right: 38px;
+  .caminho {
+    padding: 24px 70px 0;
+    font-weight: 200;
+    a {
+      margin: 0 6px;
+      font-weight: 200;
+      font-size: 12px;
+      &:first-child {
+        margin-left: 0;
       }
     }
   }
 
   .infoConteudoAdmin {
-    margin: 12px 24px;
+    margin: 12px 48px;
     padding: 12px;
     background: inherit;
     backdrop-filter: blur(10px);
@@ -93,7 +118,7 @@
     .formulario {
       form {
         .form-campo {
-          margin-bottom: 36px;
+          margin-bottom: 48px;
           position: relative;
 
           input,
@@ -150,8 +175,9 @@
           }
 
           textarea {
-            border: 1px solid #fff5;
-            background: #fff1;
+            resize: none;
+            overflow: hidden;
+            border-bottom: 1px solid #fff5;
 
             &:focus ~ label,
             &:not(:placeholder-shown) ~ label {
@@ -171,10 +197,43 @@
           }
         }
 
-        button {
-          width: fit-content;
-          padding: 12px 18px;
-          background: rgba(219, 4, 35, 1);
+        .botoes {
+          display: flex;
+          margin-top: 70px;
+          button,
+          div {
+            width: 50%;
+            margin: 3px;
+            text-align: center;
+            span,
+            a {
+              display: block;
+              padding: 12px 6px;
+              font-weight: 600;
+              color: #000;
+            }
+          }
+          .limpar {
+            background: #111;
+            a,
+            span {
+              color: #fff;
+            }
+          }
+          .excluir {
+            background: #e06c00;
+            a,
+            span {
+              color: #fff;
+            }
+          }
+          .enviar {
+            background: #db0423;
+            a,
+            span {
+              color: #fff;
+            }
+          }
         }
 
         .text-danger ~ label {
@@ -210,6 +269,7 @@
             }
           }
         }
+
         .modal {
           width: 100%;
           height: fit-content;
@@ -430,32 +490,18 @@
     }
     .infoConteudoAdmin {
       margin: 48px;
-      
+
       .formulario {
         form {
-          display: grid;
-          grid-template-columns: 38% 62%;
-
-          textarea {
-            min-height: 300px;
-          }
           .imgPrin {
             margin: auto;
             .caixaImagem {
               height: 200px;
             }
           }
-          .coluna {
-            padding: 24px;
-
-            &.esquerda {
-              height: fit-content;
-              position: sticky;
-              top: 72px;
-            }
-            &.direita {
-              padding: 48px;
-            }
+          .esquerda {
+          }
+          .direita {
           }
         }
 

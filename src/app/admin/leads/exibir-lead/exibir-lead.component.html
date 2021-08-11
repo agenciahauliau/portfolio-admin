@@ -1,37 +1,48 @@
 <div class="RouterOutlet">
     <div class="cabecalhoConteudoAdmin">
         <div class="itensCabecalhoConteudoAdmin">
-            <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+            <a [routerLink]="['/admin/leads']" routerLinkActive="router-link-active">
                 <h2>Lead</h2>
             </a>
+            <div class="submenu">
+                <a [routerLink]="['/admin/lead/', lead._id]" routerLinkActive="router-link-active">
+                    Editar lead
+                </a>
+            </div>
         </div>
     </div>
-
-    <div class="infoConteudoAdmin">
-        <div *ngIf="loading">Carregando...</div>
-        <div *ngIf="error">Erro :(</div>
-        <div class="imovel" *ngIf="lead">
-            <header>
-                <div class="nomeId">
-                    <h2>{{lead.nome}}</h2>
-                    <p>{{lead._id}}</p>
-                </div>
-                <div class="atualizacoes">
-                    <p>{{lead.updatedAt}}</p>
-                    <p>{{lead.createdAt}}</p>
-                </div>
-            </header>
-            <section>
-                <p>{{lead.leadId}}</p>
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="error">Erro :(</div>
+    <div class="lead" *ngIf="lead">
+        <header class="topo">
+            <div class="idData">
+                <p>ID: {{ lead.leadId }}</p>
+                <p>{{ lead.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}</p>
+            </div>
+            <div class="caminho">
+                <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/leads/']">leads</a> >
+                    <a>{{ lead.nome }}</a>
+                </p>
+            </div>
+        </header>
+        <section class="infoConteudoAdmin">
+            <header class="nomeTipo">
+                <h2>{{lead.nome}}</h2>
                 <p>{{lead.tipoLead}}</p>
-                <p>{{lead.email}}</p>
-                <p>{{lead.telefone}}</p>
-                <p>{{lead.preferenciaDeContato}}</p>
+            </header>
+            <section class="dados">
+                <div><b>email:</b><p>{{lead.email}}</p></div>
+                <div><b>Telefone:</b><p>{{lead.telefone}}</p></div>
+                <div><b>Preferência de Contato:</b><p ngModel pattern="/^(1|)?(\d{3})(\d{3})(\d{4})$/">{{lead.preferenciaDeContato}}</p></div>
             </section>
-            <section>
+            <section class="comentáros" *ngIf="lead.comentarios">
+                <h3>Comentário</h3>
                 <p>{{lead.comentarios}}</p>
             </section>
-
-        </div>
+            <section class="imovel" *ngIf="lead.comentarios">
+                <h3>Imóvel</h3>
+                <p>{{lead.comentarios}}</p>
+            </section>
+        </section>
     </div>
 </div>
