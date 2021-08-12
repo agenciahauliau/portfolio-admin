@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faRss } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from '../services/token.service';
-import { icones } from '../../assets/icones'
 
 @Component({
   selector: 'app-admin',
@@ -9,8 +7,6 @@ import { icones } from '../../assets/icones'
   styleUrls: ['./assets/admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-
-  public imoveis = icones.imoveis;
 
   constructor(private tokenService: TokenService) {}
 

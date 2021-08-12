@@ -40,6 +40,7 @@
     "ngx-mask": "^12.0.0",
     "ngx-pagination": "^5.1.1",
     "rxjs": "~6.6.7",
+    "tar": "6.1.2",
     "tinymce": "^5.8.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

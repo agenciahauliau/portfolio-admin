@@ -32,8 +32,8 @@
             </header>
             <section class="dados">
                 <div><b>email:</b><p>{{lead.email}}</p></div>
-                <div><b>Telefone:</b><p>{{lead.telefone}}</p></div>
-                <div><b>Preferência de Contato:</b><p ngModel pattern="/^(1|)?(\d{3})(\d{3})(\d{4})$/">{{lead.preferenciaDeContato}}</p></div>
+                <div><b>Telefone:</b><p>{{ lead.telefone }}</p></div>
+                <div><b>Preferência de Contato:</b><p>{{lead.preferenciaDeContato}}</p></div>
             </section>
             <section class="comentáros" *ngIf="lead.comentarios">
                 <h3>Comentário</h3>

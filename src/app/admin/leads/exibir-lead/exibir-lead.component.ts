@@ -12,6 +12,8 @@ import { Lead } from '../../../helpers/types';
 })
 
 export class ExibirLeadComponent implements OnInit, OnDestroy {
+
+  public phone = 1245865453333333
   
   public lead!: Lead;
   private leadQuery!: QueryRef<any>;
