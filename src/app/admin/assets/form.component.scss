@@ -1,0 +1,122 @@
+.formulario {
+  form {
+    display: flex;
+    .imgPrin {
+      display: flex;
+      align-items: center;
+      input {
+        display: none;
+      }
+      .formEsq {
+        width: 30%;
+        min-width: 320px;
+        padding: 12px;
+
+        .info {
+          margin-top: 12px;
+          font-weight: 200;
+        }
+        .botoes {
+          margin-top: 34px;
+          label {
+            width: 100%;
+            min-height: 36px;
+            padding: 6px;
+            margin: 0 auto 12px;
+            display: block;
+            text-align: center;
+            border: 1px solid #fff5;
+          }
+          button ::ng-deep {
+            width: 100%;
+            height: 36px;
+            padding: 6px;
+            svg {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+      .formDir {
+        width: 70%;
+        padding: 12px;
+        .loadImagem {
+          position: relative;
+          label {
+            height: 275px;
+            display: flex;
+            border: 1px solid #fff5;
+            background: #fff1;
+            .icone ::ng-deep {
+              width: 100%;
+              padding: 24px;
+              svg {
+                width: 100%;
+                height: 100%;
+                path {
+                  fill: #fff2;
+                }
+              }
+            }
+            .imagem {
+              width: 100%;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+          .progress {
+            width: calc(100% - 2px);
+            position: absolute;
+            bottom: 1px;
+            left: 1px;
+            .progress-bar {
+              height: 5px;
+              background: linear-gradient(40deg, #db0423 30%, #ab0019 70%, #db0423);
+              transition: 0.4s ease;
+            }
+          }
+        }
+      }
+    }
+
+    .titulo {
+      font-size: 2.5em;
+    }
+
+    .subtitulo {
+      font-weight: 200;
+      font-size: 1.75em;
+    }
+
+    .categoria {
+      margin-top: 12px;
+    }
+
+    .categoria,
+    .tag {
+      margin-bottom: 48px;
+      textarea {
+        height: auto;
+        padding: 12px 0;
+      }
+    }
+
+    .esquerda {
+      width: calc(100% - 250px);
+      padding: 24px;
+      padding-right: 48px;
+      border-right: 1px solid #fff1;
+    }
+    .direita {
+      width: 250px;
+      height: fit-content;
+      padding: 24px;
+      position: sticky;
+      top: 90px;
+    }
+  }
+}

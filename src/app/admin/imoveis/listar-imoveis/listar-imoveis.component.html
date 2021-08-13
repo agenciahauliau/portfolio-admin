@@ -1,46 +1,39 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+      <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
         <h2>Imóveis</h2>
       </a>
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
-        <p>Criar Imovel</p>
-      </a>
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
-        <p>Aprovar</p>
-      </a>
+      <div class="submenu">   
+        <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+          Novo Imóvel
+        </a>    
+      </div>
     </div>
   </div>
-  <div class="estatisticas">
-    <div class="estatistica">
-      <h3>Quant. imóveis</h3>
-      <p>{{imoveis.length}}</p>
+  <header class="topo">
+    <div class="caminho">
+        <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/imoveis/']">imóveis</a>
+        </p>
     </div>
-    <div class="estatistica">
-      <h3>Aprovados</h3>
-      <p>{{imoveis.length}}</p>
-    </div>
-    <div class="estatistica">
-      <h3>Não aprovados</h3>
-      <p>{{imoveis.length}}</p>
-    </div>
-  </div>
+</header>
   <div class="infoConteudoAdmin">
     <div class="tabelalinhaItem">
       <table class="tabelaItens">
         <thead class="tabelaItensHeader">
           <tr>
             <th [appSort]="imoveis" data-order="desc" data-name="imovelId">ID</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="categoriaImovel">Imagem</th>
             <th [appSort]="imoveis" data-order="desc" data-name="categoriaImovel">Categoria</th>
             <th [appSort]="imoveis" data-order="desc" data-name="bairro">Bairro</th>
             <th [appSort]="imoveis" data-order="desc" data-name="valorImovel">Valor</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="valorImovel">Status</th>
             <th [appSort]="imoveis" data-order="desc" data-name="updatedAt">Criado/Atualizado</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody class="tabelaItensCorpo" *ngIf="imoveis">
-          <tr class="tabelalinhaItem" *ngFor="
+          <tr class="tabelalinhaItem imoveis" *ngFor="
               let imovel of imoveis
                 | paginate
                   : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
@@ -48,6 +41,11 @@
             <td>
               <a routerLink="/admin/imovel/{{imovel._id}}">
                 {{ imovel.imovelId }}
+              </a>
+            </td>
+            <td>
+              <a class="imagem" routerLink="/admin/imovel/{{imovel._id}}">
+                <img src="{{ imovel.imagemPrincipal }}" alt="" />
               </a>
             </td>
             <td>
@@ -66,8 +64,20 @@
               </a>
             </td>
             <td>
+              <select
+                name="statusLancamento"
+                (change)="atualizaStatus(imovel._id, $event)"
+                [value]="imovel.statusLancamento"
+                [ngClass]="imovel.statusLancamento === 'aprovado' ? 'aprovado' : imovel.statusLancamento === 'reprovado' ? 'reprovado': 'pendente'"
+              >
+                <option value="pendente">Pendente</option>
+                <option value="reprovado">Reprovado</option>
+                <option value="aprovado">Aprovado</option>
+              </select>
+            </td>
+            <td>
               <a routerLink="/admin/imovel/{{imovel._id}}">
-                {{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}
+                {{ imovel.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}
               </a>
             </td>
             <td>
@@ -82,7 +92,8 @@
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls class="controle" id="server" [autoHide]="true" previousLabel="<" nextLabel=">" [maxSize]="7" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls class="controle" id="server" [autoHide]="true" previousLabel="<" nextLabel=">"
+          [maxSize]="7" (pageChange)="p = $event"></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

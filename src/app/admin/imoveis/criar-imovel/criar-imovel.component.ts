@@ -13,10 +13,14 @@ import { UploadService } from '../../../services/upload.service';
 import { NgxViacepService, Endereco, CEPError } from '@brunoc/ngx-viacep';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
+
 @Component({
   selector: 'app-criar-imovel',
   templateUrl: '../form-imovel.component.html',
-  styleUrls: ['../form-imovel.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../form-imovel.component.scss', '../../assets/form.component.scss', '../../assets/admin.component.scss'],
 })
 export class CriarImovelComponent implements OnInit {
   @ViewChildren('inputGaleria') inputGaleria: any;
@@ -27,13 +31,16 @@ export class CriarImovelComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+  inputUpload: any;
   imgPreview: any;
+  
 
   /* Para Upload de Planta */
   selectedPlantaFiles?: FileList;
   progressInfosPlantaFiles: any[] = [];
   messagePlantaFiles: string[] = [];
   plantaFiles: any = [];
+  plantaInputUpload: any;
   imgPreviewPlantas: any;
 
   /* Filtros e mascaras */
@@ -61,15 +68,24 @@ export class CriarImovelComponent implements OnInit {
   public isActiveImgAdicionais: boolean = false;
   public isActiveImgPlantas: boolean = false;
 
+  iconeImagem!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+  iconeUpload!: SafeHtml;
+
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
-    private router: Router,
     private viacep: NgxViacepService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
+    this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+    this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+
     this.imovelForm = this.formBuilder.group({
       nomeImovel: [''],
       imagemPrincipal: [''],
@@ -274,6 +290,7 @@ export class CriarImovelComponent implements OnInit {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+    this.inputUpload = event;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -311,6 +328,7 @@ export class CriarImovelComponent implements OnInit {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
+            this.inputUpload.target.value = null
           }
         },
         (error: any) => {
@@ -331,6 +349,7 @@ export class CriarImovelComponent implements OnInit {
           this.message = [];
           this.progressInfos = [];
           this.mainImg = '';
+          this.imgPreview = null;
         }
         if (res.errors) {
           console.log('Erro', res?.errors[0]?.message);
@@ -414,6 +433,7 @@ export class CriarImovelComponent implements OnInit {
     this.messagePlantaFiles = [];
     this.progressInfosPlantaFiles = [];
     this.selectedPlantaFiles = event.target.files;
+    this.plantaInputUpload = event
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -453,6 +473,7 @@ export class CriarImovelComponent implements OnInit {
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
             this.plantaFiles.push(this.url + event.body[0]);
             this.plantaFiles = this.plantaFiles.filter((x: any) => x.trim() != '');
+            this.plantaInputUpload.target.value = null
           }
         },
         (error: any) => {

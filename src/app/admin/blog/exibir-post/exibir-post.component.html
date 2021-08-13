@@ -57,13 +57,13 @@
           <h4>Tags</h4>
           <p>{{ post.tags }}</p>
         </div>
-        <div class="acoes">
+        <div class="botoes">
           <div class="editar">
             <a [routerLink]="['/admin/editar-post', post._id]" routerLinkActive="router-link-active">editar</a>
           </div>
-          <div class="excluir">
+          <button class="excluir" (click)="remover(post._id)">
             <a>excluir</a>
-          </div>
+          </button>
         </div>
       </div>
     </section>

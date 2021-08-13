@@ -24,9 +24,7 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   private querySubs = new Subscription();
 
   iconeEditar!: SafeHtml;
-  iconeExcluir!: SafeHtml;
-  iconeEsquerda!: SafeHtml;
-  iconeDireita!: SafeHtml;
+  iconeExcluir!: SafeHtml;  
 
   constructor(
     private apollo: Apollo,
@@ -38,8 +36,6 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.iconeEditar = this.sanitizer.bypassSecurityTrustHtml(icones.iconeEditar);
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
-    this.iconeEsquerda = this.sanitizer.bypassSecurityTrustHtml(icones.iconeEsquerda);
-    this.iconeDireita = this.sanitizer.bypassSecurityTrustHtml(icones.iconeDireita);
 
     this.imoveisQuery = this.apollo.watchQuery<any>({
       query: GQL_LISTAR_IMOVEIS,
