@@ -8,6 +8,9 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { GQL_LISTAR_ARQUIVOS } from '../../graphql/graphql';
 import { UploadService } from '../../services/upload.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
+
 HttpClient;
 @Component({
   selector: 'app-biblioteca',
@@ -21,29 +24,32 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
   loading = true;
   error: any;
 
-  faEye = faEye;
-  faTrashAlt = faTrashAlt;
-  faPlusSquare = faPlusSquare;
-  faHome = faHome;
-  faSyncAlt = faSyncAlt;
-  faImage = faImage;
-  faTrash = faTrash;
-
   selectedFiles?: FileList;
   progressInfos: any[] = [];
   message: string[] = [];
+  nomes: string[] = [];
+  alright: boolean = true;
 
   p: number = 1;
 
   private querySubs = new Subscription();
 
+  iconeUpload!: SafeHtml;
+  iconeLink!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+
   constructor(
     private apollo: Apollo,
     private router: Router,
     private uploadService: UploadService,
+    private sanitizer: DomSanitizer,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+    this.iconeLink = this.sanitizer.bypassSecurityTrustHtml(icones.iconeLink);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+
     this.midiasQuery = this.apollo.watchQuery<any>({
       query: GQL_LISTAR_ARQUIVOS,
     });
@@ -55,18 +61,34 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
   }
 
   selectFiles(event: any): void {
+    this.nomes = [];
     this.message = [];
     this.progressInfos = [];
+    this.alright = true;
     this.selectedFiles = event.target.files;
+    this.nameFile();
+  }
+
+  nameFile(): void {
+    this.nomes = [];
+    if (this.selectedFiles) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.nomes.push(this.selectedFiles[i].name);
+      }
+    }
   }
 
   uploadFiles(): void {
     this.message = [];
+    this.alright = true;
     if (this.selectedFiles) {
       for (let i = 0; i < this.selectedFiles.length; i++) {
         this.upload(i, this.selectedFiles[i]);
       }
     }
+
+    console.log(this.message)
+
   }
 
   upload(idx: number, file: File): void {
@@ -78,8 +100,10 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
             this.progressInfos[idx].value = Math.round((100 * event.loaded) / event.total);
           } else if (event instanceof HttpResponse) {
             this.message.push(`Arquivo enviado com sucesso ${file.name}`);
+            this.alright = true
             this.refresh();
             setTimeout(() => {
+              console.log(this.nomes[idx]);
               this.progressInfos.splice(idx, 1);
               this.message.splice(idx, 1);
             }, 5000);
@@ -89,6 +113,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
           this.progressInfos[idx].value = 0;
           const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
           this.message.push(msg);
+          this.alright = false
         },
       );
     }
@@ -123,5 +148,15 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
 
   voltar() {
     this.router.navigate(['/admin/biblioteca']);
+  }
+
+  copiar(event: any) {
+    let link = event.target.parentElement.dataset.url;
+    var text = document.createElement('input')
+    document.body.appendChild(text);
+    text.value = link;
+    text.select();
+    document.execCommand('copy');
+    document.body.removeChild(text);
   }
 }

@@ -49,8 +49,10 @@
           display: flex;
           align-items: center;
           padding: 12px 24px;
-          svg {
+          div {
             width: 24px;
+            svg {
+            }
           }
           p {
             margin-left: 12px;
@@ -499,10 +501,6 @@
               height: 200px;
             }
           }
-          .esquerda {
-          }
-          .direita {
-          }
         }
 
         .form-campo {
@@ -517,8 +515,30 @@
   text-align: center;
 }
 
-.controle ::ng-deep .ngx-pagination .current {
-  text-align: center;
-  background-color: white;
-  color: black;
+.controle ::ng-deep {
+  .ngx-pagination {
+    padding: 6px 12px;
+    li {
+      a {
+        color: #fff5;
+        transition: 0.2s ease;
+        &:hover {
+          background: none;
+          color: #fff;
+          transition: 0.4s ease;
+        }
+      }
+      &.current {
+        background: none;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+  .ngx-pagination .pagination-previous a::before, .ngx-pagination .pagination-previous.disabled::before{
+    display: none;
+  }
+  .ngx-pagination .pagination-next a::after, .ngx-pagination .pagination-next.disabled::after{
+    display: none;
+  }
 }

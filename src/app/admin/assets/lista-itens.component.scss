@@ -78,21 +78,17 @@
         button {
           cursor: pointer;
           &:hover {
-            svg {
-              path {
-                stroke: #fff;
-                transition: 0.4s ease;
-              }
+            .icone {
+              opacity: 1;
+              transition: 0.4s ease;
             }
           }
         }
-        svg {
+        .icone {
           width: 36px;
           padding: 6px;
-          path {
-            stroke: #fff5;
-            transition: 0.2s ease;
-          }
+          opacity: 0.5;
+          transition: 0.2s ease;
         }
       }
 

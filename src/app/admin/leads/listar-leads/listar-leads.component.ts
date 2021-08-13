@@ -7,6 +7,8 @@ import { faTrashAlt, faEye, faPlusSquare, faEdit } from '@fortawesome/free-regul
 import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_LISTAR_LEADS } from '../../../graphql/graphql';
 import { Lead } from '../../../helpers/types';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
 
 @Component({
   selector: 'app-listar-leads',
@@ -29,9 +31,20 @@ export class ListarLeadsComponent implements OnInit, OnDestroy {
 
   private querySubs = new Subscription();
 
-  constructor(private apollo: Apollo, private router: Router, private gqlService: GraphQlService) {}
+  iconeEditar!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+
+  constructor(
+    private apollo: Apollo,
+    private router: Router,
+    private gqlService: GraphQlService,
+    private sanitizer: DomSanitizer,
+  ) {}
 
   ngOnInit() {
+    this.iconeEditar = this.sanitizer.bypassSecurityTrustHtml(icones.iconeEditar);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+
     this.leadsQuery = this.apollo.watchQuery<any>({
       query: GQL_LISTAR_LEADS,
     });
