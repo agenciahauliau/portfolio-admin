@@ -16,10 +16,14 @@ import { UploadService } from '../../../services/upload.service';
 import { NgxViacepService, Endereco, CEPError } from '@brunoc/ngx-viacep';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
+
 @Component({
   selector: 'app-editar-imovel',
   templateUrl: '../form-imovel.component.html',
-  styleUrls: ['../form-imovel.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../form-imovel.component.scss', '../../assets/form.component.scss', '../../assets/admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit, OnDestroy {
   @ViewChildren('inputGaleria') inputGaleria: any;
@@ -30,6 +34,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+  inputUpload: any;
   imgPreview: any;
 
   /* Para Upload de Planta */
@@ -37,6 +42,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   progressInfosPlantaFiles: any = [];
   messagePlantaFiles: string[] = [];
   plantaFiles: any = [];
+  plantaInputUpload: any;
   imgPreviewPlantas: any;
 
   /* Filtros e mascaras */
@@ -65,6 +71,10 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
 
   private querySubs = new Subscription();
 
+  iconeImagem!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+  iconeUpload!: SafeHtml;
+
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
@@ -73,9 +83,14 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     private gqlService: GraphQlService,
     private uploadService: UploadService,
     private viacep: NgxViacepService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
+    this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+    this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+
     this.imovelForm = this.formBuilder.group({
       nomeImovel: [''],
       imagemPrincipal: [''],
@@ -335,6 +350,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+    this.inputUpload = event;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -372,6 +388,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
+            this.inputUpload.target.value = null
           }
         },
         (error: any) => {
@@ -392,6 +409,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
           this.message = [];
           this.progressInfos = [];
           this.mainImg = '';
+          this.imgPreview = null;
         }
         if (res.errors) {
           console.log('Erro', res?.errors[0]?.message);

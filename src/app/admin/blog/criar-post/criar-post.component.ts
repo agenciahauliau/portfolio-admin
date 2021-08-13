@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 import { UploadService } from '../../../services/upload.service';
 import { environment } from '../../../../environments/environment';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
+
 @Component({
   selector: 'app-criar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss'],
 })
 export class CriarPostComponent implements OnInit {
   /* Para upload */
@@ -20,23 +22,30 @@ export class CriarPostComponent implements OnInit {
   progressInfos: any[] = [];
   message: string[] = [];
   mainImg = '';
+  inputUpload: any;
   imgPreview: any;
-
-  faPlusSquare = faPlusSquare;
-  faTrash = faTrash;
 
   postForm!: Post & FormGroup;
 
   public isActive: boolean = false;
+
+  iconeImagem!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+  iconeUpload!: SafeHtml;
 
   constructor(
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
     private router: Router,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
+    this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+    this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+
     this.postForm = this.formBuilder.group({
       status: 'rascunho',
       titulo: ['', [Validators.required, Validators.minLength(4)]],
@@ -98,6 +107,7 @@ export class CriarPostComponent implements OnInit {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+    this.inputUpload = event;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -135,6 +145,7 @@ export class CriarPostComponent implements OnInit {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
+            this.inputUpload.target.value = null
           }
         },
         (error: any) => {
@@ -155,6 +166,7 @@ export class CriarPostComponent implements OnInit {
           this.message = [];
           this.progressInfos = [];
           this.mainImg = '';
+          this.imgPreview = null;
         }
         if (res.errors) {
           console.log('Erro', res?.errors[0]?.message);

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 import { UploadService } from '../../../services/upload.service';
@@ -11,10 +10,13 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { GQL_BUSCAR_POST } from 'src/app/graphql/graphql';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
+
 @Component({
   selector: 'app-editar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss'],
 })
 export class EditarPostComponent implements OnInit, OnDestroy {
   /* Para upload */
@@ -25,9 +27,6 @@ export class EditarPostComponent implements OnInit, OnDestroy {
   mainImg = '';
   imgPreview: any;
 
-  faPlusSquare = faPlusSquare;
-  faTrash = faTrash;
-
   postForm!: Post & FormGroup;
 
   postQuery!: QueryRef<any>;
@@ -37,6 +36,10 @@ export class EditarPostComponent implements OnInit, OnDestroy {
   private querySubs = new Subscription();
   public isActive: boolean = false;
 
+  iconeImagem!: SafeHtml;
+  iconeExcluir!: SafeHtml;
+  iconeUpload!: SafeHtml;
+
   constructor(
     private apollo: Apollo,
     private route: ActivatedRoute,
@@ -44,9 +47,14 @@ export class EditarPostComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
+    this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
+    this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
+    this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+
     this.postForm = this.formBuilder.group({
       status: '',
       titulo: ['', [Validators.required, Validators.minLength(4)]],
@@ -175,6 +183,7 @@ export class EditarPostComponent implements OnInit, OnDestroy {
           this.message = [];
           this.progressInfos = [];
           this.mainImg = '';
+          this.imgPreview = null;
         }
         if (res.errors) {
           console.log('Erro', res?.errors[0]?.message);
