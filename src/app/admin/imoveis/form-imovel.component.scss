@@ -181,9 +181,9 @@
         }
         .imagensGaleria {
           display: flex;
-
+          flex-wrap: wrap;
           .imagemGaleria {
-            width: 100%;
+            width: calc(100% / 4);
             max-width: 240px;
             height: 175px;
             margin: 10px;

@@ -1,0 +1,78 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        <h2>Imóveis</h2>
+      </a>
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        <p>Criar Imovel</p>
+      </a>
+      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+        <p>Aprovar</p>
+      </a>
+    </div>
+  </div>
+  <div class="infoConteudoAdmin">
+    <div class="tabelalinhaImovel">
+      <table class="tabelaImoveis">
+        <thead class="tabelaImoveisHeader">
+          <tr>
+            <th [appSort]="imoveis" data-order="desc" data-name="imovelId">ID</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="categoriaImovel">Categoria</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="bairro">Bairro</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="valorImovel">Valor</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="createdAt">Criado</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="updatedAt">Atualizado</th>
+            <th [appSort]="imoveis" data-order="desc" data-name="statusLancamento">Status</th>
+            <th></th>
+            <th>Ações</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
+          <tr class="tabelalinhaImovel" *ngFor="
+              let imovel of imoveis
+                | paginate
+                  : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
+            ">
+            <td>{{ imovel.imovelId }}</td>
+            <td>{{ imovel.categoriaImovel }}</td>
+            <td>{{ imovel.bairro }}</td>
+            <td>{{ imovel.valorImovel | currency: 'BRL' }}</td>
+            <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+            <td>
+              <select name="statusLancamento" (change)="atualizaStatus(imovel._id, $event)"
+                [value]="imovel.statusLancamento">
+                <option value="pendente">Pendente</option>
+                <option value="reprovado">Não aprovado</option>
+                <option value="aprovado">Aprovado</option>
+              </select>
+            </td>
+            <td>
+              <button (click)="goToImovel(imovel._id)">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="editarImovel(imovel._id)">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+            </td>
+            <td>
+              <button (click)="remover(imovel._id)">
+                <fa-icon [icon]="faTrashAlt"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="paginacao">
+        <pagination-controls class="controle" id="server" [autoHide]="true" nextLabel="Próx." previousLabel="Voltar"
+          (pageChange)="p = $event"></pagination-controls>
+      </div>
+      <div *ngIf="loading">Carregando...</div>
+      <div *ngIf="error">Erro :(</div>
+    </div>
+  </div>
+</div>

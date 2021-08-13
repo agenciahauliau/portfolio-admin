@@ -14,7 +14,7 @@ import { GQL_BUSCAR_POST } from 'src/app/graphql/graphql';
 @Component({
   selector: 'app-editar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class EditarPostComponent implements OnInit, OnDestroy {
   /* Para upload */
@@ -107,6 +107,11 @@ export class EditarPostComponent implements OnInit, OnDestroy {
 
   separa(data: any) {
     return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
+  }
+
+  async textareaResized(event: any) {
+    event.target.style.height = '0px';
+    event.target.style.height = 1 + event.target.scrollHeight + 'px';
   }
 
   selectFiles(event: any): void {

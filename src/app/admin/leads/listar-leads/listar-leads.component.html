@@ -1,62 +1,62 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-lead']" routerLinkActive="router-link-active">
-        Criar Lead
-        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      <a [routerLink]="['/admin/leads']" routerLinkActive="router-link-active">
+        <h2>Leads</h2>
       </a>
     </div>
   </div>
+  <header class="topo">
+    <div class="caminho">
+      <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/leads/']">leads</a></p>
+    </div>
+  </header>
   <div class="infoConteudoAdmin">
-    <div class="tabelalinhaImovel">
-      <table class="tabelaImoveis">
-        <thead class="tabelaImoveisHeader">
+    <div class="tabelalinhaItem">
+      <table class="tabelaItens">
+        <thead class="tabelaItensHeader">
           <th>ID</th>
           <th>Tipo do Lead</th>
           <th>Email</th>
-          <th>Criado</th>
-          <th>Atualizado</th>
-          <th></th>
+          <th>Criado / Atualizado</th>
           <th>Ações</th>
-          <th></th>
         </thead>
-        <tbody class="tabelaImoveisCorpo" *ngIf="leads">
-          <tr
-            class="tabelalinhaImovel"
-            *ngFor="let lead of leads | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }"
-          >
-            <td>{{ lead.leadId }}</td>
-            <td>{{ lead.tipoLead }}</td>
-            <td>{{ lead.email }}</td>
-            <td>{{ lead.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
-            <td>{{ lead.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
+        <tbody class="tabelaItensCorpo" *ngIf="leads">
+          <tr class="tabelalinhaItem"
+            *ngFor="let lead of leads | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }">
             <td>
-              <button (click)="goToLead(lead._id)">
-                <fa-icon [icon]="faEye" size="2x"></fa-icon>
-              </button>
+              <a routerLink="/admin/lead/{{lead._id}}">
+                {{ lead.leadId }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/lead/{{lead._id}}">
+                {{ lead.tipoLead }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/lead/{{lead._id}}">
+                {{ lead.email }}
+              </a>
+            </td>
+            <td>
+              <a routerLink="/admin/lead/{{lead._id}}">
+                {{ lead.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}
+              </a>
             </td>
             <td>
               <button (click)="editarLead(lead._id)">
-                <fa-icon [icon]="faEdit" size="2x"></fa-icon>
+                <div class="icone" [innerHtml]="iconeEditar"></div>
               </button>
-            </td>
-            <td>
               <button (click)="remover(lead._id)">
-                <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+                <div class="icone" [innerHtml]="iconeExcluir"></div>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls
-          class="controle"
-          id="server"
-          [autoHide]="true"
-          nextLabel="Próx."
-          previousLabel="Voltar"
-          (pageChange)="p = $event"
-        ></pagination-controls>
+        <pagination-controls class="controle" id="server" [autoHide]="true" nextLabel="Próx." previousLabel="Voltar" [maxSize]="7" (pageChange)="p = $event"></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

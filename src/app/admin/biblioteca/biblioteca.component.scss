@@ -1,56 +1,110 @@
-.fileUpload::-webkit-file-upload-button {
-  background: rgba(219, 4, 35, 1);
-  color: #fff;
-  font-weight: 700;
-  padding: 8px;
-  border: none;
+.submenu {
+  .uploadArquivo {
+    display: none;
+  }
+  .iconeUpload {
+    width: 36px;
+    padding: 6px;
+    cursor: pointer;
+    .icone {
+      width: 36px;
+      padding: 6px;
+    }
+  }
 }
-
-.fileUpload {
-  width: 200px;
-  color: #fff0;
-}
-
 .RouterOutlet {
   .infoConteudoAdmin {
+    display: flex;
     .biblioteca {
       padding: 12px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-
       .itemBiblioteca {
-        width: 100%;
-        max-width: 240px;
-        margin: 12px 12px 24px;
-        position: relative;
+        width: 175px;
+        padding: 12px;
         .imagem {
           width: 100%;
-          height: 168px;
+          height: 100px;
+          margin-bottom: 12px;
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
           }
         }
-        p {
-          width: 100%;
-          margin: 6px;
-          overflow-x: hidden;
-          white-space: wrap;
-          text-overflow: ellipsis;
-        }
-        button {
-          padding: 6px;
-          margin: 6px;
-          position: absolute;
-          top: 0;
-          right: 0;
-          z-index: 2;
-          background: #db0423;
-          font-weight: 800;
+        .acoes {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .icone {
+            width: 36px;
+            padding: 6px;
+            margin-left: 6px;
+            cursor: pointer;
+          }
+          .excluir {
+            padding: 6px;
+            margin-left: 6px;
+            cursor: pointer;
+          }
         }
       }
+    }
+    .itensUpload {
+      display: flex;
+      justify-content: space-between;
+      .nomeUpload {
+        ::ng-deep p {
+          font-weight: 200;
+        }
+      }
+    }
+    .uploadImagem {
+      label {
+        width: 100%;
+        display: block;
+        padding: 6px;
+        margin-bottom: 12px;
+        text-align: center;
+        border: 1px solid #fff5;
+      }
+      .up {
+        width: 100%;
+        padding: 6px;
+        background: #db0423;
+        transition: 0.4s ease;
+        &[disabled] {
+          background: #fff5;
+          transition: 0.2s ease;
+        }
+      }
+    }
+    .esquerda {
+      width: calc(100% - 250px);
+      padding: 24px;
+      padding-right: 48px;
+      border-right: 1px solid #fff1;
+    }
+    .direita {
+      width: 250px;
+      height: fit-content;
+      padding: 24px;
+      position: sticky;
+      top: 90px;
+    }
+  }
+}
+
+.circuloProgresso {
+  width: 36px;
+  padding: 6px;
+  path {
+    transition: stroke-dashoffset 0.4s ease;
+    &.true {
+      stroke: #0f05;
+    }
+    &.false {
+      stroke: #e06c00;
     }
   }
 }

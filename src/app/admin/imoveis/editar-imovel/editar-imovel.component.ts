@@ -19,7 +19,7 @@ import { EMPTY } from 'rxjs';
 @Component({
   selector: 'app-editar-imovel',
   templateUrl: '../form-imovel.component.html',
-  styleUrls: ['../form-imovel.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../form-imovel.component.scss', '../../assets/admin.component.scss'],
 })
 export class EditarImovelComponent implements OnInit, OnDestroy {
   @ViewChildren('inputGaleria') inputGaleria: any;

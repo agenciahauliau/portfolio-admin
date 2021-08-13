@@ -1,53 +1,71 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
-        Novo Post
-        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
+        <h2>Publicação</h2>
       </a>
-      <a [routerLink] (click)="editarPost(post._id)">
-        Editar post
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </a>
+      <div class="submenu">
+        <a [routerLink]="['/admin/criar-post']" routerLinkActive="router-link-active">
+          Novo Post
+        </a>
+        <a [routerLink]="['/admin/editar-post', post._id]" routerLinkActive="router-link-active">
+          Editar Post
+        </a>
+      </div>
     </div>
   </div>
-  <div class="infoConteudoAdmin">
-    <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="error">Erro :(</div>
-    <div class="post" *ngIf="post">
-      <div class="infoPostImovel">
+  <div *ngIf="loading">Carregando...</div>
+  <div *ngIf="error">Erro :(</div>
+  <div class="post" *ngIf="post">
+    <header class="topo">
+      <div class="idData">
         <p>ID: {{ post.postId }}</p>
-        <div class="infoPostImovelDatas">
-          <p>{{ post.createdAt | date: 'dd/MMMM/yyyy - HH:mm' }}</p>
-          <p>
-            <fa-icon [icon]="faSyncAlt"></fa-icon
-            >{{ post.updatedAt | date: 'dd/MMMM/yyyy - HH:mm' }}
-          </p>
+        <p>{{ post.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}</p>
+      </div>
+      <div class="caminho">
+        <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">posts</a> > <a>{{ post.titulo }}</a></p>
+      </div>
+    </header>
+    <section class="infoConteudoAdmin">
+      <div class="esquerda">
+        <div class="tituloImovel">
+          <h1 class="titulo">{{ post.titulo }}</h1>
+          <h3 class="subtitulo">{{ post.descricao }}</h3>
+        </div>
+        <div class="imagemDestaque" *ngIf="post.imagemPrincipal">
+          <img src="{{ post.imagemPrincipal }}" alt="" title="" />
+        </div>
+        <div class="conteudo">
+          <div [innerHtml]="post.conteudo"></div>
         </div>
       </div>
-      <div class="tituloImovel">
-        <h1>{{ post.titulo }}</h1>
-        <h3>{{ post.descricao }}</h3>
-      </div>
-      <div class="imagemDestaque">
-        <img src="{{ post.imagemPrincipal }}" width="500px" alt="" title="" />
-      </div>
-      <div class="infoImovel">
-        <div class="descricao">
-          <p>
-            Categoria: <span *ngFor="let i of post.categoria | slice: 0">{{ i }} </span>
-          </p>
-          <p>
-            Tags: <span *ngFor="let i of post.tags | slice: 0">{{ i }} </span>
-          </p>
-          <p>Status de publicação: {{ post.status }}</p>
+      <div class="direita">
+        <div class="status">
+          <input id='statusPost-{{post.postId}}' type="checkbox" [checked]="post.status === 'publicado' ? true :  false"
+            (change)="atualizaStatus(post._id, $event)" />
+          <label for='statusPost-{{post.postId}}'
+            [class]="post.status === 'publicado' ? 'publicar ativo' :  'publicar'">
+            <div class="chave"></div>
+          </label>
+          <p>{{ post.status }}</p>
+        </div>
+        <div class="cat categoria">
+          <h4>Categoria</h4>
+          <p>{{ post.categoria }} </p>
+        </div>
+        <div class="cat tags">
+          <h4>Tags</h4>
+          <p>{{ post.tags }}</p>
+        </div>
+        <div class="acoes">
+          <div class="editar">
+            <a [routerLink]="['/admin/editar-post', post._id]" routerLinkActive="router-link-active">editar</a>
+          </div>
+          <div class="excluir">
+            <a>excluir</a>
+          </div>
         </div>
       </div>
-      <br />
-      <div>
-        <h2>Conteúdo</h2>
-        <div [innerHtml]="post.conteudo"></div>
-      </div>
-    </div>
+    </section>
   </div>
 </div>

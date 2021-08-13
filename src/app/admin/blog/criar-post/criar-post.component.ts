@@ -11,7 +11,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-criar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../form-post.component.scss', '../../admin.component.scss'],
+  styleUrls: ['../form-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class CriarPostComponent implements OnInit {
   /* Para upload */
@@ -86,6 +86,12 @@ export class CriarPostComponent implements OnInit {
 
   separa(data: any) {
     return data.split(/\n+|\r+|,\s?/g).filter(Boolean);
+  }
+
+  async textareaResized(event: any) {
+    console.log(event)
+    event.style.height = '1px';
+    event.style.height = 12 + event.scrollHeight + 'px';
   }
 
   selectFiles(event: any): void {

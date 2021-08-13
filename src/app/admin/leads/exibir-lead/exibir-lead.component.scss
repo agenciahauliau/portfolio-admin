@@ -1,0 +1,52 @@
+.lead {
+  .topo {
+    .caminho {
+      padding: 6px 70px;
+      font-weight: 200;
+      a {
+        margin: 0 6px;
+        font-weight: 200;
+        font-size: 12px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+    .idData {
+      display: flex;
+      justify-content: space-between;
+      padding: 24px 70px 0;
+    }
+  }
+  .infoConteudoAdmin {
+    padding: 24px !important;
+    .nomeTipo {
+      margin-bottom: 24px;
+      h2 {
+        margin-bottom: 6px;
+      }
+      p {
+        font-weight: 200;
+      }
+    }
+    section {
+      padding: 24px 0;
+      margin-bottom: 12px;
+      border-top: 1px solid #fff1;
+      h3 {
+        margin-bottom: 12px;
+      }
+    }
+    .dados {
+      div {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        margin-bottom: 6px;
+        font-weight: 200;
+      }
+    }
+  }
+}

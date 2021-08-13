@@ -1,17 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { faRss } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from '../services/token.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { icones } from 'src/assets/icones';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  styleUrls: ['./assets/admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  faRss = faRss;
-  constructor(private tokenService: TokenService) {}
+  iconePainel!: SafeHtml;
+  iconeImoveis!: SafeHtml;
+  iconeBiblioteca!: SafeHtml;
+  iconeLead!: SafeHtml;
+  iconeBlog!: SafeHtml;
+  iconeConf!: SafeHtml;
 
-  ngOnInit(): void {}
+  constructor(private tokenService: TokenService, private sanitizer: DomSanitizer) {}
+
+  ngOnInit(): void {
+    this.iconePainel = this.sanitizer.bypassSecurityTrustHtml(icones.iconePainel);
+    this.iconeImoveis = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImoveis);
+    this.iconeBiblioteca = this.sanitizer.bypassSecurityTrustHtml(icones.iconeBiblioteca);
+    this.iconeLead = this.sanitizer.bypassSecurityTrustHtml(icones.iconeLead);
+    this.iconeBlog = this.sanitizer.bypassSecurityTrustHtml(icones.iconeBlog);
+    this.iconeConf = this.sanitizer.bypassSecurityTrustHtml(icones.iconeConf);
+  }
 
   logout() {
     this.tokenService.signOut();
