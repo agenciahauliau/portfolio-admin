@@ -41,6 +41,10 @@
           <div class="icone" [innerHtml]="iconeConf"></div>
           <p>Configurações</p>
         </a>
+        <a [routerLink]="['./posts']" routerLinkActive="router-link-active">
+          <div class="icone" [innerHtml]="iconeInfoLoja"></div>
+          <p>Informações</p>
+        </a>
       </div>
       <div class="footerBarra">
         <a [routerLink]="['']" routerLinkActive="router-link-active" (click)="logout()">

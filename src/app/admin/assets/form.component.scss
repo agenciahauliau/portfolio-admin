@@ -1,7 +1,132 @@
 .formulario {
   form {
     display: flex;
-    .imgPrin {
+
+    .form-campo {
+      margin-bottom: 48px;
+      position: relative;
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 6px 12px;
+        background: #ffffff02;
+        border-bottom: 1px solid #fff5;
+
+        &::placeholder {
+          color: transparent;
+          font-weight: 200;
+        }
+
+        &:focus {
+          outline: 0;
+        }
+
+        &:focus ~ .inputNome,
+        &:-webkit-autofill ~ .inputNome,
+        &:not(:placeholder-shown) ~ .inputNome {
+          top: -24px;
+          font-size: 0.7em;
+          opacity: 0.3;
+        }
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px #272727 inset !important;
+        -webkit-box-shadow: 0 0 0 30px #272727 inset !important;
+        fill: none !important;
+      }
+
+      .inputNome {
+        width: 100%;
+        padding: 6px 12px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        font-size: 0.9em;
+        font-weight: 200;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        b {
+          color: #db0423;
+        }
+      }
+
+      textarea {
+        border-bottom: 1px solid #fff5;
+        line-height: 24px;
+        overflow: hidden;
+        resize: none;
+
+        &:focus ~ .inputNome,
+        &:not(:placeholder-shown) ~ .inputNome {
+          top: -28px;
+          font-size: 0.7em;
+          opacity: 0.3;
+        }
+      }
+
+      select {
+        padding-left: 0;
+      }
+
+      option {
+        background: #272727;
+        border-bottom: 1px solid #fff5;
+      }
+    }
+
+    .text-danger ~ .inputNome {
+      color: yellow;
+    }
+
+    div.checkbox {
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+
+      [type='checkbox'] {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+
+        & ~ .inputNome {
+          display: block;
+          padding: 6px 12px;
+          margin-bottom: 0 !important;
+          position: relative;
+          top: 0;
+          font-size: 1em;
+          background: #272727;
+          opacity: 1;
+        }
+
+        &:checked ~ .inputNome {
+          background: rgba(219, 4, 35, 1);
+        }
+      }
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    .upImagem {
       display: flex;
       align-items: center;
       input {
@@ -81,42 +206,6 @@
           }
         }
       }
-    }
-
-    .titulo {
-      font-size: 2.5em;
-    }
-
-    .subtitulo {
-      font-weight: 200;
-      font-size: 1.75em;
-    }
-
-    .categoria {
-      margin-top: 12px;
-    }
-
-    .categoria,
-    .tag {
-      margin-bottom: 48px;
-      textarea {
-        height: auto;
-        padding: 12px 0;
-      }
-    }
-
-    .esquerda {
-      width: calc(100% - 250px);
-      padding: 24px;
-      padding-right: 48px;
-      border-right: 1px solid #fff1;
-    }
-    .direita {
-      width: 250px;
-      height: fit-content;
-      padding: 24px;
-      position: sticky;
-      top: 90px;
     }
   }
 }

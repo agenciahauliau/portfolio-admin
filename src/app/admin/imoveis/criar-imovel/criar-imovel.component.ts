@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { GraphQlService } from '../../../services/graphql.service';
 import { Imovel } from '../../../helpers/types';
@@ -58,10 +56,6 @@ export class CriarImovelComponent implements OnInit {
     },
   ];
 
-  faPlusSquare = faPlusSquare;
-  faHome = faHome;
-  faTrash = faTrash;
-
   imovelForm!: Imovel & FormGroup;
 
   public isActive: boolean = false;
@@ -71,9 +65,15 @@ export class CriarImovelComponent implements OnInit {
   iconeImagem!: SafeHtml;
   iconeExcluir!: SafeHtml;
   iconeUpload!: SafeHtml;
+  iconeGalerias!: SafeHtml;
+  iconeTipologias!: SafeHtml;
+
+  public urlCaminho: any = "";
+  public idImovel: any = "";
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
@@ -85,6 +85,11 @@ export class CriarImovelComponent implements OnInit {
     this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
     this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+    this.iconeGalerias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeGalerias);
+    this.iconeTipologias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeTipologias);
+
+    this.urlCaminho = this.route.snapshot.routeConfig?.path
+    this.idImovel = this.route.snapshot.paramMap.get('id');
 
     this.imovelForm = this.formBuilder.group({
       nomeImovel: [''],
@@ -286,6 +291,11 @@ export class CriarImovelComponent implements OnInit {
     this.router.navigate(['admin/imoveis']);
   }
 
+  async textareaResized(event: any) {
+    event.target.style.height = '0px';
+    event.target.style.height = 1 + event.target.scrollHeight + 'px';
+  }
+
   selectFiles(event: any): void {
     this.message = [];
     this.progressInfos = [];
@@ -429,7 +439,7 @@ export class CriarImovelComponent implements OnInit {
   }
 
   /* Planta imagens */
-  selectFilesPlantaFiles(event: any): void {
+  selectFilesPlanta(event: any): void {
     this.messagePlantaFiles = [];
     this.progressInfosPlantaFiles = [];
     this.selectedPlantaFiles = event.target.files;
@@ -449,7 +459,7 @@ export class CriarImovelComponent implements OnInit {
     };
   }
 
-  uploadFilesPlantaFiles(): void {
+  uploadFilesPlanta(): void {
     this.message = [];
     if (this.selectedPlantaFiles) {
       for (let i = 0; i < this.selectedPlantaFiles.length; i++) {

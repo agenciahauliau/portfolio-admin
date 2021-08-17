@@ -1,54 +1,70 @@
 .galerias {
   width: 100%;
 
-  p.nomeGaleria {
+  input[type='file'] {
     display: none;
   }
-
-  .galeria:first-child {
-    border-top: none;
-  }
-
   .galeria {
-    height: fit-content;
-    padding: 48px 24px;
-    border-top: 1px solid #fff5;
-
-    div.tipoGaleria {
-      display: flex;
-      margin-bottom: 24px;
-
-      button {
-        width: 216px;
+    padding: 24px 0;
+    margin: 24px 0;
+    border-bottom: 1px solid #ffffff05;
+    .acoes {
+      .icone {
+        width: 36px;
         padding: 6px;
-        margin-left: 24px;
-        background: #000;
+      }
+    }
+    .topoGaleria {
+      display: flex;
+      margin-bottom: 48px;
+      .tipoGaleria {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 12px;
+        select {
+          margin-right: 24px;
+        }
+        .acoes {
+          button {
+            background: none;
+          }
+        }
+      }
+      .upImagensGaleria {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 12px;
+        label {
+          width: 50%;
+          min-height: 36px;
+          padding: 6px;
+          display: block;
+          border: 1px solid #fff5;
+          text-align: center;
+          line-height: 28px;
+        }
+        button {
+          background: #0f05;
+          transition: 0.4s ease;
+          &:disabled {
+            background: none;
+            border: 1px solid #fff5;
+            transition: 0.2s ease;
+          }
+        }
       }
     }
 
-    div.upImagensGaleria {
-      height: fit-content;
-      display: flex;
-
-      input {
-        height: fit-content;
-      }
-
-      button {
-        width: 144px;
-        padding: 6px;
-        margin-left: 24px;
-        background: #db0423;
-      }
-    }
     .imagensGaleria {
       display: flex;
       flex-wrap: wrap;
       .imagemGaleria {
         width: calc(100% / 4);
-        max-width: 240px;
-        height: 175px;
-        margin: 10px;
+        max-width: 200px;
+        height: 150px;
+        padding: 10px;
         position: relative;
 
         img {
@@ -57,12 +73,15 @@
           object-fit: cover;
         }
 
-        button {
-          padding: 6px;
-          margin: 6px;
+        button ::ng-deep {
+          width: 24px;
+          height: 24px;
+          padding: 4px;
+          margin: 4px;
           position: absolute;
           top: 0;
           right: 0;
+          background: #f00;
         }
       }
     }
@@ -70,15 +89,15 @@
   .botaoGalerias {
     display: flex;
     align-items: center;
-    margin: 12px auto 0;
-    background: none !important;
-
+    padding: 3px 12px;
+    margin: auto;
+    background: none;
     p {
-      margin-left: 12px;
+      margin-right: 6px;
     }
-
-    svg {
+    .icone {
       width: 36px;
+      padding: 6px;
     }
   }
 }
@@ -86,121 +105,87 @@
 .tipologias {
   width: 100%;
 
-  .tipologia:first-child {
-    border-top: none;
-  }
-
   .tipologia {
-    padding-top: 24px;
-    margin-bottom: 24px;
-    border-top: 1px solid #fff5;
-
+    padding: 24px 0;
+    margin: 24px 0;
+    border-bottom: 1px solid #ffffff05;
     h4 {
-      margin-bottom: 24px;
+      margin-bottom: 48px;
+      text-align: center;
     }
-
     .infoTipologia {
-      width: 100%;
       display: flex;
       flex-wrap: wrap;
 
       > div {
-        width: calc(90% / 3);
-        margin: 0 calc(5% / 3) 12px;
+        width: calc(100% / 3);
+        padding: 0 12px;
+        margin-bottom: 48px;
         position: relative;
 
         button {
-          background: #000;
-          padding: 6px 12px;
+          width: 100%;
+          background: none;
+          .icone {
+            width: 36px;
+            padding: 6px;
+            margin: auto;
+          }
         }
-      }
-
-      > div:nth-child(3n + 1) {
-        margin-left: 0;
+        &:nth-child(3n + 1) {
+          padding-left: 0;
+        }
       }
     }
   }
-  .botaoTipologia {
+  .botaoTipologias {
     display: flex;
     align-items: center;
-    margin: 12px auto 0;
-    background: none !important;
-
+    padding: 3px 12px;
+    margin: auto;
+    background: none;
     p {
-      margin-left: 12px;
+      margin-right: 6px;
     }
-
-    svg {
+    .icone {
       width: 36px;
+      padding: 6px;
     }
   }
 }
 
-.plantaJardins {
-  width: 50%;
-  .caixaImagem {
-    width: 100%;
-    height: 175px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    border: 1px #fff2 dashed;
-
-    div[id^='complemento'] {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
-    }
-    svg {
-      width: 100%;
-      height: 100%;
-      padding: 24px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0.5;
-    }
-    img[src=''] {
-      display: none;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
+.comodidades{
+  display: flex;
+  .form-campo{
+    width: 50%;
+    padding: 0 12px;
+    &:first-child{
+      padding-left: 0;
     }
   }
+}
 
-  .acoes {
-    .progress {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .deletar {
-        width: 24px;
-        height: 38px;
-        margin: 24px 12px 12px 24px;
-      }
-      p {
-        width: 50%;
-        text-overflow: ellipsis;
-        overflow-x: hidden;
-        white-space: nowrap;
-      }
+.permutaEmobiliado{
+  display: flex;
+  justify-content: space-between; 
+}
+
+.bloco {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 48px;
+  .form-campo {
+    width: calc(100% / 3);
+    padding: 0 12px;
+    &:nth-child(3n + 1) {
+      padding-left: 0;
     }
   }
 }
 
 .dataLancamento {
-  width: 48%;
   display: flex;
   align-items: center;
-  margin-left: 2%;
   input {
     height: fit-content;
   }

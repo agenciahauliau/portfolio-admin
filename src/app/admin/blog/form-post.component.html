@@ -2,7 +2,8 @@
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
       <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
-        <h2>Editar publicação</h2>
+        <h2 [routerLink]="['/admin/criar-post/']" *ngIf="urlCaminho === 'criar-post'">Criar publicação</h2>
+        <h2 [routerLink]="['/admin/editar-post/']" *ngIf="urlCaminho != 'criar-post'">Editar publicação</h2>
       </a>
       <div class="submenu">
         <a [routerLink]="['/admin/criar-post']" routerLinkActive="router-link-active">
@@ -13,8 +14,13 @@
   </div>
 
   <div class="caminho">
-    <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">posts</a> > <a></a> > <a>editar
-        post</a> </p>
+    <p>
+      <a [routerLink]="['/admin/']">início</a> <span>></span>
+      <a [routerLink]="['/admin/posts/']">posts</a> <span>></span>
+      <a *ngIf="urlCaminho != 'criar-post'">{{tituloPost}}</a> <span *ngIf="urlCaminho != 'criar-post'">></span>
+      <a [routerLink]="['/admin/criar-post/']" *ngIf="urlCaminho === 'criar-post'">Criar publicação</a>
+      <a [routerLink]="['/admin/editar-post/']" *ngIf="urlCaminho != 'criar-post'">Editar publicação</a>
+    </p>
   </div>
 
   <section class="infoConteudoAdmin">
@@ -25,7 +31,7 @@
           <div class="form-campo">
             <div *ngIf="getControl.titulo.touched && getControl.titulo.invalid" class="text-danger"></div>
             <input class="titulo" type="text" name="titulo" formControlName="titulo" placeholder="Título" />
-            <label for="titulo">Título<b>*</b></label>
+            <label class="inputNome" for="titulo">Título<b>*</b></label>
           </div>
           <!-- Fim Título -->
           <!-- Início Descrição -->
@@ -33,43 +39,41 @@
             <div *ngIf="getControl.descricao.touched && getControl.descricao.invalid" class="text-danger"></div>
             <textarea class="subtitulo" type="text" name="descricao" formControlName="descricao" placeholder="Descrição"
               (keyup)="textareaResized($event)"></textarea>
-            <label for="descricao">Subtítulo<b>*</b></label>
+            <label class="inputNome" for="descricao">Subtítulo<b>*</b></label>
           </div>
           <!-- Fim descrição -->
           <!-- Imagem de destaque -->
-          <div class="form-campo divisao">
-            <div class="imgPrin">
-              <div class='formEsq'>
-                <h3>Imagem principal</h3>
-                <p class="info">Adione a imagem principal do imóvel, ela vai aparecer no card do feed de imóveis e no
-                  topo da página do imóvel</p>
-                <div class="botoes">
-                  <button class="excluir" (click)="deletaImgPrincipal(mainImg)" *ngIf="mainImg"
-                    [innerHtml]="iconeExcluir"></button>
-                  <button class="upload" type="button" [disabled]="!selectedFiles" (click)="uploadFiles()"
-                    *ngIf="imgPreview && !mainImg" [innerHtml]="iconeUpload"></button>
-                  <label for="upImgPrin" *ngIf="!imgPreview && !mainImg">
-                    Selecionar imagem
-                  </label>
-                </div>
+          <div class="form-campo divisao upImagem">
+            <div class='formEsq'>
+              <h3>Imagem principal</h3>
+              <p class="info">Adione a imagem principal do imóvel, ela vai aparecer no card do feed de imóveis e no
+                topo da página do imóvel</p>
+              <div class="botoes">
+                <button class="excluir" type="button" (click)="deletaImgPrincipal(mainImg)" *ngIf="mainImg"
+                  [innerHtml]="iconeExcluir"></button>
+                <button class="upload" type="button" [disabled]="!selectedFiles" (click)="uploadFiles()"
+                  *ngIf="imgPreview && !mainImg" [innerHtml]="iconeUpload"></button>
+                <label for="upImgPrin" *ngIf="!imgPreview && !mainImg">
+                  Selecionar imagem
+                </label>
               </div>
-              <div class='formDir'>
-                <div class="loadImagem">
-                  <label for="upImgPrin">
-                    <div class="imagem" *ngIf="mainImg">
-                      <img src="{{ mainImg }}" srcset="{{mainImg}}" />
-                    </div>
-                    <div class="imagem" *ngIf="imgPreview && !mainImg">
-                      <img [src]="imgPreview" />
-                    </div>
-                    <div class="icone" [innerHtml]="iconeImagem" *ngIf="!imgPreview && !mainImg"></div>
-                  </label>
-                  <input id="upImgPrin" type="file" (change)="selectFiles($event)" />
-                  <div class="progress" *ngFor="let progressInfo of progressInfos">
-                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                      attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                      [ngStyle]="{ width: progressInfo.value + '%' }"></div>
+            </div>
+            <div class='formDir'>
+              <div class="loadImagem">
+                <label for="upImgPrin">
+                  <div class="imagem" *ngIf="mainImg">
+                    <img src="{{ mainImg }}" srcset="{{mainImg}}" />
                   </div>
+                  <div class="imagem" *ngIf="imgPreview && !mainImg">
+                    <img [src]="imgPreview" />
+                  </div>
+                  <div class="icone" [innerHtml]="iconeImagem" *ngIf="!imgPreview && !mainImg"></div>
+                </label>
+                <input id="upImgPrin" type="file" (change)="selectFiles($event)" />
+                <div class="progress" *ngFor="let progressInfo of progressInfos">
+                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{ width: progressInfo.value + '%' }"></div>
                 </div>
               </div>
             </div>
@@ -99,14 +103,14 @@
           <div class="form-campo categoria">
             <textarea type="text" name="categoria" formControlName="categoria" placeholder="Categoria(s) do Post"
               (keyup)="textareaResized($event)"></textarea>
-            <label>Categoria do post - ex: Novidades, Lançamento </label>
+            <label class="inputNome">Categoria do post - ex: Novidades, Lançamento </label>
           </div>
           <!-- Fim Categoria -->
           <!-- Inínio Tags -->
           <div class="form-campo tag">
             <textarea type="text" name="tags" formControlName="tags" placeholder="Tag(s) do Post"
               (keyup)="textareaResized($event)"></textarea>
-            <label>Tags do post - ex: Novidades, Lançamento </label>
+            <label class="inputNome">Tags do post - ex: Novidades, Lançamento </label>
           </div>
           <!-- Fim Tags -->
           <div class="botoes">

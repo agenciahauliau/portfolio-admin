@@ -1,26 +1,8 @@
 .lead {
-  .topo {
-    .caminho {
-      padding: 6px 70px;
-      font-weight: 200;
-      a {
-        margin: 0 6px;
-        font-weight: 200;
-        font-size: 12px;
-        &:first-child {
-          margin-left: 0;
-        }
-      }
-    }
-    .idData {
-      display: flex;
-      justify-content: space-between;
-      padding: 24px 70px 0;
-    }
-  }
   .infoConteudoAdmin {
     padding: 24px !important;
     .nomeTipo {
+      width: 100%;
       margin-bottom: 24px;
       h2 {
         margin-bottom: 6px;
@@ -30,6 +12,7 @@
       }
     }
     section {
+      width: 100%;
       padding: 24px 0;
       margin-bottom: 12px;
       border-top: 1px solid #fff1;

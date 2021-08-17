@@ -101,15 +101,21 @@
     }
   }
 
-  .caminho {
-    padding: 24px 70px 0;
-    font-weight: 200;
-    a {
-      margin: 0 6px;
+  .topo {
+    padding: 24px 70px;
+    .idData {
+      display: flex;
+      justify-content: space-between;
+    }
+    .caminho {
       font-weight: 200;
-      font-size: 12px;
-      &:first-child {
-        margin-left: 0;
+      a {
+        margin: 0 6px;
+        font-weight: 200;
+        font-size: 12px;
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
   }
@@ -120,182 +126,52 @@
     background: inherit;
     backdrop-filter: blur(10px);
     box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01), 0 0 50px rgba(0, 0, 0, 0.1);
+  }
+}
 
-    .formulario {
-      form {
-        .form-campo {
-          margin-bottom: 48px;
-          position: relative;
-
-          input,
-          textarea,
-          select {
-            width: 100%;
-            padding: 6px 12px;
-            background: #ffffff02;
-            border-bottom: 1px solid #fff5;
-
-            &::placeholder {
-              color: transparent;
-              font-weight: 200;
-            }
-
-            &:focus {
-              outline: 0;
-            }
-
-            &:focus ~ label,
-            &:-webkit-autofill ~ label,
-            &:not(:placeholder-shown) ~ label {
-              top: -24px;
-              font-size: 0.7em;
-              opacity: 0.3;
-            }
-
-            label {
-              width: 100%;
-              padding: 6px 12px;
-              position: absolute;
-              top: 0;
-              left: 0;
-              z-index: -1;
-              font-size: 0.9em;
-              font-weight: 200;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-  
-              b {
-                color: #db0423;
-              }
-            }
-          }
-
-          
-
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active {
-            box-shadow: 0 0 0 30px #272727 inset !important;
-            -webkit-box-shadow: 0 0 0 30px #272727 inset !important;
-            fill: none !important;
-          }
-
-          textarea {
-            resize: none;
-            overflow: hidden;
-            border-bottom: 1px solid #fff5;
-
-            &:focus ~ label,
-            &:not(:placeholder-shown) ~ label {
-              top: -28px;
-              font-size: 0.7em;
-              opacity: 0.3;
-            }
-          }
-
-          select {
-            padding-left: 0;
-          }
-
-          option {
-            background: #272727;
-            border-bottom: 1px solid #fff5;
-          }
-        }
-
-        .text-danger ~ label {
-          color: yellow;
-        }
-
-        div.checkbox {
-          width: fit-content;
-          height: fit-content;
-          position: relative;
-
-          [type='checkbox'] {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-
-            & ~ label {
-              display: block;
-              padding: 6px 12px;
-              margin-bottom: 0 !important;
-              position: relative;
-              top: 0;
-              font-size: 1em;
-              background: #272727;
-              opacity: 1;
-            }
-
-            &:checked ~ label {
-              background: rgba(219, 4, 35, 1);
-            }
-          }
-        }
-      }
-
-      /* Chrome, Safari, Edge, Opera */
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      /* Firefox */
-      input[type='number'] {
-        -moz-appearance: textfield;
-      }
+.botoes {
+  display: flex;
+  margin-top: 70px;
+  button,
+  div {
+    width: 50%;
+    margin: 3px;
+    text-align: center;
+    span,
+    a {
+      display: block;
+      padding: 12px 6px;
+      font-weight: 600;
+      color: #000;
     }
-    .botoes {
-      display: flex;
-      margin-top: 70px;
-      button,
-      div {
-        width: 50%;
-        margin: 3px;
-        text-align: center;
-        span,
-        a {
-          display: block;
-          padding: 12px 6px;
-          font-weight: 600;
-          color: #000;
-        }
-      }
-      .limpar {
-        background: #111;
-        a,
-        span {
-          color: #fff;
-        }
-      }
-      .excluir {
-        background: #f005;
-        a,
-        span {
-          color: #fff;
-        }
-      }
-      .enviar {
-        background: #0f05;
-        a,
-        span {
-          color: #fff;
-        }
-      }
-      .editar, .upload {
-        background: none;
-        border: 1px solid #fff5;
-        a {
-          color: #fff;
-        }
-      }
+  }
+  .limpar {
+    background: #111;
+    a,
+    span {
+      color: #fff;
+    }
+  }
+  .excluir {
+    background: #f005;
+    a,
+    span {
+      color: #fff;
+    }
+  }
+  .enviar {
+    background: #0f05;
+    a,
+    span {
+      color: #fff;
+    }
+  }
+  .editar,
+  .upload {
+    background: none;
+    border: 1px solid #fff5;
+    a {
+      color: #fff;
     }
   }
 }
@@ -336,7 +212,31 @@
       height: 90px;
     }
     .infoConteudoAdmin {
+      display: flex;
+      flex-wrap: wrap;
       margin: 48px;
+      .esquerda {
+        width: calc(100% - 250px);
+        padding: 24px;
+        padding-right: 48px;
+        border-right: 1px solid #fff1;
+  
+        .divisao {
+          padding-bottom: 48px;
+          margin-bottom: 48px;
+          border-bottom: 1px solid #fff1;
+        }
+      }
+      .direita {
+        width: 250px;
+        height: fit-content;
+        padding: 24px;
+        position: sticky;
+        top: 90px;        
+      }
+      .tabelalinhaItem{
+        width: 100%;
+      }
     }
   }
 }

@@ -44,22 +44,22 @@
         border-bottom: 1px solid #fff1;
         button {
           color: #fff;
-          padding: 0 15px;
+          padding: 0 7px;
           background: none;
         }
         select {
           padding: 8px 15px;
           background: #fff2;
           font-size: 14px;
-          &.aprovado{
-            background: #0f05;
+          &.aprovado {
+            border: 1px solid #0f05;
           }
-          &.reprovado{
-            background: #f005;
+          &.reprovado {
+            border: 1px solid #f005;
           }
-          option{
-            background: #fff2;
-            color: #000;
+          option {
+            background: #272727;
+            color: #fff;
           }
         }
 
@@ -133,8 +133,6 @@
     background: green;
     pagination-template {
       .ngx-pagination {
-        .pagination-previous {
-        }
         li {
           a {
             span {

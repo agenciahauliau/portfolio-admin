@@ -16,7 +16,7 @@ import { icones } from 'src/assets/icones';
 @Component({
   selector: 'app-editar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss', '../form-post.component.scss'],
 })
 export class EditarPostComponent implements OnInit, OnDestroy {
   /* Para upload */
@@ -40,10 +40,13 @@ export class EditarPostComponent implements OnInit, OnDestroy {
   iconeExcluir!: SafeHtml;
   iconeUpload!: SafeHtml;
 
+  public urlCaminho: any = "";
+  public tituloPost: any = "";
+
   constructor(
-    private apollo: Apollo,
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
+    private apollo: Apollo,
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
@@ -55,6 +58,8 @@ export class EditarPostComponent implements OnInit, OnDestroy {
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
     this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
 
+    this.urlCaminho = this.route.snapshot.routeConfig?.path
+
     this.postForm = this.formBuilder.group({
       status: '',
       titulo: ['', [Validators.required, Validators.minLength(4)]],
@@ -64,6 +69,8 @@ export class EditarPostComponent implements OnInit, OnDestroy {
       categoria: [[]],
       tags: [[]],
     });
+
+    
 
     const postId = this.route.snapshot.paramMap.get('id');
     this.postQuery = this.apollo.watchQuery<Post>({
@@ -77,6 +84,7 @@ export class EditarPostComponent implements OnInit, OnDestroy {
       this.loading = loading;
       this.postForm.patchValue(data.post);
       this.mainImg = data.post.imagemPrincipal;
+      this.tituloPost = data.post.titulo;
       this.patchDadosPostForm();
       this.postForm.patchValue({
         tags: data.post.tags.join(', '),

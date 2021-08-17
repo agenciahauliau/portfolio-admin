@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../../helpers/types';
 import { GraphQlService } from '../../../services/graphql.service';
 import { UploadService } from '../../../services/upload.service';
@@ -13,7 +13,7 @@ import { icones } from 'src/assets/icones';
 @Component({
   selector: 'app-criar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss', '../form-post.component.scss'],
 })
 export class CriarPostComponent implements OnInit {
   /* Para upload */
@@ -33,11 +33,15 @@ export class CriarPostComponent implements OnInit {
   iconeExcluir!: SafeHtml;
   iconeUpload!: SafeHtml;
 
+  public urlCaminho: any = "";
+  public tituloPost: any = "";
+
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private gqlService: GraphQlService,
     private uploadService: UploadService,
-    private router: Router,
     private sanitizer: DomSanitizer,
   ) {}
 
@@ -45,6 +49,8 @@ export class CriarPostComponent implements OnInit {
     this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
     this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+
+    this.urlCaminho = this.route.snapshot.routeConfig?.path
 
     this.postForm = this.formBuilder.group({
       status: 'rascunho',

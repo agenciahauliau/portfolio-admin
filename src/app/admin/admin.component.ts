@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   iconeLead!: SafeHtml;
   iconeBlog!: SafeHtml;
   iconeConf!: SafeHtml;
+  iconeInfoLoja!: SafeHtml;
 
   constructor(private tokenService: TokenService, private sanitizer: DomSanitizer) {}
 
@@ -25,6 +26,7 @@ export class AdminComponent implements OnInit {
     this.iconeLead = this.sanitizer.bypassSecurityTrustHtml(icones.iconeLead);
     this.iconeBlog = this.sanitizer.bypassSecurityTrustHtml(icones.iconeBlog);
     this.iconeConf = this.sanitizer.bypassSecurityTrustHtml(icones.iconeConf);
+    this.iconeInfoLoja = this.sanitizer.bypassSecurityTrustHtml(icones.iconeInfoLoja);
   }
 
   logout() {

@@ -1,114 +1,143 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
-      <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
-        Criar Imovel
-        <fa-icon [icon]="faPlusSquare"></fa-icon>
+      <a [routerLink]="['/admin/imoveis']" routerLinkActive="router-link-active">
+        <h2>Imóvel</h2>
       </a>
-      <a [routerLink] (click)="editarImovel(imovel._id)">
-        Editar este Imovel
-        <fa-icon [icon]="faEdit"></fa-icon>
-      </a>
+      <div class="submenu">
+        <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
+          Novo Imóvel
+        </a>
+        <a [routerLink]="['/admin/editar-imovel', imovel._id]" routerLinkActive="router-link-active">
+          Editar imóvel
+        </a>
+      </div>
     </div>
   </div>
-  <div class="infoConteudoAdmin">
-    <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="error">Erro :(</div>
-    <div class="imovel" *ngIf="imovel">
-      <div class="infoPostImovel">
-        <p>ID: {{ imovel._id }}</p>
-        <div class="infoPostImovelDatas">
-          <p>{{ imovel.createdAt | date: 'dd/MMMM/yyyy - HH:mm' }}</p>
-          <p>
-            <fa-icon [icon]="faSyncAlt"></fa-icon
-            >{{ imovel.updatedAt | date: 'dd/MMMM/yyyy - HH:mm' }}
-          </p>
-        </div>
+  <div *ngIf="loading">Carregando...</div>
+  <div *ngIf="error">Erro :(</div>
+  <div class="imovel" *ngIf="imovel">
+    <header class="topo">
+      <div class="idData">
+        <p>ID: {{ imovel.imovelId }}</p>
+        <p>{{ imovel.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}</p>
       </div>
-      <div class="tituloImovel">
-        <h1>{{ imovel.categoriaImovel }}</h1>
-        <p>
-          {{ imovel.logradouro }}, {{ imovel.numeroLogradouro
-          }}<span *ngIf="imovel.complemento">— {{ imovel.complemento }}</span>
+      <div class="caminho">
+        <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">imóveis</a> >
+          <a>{{ imovel._id }}</a>
         </p>
-        <p>{{ imovel.bairro }} — {{ imovel.cep }} — {{ imovel.cidade }} — {{ imovel.uf }}</p>
       </div>
-      <div class="imagemDestaque">
-        <img src="{{ imovel.imagemPrincipal }}" alt="" title="" />
-      </div>
-      <div class="infoImovel">
-        <div class="tituloInfo">
-          <h2>Informações de venda do Imóvel</h2>
+    </header>
+    <div class="infoConteudoAdmin">
+      <div class="esquerda">
+        <div class="titulo bloco divisao">
+          <h2>{{ imovel.categoriaImovel }}</h2>
+          <p>{{ imovel.logradouro }}, {{ imovel.numeroLogradouro}}<span *ngIf="imovel.complemento"> -
+              {{ imovel.complemento }}</span> - {{ imovel.bairro }} - {{ imovel.cep }} - {{ imovel.cidade }} -
+            {{ imovel.uf }}</p>
         </div>
-
-        <div class="descricao" [innerHtml]="imovel.descricaoImovel"></div>
-        <p>Categoria: {{ imovel.categoriaImovel }}</p>
-        <p>É Jardins™: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
-        <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
-        <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
-        <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
-        <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
-      </div>
-      <div class="valorImovel">
-        <div class="tituloInfo">
-          <h2>Valores do Imóvel</h2>
+        <div class="imagemDestaque bloco divisao">
+          <img src="{{ imovel.imagemPrincipal }}" />
         </div>
-        <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
-        <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
-        <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
-      </div>
-      <div class="tamanhoImovel">
-        <div class="tituloInfo">
-          <h2>Área, quantidade de cômodos...</h2>
+        <div class="bloco divisao">
+          <h3 class="tituloInfo">Imagens Adicionais</h3>
+          <div class="galerias" *ngFor="let galeria of imovel.galerias">
+            <h4 class="tituloGaleria">{{galeria.tipoGaleria}}</h4>
+            <div class="galeria">
+              <div class="imagem" *ngFor="let img of galeria.arquivos">
+                <img src="{{ img }}" alt="" srcset="{{ img }}" />
+              </div>
+            </div>
+          </div>
         </div>
-        <p>Área total: {{ imovel.areaTotal }}m²</p>
-        <p>Área construída: {{ imovel.areaConstruida }}m²</p>
-        <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
-        <p>Quantidade de quartos: {{ imovel.qtdeQuarto }}</p>
-        <p>Quantidade de banheiros: {{ imovel.qtdeBanheiro }}</p>
-        <p>Quantidade de suítes: {{ imovel.qtdeSuites }}</p>
-        <p>Quantidade de vagas: {{ imovel.qtdeVagas }}</p>
-      </div>
-      <div class="enderecoImovel">
-        <div class="tituloInfo">
-          <h2>Endereço do Imóvel</h2>
-        </div>
-        <p>
-          Endereço: {{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} —
-          {{ imovel.complemento }}
-        </p>
-        <p>Bairro: {{ imovel.bairro }}</p>
-        <p>CEP: {{ imovel.cep }}</p>
-        <p>Cidade: {{ imovel.cidade }}, UF: {{ imovel.uf }}</p>
-      </div>
-      <div class="outrasInfoImovel">
-        <div class="tituloInfo">
-          <h2>Outras informações do Imóvel</h2>
-        </div>
-        <div class="coluna">
+        <div class="bloco divisao">
+          <h3 class="tituloInfo">Informações de venda do Imóvel</h3>
+          <div class="descricao" [innerHtml]="imovel.descricaoImovel"></div>
+          <p>Categoria: {{ imovel.categoriaImovel }}</p>
+          <p>É Jardins: {{ imovel.jardins ? 'Sim' : 'Não' }}</p>
+          <p>Tipo de Negociação: {{ imovel.tipoNegociacao }}</p>
+          <p>Status do Imóvel: {{ imovel.statusImovel }}</p>
+          <p>Aceita permuta?: {{ imovel.aceitaPermuta ? 'Sim' : 'Não' }}</p>
+          <p>Já está mobiliado?: {{ imovel.mobiliado ? 'Sim' : 'Não' }}</p>
           <p>Construtora: {{ imovel.nomeConstrutora }}</p>
         </div>
-        <div class="coluna">
-          <h4>Comodidades do imóvel:</h4>
-          <div *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</div>
+        <div class="bloco divisao">
+          <h3 class="tituloInfo">Valores do Imóvel</h3>
+          <p>Valor do imóvel: {{ imovel.valorImovel | currency: 'BRL' }}</p>
+          <p>Valor do IPTU: {{ imovel.valorIPTU | currency: 'BRL' }}</p>
+          <p>Valor do condomínio: {{ imovel.valorCondominio | currency: 'BRL' }}</p>
         </div>
-        <div class="coluna">
-          <h4>Comodidades do condomínio:</h4>
-          <div *ngFor="let i of imovel.comodidadesCondominio | slice: 0">
-            {{ i }}
+        <div class="bloco divisao">
+          <h3 class="tituloInfo">Área, quantidade de cômodos...</h3>
+          <p>Área total: {{ imovel.areaTotal }}m²</p>
+          <p>Área construída: {{ imovel.areaConstruida }}m²</p>
+          <p>Andar do imóvel: {{ imovel.andarImovel }}</p>
+          <p>Quantidade de quartos: {{ imovel.qtdeQuarto }}</p>
+          <p>Quantidade de banheiros: {{ imovel.qtdeBanheiro }}</p>
+          <p>Quantidade de suítes: {{ imovel.qtdeSuites }}</p>
+          <p>Quantidade de vagas: {{ imovel.qtdeVagas }}</p>
+        </div>
+        <div class="bloco divisao">
+          <h3 class="tituloInfo">Endereço do Imóvel</h3>
+          <p>
+            Endereço: {{ imovel.logradouro }}, {{ imovel.numeroLogradouro }} - {{ imovel.complemento }}
+          </p>
+          <p>Bairro: {{ imovel.bairro }}</p>
+          <p>CEP: {{ imovel.cep }}</p>
+          <p>Cidade: {{ imovel.cidade }}</p>
+          <p>UF: {{ imovel.uf }}</p>
+        </div>
+        <div class="imagemPlanta bloco divisao" *ngIf="imovel.imgPlantaCondominio">
+          <h3 class="tituloInfo">Planta Condomínio</h3>
+          <img src="{{ imovel.imgPlantaCondominio }}" />
+          <p>{{ imovel.imgPlantaCondominio }}</p>
+        </div>
+        <div class="outrasInfo bloco">
+          <h3 class="tituloInfo">Outras informações do Imóvel</h3>
+          <div class="coluna">
+            <h4>Comodidades do imóvel:</h4>
+            <div *ngFor="let i of imovel.comodidadesImovel | slice: 0">{{ i }}</div>
+          </div>
+          <div class="coluna">
+            <h4>Comodidades do condomínio:</h4>
+            <div *ngFor="let i of imovel.comodidadesCondominio | slice: 0">
+              {{ i }}
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="tituloInfo">
-          <h2>Imagens Adicionais</h2>
+      <div class="direita">
+        <!--<div class="destaque">
+           <input id='statusPost-{{imovel.imovelId}}' type="checkbox" [checked]="imovel.status === 'publicado' ? true :  false" (change)="atualizaStatus(imovel._id, $event)" />
+          <label for='statusPost-{{imovel.imovelId}}'
+            [class]="imovel.status === 'publicado' ? 'publicar ativo' :  'publicar'">
+            <div class="chave"></div>
+          </label>
+          <p>{{ imovel.destaque }}</p> 
+        </div> -->
+        <div class="status">
+          <select name="statusLancamento" (change)="atualizaStatus(imovel._id, $event)"
+            [value]="imovel.statusLancamento"
+            [ngClass]="imovel.statusLancamento === 'aprovado' ? 'aprovado' : imovel.statusLancamento === 'reprovado' ? 'reprovado': 'pendente'">
+            <option value="pendente">Pendente</option>
+            <option value="reprovado">Reprovado</option>
+            <option value="aprovado">Aprovado</option>
+          </select>
         </div>
-        <div *ngFor="let galeria of imovel.galerias">
-          <ul>
-            <li *ngFor="let img of galeria.arquivos">
-              <img src="{{ img }}" alt="" srcset="{{img}}" width="200px" />
-            </li>
-          </ul>
+        <div class="proprierario" *ngIf="imovel.nomeProprietario">
+          <p>{{ imovel.nomeProprietario }}</p>
+          <p>{{ imovel.telefoneProprietario }}</p>
+        </div>
+        <div class="previsao" *ngIf="imovel.previsaoLancamento">
+          <p> Previsão para {{ imovel.previsaoLancamento | date: 'MM/yyyy' }}</p>
+        </div>
+        <div class="botoes">
+          <div class="editar">
+            <a [routerLink]="['/admin/editar-imovel', imovel._id]" routerLinkActive="router-link-active">editar</a>
+          </div>
+          <button class="excluir" (click)="remover(imovel._id)">
+            <a>excluir</a>
+          </button>
         </div>
       </div>
     </div>

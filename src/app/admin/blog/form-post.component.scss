@@ -1,0 +1,22 @@
+.titulo {
+    font-size: 2.5em;
+  }
+
+  .subtitulo {
+    font-weight: 200;
+    font-size: 1.75em;
+    line-height: 36px !important;
+  }
+
+  .categoria {
+    margin-top: 12px;
+  }
+
+  .categoria,
+  .tag {
+    margin-bottom: 48px;
+    textarea {
+      height: auto;
+      padding: 12px 0;
+    }
+  }

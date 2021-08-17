@@ -4,8 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
@@ -55,10 +53,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   messageGalerias = [{}];
   plusImgs: any = [];
 
-  faPlusSquare = faPlusSquare;
-  faHome = faHome;
-  faTrash = faTrash;
-
   imovelForm!: Imovel & FormGroup;
 
   imovelQuery!: QueryRef<any>;
@@ -74,6 +68,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   iconeImagem!: SafeHtml;
   iconeExcluir!: SafeHtml;
   iconeUpload!: SafeHtml;
+  iconeGalerias!: SafeHtml;
+  iconeTipologias!: SafeHtml;
+
+  public urlCaminho: any = "";
+  public idImovel: any = "";
 
   constructor(
     private apollo: Apollo,
@@ -90,7 +89,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.iconeImagem = this.sanitizer.bypassSecurityTrustHtml(icones.iconeImagem);
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
     this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
+    this.iconeGalerias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeGalerias);
+    this.iconeTipologias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeTipologias);
 
+    this.urlCaminho = this.route.snapshot.routeConfig?.path
+    
     this.imovelForm = this.formBuilder.group({
       nomeImovel: [''],
       imagemPrincipal: [''],
@@ -139,6 +142,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         _id: imovelId,
       },
     });
+
+    this.idImovel = imovelId;
 
     this.querySubs = this.imovelQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
@@ -280,6 +285,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.querySubs.unsubscribe();
   }
 
+  async textareaResized(event: any) {
+    event.target.style.height = '0px';
+    event.target.style.height = 1 + event.target.scrollHeight + 'px';
+  }
+
   patchDadosImovelForm() {
     /* Tratamento de dados das comodidades de imóvel e de condomínio */
     if (this.imovelForm.value.comodidadesImovel) {
@@ -350,7 +360,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
-    this.inputUpload = event;
+    this.inputUpload = event.target.value;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -388,7 +398,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
-            this.inputUpload.target.value = null
+            this.inputUpload = null
           }
         },
         (error: any) => {
@@ -490,10 +500,11 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   }
 
   /* Planta imagens */
-  selectFilesPlantaFiles(event: any): void {
+  selectFilesPlanta(event: any): void {
     this.messagePlantaFiles = [];
     this.progressInfosPlantaFiles = [];
     this.selectedPlantaFiles = event.target.files;
+    this.plantaInputUpload = event;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -509,7 +520,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     };
   }
 
-  uploadFilesPlantaFiles(): void {
+  uploadFilesPlanta(): void {
     this.message = [];
     if (this.selectedPlantaFiles) {
       for (let i = 0; i < this.selectedPlantaFiles.length; i++) {
@@ -532,6 +543,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.messagePlantaFiles.unshift(msg);
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
             this.plantaFiles = this.url + event.body[0];
+            this.plantaInputUpload = null
           }
         },
         (error: any) => {
@@ -558,22 +570,6 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
         array.splice(i, 1);
         i--;
       }
-    }
-  }
-
-  ativaModal(event: any) {
-    if (event.target.id === 'complemento') {
-      this.isActive ? (this.isActive = false) : (this.isActive = true);
-    }
-    if (event.target.id === 'complemento1') {
-      this.isActiveImgAdicionais
-        ? (this.isActiveImgAdicionais = false)
-        : (this.isActiveImgAdicionais = true);
-    }
-    if (event.target.id === 'complemento2') {
-      this.isActiveImgPlantas
-        ? (this.isActiveImgPlantas = false)
-        : (this.isActiveImgPlantas = true);
     }
   }
 }

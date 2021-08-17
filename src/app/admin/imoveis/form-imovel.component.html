@@ -2,7 +2,8 @@
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
       <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
-        <h2>Criar Imóvel</h2>
+        <h2 *ngIf="urlCaminho === 'criar-imovel'">Criar Imóvel</h2>
+        <h2 *ngIf="urlCaminho != 'criar-imovel'">Editar Imóvel</h2>
       </a>
       <div class="submenu">
         <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
@@ -13,101 +14,58 @@
   </div>
   <header class="topo">
     <div class="caminho">
-      <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/imoveis/']">imóveis</a> > <a
-          [routerLink]="['/admin/criar-imovel/']">criar imóvel</a></p>
+      <p>
+        <a [routerLink]="['/admin/']">início</a> <span>></span>
+        <a [routerLink]="['/admin/imoveis/']">imóveis</a> <span>></span>
+        <a [routerLink]="['/admin/imovel/60c/', idImovel]" *ngIf="urlCaminho !='criar-imovel'">{{idImovel}}</a> <span *ngIf="urlCaminho !='criar-imovel'">></span>
+        <a [routerLink]="['/admin/criar-imovel/']" *ngIf="urlCaminho === 'criar-imovel'">criar imóvel</a>
+        <a [routerLink]="['/admin/criar-imovel/']" *ngIf="urlCaminho !='criar-imovel'">editar imóvel</a>
+      </p>
     </div>
   </header>
   <div class="infoConteudoAdmin">
     <div class="formulario">
       <form [formGroup]="imovelForm" (ngSubmit)="onSubmit()">
-
-
-        <!-- <div class="plantaJardins modal" [class.active]="isActiveImgPlantas">
-          <div class="fechar" id="complemento2" (click)="ativaModal($event)">X</div>
-          <div class="informacoes">
-            <h2>Upload da planta Condomínio Jardins</h2>
-            <p>
-              Após selecionar a imagem aperte em carregar para adicionar a imagem no banco de dados
-            </p>
-          </div>
-          <div class="loadImagem">
-            <img [src]="imgPreviewPlantas" *ngIf="imgPreviewPlantas" />
-            <div class="svg">
-              <div class="icone" [innerHtml]="iconeUpload"></div>
-              <h4 class="p">fazer upload da Planta do condomínio Jardins</h4>
-              <h4 class="s">Clique na imagem para mudar</h4>
-            </div>
-            <input type="file" (change)="selectFilesPlantaFiles($event)" />
-
-            <div *ngFor="let progressInfo of progressInfosPlantaFiles">
-              <div class="progress">
-                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                  attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                  [ngStyle]="{ width: progressInfo.value + '%' }"></div>
-                <div class="info">
-                  <p>{{ progressInfo.fileName }}</p>
-                  <p>{{ progressInfo.value }}%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="informacoes">
-            <p>
-              depois que a imagem carregar 100%, aperte no botão de sair no canto superior direito
-            </p>
-          </div>
-          <div class="botoesModal">
-            <button class="deletar" type="button" (click)="deletaImagensPlantas(plantaFiles)">
-              <div class="icone" [innerHtml]="iconeExcluir"></div>
-            </button>
-            <button type="button" class="upload" [disabled]="!selectedPlantaFiles" (click)="uploadFilesPlantaFiles()">
-              <p>UPLOAD</p>
-            </button>
-          </div> 
-        </div>-->
-
         <div class="esquerda">
           <!-- Imagem de destaque --------------------------------->
-          <div class="form-campo divisao">
-            <div class="imgPrin">
-              <div class='formEsq'>
-                <h3>Imagem principal</h3>
-                <p class="info">Adione a imagem principal do imóvel, ela vai aparecer no card do feed de imóveis e no
-                  topo da página do imóvel</p>
-                <div class="botoes">
-                  <button class="excluir" (click)="deletaImgPrincipal(mainImg)" *ngIf="mainImg"
-                    [innerHtml]="iconeExcluir"></button>
-                  <button class="upload" type="button" [disabled]="!selectedFiles" (click)="uploadFiles()"
-                    *ngIf="imgPreview && !mainImg" [innerHtml]="iconeUpload"></button>
-                  <label for="upImgPrin" *ngIf="!imgPreview && !mainImg">
-                    Selecionar imagem
-                  </label>
-                </div>
+          <div class="form-campo divisao upImagem">
+            <div class='formEsq'>
+              <h3>Imagem principal</h3>
+              <p class="info">Adione a imagem principal do imóvel, ela vai aparecer no card do feed de imóveis e no
+                topo da página do imóvel</p>
+              <div class="botoes">
+                <button class="excluir" type="button" (click)="deletaImgPrincipal(mainImg)" *ngIf="mainImg"
+                  [innerHtml]="iconeExcluir"></button>
+                <button class="upload" type="button" [disabled]="!selectedFiles" (click)="uploadFiles()"
+                  *ngIf="imgPreview && !mainImg" [innerHtml]="iconeUpload"></button>
+                <label for="upImgPrin" *ngIf="!imgPreview && !mainImg">
+                  Selecionar imagem
+                </label>
               </div>
-              <div class='formDir'>
-                <div class="loadImagem">
-                  <label for="upImgPrin">
-                    <div class="imagem" *ngIf="mainImg">
-                      <img src="{{ mainImg }}" srcset="{{mainImg}}" />
-                    </div>
-                    <div class="imagem" *ngIf="imgPreview && !mainImg">
-                      <img [src]="imgPreview" />
-                    </div>
-                    <div class="icone" [innerHtml]="iconeImagem" *ngIf="!imgPreview && !mainImg"></div>
-                  </label>
-                  <input id="upImgPrin" type="file" (change)="selectFiles($event)" />
-                  <div class="progress" *ngFor="let progressInfo of progressInfos">
-                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                      attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
-                      [ngStyle]="{ width: progressInfo.value + '%' }"></div>
+            </div>
+            <div class='formDir'>
+              <div class="loadImagem">
+                <label for="upImgPrin">
+                  <div class="imagem" *ngIf="mainImg">
+                    <img src="{{ mainImg }}" srcset="{{mainImg}}" />
                   </div>
+                  <div class="imagem" *ngIf="imgPreview && !mainImg">
+                    <img [src]="imgPreview" />
+                  </div>
+                  <div class="icone" [innerHtml]="iconeImagem" *ngIf="!imgPreview && !mainImg"></div>
+                </label>
+                <input id="upImgPrin" type="file" (change)="selectFiles($event)" />
+                <div class="progress" *ngFor="let progressInfo of progressInfos">
+                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{ width: progressInfo.value + '%' }"></div>
                 </div>
               </div>
             </div>
           </div>
           <!-- Fim - Imagem de destaque ------------------------------>
           <!-- Descrição ------------------------------------------>
-          <div class="form-campo">
+          <div class="form-campo divisao">
             <div *ngIf="getControl.descricaoImovel.touched && getControl.descricaoImovel.invalid" class="text-danger">
             </div>
             <editor formControlName="descricaoImovel" name="descricaoImovel" [init]="{
@@ -126,350 +84,259 @@
           </div>
           <!-- Fim - Descrição ------------------------------------------>
           <!-- Galeria -------------------------------------------------->
-          <div class="galerias form-campo">
+          <div class="galerias form-campo divisao">
             <div class="galeria" formArrayName="galerias" *ngFor="let galeria of galerias.controls; index as idx">
-              <p class="nomeGaleria">Galeria {{ idx + 1 }}</p>
               <diV [formGroupName]="idx">
-                <div class="tipoGaleria">
-                  <select name="tipoGaleria" formControlName="tipoGaleria">
-                    <option value="">Selecione o tipo da galeria</option>
-                    <option value="Galeria Principal">Galeria Principal</option>
-                    <option value="Galeria Planta Imóvel">Galeria Planta Imóvel</option>
-                    <option value="Galeria Condomínio">Galeria Condomínio</option>
-                    <option value="Galeria Planta Condomínio">Galeria Planta Condomínio</option>
-                  </select>
-                  <label for="tipoGaleria">Tipo da Galeria: <b>*</b></label>
-                  <button class="excluirGaleria" type="button" (click)="removeGaleria(idx)">
-                    Excluir Galeria
-                  </button>
-                </div>
-                <div class="upImagensGaleria">
-                  <input type="file" #inputGaleria multiple (change)="selectFilesGalerias($event)" />
-                  <div [class.active]="isActiveImgAdicionais">
-                    <button type="button" [disabled]="!selectedFilesGalerias?.length"
-                      (click)="uploadFilesGalerias(idx)">
-                      Upload
-                    </button>
+                <div class="topoGaleria">
+                  <div class="tipoGaleria">
+                    <select name="tipoGaleria" formControlName="tipoGaleria">
+                      <option value="">Selecione o tipo da galeria</option>
+                      <option value="Galeria Principal">Galeria Principal</option>
+                      <option value="Galeria Planta Imóvel">Galeria Planta Imóvel</option>
+                      <option value="Galeria Condomínio">Galeria Condomínio</option>
+                      <option value="Galeria Planta Condomínio">Galeria Planta Condomínio</option>
+                    </select>
+                    <label class="inputNome" for="tipoGaleria">Tipo da Galeria: <b>*</b></label>
+                    <div class="acoes">
+                      <button type="button" class="excluir" (click)="removeGaleria(idx)">
+                        <div class="icone" [innerHtml]="iconeExcluir"></div>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="upImagensGaleria">
+                    <input type="file" #inputGaleria multiple (change)="selectFilesGalerias($event)"
+                      id="galeria-{{idx}}" />
+                    <label class="upload" for="galeria-{{idx}}">
+                      Escolher imagens
+                    </label>
+                    <div class="acoes">
+                      <button type="button" [disabled]="!selectedFilesGalerias?.length"
+                        (click)="uploadFilesGalerias(idx)">
+                        <div class="icone" [innerHtml]="iconeUpload"></div>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div class="imagensGaleria" *ngIf="plusImgs[idx]?.arquivos != undefined">
                   <div class="imagemGaleria" *ngFor="let item of plusImgs[idx]?.arquivos; index as i">
                     <img src="{{ item }}" />
-                    <button type="button" (click)="deletaImagemGaleria(item, idx)">X</button>
+                    <button type="button" (click)="deletaImagemGaleria(item, idx)" [innerHtml]="iconeExcluir"></button>
                   </div>
                 </div>
               </diV>
             </div>
             <button class="botaoGalerias" type="button" (click)="addGaleria()">
-              Adicionar Galerias
+              <p>Adicionar Galeria</p>
+              <div class="icone" [innerHtml]="iconeGalerias"></div>
             </button>
           </div>
-
-          <!-- <div class="form-campo">
-            <button
-              type="button"
-              name="complemento1"
-              class=""
-              (click)="ativaModal($event)"
-            ></button>
-
-            <label for="inagensAdicionais">Adicionar mais Fotos: <b>*</b></label>
-            <div>
-              <input type="file" multiple (change)="selectFilesImagensAdicionais($event)" />
-            </div>
-            <div [class.active]="isActiveImgAdicionais">
-              <button
-                type="button"
-                [disabled]="!selectedFilesImgsAdicionais"
-                (click)="uploadFilesImagensAdicionais()"
-              >
-                Upload
-              </button>
-            </div>
-            <div *ngFor="let progressInfo of progressInfosImgsAdicionais">
-              <span>{{ progressInfo.fileName }}</span>
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-info progress-bar-striped"
-                  role="progressbar"
-                  attr.aria-valuenow="{{ progressInfo.value }}"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  [ngStyle]="{ width: progressInfo.value + '%' }"
-                >
-                  {{ progressInfo.value }}%
-                  <img src="{{ progressInfo.url }}" width="300px" srcset="{{progressInfo.url}}" />
-                  <button type="button" (click)="deletaImagensAdicionais(progressInfo.url)">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div> -->
           <!-- Fim - Galeria ------------------------------------------->
-          <!-- Tipologias ----------------------------------------->
-          <div class="form-campo tipologias" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
-            <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger"></div>
-            <div class="tipologia" formArrayName="tipologias"
-              *ngFor="let tipologia of tipologias.controls; index as idx">
-              <h4>Tipologia {{ idx + 1 }}</h4>
-              <div class="infoTipologia" type="text" [formGroupName]="idx">
-                <div>
-                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
-                  </div>
-
-                  <input type="number" onmousewheel="return false;" name="quartos" formControlName="quartos"
-                    placeholder="Quartos" />
-                  <label for="quartos">Quartos - ex: 3<b>*</b></label>
-                </div>
-                <div>
-                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
-                  </div>
-                  <input type="number" onmousewheel="return false;" name="suites" formControlName="suites"
-                    placeholder="Suítes" />
-                  <label for="suites">Suítes - ex: 3 <b>*</b></label>
-                </div>
-                <div>
-                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
-                  </div>
-                  <input currencyMask [options]="{
-                      prefix: '',
-                      suffix: ' m² ',
-                      thousands: '.',
-                      decimal: ',',
-                      align: 'left'
-                    }" onmousewheel="return false;" name="tamanho" placeholder="Tamanho" formControlName="tamanho" />
-                  <label for="tamanho">Tamanho - ex: 332,56 <b>*</b></label>
-                </div>
-                <div>
-                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
-                  </div>
-                  <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-                    onmousewheel="return false;" name="valorEntrada" formControlName="valorEntrada"
-                    placeholder="Entrada" />
-                  <label for="valorEntrada">Entrada - ex: 15.000,00 <b>*</b></label>
-                </div>
-                <div>
-                  <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-                    onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
-                    placeholder="Parcelas" />
-                  <label for="valorParcela">Parcelas - ex: 15.000,00 <b>*</b></label>
-                </div>
-                <div>
-                  <button type="button" (click)="removeTipologia(idx)">
-                    <p>Excluir tipologia</p>
-                  </button>
-                </div>
-              </div>
+          <div class="infoBasicas bloco divisao">
+            <!-- Status Imóvel --------------------------------------->
+            <div class="form-campo">
+              <div *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid" class="text-danger"></div>
+              <select name="statusImovel" formControlName="statusImovel">
+                <option value="">Selecione o status do imóvel</option>
+                <option value="Pronto para Morar">Pronto para Morar</option>
+                <option value="Entrega em Breve">Entrega em Breve</option>
+                <option value="Pronto para Construir">Pronto para Construir</option>
+                <option value="Lançamento">Lançamento</option>
+                <option value="Entregue">Entregue</option>
+              </select>
+              <label class="inputNome" for="statusImovel">Status do imóvel <b>*</b></label>
             </div>
-            <button class="botaoTipologia" type="button" (click)="addTipologia()">
-              <p>Adicionar Tipologia</p>
-            </button>
-          </div>
-          <!-- Fim - Tipologias ------------------------------------------>
-          <!-- Plantas ------------------------------------------>
-          <div class="plantaJardins form-campo" *ngIf="
-              (getControl.categoriaImovel.value === 'Casa em Condomínio' &&
-                getControl.jardins.value) ||
-              (getControl.categoriaImovel.value === 'Lote em Condomínio' &&
-                getControl.jardins.value)
+            <!-- Fim - Status Imóvel ----------------------------------->
+            <!-- Valor Imóvel --------------------------------------->
+            <div class="form-campo">
+              <div *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid" class="text-danger"></div>
+              <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                onmousewheel="return false;" name="valorImovel" formControlName="valorImovel"
+                placeholder="Valor Imóvel" />
+              <label class="inputNome" for="valorImovel">Valor do imóvel - ex: 1.000.000,00 <b>*</b></label>
+            </div>
+            <!-- Fim - Valor Imóvel ----------------------------------->
+            <!-- Valor IPTU ------------------------------------------>
+            <div class="form-campo" *ngIf=" getControl.tipoNegociacao.value != 'Lançamento'">
+              <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                onmousewheel="return false;" name="valorIPTU" formControlName="valorIPTU" placeholder="Valor do IPTU" />
+              <label class="inputNome" for="valorIPTU">Valor do IPTU - ex: 400,45</label>
+            </div>
+            <!-- Fim - IPTU ----------------------------------->
+            <!-- Valor do condomínio ----------------------------->
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+              getControl.categoriaImovel.value === 'Lote em Condomínio'
             ">
-            <div class="caixaImagem">
-              <div id="complemento2" (click)="ativaModal($event)"></div>
-              <div class="icone" [innerHtml]="iconeImagem"></div>
-              <img src="{{ plantaFiles }}" srcset="{{ plantaFiles }}" />
+              <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                onmousewheel="return false;" name="valorCondominio" formControlName="valorCondominio"
+                placeholder="Valor condomínio" />
+              <label class="inputNome" for="valorCondominio">Valor cond. - ex: 1.500,13 </label>
             </div>
-            <div class="acoes">
-              <div *ngFor="let progressInfo of progressInfosPlantaFiles">
-                <div class="progress">
-                  <p>{{ progressInfo.fileName }}</p>
-                  <div class="deletar" (click)="deletaImgPrincipal(mainImg)">
-                    <div class="icone" [innerHtml]="iconeExcluir"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Fim - Plantas ------------------------------------------>
-          <!-- Tipo de negociação -------------------------------->
-          <div class="form-campo">
-            <div *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid" class="text-danger">
-            </div>
-            <select name="tipoNegociacao" formControlName="tipoNegociacao">
-              <option value="">Selecione o tipo de negociação</option>
-              <option value="Alugar">Para Alugar</option>
-              <option value="Revenda">Para Vender</option>
-              <option value="Lançamento">Lançamento Imobiliário</option>
-            </select>
-            <label for="tipoNegociacao">Tipo de Negociação: <b>*</b></label>
-          </div>
-          <!-- Fim - Tipo de negociação ----------------------------------->
-          <!-- Status Imóvel --------------------------------------->
-
-          <div class="form-campo">
-            <div *ngIf="getControl.statusImovel.touched && getControl.statusImovel.invalid" class="text-danger"></div>
-
-            <select name="statusImovel" formControlName="statusImovel">
-              <option value="">Selecione o status do imóvel</option>
-              <option value="Pronto para Morar">Pronto para Morar</option>
-              <option value="Entrega em Breve">Entrega em Breve</option>
-              <option value="Pronto para Construir">Pronto para Construir</option>
-              <option value="Lançamento">Lançamento</option>
-              <option value="Entregue">Entregue</option>
-            </select>
-            <label for="statusImovel">Status do imóvel <b>*</b></label>
-          </div>
-          <!-- Fim - Status Imóvel ----------------------------------->
-          <!-- Valor Imóvel --------------------------------------->
-
-          <div class="form-campo">
-            <div *ngIf="getControl.valorImovel.touched && getControl.valorImovel.invalid" class="text-danger"></div>
-            <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-              onmousewheel="return false;" name="valorImovel" formControlName="valorImovel"
-              placeholder="Valor Imóvel" />
-            <label for="valorImovel">Valor do imóvel - ex: 1.000.000,00 <b>*</b></label>
-          </div>
-          <!-- Fim - Valor Imóvel ----------------------------------->
-          <!-- Valor IPTU ------------------------------------------>
-
-          <div class="form-campo">
-            <div *ngIf="getControl.valorIPTU.touched && getControl.valorIPTU.invalid" class="text-danger"></div>
-            <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-              onmousewheel="return false;" name="valorIPTU" formControlName="valorIPTU" placeholder="Valor do IPTU" />
-            <label for="valorIPTU">Valor do IPTU - ex: 400,45 <b>*</b></label>
-          </div>
-          <!-- Fim - IPTU ----------------------------------->
-          <!-- Área Total ------------------------------------------>
-          <div class="form-campo">
-            <div *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid" class="text-danger"></div>
-            <input currencyMask [options]="{
+            <!-- Fim - Valor do condomínio ------------------------------------------>
+            <!-- Área Total ------------------------------------------>
+            <div class="form-campo" *ngIf=" getControl.tipoNegociacao.value != 'Lançamento'">
+              <div *ngIf="getControl.areaTotal.touched && getControl.areaTotal.invalid" class="text-danger"></div>
+              <input currencyMask [options]="{
                 prefix: '',
                 suffix: ' m² ',
                 thousands: '.',
                 decimal: ',',
                 align: 'left'
               }" name="areaTotal" formControlName="areaTotal" placeholder="Área total" />
-            <label for="areaTotal">Área total - ex: 332,56 <b>*</b></label>
+              <label class="inputNome" for="areaTotal">Área total - ex: 332,56 <b>*</b></label>
+            </div>
+            <!-- Fim - Área Total ----------------------------------->
+            <!-- Área Construída ---------------------------------->
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
+              <input currencyMask [options]="{
+                prefix: '',
+                suffix: ' m² ',
+                thousands: '.',
+                decimal: ',',
+                align: 'left'
+              }" onmousewheel="return false;" name="areaConstruida" formControlName="areaConstruida"
+                placeholder="Área construída" />
+              <label class="inputNome" for="areaConstruida">Área cons. - ex: 230,56 <b>*</b></label>
+            </div>
+            <!-- Fim - Área Construída ------------------------------------------>
+            <!-- Andar do imóvel ---------------------------------->
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <div *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid" class="text-danger"></div>
+              <input type="number" onmousewheel="return false;" name="andarImovel" formControlName="andarImovel"
+                placeholder="Andar" />
+              <label class="inputNome" for="andarImovel">Andar - ex: 2 </label>
+            </div>
+            <!-- Fim - Andar do imóvel ------------------------------------------>
+            <!-- Quartos ------------------------------------------>
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
+              <input type="number" onmousewheel="return false;" name="qtdeQuarto" formControlName="qtdeQuarto"
+                placeholder="Quartos" />
+              <label class="inputNome" for="qtdeQuarto">Quartos - ex: 2 <b>*</b></label>
+            </div>
+            <!-- Fim - Quartos ------------------------------------------>
+            <!-- Banheiros ----------------------------------------->
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
+              <input type="number" onmousewheel="return false;" name="qtdeBanheiro" formControlName="qtdeBanheiro"
+                placeholder="Banheiros" />
+              <label class="inputNome" for="qtdeBanheiro">Banheiros - ex: 2 <b>*</b></label>
+            </div>
+            <!-- Fim - Banheiros ------------------------------------------>
+            <!-- Suítes ------------------------------------------>
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
+              <input type="number" onmousewheel="return false;" name="qtdeSuites" formControlName="qtdeSuites"
+                placeholder="Suítes" />
+              <label class="inputNome" for="qtdeSuites">Suítes - ex: 1 </label>
+            </div>
+            <!-- Fim - Suítes ------------------------------------------>
+            <!-- Quantidade de vagas ------------------------------>
+            <div class="form-campo" *ngIf="
+              getControl.categoriaImovel.value === 'Sala Comercial' ||
+              getControl.categoriaImovel.value === 'Cobertura' ||
+              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
+              getControl.categoriaImovel.value === 'Chácaras' ||
+              getControl.categoriaImovel.value === 'Casa Residencial' ||
+              getControl.categoriaImovel.value === 'Casa em Condomínio' &&
+              getControl.tipoNegociacao.value != 'Lançamento'
+            ">
+              <input type="number" onmousewheel="return false;" name="qtdeVagas" formControlName="qtdeVagas"
+                placeholder="Vagas garagem" />
+              <label class="inputNome" for="qtdeVagas">Vagas garagem - ex: 5 </label>
+            </div>
           </div>
-
-          <!-- Fim - Área Total ----------------------------------->
-          <div class="endereco">
+          <div class="endereco bloco divisao">
             <!-- CEP ---------------------------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="text" onmousewheel="return false;" name="cep" formControlName="cep" [mask]="this.maskCep"
                 (blur)="buscaCEP()" placeholder="CEP" />
-              <label for="cep">CEP - ex: 74.000.000 <b>*</b></label>
+              <label class="inputNome" for="cep">CEP - ex: 74.000.000 <b>*</b></label>
             </div>
             <!-- Fim - CEP ----------------------------------->
             <!-- Logradouro --------------------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="text" name="logradouro" formControlName="logradouro" placeholder="Logradouro" />
-              <label for="logradouro">Logradouro - ex:Av. Anhanguera, Rua 12 ...<b>*</b></label>
+              <label class="inputNome" for="logradouro">Logradouro - ex:Av. Anhanguera, Rua 12 ...<b>*</b></label>
             </div>
             <!-- Fim - Logradouro ----------------------------------->
             <!--- Número do logradouro ---------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
               <input type="text" name="numeroLogradouro" formControlName="numeroLogradouro" placeholder="número" />
-              <label for="numeroLogradouro">Número - ex: 215 </label>
+              <label class="inputNome" for="numeroLogradouro">Número - ex: 215 </label>
             </div>
             <!-- Fim - Número do logradouro ----------------------------------->
             <!--- Complemento ---------------------------------------->
             <div class="form-campo">
               <input type="text" name="complemento" formControlName="complemento" placeholder="Complemento" />
-              <label for="complemento">Complemento - ex: Quadra 17, Lote 13 </label>
+              <label class="inputNome" for="complemento">Complemento - ex: Quadra 17, Lote 13 </label>
             </div>
             <!-- Fim - Complemento ----------------------------------->
             <!---- Bairro/Setor --------------------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.bairro.touched && getControl.bairro.invalid" class="text-danger"></div>
               <input type="text" name="bairro" formControlName="bairro" placeholder="Bairro / Setor" />
-              <label for="bairro">Bairro/Setor - ex: Setor Bueno <b>*</b></label>
+              <label class="inputNome" for="bairro">Bairro/Setor - ex: Setor Bueno <b>*</b></label>
             </div>
             <!-- Fim - Bairro/Setor ----------------------------------->
             <!-- Cidade --------------------------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.cidade.touched && getControl.cidade.invalid" class="text-danger"></div>
               <input type="text" name="cidade" formControlName="cidade" placeholder="Cidade" />
-              <label for="cidade">Cidade - ex: Goiânia <b>*</b></label>
+              <label class="inputNome" for="cidade">Cidade - ex: Goiânia <b>*</b></label>
             </div>
             <!-- Fim - Cidade ----------------------------------->
             <!-- Estado ----------------------------------------------->
             <div class="form-campo">
               <div *ngIf="getControl.uf.touched && getControl.uf.invalid" class="text-danger"></div>
               <input type="text" name="uf" formControlName="uf" maxlength="2" placeholder="UF" />
-              <label for="uf">UF - ex: GO <b>*</b></label>
+              <label class="inputNome" for="uf">UF - ex: GO <b>*</b></label>
             </div>
             <!-- Fim - Estado ----------------------------------->
           </div>
-        </div>
-        <div class="direita">
-          <div class="definicaoImovel">
-            <!-- Categoria Imóveis ----------------------------------->
-            <div class="form-campo categoriaImovel">
-              <div *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid" class="text-danger">
-              </div>
-              <select name="categoriaImovel" formControlName="categoriaImovel">
-                <option value="">Selecione a categoria do imóvel</option>
-                <option value="Sala Comercial">Sala Comercial</option>
-                <option value="Área Comercial">Área Comercial</option>
-                <option value="Cobertura">Cobertura</option>
-                <option value="Apartamento Padrão">Apartamento Padrão</option>
-                <option value="Chácaras">Chácaras</option>
-                <option value="Casa Residencial">Casa Residencial</option>
-                <option value="Lote urbano">Lote urbano</option>
-                <option value="Casa em Condomínio">Casa em Condomínio</option>
-                <option value="Lote em Condomínio">Lote em Condomínio</option>
-              </select>
-              <label for="categoriaImovel"> Categoria do Imóvel: <b>*</b> </label>
-            </div>
-            <!-- Fim - Categoria Imóveis ------------------------->
-            <!-- Botão Jardins ---------------------------------->
-
-            <div class="form-campo checkbox Jardins" *ngIf="
-                getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-                getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
-              <input type="checkbox" name="jardins" formControlName="jardins" />
-              <label for="jardins">Jardins </label>
-            </div>
-            <!-- Fim - Botão Jardins ------------------------->
-          </div>
-          <!--- Nome do Proprietário---------------------------------->
-          <div class="form-campo nomeProprietario">
-            <div *ngIf="getControl.nomeProprietario.touched && getControl.nomeProprietario.invalid" class="text-danger">
-            </div>
-            <input type="text" name="nomeProprietario" formControlName="nomeProprietario" placeholder="Fulano de tal" />
-            <label for="nomeProprietario">Nome do Proprietário(a) <b>*</b></label>
-          </div>
-          <!-- Fim - Properitário ------------------------------------>
-          <!-- Telefone do Properitário ----------------------------->
-          <div class="form-campo telefoneProprietario">
-            <div *ngIf="
-                  getControl.telefoneProprietario.touched && getControl.telefoneProprietario.invalid
-                " class="text-danger"></div>
-            <input type="text" name="telefone" formControlName="telefoneProprietario" placeholder="(62) 9 8789-9890"
-              [mask]="this.maskPhone" [showMaskTyped]="true" />
-            <label for="telefoneProprietario">Telefone do(a) proprietário(a) <b>*</b></label>
-          </div>
-          <div class="permutaEmobiliado">
-            <!-- Fim - Telefone do Properitário ------------------------>
-            <!-- Permuta -------------------------------------------->
-            <div class="form-campo checkbox">
-              <input type="checkbox" name="aceitaPermuta" formControlName="aceitaPermuta" value="false" />
-              <label for="aceitaPermuta">Aceita permuta? </label>
-            </div>
-            <!-- Fim - Permuta ------------------------------------------>
-            <!-- Mobiliado ------------------------------------------>
-            <div class="form-campo checkbox">
-              <input type="checkbox" name="mobiliado" formControlName="mobiliado" value="false" />
-              <label for="mobiliado">Mobiliado? </label>
-            </div>
-            <!-- Fim - Mobiliado ------------------------------------------>
-          </div>
-          <div class="infoCondominio" *ngIf="
+          <div class="infoCondominio bloco divisao" *ngIf="
               getControl.categoriaImovel.value === 'Sala Comercial' ||
               getControl.categoriaImovel.value === 'Cobertura' ||
               getControl.categoriaImovel.value === 'Apartamento Padrão' ||
@@ -486,7 +353,7 @@
               ">
               <div *ngIf="getControl.nomeImovel.touched && getControl.nomeImovel.invalid" class="text-danger"></div>
               <input type="text" name="nomeImovel" formControlName="nomeImovel" placeholder="Nome do Condomínio" />
-              <label for="nomeImovel">Nome do Condomínio <b>*</b></label>
+              <label class="inputNome" for="nomeImovel">Nome do Condomínio <b>*</b></label>
             </div>
             <!-- Fim - Nome Imóvel ------------------------------------------>
             <!-- Construtora ------------------------------------->
@@ -500,7 +367,7 @@
               <div *ngIf="getControl.nomeConstrutora.touched && getControl.nomeConstrutora.invalid" class="text-danger">
               </div>
               <input type="text" name="nomeConstrutora" formControlName="nomeConstrutora" placeholder="Construtora" />
-              <label for="nomeConstrutora">Construtora do imóvel - FGR Construtora <b>*</b></label>
+              <label class="inputNome" for="nomeConstrutora">Construtora do imóvel - FGR Construtora <b>*</b></label>
             </div>
             <!-- Fim - Construtora ------------------------------------------>
             <!-- Previsão do lançamento -------------------------->
@@ -511,132 +378,117 @@
                   getControl.jardins.value)
               ">
               <input type="date" name="previsaoLancamento" formControlName="previsaoLancamento" />
-              <label for="previsaoLancamento">Previsão do lançamento</label>
+              <label class="inputNome" for="previsaoLancamento">Previsão do lançamento</label>
             </div>
+            <!-- Fim- Previsão do lançamento -------------------------->
           </div>
+          <!-- Tipologias ----------------------------------------->
+          <div class="form-campo tipologias divisao" *ngIf="getControl.tipoNegociacao.value === 'Lançamento'">
+            <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger"></div>
+            <div class="tipologia" formArrayName="tipologias"
+              *ngFor="let tipologia of tipologias.controls; index as idx">
+              <h4>Tipologia {{ idx + 1 }}</h4>
+              <div class="infoTipologia" type="text" [formGroupName]="idx">
+                <div>
+                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
+                  </div>
 
-          <div class="numeros" *ngIf="
-              getControl.categoriaImovel.value === 'Sala Comercial' ||
-              getControl.categoriaImovel.value === 'Cobertura' ||
-              getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-              getControl.categoriaImovel.value === 'Chácaras' ||
-              getControl.categoriaImovel.value === 'Casa Residencial' ||
-              getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-              getControl.categoriaImovel.value === 'Lote em Condomínio'
-            ">
-            <!-- Fim - Previsão do lançamento ------------------------------------------>
-            <!-- Valor do condomínio ----------------------------->
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Sala Comercial' ||
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio' ||
-                getControl.categoriaImovel.value === 'Lote em Condomínio'
-              ">
-              <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
-                onmousewheel="return false;" name="valorCondominio" formControlName="valorCondominio"
-                placeholder="Valor condomínio" />
-              <label for="valorCondominio">Valor cond. - ex: 1.500,13 <b>*</b></label>
+                  <input type="number" onmousewheel="return false;" name="quartos" formControlName="quartos"
+                    placeholder="Quartos" />
+                  <label class="inputNome" for="quartos">Quartos - ex: 3<b>*</b></label>
+                </div>
+                <div>
+                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
+                  </div>
+                  <input type="number" onmousewheel="return false;" name="suites" formControlName="suites"
+                    placeholder="Suítes" />
+                  <label class="inputNome" for="suites">Suítes - ex: 3 <b>*</b></label>
+                </div>
+                <div>
+                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
+                  </div>
+                  <input currencyMask [options]="{
+                      prefix: '',
+                      suffix: ' m² ',
+                      thousands: '.',
+                      decimal: ',',
+                      align: 'left'
+                    }" onmousewheel="return false;" name="tamanho" placeholder="Tamanho" formControlName="tamanho" />
+                  <label class="inputNome" for="tamanho">Tamanho - ex: 332,56 <b>*</b></label>
+                </div>
+                <div>
+                  <div *ngIf="getControl.tipologias.touched && getControl.tipologias.invalid" class="text-danger">
+                  </div>
+                  <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                    onmousewheel="return false;" name="valorEntrada" formControlName="valorEntrada"
+                    placeholder="Entrada" />
+                  <label class="inputNome" for="valorEntrada">Entrada - ex: 15.000,00 <b>*</b></label>
+                </div>
+                <div>
+                  <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                    onmousewheel="return false;" name="valorParcela" formControlName="valorParcela"
+                    placeholder="Parcelas" />
+                  <label class="inputNome" for="valorParcela">Parcelas - ex: 15.000,00 <b>*</b></label>
+                </div>
+                <div>
+                  <button type="button" (click)="removeTipologia(idx)">
+                    <div class="icone" [innerHtml]="iconeExcluir"></div>
+                  </button>
+                </div>
+              </div>
             </div>
-            <!-- Fim - Valor do condomínio ------------------------------------------>
-            <!-- Área Construída ---------------------------------->
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Sala Comercial' ||
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Chácaras' ||
-                getControl.categoriaImovel.value === 'Casa Residencial' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
-              <input currencyMask [options]="{
-                  prefix: '',
-                  suffix: ' m² ',
-                  thousands: '.',
-                  decimal: ',',
-                  align: 'left'
-                }" onmousewheel="return false;" name="areaConstruida" formControlName="areaConstruida"
-                placeholder="Área construída" />
-              <label for="areaConstruida">Área cons. - ex: 230,56 <b>*</b></label>
+            <button class="botaoTipologias" type="button" (click)="addTipologia()">
+              <p>Adicionar Tipologia</p>
+              <div class="icone" [innerHtml]="iconeTipologias"></div>
+            </button>
+          </div>
+          <!-- Fim - Tipologias ------------------------------------------>
+          <!-- Plantas ------------------------------------------>
+          <div class="plantaJardins form-campo divisao upImagem" *ngIf="
+            (getControl.categoriaImovel.value === 'Casa em Condomínio' && getControl.jardins.value) ||
+            (getControl.categoriaImovel.value === 'Lote em Condomínio' && getControl.jardins.value)
+          ">
+            <div class='formEsq'>
+              <h3>Planta Jardins</h3>
+              <p class="info">Adione a planta do condomínio Jardins a ser vizualizada na página</p>
+              <div class="botoes">
+                <button class="excluir" type="button" (click)="deletaImagensPlantas(plantaFiles)" *ngIf="plantaFiles"
+                  [innerHtml]="iconeExcluir"></button>
+                <button class="upload" type="button" [disabled]="!selectedFiles" (click)="uploadFilesPlanta()"
+                  *ngIf="imgPreviewPlantas && !plantaFiles" [innerHtml]="iconeUpload"></button>
+                <label for="upImgPlantas" *ngIf="!imgPreviewPlantas && !plantaFiles">
+                  Selecionar imagem
+                </label>
+              </div>
             </div>
-            <!-- Fim - Área Construída ------------------------------------------>
-            <!-- Andar do imóvel ---------------------------------->
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Sala Comercial' ||
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão'
-              ">
-              <div *ngIf="getControl.andarImovel.touched && getControl.andarImovel.invalid" class="text-danger"></div>
-              <input type="number" onmousewheel="return false;" name="andarImovel" formControlName="andarImovel"
-                placeholder="Andar" />
-              <label for="andarImovel">Andar - ex: 2 </label>
-            </div>
-            <!-- Fim - Andar do imóvel ------------------------------------------>
-            <!-- Quartos ------------------------------------------>
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Chácaras' ||
-                getControl.categoriaImovel.value === 'Casa Residencial' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
-              <input type="number" onmousewheel="return false;" name="qtdeQuarto" formControlName="qtdeQuarto"
-                placeholder="Quartos" />
-              <label for="qtdeQuarto">Quartos - ex: 2 <b>*</b></label>
-            </div>
-            <!-- Fim - Quartos ------------------------------------------>
-            <!-- Banheiros ----------------------------------------->
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Sala Comercial' ||
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Chácaras' ||
-                getControl.categoriaImovel.value === 'Casa Residencial' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
-              <input type="number" onmousewheel="return false;" name="qtdeBanheiro" formControlName="qtdeBanheiro"
-                placeholder="Banheiros" />
-              <label for="qtdeBanheiro">Banheiros - ex: 2 <b>*</b></label>
-            </div>
-            <!-- Fim - Banheiros ------------------------------------------>
-            <!-- Suítes ------------------------------------------>
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Chácaras' ||
-                getControl.categoriaImovel.value === 'Casa Residencial' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <div *ngIf="getControl.logradouro.touched && getControl.logradouro.invalid" class="text-danger"></div>
-              <input type="number" onmousewheel="return false;" name="qtdeSuites" formControlName="qtdeSuites"
-                placeholder="Suítes" />
-              <label for="qtdeSuites">Suítes - ex: 1 </label>
-            </div>
-            <!-- Fim - Suítes ------------------------------------------>
-            <!-- Quantidade de vagas ------------------------------>
-            <div class="form-campo" *ngIf="
-                getControl.categoriaImovel.value === 'Sala Comercial' ||
-                getControl.categoriaImovel.value === 'Cobertura' ||
-                getControl.categoriaImovel.value === 'Apartamento Padrão' ||
-                getControl.categoriaImovel.value === 'Chácaras' ||
-                getControl.categoriaImovel.value === 'Casa Residencial' ||
-                getControl.categoriaImovel.value === 'Casa em Condomínio'
-              ">
-              <input type="number" onmousewheel="return false;" name="qtdeVagas" formControlName="qtdeVagas"
-                placeholder="Vagas garagem" />
-              <label for="qtdeVagas">Vagas garagem - ex: 5 </label>
+            <div class='formDir'>
+              <div class="loadImagem">
+                <label for="upImgPlantas">
+                  <div class="imagem" *ngIf="plantaFiles">
+                    <img src="{{ plantaFiles }}" srcset="{{plantaFiles}}" />
+                  </div>
+                  <div class="imagem" *ngIf="imgPreviewPlantas && !plantaFiles">
+                    <img [src]="imgPreviewPlantas" />
+                  </div>
+                  <div class="icone" [innerHtml]="iconeImagem" *ngIf="!imgPreviewPlantas && !plantaFiles"></div>
+                </label>
+                <input id="upImgPlantas" type="file" (change)="selectFilesPlanta($event)" />
+                <div class="progress" *ngFor="let progressInfo of progressInfosPlantaFiles">
+                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                    attr.aria-valuenow="{{ progressInfo.value }}" aria-valuemin="0" aria-valuemax="100"
+                    [ngStyle]="{ width: progressInfo.value + '%' }"></div>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- Fim - Plantas ------------------------------------------>
           <div class="comodidades">
             <!-- Fim - Quantidade de vagas ------------------------------------------>
             <!-- Comodidades Imóvel ------------------------------->
             <div class="form-campo comodidadesImovel">
-              <textarea cols="20" rows="10" type="text" name="comodidadesImovel" formControlName="comodidadesImovel"
-                placeholder="Comodidades
-                do Imóvel"></textarea>
-              <label
+              <textarea type="text" name="comodidadesImovel" formControlName="comodidadesImovel" placeholder="Comodidades
+                do Imóvel" (keyup)="textareaResized($event)"></textarea>
+              <label class="inputNome"
                 for="Comodidades do imóvel - ex: Churrasqueira, Psincina, Quintal Amplo, Casinha pro cachorro">Comodidades
                 do Imóvel - ex: Piscina, Churrasqueira ...
               </label>
@@ -650,21 +502,99 @@
                 getControl.categoriaImovel.value === 'Casa em Condomínio' ||
                 getControl.categoriaImovel.value === 'Lote em Condomínio'
               ">
-              <textarea cols="20" rows="10" type="text" name="comodidadesCondominio"
-                formControlName="comodidadesCondominio" placeholder="Comodidades do condomínio"></textarea>
-              <label for="comodidadesCondominio">Comodidades do condomínio - ex:Segurança 24 horas, Posto de emergência
+              <textarea type="text" name="comodidadesCondominio" formControlName="comodidadesCondominio"
+                placeholder="Comodidades do condomínio" (keyup)="textareaResized($event)"></textarea>
+              <label class="inputNome" for="comodidadesCondominio">Comodidades do condomínio - ex:Segurança 24 horas,
+                Posto de emergência
                 privado
               </label>
             </div>
+            <!-- Fim - Comodidades do condomínio ------------------------------------------>
           </div>
-          <!-- Fim - Comodidades do condomínio ------------------------------------------>
+        </div>
+        <div class="direita">
+          <div class="definicaoImovel">
+            <!-- Tipo de negociação -------------------------------->
+            <div class="form-campo">
+              <div *ngIf="getControl.tipoNegociacao.touched && getControl.tipoNegociacao.invalid" class="text-danger">
+              </div>
+              <select name="tipoNegociacao" formControlName="tipoNegociacao">
+                <option value="">Selecione o tipo de negociação</option>
+                <option value="Alugar">Para Alugar</option>
+                <option value="Revenda">Para Vender</option>
+                <option value="Lançamento">Lançamento Imobiliário</option>
+              </select>
+              <label class="inputNome" for="tipoNegociacao">Tipo de Negociação: <b>*</b></label>
+            </div>
+            <!-- Fim - Tipo de negociação ----------------------------------->
+            <!-- Categoria Imóveis ----------------------------------->
+            <div class="form-campo categoriaImovel">
+              <div *ngIf="getControl.categoriaImovel.touched && getControl.categoriaImovel.invalid" class="text-danger">
+              </div>
+              <select name="categoriaImovel" formControlName="categoriaImovel">
+                <option value="">Selecione a categoria do imóvel</option>
+                <option value="Sala Comercial">Sala Comercial</option>
+                <option value="Área Comercial">Área Comercial</option>
+                <option value="Cobertura">Cobertura</option>
+                <option value="Apartamento Padrão">Apartamento Padrão</option>
+                <option value="Chácaras">Chácaras</option>
+                <option value="Casa Residencial">Casa Residencial</option>
+                <option value="Lote urbano">Lote urbano</option>
+                <option value="Casa em Condomínio">Casa em Condomínio</option>
+                <option value="Lote em Condomínio">Lote em Condomínio</option>
+              </select>
+              <label class="inputNome" for="categoriaImovel"> Categoria do Imóvel: <b>*</b> </label>
+            </div>
+            <!-- Fim - Categoria Imóveis ------------------------->
+          </div>
+          <!-- Botão Jardins ---------------------------------->
+          <div class="form-campo checkbox Jardins" *ngIf="
+           getControl.categoriaImovel.value === 'Casa em Condomínio' ||
+           getControl.categoriaImovel.value === 'Lote em Condomínio'
+         ">
+            <input type="checkbox" name="jardins" formControlName="jardins" />
+            <label class="inputNome" for="jardins">Jardins </label>
+          </div>
+          <!-- Fim - Botão Jardins ------------------------->
+          <!--- Nome do Proprietário---------------------------------->
+          <div class="form-campo nomeProprietario">
+            <div *ngIf="getControl.nomeProprietario.touched && getControl.nomeProprietario.invalid" class="text-danger">
+            </div>
+            <input type="text" name="nomeProprietario" formControlName="nomeProprietario" placeholder="Fulano de tal" />
+            <label class="inputNome" for="nomeProprietario">Nome do Proprietário(a) <b>*</b></label>
+          </div>
+          <!-- Fim - Properitário ------------------------------------>
+          <!-- Telefone do Properitário ----------------------------->
+          <div class="form-campo telefoneProprietario">
+            <div *ngIf="
+                  getControl.telefoneProprietario.touched && getControl.telefoneProprietario.invalid
+                " class="text-danger"></div>
+            <input type="text" name="telefone" formControlName="telefoneProprietario" placeholder="(62) 9 8789-9890"
+              [mask]="this.maskPhone" [showMaskTyped]="true" />
+            <label class="inputNome" for="telefoneProprietario">Telefone do(a) proprietário(a) <b>*</b></label>
+          </div>
+          <div class="permutaEmobiliado">
+            <!-- Fim - Telefone do Properitário ------------------------>
+            <!-- Permuta -------------------------------------------->
+            <div class="form-campo checkbox">
+              <input type="checkbox" name="aceitaPermuta" formControlName="aceitaPermuta" value="false" />
+              <label class="inputNome" for="aceitaPermuta">Permuta</label>
+            </div>
+            <!-- Fim - Permuta ------------------------------------------>
+            <!-- Mobiliado ------------------------------------------>
+            <div class="form-campo checkbox">
+              <input type="checkbox" name="mobiliado" formControlName="mobiliado" value="false" />
+              <label class="inputNome" for="mobiliado">Mobiliado</label>
+            </div>
+            <!-- Fim - Mobiliado ------------------------------------------>
+          </div>
           <!-- Enviar dados --------------------------------------->
           <div class="botoes">
-            <button class="limpar" type="reset" (click)="this.limpaArrayImgs()">
-              Limpar dados
+            <button type="reset" class="limpar" (click)="this.limpaArrayImgs()">
+              <span>Limpar</span>
             </button>
-            <button class="enviar" [disabled]="!imovelForm.valid" type="submit">
-              Enviar Dados
+            <button type="submit" class="enviar" [disabled]="!imovelForm.valid">
+              <span>Salvar</span>
             </button>
           </div>
         </div>
