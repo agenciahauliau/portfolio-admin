@@ -31,6 +31,8 @@ import { CriarPostComponent } from './blog/criar-post/criar-post.component';
 import { ListarPostsComponent } from './blog/listar-posts/listar-posts.component';
 import { TruncatePipe } from '../helpers/truncate.pipe';
 import { SortDirective } from '../helpers/sort.directive';
+import { ExibirArquivoComponent } from './biblioteca/exibir-arquivo/exibir-arquivo.component';
+import { EditarArquivoComponent } from './biblioteca/editar-arquivo/editar-arquivo.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -50,6 +52,8 @@ import { SortDirective } from '../helpers/sort.directive';
     ListarPostsComponent,
     TruncatePipe,
     SortDirective,
+    ExibirArquivoComponent,
+    EditarArquivoComponent,
   ],
   imports: [
     CommonModule,

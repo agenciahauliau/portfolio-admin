@@ -1,0 +1,54 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/biblioteca']" routerLinkActive="router-link-active">
+        <h2>Publicação</h2>
+      </a>
+      <div class="submenu">
+        <a
+          [routerLink]="['/admin/editar-arquivo', file?._id]"
+          routerLinkActive="router-link-active"
+        >
+          Editar File
+        </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loading">Carregando...</div>
+  <div *ngIf="error">Erro :(</div>
+  <div class="file" *ngIf="file">
+    <header class="topo">
+      <div class="inData">
+        <p>ID: {{ file.fileId }}</p>
+        <p>{{ file.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}</p>
+      </div>
+      <div class="caminho">
+        <p>
+          <a [routerLink]="['/admin/']">início</a> >
+          <a [routerLink]="['/admin/biblioteca']">biblioteca</a> >
+          <a>{{ file.name }}</a>
+        </p>
+      </div>
+    </header>
+    <section>
+      <img src="{{ url }}{{ file.name }}" alt="{{ file.altText }}" />
+      <h3>Texto Alternativo</h3>
+      <p>{{ file.altText }}</p>
+      <h3>Tipo do arquivo</h3>
+      <p>{{ file.tipo }}</p>
+
+      <div class="botoes">
+        <div class="editar">
+          <a
+            [routerLink]="['/admin/editar-arquivo', file._id]"
+            routerLinkActive="router-link-active"
+            >editar</a
+          >
+        </div>
+        <button class="excluir" (click)="remover(file.name)">
+          <a>excluir</a>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

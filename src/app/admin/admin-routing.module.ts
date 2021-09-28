@@ -11,6 +11,8 @@ import { CriarImovelComponent } from './imoveis/criar-imovel/criar-imovel.compon
 import { EditarImovelComponent } from './imoveis/editar-imovel/editar-imovel.component';
 
 import { BibliotecaComponent } from './biblioteca/biblioteca.component';
+import { ExibirArquivoComponent } from './biblioteca/exibir-arquivo/exibir-arquivo.component';
+import { EditarArquivoComponent } from './biblioteca/editar-arquivo/editar-arquivo.component';
 
 import { ListarLeadsComponent } from './leads/listar-leads/listar-leads.component';
 import { ExibirLeadComponent } from './leads/exibir-lead/exibir-lead.component';
@@ -54,6 +56,14 @@ const routes: Routes = [
           {
             path: 'biblioteca',
             component: BibliotecaComponent,
+          },
+          {
+            path: 'biblioteca/:id',
+            component: ExibirArquivoComponent,
+          },
+          {
+            path: 'editar-arquivo/:id',
+            component: EditarArquivoComponent,
           },
           {
             path: 'leads',

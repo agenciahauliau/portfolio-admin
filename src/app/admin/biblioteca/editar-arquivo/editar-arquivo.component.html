@@ -1,0 +1,48 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <div class="submenu">
+        <a [routerLink]="['/admin/biblioteca']" routerLinkActive="router-link-active">
+          Novo Arquivo
+        </a>
+      </div>
+    </div>
+  </div>
+  <header class="topo">
+    <div class="caminho">
+      <p>
+        <a [routerLink]="['/admin/']">início</a> <span>></span>
+        <a [routerLink]="['/admin/biblioteca/']">biblioteca</a> <span>></span>
+      </p>
+    </div>
+  </header>
+  <div class="infoConteudoAdmin">
+    <div class="formulario">
+      <form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
+        <div class="form-campo">
+          <img src="{{ this.url }}{{ this.imagem }}" />
+          <div
+            *ngIf="getControl.altText.touched && getControl.altText.invalid"
+            class="text-danger"
+          ></div>
+          <input
+            type="text"
+            name="altText"
+            formControlName="altText"
+            placeholder="Um texto alternativo para a imagem"
+          />
+          <label class="inputNome" for="altText">Texto Alternativo <b>*</b></label>
+        </div>
+        <!-- Enviar dados --------------------------------------->
+        <div class="botoes">
+          <button type="reset" class="limpar">
+            <span>Limpar</span>
+          </button>
+          <button type="submit" class="enviar" [disabled]="!fileForm.valid">
+            <span>Salvar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

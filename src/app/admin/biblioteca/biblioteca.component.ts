@@ -1,15 +1,14 @@
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faHome, faSyncAlt, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { GQL_LISTAR_ARQUIVOS } from '../../graphql/graphql';
+import { GQL_LISTAR_FILES } from '../../graphql/graphql';
 import { UploadService } from '../../services/upload.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { icones } from 'src/assets/icones';
+import { icones } from '../../../assets/icones';
+import { File as FileTipo } from '../../helpers/types';
 
 HttpClient;
 @Component({
@@ -18,11 +17,11 @@ HttpClient;
   styleUrls: ['./biblioteca.component.scss', '../assets/admin.component.scss'],
 })
 export class BibliotecaComponent implements OnInit, OnDestroy {
-  url = `${environment.API}files/`;
-  midias!: [string];
-  midiasQuery!: QueryRef<any>;
-  loading = true;
-  error: any;
+  public url = `${environment.API}files/`;
+  public midias!: FileTipo[];
+  private midiasQuery!: QueryRef<any>;
+  public loading = true;
+  public error: any;
 
   selectedFiles?: FileList;
   progressInfos: any[] = [];
@@ -51,12 +50,13 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
 
     this.midiasQuery = this.apollo.watchQuery<any>({
-      query: GQL_LISTAR_ARQUIVOS,
+      query: GQL_LISTAR_FILES,
+      nextFetchPolicy: 'cache-and-network',
     });
 
     this.querySubs = this.midiasQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
-      this.midias = data.listarUploads;
+      this.midias = [...data.files];
     });
   }
 
@@ -87,8 +87,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log(this.message)
-
+    console.log(this.message);
   }
 
   upload(idx: number, file: File): void {
@@ -100,7 +99,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
             this.progressInfos[idx].value = Math.round((100 * event.loaded) / event.total);
           } else if (event instanceof HttpResponse) {
             this.message.push(`Arquivo enviado com sucesso ${file.name}`);
-            this.alright = true
+            this.alright = true;
             this.refresh();
             setTimeout(() => {
               console.log(this.nomes[idx]);
@@ -113,13 +112,13 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
           this.progressInfos[idx].value = 0;
           const msg = `Não foi possível subir o arquivo: ${file.name}\n Possivel Causa: ${error}`;
           this.message.push(msg);
-          this.alright = false
+          this.alright = false;
         },
       );
     }
   }
 
-  deletaImagem(imgUrl: string): void {
+  async deletaImagem(imgUrl: any) {
     this.uploadService
       .deletaArquivo(imgUrl)
       .then((res: any) => {
@@ -152,7 +151,7 @@ export class BibliotecaComponent implements OnInit, OnDestroy {
 
   copiar(event: any) {
     let link = event.target.parentElement.dataset.url;
-    var text = document.createElement('input')
+    var text = document.createElement('input');
     document.body.appendChild(text);
     text.value = link;
     text.select();

@@ -8,6 +8,16 @@ export interface User {
   updatedAt?: number;
 }
 
+export interface File {
+  _id?: string;
+  fileId?: number;
+  name?: string;
+  tipo?: string;
+  altText?: string;
+  createdAt?: number;
+  updatedAt?: number;
+}
+
 export interface Tipologia {
   quartos?: number;
   suites?: number;
@@ -34,8 +44,9 @@ export interface Imovel {
   _id?: string;
   imovelId?: number;
   nomeImovel?: string;
-  imagemPrincipal?: string;
+  imagemPrincipal?: File[];
   categoriaImovel?: string;
+  destaque?: boolean;
   jardins?: boolean;
   descricaoImovel?: string;
   tipoNegociacao?: string;

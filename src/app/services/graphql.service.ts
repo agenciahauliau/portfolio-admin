@@ -17,8 +17,10 @@ import {
   GQL_LISTAR_POSTS,
   GQL_ATUALIZA_POST,
   GQL_DELETA_POST,
+  GQL_ATUALIZA_FILE,
+  GQL_LISTAR_FILES,
 } from '../graphql/graphql';
-import { Imovel, Lead, Post, User } from '../helpers/types';
+import { File, Imovel, Lead, Post, User } from '../helpers/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -204,6 +206,22 @@ export class GraphQlService {
           console.error('Err: ', err);
         },
       );
+  }
+
+  async atualizaFile(id: any, dados: File) {
+    const result = this.apollo
+      .mutate({
+        mutation: GQL_ATUALIZA_FILE,
+        refetchQueries: [{ query: GQL_LISTAR_FILES }],
+        variables: {
+          _id: id,
+          input: {
+            ...dados,
+          },
+        },
+      })
+      .toPromise();
+    return result;
   }
 
   logout() {

@@ -12,12 +12,6 @@ export const GQL_CHECK = gql`
   }
 `;
 
-export const GQL_ENVIA_ARQUIVO = gql`
-  mutation upload($file: Upload!) {
-    uploadFileRemoto(file: $file)
-  }
-`;
-
 export const GQL_LISTAR_ARQUIVOS = gql`
   query arquivos {
     listarUploads
@@ -42,9 +36,19 @@ export const GQL_CRIAR_IMOVEL = gql`
   mutation criarImovel($input: CreateImovelInput!) {
     createImovel(dados: $input) {
       _id
+      imovelId
       nomeImovel
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoriaImovel
+      destaque
       jardins
       descricaoImovel
       tipoNegociacao
@@ -80,7 +84,15 @@ export const GQL_CRIAR_IMOVEL = gql`
         arquivos
         arquivoDestaque
       }
-      imgPlantaCondominio
+      imgPlantaCondominio(populateImgCondominio: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       comodidadesImovel
       comodidadesCondominio
       previsaoLancamento
@@ -101,10 +113,20 @@ export const GQL_LISTAR_IMOVEIS = gql`
   query imoveis {
     imoveis {
       _id
+      imovelId
       nomeImovel
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoriaImovel
       jardins
+      destaque
       descricaoImovel
       tipoNegociacao
       statusLancamento
@@ -139,7 +161,15 @@ export const GQL_LISTAR_IMOVEIS = gql`
         arquivos
         arquivoDestaque
       }
-      imgPlantaCondominio
+      imgPlantaCondominio(populateImgCondominio: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       comodidadesImovel
       comodidadesCondominio
       previsaoLancamento
@@ -152,7 +182,6 @@ export const GQL_LISTAR_IMOVEIS = gql`
       }
       createdAt
       updatedAt
-      imovelId
     }
   }
 `;
@@ -161,10 +190,20 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
   query imoveis_com_filtro($input: SearchImovelInput, $quantidade: Float) {
     imoveis(filtros: $input, quantidade: $quantidade) {
       _id
+      imovelId
       nomeImovel
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoriaImovel
       jardins
+      destaque
       descricaoImovel
       tipoNegociacao
       statusLancamento
@@ -199,7 +238,15 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
         arquivos
         arquivoDestaque
       }
-      imgPlantaCondominio
+      imgPlantaCondominio(populateImgCondominio: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       comodidadesImovel
       comodidadesCondominio
       previsaoLancamento
@@ -212,7 +259,6 @@ export const GQL_BUSCAR_IMOVEIS_COM_FILTRO = gql`
       }
       createdAt
       updatedAt
-      imovelId
     }
   }
 `;
@@ -222,7 +268,15 @@ export const GQL_BUSCAR_IMOVEL = gql`
     imovel(dados: { _id: $_id }) {
       _id
       nomeImovel
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoriaImovel
       jardins
       descricaoImovel
@@ -259,7 +313,15 @@ export const GQL_BUSCAR_IMOVEL = gql`
         arquivos
         arquivoDestaque
       }
-      imgPlantaCondominio
+      imgPlantaCondominio(populateImgCondominio: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       comodidadesImovel
       comodidadesCondominio
       previsaoLancamento
@@ -287,10 +349,20 @@ export const GQL_ATUALIZA_IMOVEL = gql`
   mutation updateImovel($_id: String!, $input: UpdateImovelInput!) {
     updateImovel(id: $_id, dados: $input) {
       _id
+      imovelId
       nomeImovel
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoriaImovel
       jardins
+      destaque
       descricaoImovel
       tipoNegociacao
       statusLancamento
@@ -325,7 +397,15 @@ export const GQL_ATUALIZA_IMOVEL = gql`
         arquivos
         arquivoDestaque
       }
-      imgPlantaCondominio
+      imgPlantaCondominio(populateImgCondominio: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       comodidadesImovel
       comodidadesCondominio
       previsaoLancamento
@@ -359,8 +439,9 @@ export const GQL_LISTAR_LEADS = gql`
       telefone
       comentarios
       preferenciaDeContato
-      imoveis(populate: true) {
+      imoveis(populateImoveis: true) {
         _id
+        imovelId
         nomeImovel
       }
       createdAt
@@ -386,8 +467,9 @@ export const GQL_ATUALIZA_LEAD = gql`
       telefone
       comentarios
       preferenciaDeContato
-      imoveis(populate: true) {
+      imoveis(populateImoveis: true) {
         _id
+        imovelId
       }
       createdAt
       updatedAt
@@ -406,8 +488,9 @@ export const GQL_BUSCA_UNICO_LEAD = gql`
       telefone
       comentarios
       preferenciaDeContato
-      imoveis(populate: true) {
+      imoveis(populateImoveis: true) {
         _id
+        imovelId
         nomeImovel
       }
       createdAt
@@ -425,7 +508,15 @@ export const GQL_CRIAR_POST = gql`
       titulo
       descricao
       conteudo
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoria
       tags
       createdAt
@@ -442,7 +533,15 @@ export const GQL_ATUALIZA_POST = gql`
       titulo
       descricao
       conteudo
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoria
       tags
       createdAt
@@ -460,7 +559,15 @@ export const GQL_LISTAR_POSTS = gql`
       titulo
       descricao
       conteudo
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoria
       tags
       createdAt
@@ -478,7 +585,15 @@ export const GQL_BUSCAR_POSTS_COM_FILTRO = gql`
       titulo
       descricao
       conteudo
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoria
       tags
       createdAt
@@ -496,7 +611,15 @@ export const GQL_BUSCAR_POST = gql`
       titulo
       descricao
       conteudo
-      imagemPrincipal
+      imagemPrincipal(populateImgPrincipal: true) {
+        _id
+        fileId
+        name
+        tipo
+        altText
+        createdAt
+        updatedAt
+      }
       categoria
       tags
       createdAt
@@ -508,5 +631,47 @@ export const GQL_BUSCAR_POST = gql`
 export const GQL_DELETA_POST = gql`
   mutation deletaPost($id: String!) {
     removePost(id: $id)
+  }
+`;
+
+export const GQL_BUSCAR_FILE = gql`
+  query SingleFile($fileDados: SearchFileInput!) {
+    file(dados: $fileDados) {
+      _id
+      fileId
+      name
+      tipo
+      altText
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_LISTAR_FILES = gql`
+  query Files {
+    files {
+      _id
+      fileId
+      name
+      tipo
+      altText
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const GQL_ATUALIZA_FILE = gql`
+  mutation updateFile($input: UpdateFileInput!, $_id: String!) {
+    updateFile(dados: $input, id: $_id) {
+      _id
+      fileId
+      name
+      tipo
+      altText
+      createdAt
+      updatedAt
+    }
   }
 `;
