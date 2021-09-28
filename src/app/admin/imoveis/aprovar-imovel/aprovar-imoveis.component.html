@@ -30,11 +30,14 @@
           </tr>
         </thead>
         <tbody class="tabelaImoveisCorpo" *ngIf="imoveis">
-          <tr class="tabelalinhaImovel" *ngFor="
+          <tr
+            class="tabelalinhaImovel"
+            *ngFor="
               let imovel of imoveis
                 | paginate
                   : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
-            ">
+            "
+          >
             <td>{{ imovel.imovelId }}</td>
             <td>{{ imovel.categoriaImovel }}</td>
             <td>{{ imovel.bairro }}</td>
@@ -42,8 +45,11 @@
             <td>{{ imovel.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>{{ imovel.updatedAt | date: 'dd/MMM/yyyy - HH:mm' }}</td>
             <td>
-              <select name="statusLancamento" (change)="atualizaStatus(imovel._id, $event)"
-                [value]="imovel.statusLancamento">
+              <select
+                name="statusLancamento"
+                (change)="atualizaStatus(imovel._id, $event)"
+                [value]="imovel.statusLancamento"
+              >
                 <option value="pendente">Pendente</option>
                 <option value="reprovado">Não aprovado</option>
                 <option value="aprovado">Aprovado</option>
@@ -68,8 +74,14 @@
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls class="controle" id="server" [autoHide]="true" nextLabel="Próx." previousLabel="Voltar"
-          (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          nextLabel="Próx."
+          previousLabel="Voltar"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

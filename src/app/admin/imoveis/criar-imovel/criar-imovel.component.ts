@@ -18,7 +18,11 @@ import { icones } from 'src/assets/icones';
 @Component({
   selector: 'app-criar-imovel',
   templateUrl: '../form-imovel.component.html',
-  styleUrls: ['../form-imovel.component.scss', '../../assets/form.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: [
+    '../form-imovel.component.scss',
+    '../../assets/form.component.scss',
+    '../../assets/admin.component.scss',
+  ],
 })
 export class CriarImovelComponent implements OnInit {
   @ViewChildren('inputGaleria') inputGaleria: any;
@@ -31,7 +35,6 @@ export class CriarImovelComponent implements OnInit {
   mainImg = '';
   inputUpload: any;
   imgPreview: any;
-  
 
   /* Para Upload de Planta */
   selectedPlantaFiles?: FileList;
@@ -68,8 +71,8 @@ export class CriarImovelComponent implements OnInit {
   iconeGalerias!: SafeHtml;
   iconeTipologias!: SafeHtml;
 
-  public urlCaminho: any = "";
-  public idImovel: any = "";
+  public urlCaminho: any = '';
+  public idImovel: any = '';
 
   constructor(
     private router: Router,
@@ -88,7 +91,7 @@ export class CriarImovelComponent implements OnInit {
     this.iconeGalerias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeGalerias);
     this.iconeTipologias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeTipologias);
 
-    this.urlCaminho = this.route.snapshot.routeConfig?.path
+    this.urlCaminho = this.route.snapshot.routeConfig?.path;
     this.idImovel = this.route.snapshot.paramMap.get('id');
 
     this.imovelForm = this.formBuilder.group({
@@ -338,7 +341,7 @@ export class CriarImovelComponent implements OnInit {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
-            this.inputUpload.target.value = null
+            this.inputUpload.target.value = null;
           }
         },
         (error: any) => {
@@ -443,7 +446,7 @@ export class CriarImovelComponent implements OnInit {
     this.messagePlantaFiles = [];
     this.progressInfosPlantaFiles = [];
     this.selectedPlantaFiles = event.target.files;
-    this.plantaInputUpload = event
+    this.plantaInputUpload = event;
 
     /* Previsualização da imagem */
     let mimeType = event.target.files[0].type;
@@ -483,7 +486,7 @@ export class CriarImovelComponent implements OnInit {
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
             this.plantaFiles.push(this.url + event.body[0]);
             this.plantaFiles = this.plantaFiles.filter((x: any) => x.trim() != '');
-            this.plantaInputUpload.target.value = null
+            this.plantaInputUpload.target.value = null;
           }
         },
         (error: any) => {

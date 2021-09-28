@@ -7,6 +7,7 @@ import { GQL_LISTAR_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { icones } from 'src/assets/icones';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-listar-imoveis',
@@ -18,13 +19,14 @@ export class ListarImoveisComponent implements OnInit, OnDestroy {
   private imoveisQuery!: QueryRef<any>;
   public loading = true;
   public error: any;
+  public url = `${environment.API}files/`;
 
   p: number = 1;
 
   private querySubs = new Subscription();
 
   iconeEditar!: SafeHtml;
-  iconeExcluir!: SafeHtml;  
+  iconeExcluir!: SafeHtml;
 
   constructor(
     private apollo: Apollo,

@@ -21,7 +21,11 @@ import { icones } from 'src/assets/icones';
 @Component({
   selector: 'app-editar-imovel',
   templateUrl: '../form-imovel.component.html',
-  styleUrls: ['../form-imovel.component.scss', '../../assets/form.component.scss', '../../assets/admin.component.scss'],
+  styleUrls: [
+    '../form-imovel.component.scss',
+    '../../assets/form.component.scss',
+    '../../assets/admin.component.scss',
+  ],
 })
 export class EditarImovelComponent implements OnInit, OnDestroy {
   @ViewChildren('inputGaleria') inputGaleria: any;
@@ -71,8 +75,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
   iconeGalerias!: SafeHtml;
   iconeTipologias!: SafeHtml;
 
-  public urlCaminho: any = "";
-  public idImovel: any = "";
+  public urlCaminho: any = '';
+  public idImovel: any = '';
 
   constructor(
     private apollo: Apollo,
@@ -92,8 +96,8 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
     this.iconeGalerias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeGalerias);
     this.iconeTipologias = this.sanitizer.bypassSecurityTrustHtml(icones.iconeTipologias);
 
-    this.urlCaminho = this.route.snapshot.routeConfig?.path
-    
+    this.urlCaminho = this.route.snapshot.routeConfig?.path;
+
     this.imovelForm = this.formBuilder.group({
       nomeImovel: [''],
       imagemPrincipal: [''],
@@ -398,7 +402,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
-            this.inputUpload = null
+            this.inputUpload = null;
           }
         },
         (error: any) => {
@@ -543,7 +547,7 @@ export class EditarImovelComponent implements OnInit, OnDestroy {
             this.messagePlantaFiles.unshift(msg);
             this.progressInfosPlantaFiles[idx].url = this.url + event.body[0];
             this.plantaFiles = this.url + event.body[0];
-            this.plantaInputUpload = null
+            this.plantaInputUpload = null;
           }
         },
         (error: any) => {

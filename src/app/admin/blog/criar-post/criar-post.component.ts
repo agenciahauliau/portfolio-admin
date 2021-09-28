@@ -13,7 +13,11 @@ import { icones } from 'src/assets/icones';
 @Component({
   selector: 'app-criar-post',
   templateUrl: '../form-post.component.html',
-  styleUrls: ['../../assets/form.component.scss', '../../assets/admin.component.scss', '../form-post.component.scss'],
+  styleUrls: [
+    '../../assets/form.component.scss',
+    '../../assets/admin.component.scss',
+    '../form-post.component.scss',
+  ],
 })
 export class CriarPostComponent implements OnInit {
   /* Para upload */
@@ -33,8 +37,8 @@ export class CriarPostComponent implements OnInit {
   iconeExcluir!: SafeHtml;
   iconeUpload!: SafeHtml;
 
-  public urlCaminho: any = "";
-  public tituloPost: any = "";
+  public urlCaminho: any = '';
+  public tituloPost: any = '';
 
   constructor(
     private router: Router,
@@ -50,7 +54,7 @@ export class CriarPostComponent implements OnInit {
     this.iconeExcluir = this.sanitizer.bypassSecurityTrustHtml(icones.iconeExcluir);
     this.iconeUpload = this.sanitizer.bypassSecurityTrustHtml(icones.iconeUpload);
 
-    this.urlCaminho = this.route.snapshot.routeConfig?.path
+    this.urlCaminho = this.route.snapshot.routeConfig?.path;
 
     this.postForm = this.formBuilder.group({
       status: 'rascunho',
@@ -104,7 +108,7 @@ export class CriarPostComponent implements OnInit {
   }
 
   async textareaResized(event: any) {
-    console.log(event)
+    console.log(event);
     event.style.height = '1px';
     event.style.height = 12 + event.scrollHeight + 'px';
   }
@@ -151,7 +155,7 @@ export class CriarPostComponent implements OnInit {
             this.progressInfos[idx].url = this.url + event.body[0];
             this.message.push(msg);
             this.mainImg = this.url + event.body[0];
-            this.inputUpload.target.value = null
+            this.inputUpload.target.value = null;
           }
         },
         (error: any) => {

@@ -14,7 +14,6 @@ import { icones } from 'src/assets/icones';
   styleUrls: ['../../assets/lista-itens.component.scss', '../../assets/admin.component.scss'],
 })
 export class ListarPostsComponent implements OnInit, OnDestroy {
-
   posts!: Post[];
   postsQuery!: QueryRef<any>;
   loading = true;
@@ -27,7 +26,12 @@ export class ListarPostsComponent implements OnInit, OnDestroy {
   iconeEditar!: SafeHtml;
   iconeExcluir!: SafeHtml;
 
-  constructor(private apollo: Apollo, private router: Router, private gqlService: GraphQlService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private apollo: Apollo,
+    private router: Router,
+    private gqlService: GraphQlService,
+    private sanitizer: DomSanitizer,
+  ) {}
 
   ngOnInit() {
     this.iconeEditar = this.sanitizer.bypassSecurityTrustHtml(icones.iconeEditar);
@@ -41,7 +45,7 @@ export class ListarPostsComponent implements OnInit, OnDestroy {
       this.loading = loading;
       this.posts = [...data.posts];
 
-      console.log(this.posts)
+      console.log(this.posts);
     });
   }
 
@@ -73,13 +77,13 @@ export class ListarPostsComponent implements OnInit, OnDestroy {
   async atualizaStatus(id: unknown, event: any) {
     // const status = { status: event.target.value };
     const status = () => {
-      if(event.target.checked === true){
-        return 'publicado'
+      if (event.target.checked === true) {
+        return 'publicado';
       } else {
-        return 'rascunho'
+        return 'rascunho';
       }
     };
-    const statusPub = {status: status()}
+    const statusPub = { status: status() };
 
     console.log(event);
 

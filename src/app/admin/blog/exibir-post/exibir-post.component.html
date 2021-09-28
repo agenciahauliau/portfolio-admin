@@ -23,7 +23,10 @@
         <p>{{ post.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}</p>
       </div>
       <div class="caminho">
-        <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">posts</a> > <a>{{ post.titulo }}</a></p>
+        <p>
+          <a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/posts/']">posts</a> >
+          <a>{{ post.titulo }}</a>
+        </p>
       </div>
     </header>
     <section class="infoConteudoAdmin">
@@ -41,17 +44,23 @@
       </div>
       <div class="direita">
         <div class="status">
-          <input id='statusPost-{{post.postId}}' type="checkbox" [checked]="post.status === 'publicado' ? true :  false"
-            (change)="atualizaStatus(post._id, $event)" />
-          <label for='statusPost-{{post.postId}}'
-            [class]="post.status === 'publicado' ? 'publicar ativo' :  'publicar'">
+          <input
+            id="statusPost-{{ post.postId }}"
+            type="checkbox"
+            [checked]="post.status === 'publicado' ? true : false"
+            (change)="atualizaStatus(post._id, $event)"
+          />
+          <label
+            for="statusPost-{{ post.postId }}"
+            [class]="post.status === 'publicado' ? 'publicar ativo' : 'publicar'"
+          >
             <div class="chave"></div>
           </label>
           <p>{{ post.status }}</p>
         </div>
         <div class="cat categoria">
           <h4>Categoria</h4>
-          <p>{{ post.categoria }} </p>
+          <p>{{ post.categoria }}</p>
         </div>
         <div class="cat tags">
           <h4>Tags</h4>
@@ -59,7 +68,9 @@
         </div>
         <div class="botoes">
           <div class="editar">
-            <a [routerLink]="['/admin/editar-post', post._id]" routerLinkActive="router-link-active">editar</a>
+            <a [routerLink]="['/admin/editar-post', post._id]" routerLinkActive="router-link-active"
+              >editar</a
+            >
           </div>
           <button class="excluir" (click)="remover(post._id)">
             <a>excluir</a>

@@ -4,19 +4,20 @@
       <a [routerLink]="['/admin/posts']" routerLinkActive="router-link-active">
         <h2>Imóveis</h2>
       </a>
-      <div class="submenu">   
+      <div class="submenu">
         <a [routerLink]="['/admin/criar-imovel']" routerLinkActive="router-link-active">
           Novo Imóvel
-        </a>    
+        </a>
       </div>
     </div>
   </div>
   <header class="topo">
     <div class="caminho">
-        <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/imoveis/']">imóveis</a>
-        </p>
+      <p>
+        <a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/imoveis/']">imóveis</a>
+      </p>
     </div>
-</header>
+  </header>
   <div class="infoConteudoAdmin">
     <div class="tabelalinhaItem">
       <table class="tabelaItens">
@@ -33,33 +34,38 @@
           </tr>
         </thead>
         <tbody class="tabelaItensCorpo" *ngIf="imoveis">
-          <tr class="tabelalinhaItem imoveis" *ngFor="
+          <tr
+            class="tabelalinhaItem imoveis"
+            *ngFor="
               let imovel of imoveis
                 | paginate
                   : { id: 'server', itemsPerPage: 9, currentPage: p, totalItems: imoveis.length }
-            ">
+            "
+          >
             <td>
-              <a routerLink="/admin/imovel/{{imovel._id}}">
+              <a routerLink="/admin/imovel/{{ imovel._id }}">
                 {{ imovel.imovelId }}
               </a>
             </td>
             <td>
-              <a class="imagem" routerLink="/admin/imovel/{{imovel._id}}">
-                <img src="{{ imovel.imagemPrincipal }}" alt="" />
+              <a class="imagem" routerLink="/admin/imovel/{{ imovel._id }}">
+                <div *ngFor="let file of imovel.imagemPrincipal">
+                  <img [src]="url + file.name" [alt]="file.altText" />
+                </div>
               </a>
             </td>
             <td>
-              <a routerLink="/admin/imovel/{{imovel._id}}">
+              <a routerLink="/admin/imovel/{{ imovel._id }}">
                 {{ imovel.categoriaImovel }}
               </a>
             </td>
             <td>
-              <a routerLink="/admin/imovel/{{imovel._id}}">
+              <a routerLink="/admin/imovel/{{ imovel._id }}">
                 {{ imovel.bairro }}
               </a>
             </td>
             <td>
-              <a routerLink="/admin/imovel/{{imovel._id}}">
+              <a routerLink="/admin/imovel/{{ imovel._id }}">
                 {{ imovel.valorImovel | currency: 'BRL' }}
               </a>
             </td>
@@ -68,7 +74,13 @@
                 name="statusLancamento"
                 (change)="atualizaStatus(imovel._id, $event)"
                 [value]="imovel.statusLancamento"
-                [ngClass]="imovel.statusLancamento === 'aprovado' ? 'aprovado' : imovel.statusLancamento === 'reprovado' ? 'reprovado': 'pendente'"
+                [ngClass]="
+                  imovel.statusLancamento === 'aprovado'
+                    ? 'aprovado'
+                    : imovel.statusLancamento === 'reprovado'
+                    ? 'reprovado'
+                    : 'pendente'
+                "
               >
                 <option value="pendente">Pendente</option>
                 <option value="reprovado">Reprovado</option>
@@ -76,7 +88,7 @@
               </select>
             </td>
             <td>
-              <a routerLink="/admin/imovel/{{imovel._id}}">
+              <a routerLink="/admin/imovel/{{ imovel._id }}">
                 {{ imovel.updatedAt | date: 'dd/MM/yyyy - HH:mm' }}
               </a>
             </td>
@@ -92,8 +104,15 @@
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls class="controle" id="server" [autoHide]="true" previousLabel="<" nextLabel=">"
-          [maxSize]="7" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          previousLabel="<"
+          nextLabel=">"
+          [maxSize]="7"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

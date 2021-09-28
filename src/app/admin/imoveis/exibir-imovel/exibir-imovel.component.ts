@@ -5,6 +5,7 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { GQL_BUSCAR_IMOVEL } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-exibir-imovel',
@@ -12,6 +13,7 @@ import { Imovel } from '../../../helpers/types';
   styleUrls: ['./exibir-imovel.component.scss', '../../assets/admin.component.scss'],
 })
 export class ExibirImovelComponent implements OnInit, OnDestroy {
+  public url = `${environment.API}files/`;
   imovel!: Imovel;
   imovelQuery!: QueryRef<any>;
   loading = true;
@@ -23,7 +25,7 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private apollo: Apollo,
     private gqlService: GraphQlService,
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     const imovelId = this.route.snapshot.paramMap.get('id');
@@ -38,8 +40,6 @@ export class ExibirImovelComponent implements OnInit, OnDestroy {
     this.querySubs = this.imovelQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
       this.imovel = data.imovel;
-
-      console.log(data.imovel)
     });
   }
 

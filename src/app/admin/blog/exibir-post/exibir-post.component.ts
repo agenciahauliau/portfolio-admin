@@ -12,14 +12,18 @@ import { Post } from '../../../helpers/types';
   styleUrls: ['./exibir-post.component.scss', '../../assets/admin.component.scss'],
 })
 export class ExibirPostComponent implements OnInit, OnDestroy {
-  
   post!: Post;
   postQuery!: QueryRef<any>;
   loading = true;
   error: any;
 
   private querySubs = new Subscription();
-  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router, private gqlService: GraphQlService) {}
+  constructor(
+    private apollo: Apollo,
+    private route: ActivatedRoute,
+    private router: Router,
+    private gqlService: GraphQlService,
+  ) {}
 
   ngOnInit(): void {
     const postId = this.route.snapshot.paramMap.get('id');
@@ -65,13 +69,13 @@ export class ExibirPostComponent implements OnInit, OnDestroy {
   async atualizaStatus(id: unknown, event: any) {
     // const status = { status: event.target.value };
     const status = () => {
-      if(event.target.checked === true){
-        return 'publicado'
+      if (event.target.checked === true) {
+        return 'publicado';
       } else {
-        return 'rascunho'
+        return 'rascunho';
       }
     };
-    const statusPub = {status: status()}
+    const statusPub = { status: status() };
 
     console.log(event);
 

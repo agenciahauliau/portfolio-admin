@@ -8,7 +8,9 @@
   </div>
   <header class="topo">
     <div class="caminho">
-      <p><a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/leads/']">leads</a></p>
+      <p>
+        <a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/leads/']">leads</a>
+      </p>
     </div>
   </header>
   <div class="infoConteudoAdmin">
@@ -22,25 +24,27 @@
           <th>Ações</th>
         </thead>
         <tbody class="tabelaItensCorpo" *ngIf="leads">
-          <tr class="tabelalinhaItem"
-            *ngFor="let lead of leads | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }">
+          <tr
+            class="tabelalinhaItem"
+            *ngFor="let lead of leads | paginate: { id: 'server', itemsPerPage: 9, currentPage: p }"
+          >
             <td>
-              <a routerLink="/admin/lead/{{lead._id}}">
+              <a routerLink="/admin/lead/{{ lead._id }}">
                 {{ lead.leadId }}
               </a>
             </td>
             <td>
-              <a routerLink="/admin/lead/{{lead._id}}">
+              <a routerLink="/admin/lead/{{ lead._id }}">
                 {{ lead.tipoLead }}
               </a>
             </td>
             <td>
-              <a routerLink="/admin/lead/{{lead._id}}">
+              <a routerLink="/admin/lead/{{ lead._id }}">
                 {{ lead.email }}
               </a>
             </td>
             <td>
-              <a routerLink="/admin/lead/{{lead._id}}">
+              <a routerLink="/admin/lead/{{ lead._id }}">
                 {{ lead.createdAt | date: 'dd/MMM/yyyy - HH:mm' }}
               </a>
             </td>
@@ -56,7 +60,15 @@
         </tbody>
       </table>
       <div class="paginacao">
-        <pagination-controls class="controle" id="server" [autoHide]="true" nextLabel="Próx." previousLabel="Voltar" [maxSize]="7" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls
+          class="controle"
+          id="server"
+          [autoHide]="true"
+          nextLabel="Próx."
+          previousLabel="Voltar"
+          [maxSize]="7"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
       <div *ngIf="loading">Carregando...</div>
       <div *ngIf="error">Erro :(</div>

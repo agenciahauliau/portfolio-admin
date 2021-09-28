@@ -10,11 +10,9 @@ import { Lead } from '../../../helpers/types';
   templateUrl: './exibir-lead.component.html',
   styleUrls: ['./exibir-lead.component.scss', '../../assets/admin.component.scss'],
 })
-
 export class ExibirLeadComponent implements OnInit, OnDestroy {
+  public phone = 1245865453333333;
 
-  public phone = 1245865453333333
-  
   public lead!: Lead;
   private leadQuery!: QueryRef<any>;
   public loading = true;
@@ -32,7 +30,7 @@ export class ExibirLeadComponent implements OnInit, OnDestroy {
       },
       errorPolicy: 'all',
     });
-    
+
     this.querySubs = this.leadQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
       this.lead = data.lead;

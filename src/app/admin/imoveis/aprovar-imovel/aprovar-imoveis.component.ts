@@ -8,7 +8,6 @@ import { GraphQlService } from '../../../services/graphql.service';
 import { GQL_LISTAR_IMOVEIS } from '../../../graphql/graphql';
 import { Imovel } from '../../../helpers/types';
 
-
 @Component({
   selector: 'app-aprovar-imoveis',
   templateUrl: './aprovar-imoveis.component.html',
@@ -20,7 +19,7 @@ export class AprovarImoveisComponent implements OnInit, OnDestroy {
   public faTrashAlt = faTrashAlt;
   public faImage = faImage;
   public faPlusSquare = faPlusSquare;
-  
+
   public imoveis!: Imovel[];
   private imoveisQuery!: QueryRef<any>;
   public loading = true;
