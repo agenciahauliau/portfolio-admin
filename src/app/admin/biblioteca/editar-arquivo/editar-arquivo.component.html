@@ -20,7 +20,14 @@
     <div class="formulario">
       <form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
         <div class="form-campo">
-          <img src="{{ this.url }}{{ this.imagem }}" />
+          <img
+            *ngIf="this.arquivo.tipo?.match('image')"
+            src="{{ url }}{{ this.arquivo.name }}"
+            alt="{{ this.arquivo.altText }}"
+          />
+          <video *ngIf="this.arquivo.tipo?.match('video')" controls>
+            <source [src]="url + this.arquivo.name" [type]="this.arquivo.tipo" />
+          </video>
           <div
             *ngIf="getControl.altText.touched && getControl.altText.invalid"
             class="text-danger"

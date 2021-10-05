@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { File } from '../../../helpers/types';
+import { File as FileTipo } from '../../../helpers/types';
 
 import { GraphQlService } from '../../../services/graphql.service';
 import { environment } from '../../../../environments/environment';
@@ -20,13 +20,13 @@ import { GQL_BUSCAR_FILE } from 'src/app/graphql/graphql';
 })
 export class EditarArquivoComponent implements OnInit, OnDestroy {
   public url = `${environment.API}files/`;
-  public fileForm!: File & FormGroup;
+  public fileForm!: FileTipo & FormGroup;
   public fileQuery!: QueryRef<any>;
   public loading = true;
   public error: any;
   private querySubs = new Subscription();
 
-  public imagem: string = '';
+  public arquivo!: FileTipo;
 
   constructor(
     private router: Router,
@@ -56,7 +56,7 @@ export class EditarArquivoComponent implements OnInit, OnDestroy {
     this.querySubs = this.fileQuery.valueChanges.subscribe(({ data, loading }) => {
       this.loading = loading;
       this.fileForm.patchValue(data.file);
-      this.imagem = data.file.name;
+      this.arquivo = data.file;
     });
   }
 

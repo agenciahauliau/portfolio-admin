@@ -37,7 +37,14 @@
         >
           <div class="imagem">
             <a class="imagem" routerLink="{{ midia._id }}">
-              <img src="{{ url }}{{ midia.name }}" alt="{{ midia.altText }}" title="" />
+              <img
+                *ngIf="midia.tipo?.match('image')"
+                src="{{ url }}{{ midia.name }}"
+                alt="{{ midia.altText }}"
+              />
+              <video *ngIf="midia.tipo?.match('video')">
+                <source [src]="url + midia.name" [type]="midia.tipo" />
+              </video>
             </a>
           </div>
           <div class="acoes">

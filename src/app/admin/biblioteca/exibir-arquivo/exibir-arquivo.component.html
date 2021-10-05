@@ -31,7 +31,14 @@
       </div>
     </header>
     <section>
-      <img src="{{ url }}{{ file.name }}" alt="{{ file.altText }}" />
+      <img
+        *ngIf="file.tipo?.match('image')"
+        src="{{ url }}{{ file.name }}"
+        alt="{{ file.altText }}"
+      />
+      <video *ngIf="file.tipo?.match('video')" controls>
+        <source [src]="url + file.name" [type]="file.tipo" />
+      </video>
       <h3>Texto Alternativo</h3>
       <p>{{ file.altText }}</p>
       <h3>Tipo do arquivo</h3>
