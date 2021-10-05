@@ -11,7 +11,6 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { FooterComponent } from './footer/footer.component';
 
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { AprovarImoveisComponent } from './imoveis/aprovar-imovel/aprovar-imoveis.component';
@@ -36,7 +35,6 @@ import { EditarArquivoComponent } from './biblioteca/editar-arquivo/editar-arqui
 @NgModule({
   declarations: [
     AdminComponent,
-    FooterComponent,
     ListarImoveisComponent,
     AprovarImoveisComponent,
     ExibirImovelComponent,
