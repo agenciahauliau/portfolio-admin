@@ -5,7 +5,7 @@
         <h2>Lead</h2>
       </a>
       <div class="submenu">
-        <a [routerLink]="['/admin/lead/', lead._id]" routerLinkActive="router-link-active">
+        <a [routerLink]="['/admin/editar-lead/', lead?._id]" routerLinkActive="router-link-active">
           Editar lead
         </a>
       </div>
@@ -22,7 +22,7 @@
       <div class="caminho">
         <p>
           <a [routerLink]="['/admin/']">início</a> > <a [routerLink]="['/admin/leads/']">leads</a> >
-          <a>{{ lead.nome }}</a>
+          <a>{{ lead._id }}</a>
         </p>
       </div>
     </header>
@@ -47,11 +47,18 @@
       </section>
       <section class="comentáros" *ngIf="lead.comentarios">
         <h3>Comentário</h3>
-        <p>{{ lead.comentarios }}</p>
+        <div [innerHtml]="lead.comentarios"></div>
       </section>
-      <section class="imovel" *ngIf="lead.comentarios">
+      <section class="imovel">
         <h3>Imóvel</h3>
-        <p>{{ lead.comentarios }}</p>
+        <div *ngFor="let imovel of lead.imoveis">
+          <a routerLink="/admin/imovel/{{ imovel._id }}">
+            <p>
+              Imóvel ID: {{ imovel.imovelId }}
+              <span *ngIf="imovel.nomeImovel">– {{ imovel.nomeImovel }}</span>
+            </p>
+          </a>
+        </div>
       </section>
     </section>
   </div>

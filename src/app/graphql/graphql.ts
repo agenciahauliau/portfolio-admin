@@ -477,7 +477,7 @@ export const GQL_ATUALIZA_LEAD = gql`
   }
 `;
 
-export const GQL_BUSCA_UNICO_LEAD = gql`
+export const GQL_BUSCAR_UNICO_LEAD = gql`
   query lead($_id: ID!) {
     lead(dados: { _id: $_id }) {
       _id

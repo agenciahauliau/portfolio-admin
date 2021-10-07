@@ -107,7 +107,7 @@ export class GraphQlService {
         mutation: GQL_ATUALIZA_LEAD,
         refetchQueries: [{ query: GQL_LISTAR_LEADS }],
         variables: {
-          _id: id,
+          id: id,
           input: {
             ...dados,
           },

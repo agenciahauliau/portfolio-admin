@@ -35,7 +35,9 @@ export interface Lead {
   telefone?: number;
   comentarios?: string;
   preferenciaDeContato?: string;
-  imoveis?: Imovel[] | string[];
+  tipoNegociacao?: string;
+  categoriaImovel?: string;
+  imoveis?: Imovel[];
   createdAt?: number;
   updatedAt?: number;
 }

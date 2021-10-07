@@ -74,6 +74,10 @@ const routes: Routes = [
             component: ExibirLeadComponent,
           },
           {
+            path: 'editar-lead/:id',
+            component: EditarLeadComponent,
+          },
+          {
             path: 'posts',
             component: ListarPostsComponent,
           },

@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_BUSCAR_POST } from 'src/app/graphql/graphql';
+import { GQL_BUSCAR_POST } from '../../../graphql/graphql';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { icones } from 'src/assets/icones';

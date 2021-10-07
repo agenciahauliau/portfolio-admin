@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Subscription } from 'rxjs';
-import { GQL_BUSCA_UNICO_LEAD } from '../../../graphql/graphql';
+import { GQL_BUSCAR_UNICO_LEAD } from '../../../graphql/graphql';
 import { Lead } from '../../../helpers/types';
 
 @Component({
@@ -11,20 +11,18 @@ import { Lead } from '../../../helpers/types';
   styleUrls: ['./exibir-lead.component.scss', '../../assets/admin.component.scss'],
 })
 export class ExibirLeadComponent implements OnInit, OnDestroy {
-  public phone = 1245865453333333;
-
   public lead!: Lead;
   private leadQuery!: QueryRef<any>;
   public loading = true;
   public error: any;
-
   private querySubs = new Subscription();
+
   constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const leadId = this.route.snapshot.paramMap.get('id');
     this.leadQuery = this.apollo.watchQuery<Lead>({
-      query: GQL_BUSCA_UNICO_LEAD,
+      query: GQL_BUSCAR_UNICO_LEAD,
       variables: {
         _id: leadId,
       },

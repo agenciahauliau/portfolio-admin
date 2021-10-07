@@ -1,1 +1,130 @@
-<p>editar-lead works!</p>
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <h2>Editar Lead</h2>
+      <div class="submenu"></div>
+    </div>
+  </div>
+  <header class="topo">
+    <div class="caminho">
+      <p>
+        <a [routerLink]="['/admin/']">início</a> <span>></span>
+        <a [routerLink]="['/admin/leads/']">leads</a> <span>></span>
+        <a>{{ leadDados?._id }}</a>
+      </p>
+    </div>
+  </header>
+  <section class="infoConteudoAdmin">
+    <div class="formulario">
+      <form [formGroup]="leadForm" (ngSubmit)="onSubmit()">
+        <div class="esquerda">
+          <!-- Início Nome -->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.nome.touched && getControl.nome.invalid"
+              class="text-danger"
+            ></div>
+            <input
+              class="titulo"
+              type="text"
+              name="nome"
+              formControlName="nome"
+              placeholder="Nome"
+            />
+            <label class="inputNome" for="nome">Nome<b>*</b></label>
+          </div>
+          <!-- Fim Nome -->
+          <!-- Início Email -->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.email.touched && getControl.email.invalid"
+              class="text-danger"
+            ></div>
+            <input
+              class="titulo"
+              type="text"
+              name="email"
+              formControlName="email"
+              placeholder="Nome"
+            />
+            <label class="inputNome" for="email">Email<b>*</b></label>
+          </div>
+          <!-- Fim Email -->
+          <!-- Telefone -->
+          <div class="form-campo telefone">
+            <div
+              *ngIf="getControl.telefone.touched && getControl.telefone.invalid"
+              class="text-danger"
+            ></div>
+            <input
+              type="text"
+              name="telefone"
+              formControlName="telefone"
+              placeholder="(62) 9 8789-9890"
+              [mask]="this.maskPhone"
+              [showMaskTyped]="true"
+            />
+            <label class="inputNome" for="telefone">Telefone de contato <b>*</b></label>
+          </div>
+          <!-- Fim Telefone -->
+          <!-- Início preferência de contato -->
+          <div class="form-campo">
+            <div
+              *ngIf="
+                getControl.preferenciaDeContato.touched && getControl.preferenciaDeContato.invalid
+              "
+              class="text-danger"
+            ></div>
+            <select name="preferenciaDeContato" formControlName="preferenciaDeContato">
+              <option value="">Selecione...</option>
+              <option value="E-mail">E-mail</option>
+              <option value="Telefone fixo / celular">Telefone fixo / celular</option>
+              <option value="WhatsApp">WhatsApp</option>
+            </select>
+            <label class="inputNome" for="preferenciaDeContato"
+              >Preferência de contato <b>*</b></label
+            >
+          </div>
+          <!-- Fim da preferência de contato -->
+        </div>
+        <div class="direita">
+          <!-- Comentário -->
+          <div class="form-campo">
+            <div
+              *ngIf="getControl.comentarios.touched && getControl.comentarios.invalid"
+              class="text-danger"
+            ></div>
+            <editor
+              formControlName="comentarios"
+              name="comentarios"
+              [init]="{
+                base_url: '/tinymce',
+                suffix: '.min',
+                height: 600,
+                menubar: true,
+                language: 'pt_BR',
+                placeholder: 'Campo para escrever algum comentário extra',
+                plugins: [
+                  'autolink lists link charmap anchor table paste help wordcount emoticons'
+                ],
+                toolbar:
+                  'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent table link emoticons | emoticons | removeformat | help'
+              }"
+            ></editor>
+          </div>
+          <!-- Fim - Comentário -->
+          <!-- Enviar dados -->
+          <div class="botoes">
+            <button type="reset" class="limpar">
+              <span>Limpar</span>
+            </button>
+            <button type="submit" class="enviar" [disabled]="!leadForm.valid">
+              <span>Salvar</span>
+            </button>
+          </div>
+          <!-- Fim da seção de envio do formulário -->
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

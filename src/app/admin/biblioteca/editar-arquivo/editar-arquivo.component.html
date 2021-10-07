@@ -1,6 +1,9 @@
 <div class="RouterOutlet">
   <div class="cabecalhoConteudoAdmin">
     <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/biblioteca']" routerLinkActive="router-link-active">
+        <h2>Biblioteca</h2>
+      </a>
       <div class="submenu">
         <a [routerLink]="['/admin/biblioteca']" routerLinkActive="router-link-active">
           Novo Arquivo
@@ -13,6 +16,9 @@
       <p>
         <a [routerLink]="['/admin/']">início</a> <span>></span>
         <a [routerLink]="['/admin/biblioteca/']">biblioteca</a> <span>></span>
+        <a>editar-arquivo</a>
+        <span>></span>
+        <a [routerLink]="['/admin/biblioteca/', arquivo._id]">{{ arquivo._id }}</a>
       </p>
     </div>
   </header>
