@@ -32,6 +32,8 @@ import { TruncatePipe } from '../helpers/truncate.pipe';
 import { SortDirective } from '../helpers/sort.directive';
 import { ExibirArquivoComponent } from './biblioteca/exibir-arquivo/exibir-arquivo.component';
 import { EditarArquivoComponent } from './biblioteca/editar-arquivo/editar-arquivo.component';
+import { Informacao } from './info/info.component';
+import { Configuracao } from './conf/conf.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -52,6 +54,8 @@ import { EditarArquivoComponent } from './biblioteca/editar-arquivo/editar-arqui
     SortDirective,
     ExibirArquivoComponent,
     EditarArquivoComponent,
+    Informacao,
+    Configuracao
   ],
   imports: [
     CommonModule,

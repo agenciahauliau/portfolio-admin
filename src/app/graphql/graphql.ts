@@ -675,3 +675,31 @@ export const GQL_ATUALIZA_FILE = gql`
     }
   }
 `;
+
+// export const GQL_CONFIGURACOES = gql`
+//   query configuracoes(filtros: SearchConfiguracaoInput) {
+//     configuracao {
+//       _id
+//       configId
+//       tipo
+//       titulo
+//       instagram
+//       facebook
+//       linkedin
+//       whatsapp
+//       telefone
+//       endereco
+//       arquivo(populateImgPrincipal: true) {
+//         _id
+//         fileId
+//         name
+//         tipo
+//         altText
+//         createdAt
+//         updatedAt
+//       }
+//       createdAt
+//       updatedAt
+//     }
+//   }
+// `;

@@ -108,3 +108,19 @@ export interface Post {
   createdAt?: number;
   updatedAt?: number;
 }
+
+export interface configuracao {
+  _id?: string;
+  configId?: number;
+  tipo?: string;
+  titulo?: string;
+  instagram?: string;
+  facebook?: string;
+  linkedin?: string;
+  whatsapp?: string;
+  telefone?: string;
+  endereco?: string;
+  arquivo?: File[];
+  createdAt?: number;
+  updatedAt?: number;
+}

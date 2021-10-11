@@ -1,0 +1,49 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/configuracao']" routerLinkActive="router-link-active">
+        <h2>Configurações</h2>
+      </a>
+      <div class="submenu">
+        <a>
+          Home
+        </a>
+        <a>
+          Venda
+        </a>
+        <a>
+          Aluguel
+        </a>
+        <a>
+          Lançamento
+        </a>
+        <a>
+          Jardins
+        </a>
+      </div>
+    </div>
+  </div>
+  <header class="topo">
+    <div class="caminho">
+      <p>
+        <a [routerLink]="['/admin']" routerLinkActive="router-link-active">início</a> <span>></span>
+        <a [routerLink]="['/admin/configuracao']" routerLinkActive="router-link-active">configuração</a>
+      </p>
+    </div>
+  </header>
+  <div class="infoConteudoAdmin">
+    <div class="informacoes">
+      <div class="infoPrincial">
+        <div class="campo">
+          <p>Telefone</p>
+        </div>
+        <div class="campo">
+          <p>Endereço</p>
+        </div>
+      </div>
+      <div class="social">
+        <h3>Banner Jardins</h3>
+      </div>
+    </div>
+  </div>
+</div>

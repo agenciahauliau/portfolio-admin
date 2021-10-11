@@ -40,11 +40,11 @@
           <div class="icone" [innerHtml]="iconeBlog"></div>
           <p>Posts</p>
         </a>
-        <a [routerLink]="['./posts']" routerLinkActive="router-link-active">
+        <a [routerLink]="['./configuracao']" routerLinkActive="router-link-active">
           <div class="icone" [innerHtml]="iconeConf"></div>
           <p>Configurações</p>
         </a>
-        <a [routerLink]="['./posts']" routerLinkActive="router-link-active">
+        <a [routerLink]="['./informacao']" routerLinkActive="router-link-active">
           <div class="icone" [innerHtml]="iconeInfoLoja"></div>
           <p>Informações</p>
         </a>
@@ -53,6 +53,10 @@
         <a [routerLink]="['']" routerLinkActive="router-link-active" (click)="logout()">
           <p>SAIR</p>
         </a>
+        <div class="footer">
+          <p>Portifolio Imóveis {{ano}} </p>
+          <p>feito por <a href="https://hi4u.me">Agênica Haul Iau</a></p>
+        </div>
       </div>
     </div>
   </div>

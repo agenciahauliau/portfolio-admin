@@ -4,6 +4,10 @@ import { AuthGuard } from '../helpers/auth.guard';
 
 import { AdminComponent } from '../admin/admin.component';
 
+import { Informacao } from './info/info.component';
+
+import { Configuracao } from './conf/conf.component';
+
 import { ExibirImovelComponent } from './imoveis/exibir-imovel/exibir-imovel.component';
 import { ListarImoveisComponent } from './imoveis/listar-imoveis/listar-imoveis.component';
 import { AprovarImoveisComponent } from './imoveis/aprovar-imovel/aprovar-imoveis.component';
@@ -33,6 +37,14 @@ const routes: Routes = [
         path: '',
         canActivateChild: [AuthGuard],
         children: [
+          {
+            path: 'informacao',
+            component: Informacao,
+          },
+          {
+            path: 'configuracao',
+            component: Configuracao,
+          },
           {
             path: 'imoveis',
             component: ListarImoveisComponent,

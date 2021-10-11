@@ -1,0 +1,48 @@
+<div class="RouterOutlet">
+  <div class="cabecalhoConteudoAdmin">
+    <div class="itensCabecalhoConteudoAdmin">
+      <a [routerLink]="['/admin/informacao']" routerLinkActive="router-link-active">
+        <h2>Informações</h2>
+      </a>
+    </div>
+  </div>
+  <header class="topo">
+    <div class="caminho">
+      <p>
+        <a [routerLink]="['/admin']" routerLinkActive="router-link-active">início</a> <span>></span>
+        <a [routerLink]="['/admin/informacao']" routerLinkActive="router-link-active">informações</a>
+      </p>
+    </div>
+  </header>
+  <div class="infoConteudoAdmin">
+    <div class="informacoes">
+      <div class="infoPrincial">
+        <div class="campo">
+          <p>Telefone</p>
+        </div>
+        <div class="campo">
+          <p>Endereço</p>
+        </div>
+      </div>
+      <div class="social">
+        <h3>Redes Sociais</h3>
+        <div class="campo">
+          <input />
+          <p>Instagram</p>
+        </div>
+        <div class="campo">
+          <input />
+          <p>Facebook</p>
+        </div>
+        <div class="campo">
+          <input />
+          <p>WhatsApp</p>
+        </div>
+        <div class="campo">
+          <input />
+          <p>Linkedin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

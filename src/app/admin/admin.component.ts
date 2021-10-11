@@ -9,6 +9,8 @@ import { icones } from 'src/assets/icones';
   styleUrls: ['./assets/admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
+  ano = new Date().getFullYear();
+
   iconePainel!: SafeHtml;
   iconeImoveis!: SafeHtml;
   iconeBiblioteca!: SafeHtml;
